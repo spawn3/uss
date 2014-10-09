@@ -1,0 +1,13 @@
+{application, ussadmin, [
+    {description, "USS Cluster Management System"},
+    {vsn, "1.1.0"},
+    {start_phases, []},
+    {registered, [
+        uss_manager,
+        uss_manager_rt,
+        uss_agent,
+        uss_agent_rt]},
+    {applications, [kernel, stdlib]},
+    {mod, {uss_app, []}},
+  {env, []}
+ ]}.

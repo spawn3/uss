@@ -1,0 +1,133 @@
+<style>
+    .div_btn_block {
+        float: right;
+        margin-right: 100px;
+    }
+
+    #tb_drvs {
+        font-size: 8px;
+    }
+
+    #div_srvc_tb {
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+
+        box-shadow: 0 3px 3px#C8C8C8;
+        -webkit-box-shadow: 0 3px 3px #C8C8C8;
+        -moz-box-shadow: 0 3px 3px #C8C8C8;
+
+        float: left;
+        margin-top: 10px;
+    }
+
+    #tb_drvs {
+        font-size: 8px;
+    }
+</style>
+
+<script>
+    $(document).ready(function(){
+        var btn_resetview = $('#btn_resetview')
+
+        btn_resetview.click(function(){
+            $('#div_srvc_dtls').html('');
+            $("#tb_srvc").setGridHeight(470);
+            return false;
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var current_attr = "all_log";
+
+        $('#tb_srvc').jqGrid({
+            url:'node/srvc/'+current_attr,
+            datatype: 'json',
+            mtype: 'GET',
+            colNames:['IP', '类别', 'ID', '状态', 'Pid'],
+            colModel :[
+                {name:'ip',   index:'ip',   width:80, align:'center'},
+                {name:'type', index:'type', width:70, align:'center'},
+                {name:'n',    index:'n',    width:40, align:'center'},
+                {name:'stat', index:'stat', width:50, align:'center'},
+                {name:'pid',  index:'pid',  width:60, align:'center'}
+            ],
+            pager: '#div_srvc_pager',
+            rowNum:50,
+            rowList:[50,100,150],
+            sortname: 'ip',
+            sortorder: 'desc',
+            viewrecords: true,
+            caption: '进程状态',
+            loadui: 'disable',
+            //shrinkToFit:false,
+            width: 950,
+            height: 470,
+            onSelectRow: function(rowid, iCol, cellcontent, e){
+                $("#tb_srvc").setGridHeight($(window).height()*0.1);
+                $("#div_srvc_dtls").load('/fsys/flog/srvc_dtls', {'sid': rowid});
+                return false;
+            },
+        });
+
+        $('#tb_srvc_ctrl').navGrid("#div_srvc_pager",{add:false, edit:false, del:false, search:false});
+
+        $.extend({
+            refresh_a_tab_node_ctrl_log:function(){
+                if ($('#interval_tip').hasClass('a_tab_node_ctrl_log')) {
+                    $('#tb_srvc').trigger("reloadGrid");
+                }
+            }
+        });
+        setInterval("$.refresh_a_tab_node_ctrl_log()", 30000);
+
+        $(window).bind('resize', function() {
+                        //$('.div_filter').setGridWidth($(window).width()*0.85);
+                        //$('#tb_srvc').setGridWidth($(window).width()*0.71);
+                        //$('#tb_node_mng').setGridHeight($(window).height()*0.68);
+                        }).trigger('resize');
+
+        $('input[name="type"]').click(function(){
+            $('#tb_srvc').jqGrid('setGridParam',{url:'node/srvc/'+$(this).val()});
+            $('#tb_srvc').trigger("reloadGrid");
+            current_type = $(this).val();
+        });
+
+        /*	$('#slt_rack').change(function(){
+                        r = $('#slt_rack option:selected').val();
+                        t = $('#slt_time option:selected').val();
+                        $('#div_statd_graph').load('node/stat_graph', {rack=r, time=t});
+                        });
+         */
+        });
+</script>
+
+<div class="div_filter">
+    <div class="div_filter_block">
+        <input type="radio" name="type" value="all_log" checked/>
+        <label class="lbl_right">all</label>
+    </div>
+
+    {% for service in services %}
+    <div class="div_filter_block">
+        <input type="radio" name="type" value="{{service}}"/>
+        <label class="lbl_right">{{service}}</label>
+    </div>
+    {% endfor %}
+
+    <div class="div_filter_block">
+        <button id="btn_resetview">重置视图</button>
+    </div>
+
+</div>
+
+
+<div id="div_srvc_tb">
+    <table id="tb_srvc"></table>
+    <div id="div_srvc_pager"></div>
+</div>
+
+<div id="div_srvc_dtls"></div>

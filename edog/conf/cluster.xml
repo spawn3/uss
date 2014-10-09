@@ -1,0 +1,6 @@
+<cluster>
+    <master ip='192.168.1.15'></master>
+    <slave ip='192.168.1.13'></slave>
+    <slave ip='192.168.1.14'></slave>
+    <slave ip='192.168.1.15'></slave>
+</cluster>

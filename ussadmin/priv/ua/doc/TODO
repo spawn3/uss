@@ -1,0 +1,28 @@
+new:
+	setup.py里面script的安装路径，需要调整。
+	node.py 157行， nm为none的情况没有考虑。
+
+1, 
+	发现rest/moni.py 里面做了对response的处理， 这个处理过程下一步调整到bridge/moni.py里面，因为可以这样理解，rest.py里面就直接返回原始的response，如果edog server error,这个rest/moni.py 就抛出异常。bridge/moni.py对接受到的数据进行加工，经过bridge/moni.py加工后的数据要满足调用bridge/moni.py的格式要求，否则，抛出异常。
+
+#7, 
+	添加了日志的清空和备份
+
+#2,
+	调试集群的启动，关闭，测试，并把返回的执行结果，包装好看点返回给用户，
+
+#3，
+	处理一下ear/情况，把监听到的信息，打印到在右边，
+
+
+
+#4,
+	正在处理utils里面的request的日志，
+
+
+#5,
+	有时间研究一下 common/sqlitedb.py
+
+#6,
+	完善一下，install.py
+

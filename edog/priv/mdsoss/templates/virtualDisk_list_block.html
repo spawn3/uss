@@ -1,0 +1,43 @@
+<table class="v">
+    <thead>
+        <tr>
+            <td></th>
+            <td>ID</td>
+            <td>磁盘名</td>
+            <td>用户</td>
+            <td>共享数</td>
+            <td>容量(GB)</td>
+            <td>可启动</td>
+            <!--<td>target</td>-->
+            <td>可共享</td>
+            <td>位置</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for virtualDisk in virtualDisk_set %}
+        <tr class="{% cycle 'row1' 'row2' %}">
+            <td class='td_checkbox'>
+                <input type="checkbox" name="action_on_who" value = "action_on_who">
+            </td>
+            <td><a href="#" onclick="ShowIframe('virtualDisk','virtualDisk_detail?virtualDisk_uuid={{virtualDisk.uuid}}',480,220)">{{ virtualDisk.uuid }}</a></td>
+            <td>{{ virtualDisk.alias }} </td>
+            <td>{{ virtualDisk.customer }}</td>
+            <td>{{ virtualDisk.vm }}</td>
+            <td>{{ virtualDisk.capacity }}</td>
+            <td>{{ virtualDisk.is_vmimg }}</td>
+            <!--<td>{{ virtualDisk.target }}</td>-->
+            {% ifequal virtualDisk.shared  "true" %}
+                <td style=""><font color="#EA0000">{{ virtualDisk.shared }}</font></td>
+            {% else %}
+                <td>{{ virtualDisk.shared }}</td>
+            {% endifequal %}
+            <td>{{ virtualDisk.path }}</td>
+
+        </tr>
+        {% endfor %}
+				<tr><td>
+<p>{{ virtualDisk_set|length }} 个磁盘</p>
+				</td></tr>
+    </tbody>
+</table>

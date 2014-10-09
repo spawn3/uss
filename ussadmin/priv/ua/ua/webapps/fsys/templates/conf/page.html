@@ -1,0 +1,86 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		var lastsel; 
+		jQuery("#rowed3").jqGrid({ 
+		url:'fsys/conf/rsrc', 
+		datatype: "json", 
+		colNames:['作用域','键', '值', '说明'], 
+		colModel:[ 
+        {name:'catagory',index:'catagory', width:90, editable:false}, 
+        {name:'key',index:'key', width:90, editable:false}, 
+				{name:'value',index:'value', width:100,editable:true},
+				{name:'doc',index:'doc', width:100,editable:true},
+			],
+    rowNum:20, 
+    rowList:[10,20,30], 
+    pager: '#prowed3', 
+    sortname: 'catagory', 
+    viewrecords: true, 
+    sortorder: "desc", 
+    onSelectRow: function(id){ 
+//					if(id && id!==lastsel){ 
+					if(id){ 
+							jQuery('#rowed3').jqGrid('restoreRow',lastsel); 
+							jQuery('#rowed3').jqGrid('editRow',id,true); 
+							lastsel=id; 
+					} 
+		}, 
+		editurl: "fsys/conf/rsrc", 
+		caption: "修改配置",
+		width: 900,
+		height: 500,
+	}); 
+		jQuery("#rowed3").jqGrid('navGrid',"#prowed3",{edit:false, add:false, del:false, search:false}); 
+});
+		
+</script>
+
+<style>
+
+	#submit_conf {
+		width: 150px;
+		height: 40px;
+		margin: 10px;
+		border: 1px solid #EEEEEE;
+		padding: 10px;
+		font-size: 12px;
+		border-radius: 3px;
+		-moz-border-radius: 3px;
+	}
+
+</style>
+
+<div class="conf">
+	<!--
+												<table class="content-tab">
+													<tbody>
+											{% for option in cf %}
+														<tr>
+															<td class="optionkey">{{option.key}}</td>
+															<td><input class="optionkey_input" type="txt"  name="{{option.key}}" value="{{option.value}}" readonly style="background-color:white">
+															</td>
+														</tr>
+												{% endfor %}
+
+
+														<tr>
+															<td class="optionkey_submit"></td>
+															<td align="right"><button id="submit_conf" name="dosave" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-only">当前配置</button>
+															</td>
+														</tr>
+
+													<tr>
+															<td></td>
+															<td align="right"><div id="conf_result"></div></td>
+														</tr>
+
+
+													</tbody>
+												</table>
+					</div>
+		-->
+
+					<div id='conf_tab'>
+						<table id="rowed3"></table> 
+						<div id="prowed3"></div> 
+					</div>

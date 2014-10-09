@@ -1,0 +1,137 @@
+<html>
+	<head>
+    <title>permissions</title>
+    
+<script type ="text/javascript" language ="javascript" >
+        var req; //定义变量，用来创建xmlhttprequest对象
+		var group;
+		var values="";
+		
+function check(){
+			group=document.getElementById("group").value;
+			var permission_list = document.changePermission.permission_selected;
+			var flag=0;
+
+			for(var i=0;i<permission_list.length;i++)
+			{
+				if(permission_list[i].checked)
+				{
+					flag++;
+					values+=permission_list[i].value+",";
+					
+				}
+			}
+			values=values.substring(0,values.length-1);
+			if(flag==0)
+			{
+			document.getElementById("error").innerHTML="请选权限";
+			return false;
+			}
+			else
+			{
+				return true;
+	        }
+	}
+
+
+
+		function creatReq() {
+			if (!check())
+				return false;
+            var url="user_changeGroupPermission?group="+group+"&permission="+values; //要请求的服务端地址
+            if(window.XMLHttpRequest) {
+                req=new XMLHttpRequest();
+            }
+            else if(window.ActiveXObject) {
+                req=new ActiveXObject("Microsoft.XMLHttp");
+            }
+            if(req) {
+                req.open("GET",url,true); //与服务端建立连接(请求方式post或get，地址,true表示异步)
+                req.onreadystatechange = callback; //指定回调函数
+                req.send(null); //发送请求
+            }
+        }
+        
+        function callback() {
+            if(req.readyState==4) //请求状态为4表示成功
+            {
+                    document.getElementById("error").innerHTML = req.responseText;
+					
+               
+        	}
+		}
+
+		function closed(){
+			parent.location.reload();
+			window.close();
+			}
+
+
+
+    </script>
+
+</script>
+
+<style type="text/css">
+tr{
+	text-align:left;
+	}
+</style>
+    
+    </head>
+    
+    <body>    
+   		 <div style="font-size:12px">  
+         组名：{{ group.name }}<br  />
+         现有权限：{% for p in group.permissions.all %} {{ p.name }}, {% endfor %}
+         </div>
+         <center>
+         <hr  />
+         请重新选择权限：<br  />
+         
+          <div style="color:#FF0000" id="error"></div> 
+          <form id="v" name="changePermission" method="post" action="" >
+           <input type="hidden" name="group" id="group" value="{{ group.name }}"/>
+          <table>
+           <tr>
+              <td>
+              	   <input type="checkbox" id="p1" name="permission_selected" value="manage_pm">
+                   <label for="p1" style="font-size:12px">PM Management</label>
+                   
+              </td>
+              <td>
+                   <input type="checkbox" id="p2" name="permission_selected" value="manage_vm">             
+                   <label for="p2" style="font-size:12px">VM Management</label>
+              </td>
+           </tr>
+          
+           <tr>
+              <td>
+                   <input type="checkbox" id="p3" name="permission_selected" value="manage_vd">              
+                   <label for="p3" style="font-size:12px">VirtualDisk Management</label> 
+              </td>
+              <td>  
+                   <input type="checkbox" id="p4" name="permission_selected" value="manage_yfs">             
+                   <label for="p4" style="font-size:12px">Yfs Management</label>
+              </td>
+           </tr>
+           
+           <tr>
+              <td>
+                   <input type="checkbox" id="p5" name="permission_selected" value="manage_customer">              
+                   <label for="p5" style="font-size:12px">Customer Management</label>
+              </td>
+              <td>
+                   <input type="checkbox" id="p6" name="permission_selected" value="manage_User">            
+                   <label for="p6" style="font-size:12px">User Management</label>
+               </td>
+            </tr>
+            
+
+            </table>  
+            <br />
+              <div ><input value="submit" type="button"  onclick="return creatReq()" /> <input value="close" type="button"  onclick="closed()" /> </div> 
+            </form>
+            </center>                                                
+		</body>
+</html>        

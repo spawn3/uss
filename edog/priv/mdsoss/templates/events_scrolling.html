@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us" >
+<head>
+<link rel="stylesheet" type="text/css" href="/static/css/admin_base.css" />
+<script type="text/javascript" src="static/js/jquery-1.4.2.min.js"></script>  
+
+
+
+<script type ="text/javascript" language ="javascript" >
+	//加上random是为了防止浏览器缓存
+				function creatReq() {
+					var data = "";
+					$.get("events_msg?random="+Math.random(), function(data){
+							$("#myTime").html(data);
+					});
+				}
+
+				setInterval(creatReq, 5000);
+
+//        function creatReq() {
+//            var url="events_msg"; //要请求的服务端地址
+//            if(window.XMLHttpRequest) {
+//                req=new XMLHttpRequest();
+//            }
+//            else if(window.ActiveXObject) {
+//                req=new ActiveXObject("Microsoft.XMLHttp");
+//            }
+//            if(req) {
+//                req.open("GET",url,true); //与服务端建立连接(请求方式post或get，地址,true表示异步)
+//                req.onreadystatechange = callback; //指定回调函数
+//                req.send(null); //发送请求
+//            }
+//        }
+//
+//        function callback() {
+//            if(req.readyState==4) //请求状态为4表示成功
+//            {
+//                if(req.status==200) {
+//                    Dispaly(); //所有状态成功，执行此函数，显示数据
+//                }
+//                else {
+//                    //alert("服务端返回状态" + req.status + "  " + req.statusText);
+//                }
+//            }
+//            /*
+//            else {
+//                document.getElementById("myTime").innerHTML = "数据加载中";
+//            }*/
+//        }
+//
+//        function Dispaly() {
+//            document.getElementById("myTime").innerHTML = req.responseText;
+//        }
+
+    </script>
+
+</head>
+
+<body>
+
+
+
+
+<div align="center" style="font-weight: bold; font-size: 15px;">
+<!--<a href="" onclick='creatReq();return false;'>信息面板</a>-->
+<!--<input type="button" onclick ="creatReq();" value="creatReq"/>-->
+</div>
+
+<div id="myTime"></div>
+
+</body>
+</html>

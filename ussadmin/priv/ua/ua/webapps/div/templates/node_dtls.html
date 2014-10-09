@@ -1,0 +1,200 @@
+<style>
+.div_dtls {
+	margin-top: 5px;
+	float:left;
+
+	border: 1px solid #EEEEEE;
+	font-size: 12px;
+
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+
+	box-shadow: 0 3px 3px #C8C8C8;
+	-webkit-box-shadow: 0 3px 3px #C8C8C8;
+	-moz-box-shadow: 0 3px 3px #C8C8C8;
+
+	width: 1000px;
+}
+
+.unit {
+	margin: 5px;
+	float:left;
+
+	border: 1px solid #EEEEEE;
+	padding: 5px;
+	font-size: 12px;
+
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+
+/*
+	box-shadow: #888 0px 2px 2px;
+	-webkit-box-shadow: #888 0px 2px 2px;
+	-moz-box-shadow: #888 0px 2px 2px;
+*/
+}
+
+.unit th {
+	font-weight: normal;
+}
+
+.dtls_title {
+	font-weight: bold;
+}
+.div_dtls_header {
+	font-size: 0.9em;
+	line-height: 18px;
+	padding:1px;
+}
+
+.div_dtls_content {
+	padding: 5px;
+}
+
+#tb_node_dtls {
+	border-collapse:collapse;
+}
+#tb_node_dtls td {
+	border: 1px solid #EEEEEE;
+}
+
+#tb_drvs {
+	border-collapse:collapse;
+}
+#tb_drvs td {
+	border: 0px solid #EEEEEE;
+	padding: 5px;
+}
+
+.span_td {
+	margin-right: 7px;
+}
+
+.tb_subtable {
+	margin: 0px;
+	border-collapse:collapse;
+}
+.tb_subtable td, .tb_subtable th {
+	border: 1px solid #EEEEEE;
+}
+
+.rrd_img {
+	float: left;
+	margin: 2px;
+
+	box-shadow: 0 4px 4px#C8C8C8;
+	-webkit-box-shadow: 0 4px 4px #C8C8C8;
+	-moz-box-shadow: 0 4px 4px #C8C8C8;
+}
+</style>
+
+<div id="div_dtls" class="div_dtls">
+
+
+<div class="ui-widget-header div_dtls_header" >Node Details</div>
+
+<div class="div_dtls_content">
+
+<div class="unit">
+	<table>
+		<tr><td class="dtls_title">ID:</td><td>{{ node.id }}</td></tr>
+		<tr><td class="dtls_title">IP:</td><td>{{ node.ip }}</td></tr>
+		<tr><td class="dtls_title">Hostname:</td><td>{{ node.hostname }}</td></tr>
+		<tr><td class="dtls_title">Rack:</td><td>{{ node.rack }}</td></tr>
+		<tr><td class="dtls_title">Memory:</td><td>{{ node.mem.total }}</td></tr>
+		<tr><td class="dtls_title">Swap:</td><td>{{ node.swap.total }}</td></tr>
+	</table>
+</div>
+
+
+<div class="unit">
+	<span class="dtls_title" >CPU:</span>
+	<table class="tb_subtable">
+	<tr><th>Physical ID</th><th>Count</th><th>Model</th></tr>
+
+		{% if node.cpu %}
+			{% for c in node.cpu %}
+			<tr>
+				<td>{{ c.physical_id }}</td>
+				<td>{{ c.count }}</td>
+				<td>{{ c.model_name }}</td>
+			</tr>
+			{% endfor %}
+		{% endif %}
+
+	</table>
+</div>
+
+<div class="unit">
+	<span class="dtls_title">Network:</span>
+	<table class="tb_subtable">
+            <tr>
+                <th>Ifname</th>
+                <th>IP</th>
+                <th>Mac</th>
+                <th>Mask</th>
+                <th>Bcast</th>
+                <th>Speed</th>
+                <th>In</th>
+                <th>Out</th></tr>
+		{% if node.nw.dtls %}
+			{% for nwk in node.nw.dtls %}
+                        <tr>
+                            <td>{{ nwk.ifname }}</td>
+                            <td>{{ nwk.ip }}</td>
+                            <td>{{ nwk.mac }}</td>
+                            <td>{{ nwk.mask }}</td>
+                            <td>{{ nwk.bcast }}</td>
+                            <td>{{ nwk.speed }}</td>
+                            <td>{{ nwk.rx_bytes }}</td>
+                            <td>{{ nwk.tx_bytes }}</td>
+                        </tr>
+			{% endfor %}
+		{% endif %}
+	</table>
+</div>
+
+<!--
+<tr>
+<td class="dtls_title">Drives:</td>
+<td colspan="11">
+
+<table id="tb_drvs">
+<thead>
+<tr><td>Filesystem</td> <td>1K-blocks</td> <td>Available</td> <td>Use%</td> <td>Mounted on</td></tr>
+</thead>
+<tbody>
+<tr><td>/dev/sda7</td>  <td>17134420</td>  <td>2297280</td>   <td>86%</td>  <td>/</td></tr>
+<tr><td>/dev/sda3</td>  <td>41943036</td>  <td>13321196</td>  <td>69%</td>  <td>/media/wind</td></tr>
+<tr><td>/dev/sda5</td>  <td>31457276</td>  <td>7843444</td>   <td>76%</td>  <td>/media/wine</td></tr>
+<tr><td>/dev/sda6</td>  <td>30963708</td>  <td>22083116</td>  <td>25%</td>  <td>/media/store</td></tr>
+</tbody>
+</table>
+
+</td>
+</tr>
+-->
+
+<div class="unit">
+	<span class="dtls_title">Monitoring:</span>
+	<div>
+	{% for img in img_urls %}
+		<img style="margin-top:5px;" class="rrd_img" src="{{ img }}">
+	{% endfor %}
+	</div>
+</div>
+
+<!--
+<tr><td colspan="4" class="dtls_title">MDS:</td></tr>
+<tr><td colspan="4" class="dtls_title">CDS:</td></tr>
+<tr><td colspan="4" class="dtls_title">C60:</td></tr>
+
+<tr>
+<td class="dtls_title">NFS:5</td>
+<td class="dtls_title">CIFS:1</td>
+<td class="dtls_title">FTP:3</td>
+</tr>
+-->
+
+</div>
+</div>

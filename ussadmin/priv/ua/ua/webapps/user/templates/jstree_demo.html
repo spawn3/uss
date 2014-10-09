@@ -1,0 +1,120 @@
+<script type="text/javascript" src="/static/jsTree.v.1.0rc2/jquery.jstree.js" ></script>
+<script type="text/javascript" src="/static/jsTree.v.1.0rc2/_lib/jquery.cookie.js" ></script>
+<script type="text/javascript" src="/static/jsTree.v.1.0rc2/_lib/jquery.hotkeys.js" ></script>
+
+<script type="text/javascript" src="/static/js/jquery.livequery.js" ></script>
+
+<script type="text/javascript" src="/static/js/user_tree.js" ></script>
+		
+<style type="text/css">
+	#demo {
+		margin: 0px;
+		overflow: auto;
+		border: 1px solid gray;
+		background:white; 
+	}
+</style>
+
+	<div class="nosidebar">
+		<div id="container">
+			<div id="content" class="demo">
+
+				<div id="mmenu" style="height: 30px; overflow: auto;">
+					<input id="clear_search" value="clear" style="display: block; float: right;" type="button">
+					<input id="search" value="search" style="display: block; float: right;" type="button">
+					<input id="text" style="display: block; float: right;" type="text">
+				</div>
+				<!-- the tree container (notice NOT an UL node) -->
+
+				<div id="demo" >
+				</div>
+
+				<div id="txtSelectedValue">
+				</div>
+
+				<div id="add">
+					<table>
+
+						<tr>
+							<td>
+								<div id="addGroupDiv" style="display:none;">
+									<table>
+										<tr>
+											<td class="optionkey">groupName</td>
+											<td><input type="txt"  class="userInput" name="groupName">
+											</td>
+										</tr>
+
+										<tr>
+											<td class="optionkey">groupGroup</td>
+											<td><input readonly class="userInput" id="groupGroup" type="txt"  name="groupGroup">
+											</td>
+										</tr>
+
+										<tr>
+											<td class="optionkey">permis</td>
+											<td><input type="txt" class="userInput"  name="permis">
+											</td>
+										</tr>
+
+										<tr>
+											<td class="optionkey"></td>
+											<td><input class="userInput" style="border:0px" type="txt"  name="">
+											</td>
+										</tr>
+
+
+										<tr>
+											<td class="optionkey"></td>
+											<td align="right"><input id="addGroup" type="submit" name="addGroup" value="添加组">
+											</td>
+										</tr>
+
+									</table>
+								</div>
+							</td>
+
+							<td>
+								<div id="addUserDiv" style="display:none;">
+									<table>
+										<tr>
+											<td class="optionkey">userName</td>
+											<td><input class="userInput" type="txt"  name="userName">
+											</td>
+										</tr>
+
+										<tr>
+											<td class="optionkey">userGroup</td>
+											<td><input readonly class="userInput" id="userGroup" type="txt"  name="userGroup">
+											</td>
+										</tr>
+
+										<tr>
+											<td class="optionkey">password</td>
+											<td><input type="password" class="userInput"  name="password">
+											</td>
+										</tr>
+
+										<tr>
+											<td class="optionkey">password</td>
+											<td><input type="password"  class="userInput" name="password">
+											</td>
+										</tr>
+
+										<tr>
+											<td class="optionkey"></td>
+											<td  align=right><input id="addUser" type="submit" name="addUser" value="添加用户">
+											</td>
+										</tr>
+									</table>
+								</div>
+							</td>
+
+						</tr>
+					</table>
+				</div>
+
+			</div>
+		</div>
+
+</div>

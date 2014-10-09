@@ -1,0 +1,35 @@
+{% extends "world_base.html" %}
+{% block title %}用户{% endblock %}
+{% block content %}
+
+<div class='menu2' > 
+<a href="home">首页</a> 
+&rsaquo; 
+<a href="customer_list">用户</a> 
+</div> 
+
+
+
+<br />
+<br />
+<script type="text/javascript">
+</script>
+
+<div align="center">
+<table>
+<tr>
+<td>
+<button type="button" onclick="ShowIframe('创建新用户','customer_action?action_type=customer_create',650,400)">创建新用户</button>
+</td>
+</tr>
+<tr>
+<td>
+{% include "customer_list_block.html" %}
+</td>
+</tr>
+</div>
+
+{% endblock %}
+
+
+

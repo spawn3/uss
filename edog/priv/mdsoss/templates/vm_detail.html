@@ -1,0 +1,119 @@
+{% extends "world_base.html" %}
+{% block title %}虚拟机详细资料{% endblock %}
+{% block content %}
+
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script type="text/javascript" src="static/js/popup.js"></script>
+<script type="text/javascript" src="static/js/popupclass.js"></script>
+
+<style type='text/css'>
+	#Exe1 {
+		width: 20px;
+		height: 20px;
+	}
+
+	button {
+	}
+
+</style>
+
+<script type="text/javascript">
+function ok() {
+    ShowIframe('摧毁虚拟机','vm_destroy?vm_uuid={{vm.uuid}}&customer_uuid={{vm.customer.uuid}}',500,300);
+
+}
+</script>
+
+<div class='menu' >
+<a href="home">首页</a>
+&rsaquo;
+<a href="vm_detail?vm_uuid={{vm.uuid}}">虚拟机详细资料</a>
+</div>
+
+{% if not vm.customer.locked %}
+<div style="float:left;">
+	<ul>
+<br/>
+<button align="right" style="" type="button" onclick="ShowIframe('开机','vm_start?vm_uuid={{vm.uuid}}&customer_uuid={{vm.customer.uuid}}',500,300)">开机</button>
+<button align="right" style="" type="button" onclick="ShowIframe('关机','vm_shutdown?vm_uuid={{vm.uuid}}&customer_uuid={{vm.customer.uuid}}',500,300)">关机</button>
+<button align="right" style="" type="button" onclick="ShowIframe('强制关机','vm_stop?vm_uuid={{vm.uuid}}&customer_uuid={{vm.customer.uuid}}',500,300)">强制关机</button>
+<button align="right" style="" type="button" onclick="ShowIframe('编辑','vm_action?action_type=vm_edit&vm_uuid={{vm.uuid}}&customer_uuid={{vm.customer.uuid}}',950,600)">编辑</button>
+<br />
+<!--<button align="right" type="button" onclick="ShowIframe('Shut down the VM','vm_shutdown?vm_uuid={{vm.uuid}}&customer_uuid={{vm.customer.uuid}}',500,300)">Shut Down</button>-->
+<!--<button align="right" type="button" onclick="ShowIframe('Pause the VM','vm_pause?vm_uuid={{vm.uuid}}&customer_uuid={{vm.customer.uuid}}',500,300)">Pause</button>-->
+<!--<button align="right" type="button" onclick="ShowIframe('Resume the VM','vm_resume?vm_uuid={{vm.uuid}}&customer_uuid={{vm.customer.uuid}}',500,300)">Resume</button>-->
+<button align="right" style="" type="button" onclick="ShowIframe('迁移','vm_action?vm_uuid={{vm.uuid}}&action_type=vm_migrate',700,500)">迁移</button>
+<button align="right" style="" type="button" onclick="ShowConfirm('Confirm','您确定要删除虚拟机吗？','Button4','',340,80, ok)">删除</button>
+<button align="right" style="" type="button" onclick="ShowIframe('在指定物理机上开机','vm_action?action_type=vm_startOnPm&vm_uuid={{vm.uuid}}',900,450)">指定物理机并开机</button>
+</ul>
+</div>
+{% endif %}
+
+<table align="center" style="border:1 dotted; font-size:12px">
+    <tr>
+			<td align="left">名称:</td> <td a='b'>{{vm.alias}}</td>
+			<td align="left">vnc:</td>
+			<td a='b'>
+				{% ifequal vm.status 'running'  %}
+	<OBJECT ID="Exe1" CLASSID="CLSID:83831D65-B4CC-4A7D-B362-D9AF6495C5A9" style=''>
+		<param id='exe1_param' name="Path0" value="path={C:\Program Files\RealVNC\VNC4\vncviewer.exe} ip={{vm.pm.uuid}}:{{vm.port}}">
+	</OBJECT>
+				{% endifequal %}
+			</td>
+        </tr>
+        <tr>
+            <td align="left">状态:</td><td a='b'>{{ vm.status }}</td>
+            <td align="left">端口:</td><td a='b'>{{ vm.port }}</td>
+        </tr>
+        <tr>
+            <td align="left">处理器数:</td><td a='b'>{{vm.cpu_cores}}</td>
+            <td align="left">内存数:</td><td a='b'>{{vm.mem_capacity}}</td>
+        </tr>
+        <tr>
+            <td align="left">物理机:</td><td a='b'>{{vm.pm.uuid}}</td>
+            <td align="left">用户:</td><td a='b'>{{vm.customer.alias}}</td>
+        </tr>
+        <tr>
+            <td align="left">ID:</td><td a='b' colspan = "3">{{vm.uuid}}</td>
+        </tr>
+        <tr>
+            <td align="left">系统盘:</td><td a='b' colspan = "3">{{vm.boot_disk}}</td>
+        </tr>
+    </table>
+		<!--a='b'  之前是width='160px'-->
+
+<br />
+<br />
+
+
+<div align="center">
+    <table>
+        <tr>
+            <td>
+                <label style="font-weight:bold; font-size=12px; color:#066;">虚拟网卡</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% include "virtualNetworkCard_list_block.html" %}
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div align="center">
+    <table>
+        <tr>
+            <td>
+                <label style="font-weight:bold; font-size=12px; color:#066;">虚拟磁盘</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% include "virtualDisk_list_block_vm.html" %}
+            </td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}

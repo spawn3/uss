@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+#zhangjunfeng@meidisen.com
+
+import os
+import sys
+import re
+import getpass
+import hashlib
+
+
+from ua.common.ua_conf import ua_password_file
+
+
+#这个是uss-ua的小工具，用来重新设置uss_ua 的登录密码
+#print "hello"
+
+def check_passwd(passwd):
+    m = re.match('^[0-9a-zA-Z_]*$', passwd)
+    if m:
+        return True
+    else:
+        print "sorry, a illegal characters,"
+        print ""
+        print "密码格式为大小写字母或数字的任意组合"
+        return False
+
+#if not os.getuid() == 0:
+#    print "请使用root或sudo"
+#    sys.exit()
+
+print "Changing passwd for user root, uss_ua"
+
+while True:
+    newpasswd1 = getpass.getpass("New passwd:")
+    if check_passwd(newpasswd1):
+        break
+
+while True:
+    newpasswd2 = getpass.getpass("Retype new passwd:")
+    if not newpasswd2 == newpasswd1:
+        print "Sorry, passwd do not match."
+    else:
+        break
+
+#print  newpasswd1, newpasswd2
+passwd_hash = hashlib.md5(newpasswd1).hexdigest()
+#print passwd_hash
+
+with open(ua_password_file, "w") as f:
+    f.write(passwd_hash)
+
+print "密码重置成功！"

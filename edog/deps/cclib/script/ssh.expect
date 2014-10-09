@@ -1,0 +1,26 @@
+#!/usr/bin/expect -f
+
+########################################
+# Usage: ./ssh.expect HOST PSWD
+########################################
+
+set HOST [lindex $argv 0]
+set PSWD [lindex $argv 1]
+set USER "root"
+
+spawn -noecho ssh $USER@$HOST echo magic
+expect {
+    "*yes/no*" {
+        send "yes\r";
+        exp_continue
+    }
+    "password:" {
+        send "$PSWD\r";
+        expect {
+            "denied" {exit 1}
+            eof
+        }
+    }
+    "*No route to HOST" {exit 2}
+    "*Connection refused" {exit 3}
+}

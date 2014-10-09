@@ -1,0 +1,57 @@
+#header {
+    background: #709CD2;
+    color: #FFFFFF;
+    overflow: hidden;
+}
+
+#branding h1 {
+    padding: 0 10px;
+    font-size: 18px;
+    margin: 8px 0;
+    font-weight: normal;
+    color: #FFFFFF;
+}
+
+.v {
+	border-collapse: collapse; 
+	width:850;
+	font-size:11; 
+	font-family:Arial,Verdana,Sans-serif
+}
+
+.td_checkbox {
+	width:10px;
+}
+
+.v td {
+	white-space:nowrap; 
+	border-left: 1px solid #FFFFFF;
+	border-right: 1px solid #FFFFFF;
+	height:30
+}
+.v thead td {
+	white-space:nowrap; 
+	border-left: 1px solid #FFFFFF;
+	border-right: 1px solid #FFFFFF;
+	height:19; 
+	color: #FFFFFF;
+	font-weight: bold;
+	background:#709CD2
+}
+
+.row1 {
+	background: #EDF3FE;
+}
+
+.row2 {
+	background: white;
+}
+
+body {
+	font-size:11; 
+	font-family:Arial,Verdana,Sans-serif
+}
+
+.menu2
+{
+}

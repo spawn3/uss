@@ -1,0 +1,101 @@
+<style type="text/css">
+
+	#submit_conf {
+		width: 150px;
+		height: 40px;
+		margin: 10px;
+		border: 1px solid #EEEEEE;
+		padding: 10px;
+		font-size: 12px;
+		border-radius: 3px;
+		-moz-border-radius: 3px;
+	}
+
+
+
+</style>
+
+
+	<script type="text/javascript">
+			$(document).ready(function(){
+					$("#submit_conf").click(function(){
+		
+						$("#conf_result").html("");
+						var oldpasswd = "";
+						var newpasswd1 = "";
+						var newpasswd2 = "";
+
+		
+						$(".optionkey_input").each(function(){
+							//	alert($(this).attr("name"));
+							if ($(this).attr("name") == "oldpasswd")
+							{
+								oldpasswd = $(this).val()	
+							}
+							if ($(this).attr("name") == "newpasswd1")
+							{
+								newpasswd1 = $(this).val()	
+							}
+							if ($(this).attr("name") == "newpasswd2")
+							{
+								newpasswd2 = $(this).val()	
+							}
+						});
+
+						if ( newpasswd1 != newpasswd2 )
+						{
+							alert("两次输入的新密码不同");					
+						}
+		
+						//向服务器端提交
+						$("#conf_result").load("/user/changepasswd",
+								{
+								"oldpasswd":oldpasswd,
+								"newpasswd1":newpasswd1,
+								"newpasswd2":newpasswd2
+								});
+		
+					});
+				});
+
+
+	</script>
+
+	<div class="conf">
+		<!--
+		-->
+		<table class="content-tab">
+			<tbody>
+
+				<tr>
+					<td class="optionkey">现有密码</td>
+					<td><input class="optionkey_input" type="password"  name="oldpasswd">
+					</td>
+				</tr>
+
+				<tr>
+					<td class="optionkey">新密码</td>
+					<td><input class="optionkey_input" type="password"  name="newpasswd1">
+					</td>
+				</tr>
+
+				<tr>
+					<td class="optionkey">再次输入新密码</td>
+					<td><input class="optionkey_input" type="password"  name="newpasswd2">
+					</td>
+				</tr>
+
+				<tr>
+					<td class="optionkey_submit"></td>
+					<td align="right"><button id="submit_conf" type="submit" name="dosave" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false" >修改密码</button>
+					</td>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td align="right"><div id="conf_result"></div></td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>

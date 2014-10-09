@@ -1,0 +1,43 @@
+<script type="text/javascript">
+$(document).ready(function(){ 
+$("#tb_conn_ftp").jqGrid({
+		url:'fsys/conn/ftp_rsrc',
+		datatype: 'json',
+		mtype: 'GET',
+		colNames:['ID', 'IP', '服务节点', 'Bindwidth'],
+		colModel :[ 
+		  {name:'id', index:'id', width:50, align:'center'}, 
+		  {name:'ip', index:'ip', width:100, align:'center'}, 
+		  {name:'server', index:'server', width:150, align:'center'},
+		  {name:'bindwidth', index:'bindwidth', width:200, align:'center'}
+		],
+		pager: '#div_conn_ftp_pager',
+		rowNum:50,
+		rowList:[50,100,150],
+		sortname: 'id',
+		sortorder: 'desc',
+		viewrecords: true,
+		caption: 'Node',
+		shrinkToFit:false,
+		width: 900,
+		height: 500
+})
+	.navGrid("#div_conn_ftp_pager")
+	.navButtonAdd('#div_conn_ftp_pager',{
+		caption: "",
+		position: "last",
+		title: "forbidden ",
+		buttonicon: "ui-icon-gear",
+		onClickButton: function(){
+			alert("adding Row");	
+			$("#tb_dev_list").setColumns(options);
+	   		return false;
+		},
+	});
+}); 
+</script>
+ 
+<div class="div_dev">
+<table id="tb_conn_ftp"></table>
+<div id="div_conn_ftp_pager"></div>
+</div>

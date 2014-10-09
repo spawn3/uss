@@ -1,0 +1,165 @@
+{% extends "world_base.html" %}
+{% block title %}物理机详细资料{% endblock %}
+{% block content %}
+
+<div class='menu2'>
+    <a href="home">首页</a>
+    &rsaquo;
+    <a href="pm_detail?pm_uuid={{pm.uuid}}">物理机详细资料</a>
+</div>
+
+<!--
+<div style="float:left">
+<ul>
+<button align="right" type="button" onclick="ShowIframe('物理机下线','pm_down?pm_uuid={{pm.uuid}}',500,300)">下线</button>
+<button align="right" type="button" onclick="ShowIframe('物理机上线','pm_up?pm_uuid={{pm.uuid}}',500,300)">上线</button>
+</ul>
+</div>
+-->
+
+<!--
+<script type ="text/javascript" language ="javascript" >
+        var req; //定义变量，用来创建xmlhttprequest对象
+        function creatReq() {
+            var uuid=document.getElementById('pm_uuid').value;
+            var url="monitorPngs?pm_uuid=" + uuid; //要请求的服务端地址
+            if(window.XMLHttpRequest) {
+                req=new XMLHttpRequest();
+            }
+            else if(window.ActiveXObject) {
+                req=new ActiveXObject("Microsoft.XMLHttp");
+            }
+            if(req) {
+                req.open("GET",url,true); //与服务端建立连接(请求方式post或get，地址,true表示异步)
+                req.onreadystatechange = callback; //指定回调函数
+                req.send(null); //发送请求
+            }
+        }
+
+        function callback() {
+            if(req.readyState==4) //请求状态为4表示成功
+            {
+                if(req.status==200) {
+                    Dispaly(); //所有状态成功，执行此函数，显示数据
+                }
+                else {
+                    alert("服务端返回状态" + req.status + "  " + req.statusText);
+                }
+            }
+            /*
+            else {
+                document.getElementById("monitorPngs").innerHTML = "数据加载中";
+            }*/
+        }
+
+        function Dispaly() {
+            document.getElementById("monitorPngs").innerHTML = "";
+//						alert(req.responseText);
+            document.getElementById("monitorPngs").innerHTML = req.responseText;
+            //alert(document.getElementById("monitorPngs").innerHTML);
+        }
+
+</script>
+-->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+          function refresh_pm_rrd(){
+              var uuid=document.getElementById('pm_uuid').value;
+              var url="monitorPngs?pm_uuid=" + uuid; //要请求的服务端地址
+              // alert(uuid);
+              // alert(url);
+              // $('#monitorPngs').html('');
+              $('#monitorPngs').load(url);
+              // $('.img_refresh').each(function(){
+              // var timestamp = new Date().getTime();
+              // $(this).attr('src', $(this).attr('src')+'?'+timestamp);
+              // });
+          }
+          refresh_pm_rrd();
+          setInterval(refresh_pm_rrd, 30000);
+      });
+
+//setInterval('creatReq();', 10000);
+</script>
+
+<div id="monitorPngs" align="center">
+<input type="hidden" name="pm_uuid" id="pm_uuid" value={{pm.uuid}}>
+	<!--
+<table>
+<tr>
+<td><img class='img_refresh' src="monitor/rrds/{{pm.uuid}}/load.png" ></td>
+<td><img class='img_refresh' src="monitor/rrds/{{pm.uuid}}/mem.png" ></td>
+</tr>
+<tr>
+<td><img class='img_refresh' src="monitor/rrds/{{pm.uuid}}/swap.png" ></td>
+<td><img class='img_refresh' src="monitor/rrds/{{pm.uuid}}/net.png" ></td>
+</tr>
+</table>
+-->
+</div>
+
+<div style="clear:both;"></div>
+<div id="pm_monitor_field">
+    {% for time in monitor_set %}
+    time:{{ time.time }}
+    avg1:{{ time.cpuAvg1 }}
+    {% endfor %}
+</div>
+
+<table align="center" style="border:1 dotted; font-size:12px">
+    <tr>
+        <td><td align="left">IP地址:</td><td width="120">{{pm.uuid}}</td></td>
+        <td>
+            <td align="left">虚拟机数:</td><td width="120">{{pm.ip}}</td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <td align="left">内存总数:</td><td width="150">{{pm.mem_capacity}}</td>
+        </td>
+        <td>
+            <td align="left">已用内存:</td><td width="150">{{pm.mem_used}}</td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <td align="left">处理器个数:</td><td width="150">{{pm.cpu_cores}}</td>
+        </td>
+    </tr>
+</table>
+
+<br />
+<br />
+
+<div align="center">
+    <table>
+        <tr>
+            <td>
+                <label style="font-weight:bold; font-size=12px; color:#066;">虚拟机</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% include "vm_list_block.html" %}
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div align="center">
+    <table>
+        <tr>
+            <td>
+                <label style="font-weight:bold; font-size=12px; color:#066;">网桥设备</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% include "networkBridge_list_block.html" %}
+            </td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}

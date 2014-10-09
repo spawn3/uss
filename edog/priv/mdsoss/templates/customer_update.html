@@ -1,0 +1,77 @@
+{% extends "world_base.html" %}
+{% block title %}create_vm{% endblock %}
+{% block content %}
+
+<script src="/static/js/validate.js"  charset="gb2312"></script> 
+<style type="text/css">
+        form.submitForm fieldset { border:0 }
+
+        label {    
+            width: 13em;    
+            float: left;    
+        }   
+        label.error {    
+            float: none;    
+            color: red;    
+            padding-left: .5em;    
+            vertical-align: top;    
+        }   
+        p {    
+            clear: both;    
+        }   
+        .submit {    
+            margin-left: 12em;    
+        }   
+        em {    
+            font-weight: bold;    
+            padding-right: 1em;    
+            vertical-align: top;   
+            color:red 
+        }   
+        
+        legend {
+            font-weight: bold;
+            font-size: 130%
+        }
+           
+</style>
+ 
+        <form  class="submitForm" id="submitForm" name="submitForm" method="POST" action="customer_update">  
+         <fieldset>  
+           <legend>请输入用户信息：</legend>  
+					 <input id="uuid" name="uuid" size="25"  type='hidden' value={{customer.uuid}}> </input> 
+           <p>  
+             <label for="alias">公司简称</label>  
+             <em>*</em><input id="alias" name="alias" value={{customer.alias}} size="25"  readonly onchange="return checkCompanyAlias(alias.value)"/>  
+           </p> 
+           <p>  
+             <label for="company">公司全称</label>  
+             <em>*</em><input id="company" name="company" size="25" value={{customer.company}} onchange="return checkCompany(company.value)"/>  
+           </p>
+           <p>  
+             <label for="address">地址</label>  
+             <em>*</em><input id="address" name="address" size="25" value={{customer.address}} onchange="return checkAddress(address.value)"/>  
+           </p>  
+           <p>  
+             <label for="telephone">电话(如010-12345678)</label>  
+             <em>*</em><input id="telephone" name="telephone" size="25" value={{customer.telephone}} onchange="return checkTelphone(telephone.value)"/>   
+           </p> 
+           <p>  
+             <label for="contact_person">联系人</label>  
+             <em>*</em><input id="contact_person" name="contact_person" size="25" value={{customer.contact_person}} onchange="return checkContact_person(contact_person.value)"/>  
+           </p> 
+           <p>  
+             <label for="cellphone">手机</label>  
+             <em>*</em><input id="cellphone" name="cellphone" size="25" value="{{customer.cellphone}}"  onchange="return checkCellphone(cellphone.value)"/>  
+           </p>
+           <p>  
+             <label for="email">Email</label>  
+             <em>*</em><input id="email" name="email" size="25" value={{customer.email}} onchange="return checkEmail(email.value)" />  
+           </p>  
+            
+           <p><input class="submit" type="submit" value="提交"  onclick="return submitCustormer()"/></p>  
+          </fieldset>  
+         </form>  
+
+
+{% endblock %}

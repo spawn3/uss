@@ -1,0 +1,17 @@
+<uwsgi>
+	<socket>127.0.0.1:8000</socket>    #设定监听ip和端口
+	<workers>4</workers>               #worker模式支持多线程和多进程混合模型的MPM
+	#如果对work和prefork工作模式不清楚自行查资料
+	<processes>4</processes>           #使用进程数
+	<listen>100</listen>               #监听满后排队数量，超过排队数量服务将会拒绝连接
+	<master>true</master>              #主线程enable
+	<pidfile>/usr/local/nginx/uwsgi.pid</pidfile>   #产生主进程号的位置
+	<pythonpath>/root/zhangjunfeng/uss/edog/priv/mdsoss</pythonpath>
+	<module>whs_uwsgi</module>                 #模块信息，下一步中会编辑这个文件
+	<profiler>true</profiler>
+	<memory-report>true</memory-report>           #打印内存请求日志信息
+	<enable-threads>true</enable-threads>         #开启多线程
+	<logdate>true</logdate>                       #每行都用string格式打印时间
+	<limit-as>512</limit-as>                     #uwsgi需要使用内存的量，如当前配置为512M
+	<daemonize>/var/log/jango.log</daemonize>  #此进程打印日志的位置
+</uwsgi>

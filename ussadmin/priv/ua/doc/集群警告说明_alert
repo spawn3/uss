@@ -1,0 +1,10 @@
+1, 警告由edog发送到ear/srvc/stat
+
+ level分为三个级别： info , warn , error, 分别以不同的颜色表示
+ 格式如下:
+{u'info': u'192.168.1.201 leaved', u'time': u'1303204297', u'catagory': u'alert', u'event': u'slave_leave', u'level': u'warn'}
+
+颜色标示方案：
+error: 为红色，
+info: 为绿色，
+warn: 为黄色，

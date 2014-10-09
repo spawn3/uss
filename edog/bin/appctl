@@ -1,0 +1,578 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+import os
+import sys
+import shlex
+import subprocess
+import commands
+import re
+import time
+from optparse import OptionParser
+from xml.etree.ElementTree import ElementTree
+from threading import Thread
+
+current_dir  = os.path.dirname(os.path.realpath(__file__))
+app_src_dir  = '%s/..' % current_dir
+app_data_dir = '%s/../../edog_runtime' % current_dir
+
+# sys.path.append('%s/script' % app_src_dir)
+
+# print sys.path
+
+import cclib
+
+application  = 'edog'
+manager_name = 'edog_master'
+agent_name   = 'edog'
+api_port     = 9501
+verbose      = False
+
+
+def usage():
+    print '*********************************************'
+    print '*** usage:'
+    print '\tappctl version'
+    print
+    print '\tappctl web conf'
+    print
+    print '\tappctl cluster conf [master_ip|..]'
+    print '\tappctl cluster deploy [ip1|..]'
+    print '\tappctl cluster start'
+    print '\tappctl cluster stop'
+    #print '\tappctl cluster restart'
+    print '\tappctl cluster ping'
+    print '\tappctl cluster check'
+    print
+    print '\tappctl manager start  [<ip> [fg]]'
+    print '\tappctl manager stop   [<ip>]'
+    print '\t* appctl manager add    <ip>'
+    print '\t* appctl manager delete <ip>'
+    print
+    print '\tappctl agent list'
+    print '\tappctl agent start [<ip> [fg]]'
+    print '\tappctl agent stop  [<ip>]'
+    print
+    print '\t* appctl db backup          [<file>]'
+    print '\t* appctl db backup_offline  [<file>]'
+    print '\t* appctl db recover         [<file>]'
+    print '\t* appctl db clear'
+    print '\t* appctl db remove'
+    print
+    # print '\tappctl disk'
+    # print '\tappctl disk delete <diskid>'
+    # print
+    #print '\tappctl web start'
+    #print '\tappctl web stop'
+    #print
+    print '\t* appctl action stddisk_reset'
+    print '\t* appctl action libvirt_start'
+    print
+    #print
+    print '*********************************************'
+
+def print_version():
+    f = open('%s/ebin/git.vsn' % (app_src_dir), 'r')
+    print '== VERSION INFO:'
+    for x in f.readlines():
+        print '-- \t%s' % x.strip()
+
+##
+def get_agents():
+    agents = []
+    try:
+        cfg = '%s/conf/cluster.xml' % app_data_dir
+        tree = ElementTree()
+        tree.parse(cfg)
+        e_slaves = tree.findall('slave')
+        for i in e_slaves:
+            agents.append(i.get('ip'))
+    except Exception, e:
+        print e
+        agents = []
+    return cclib.sort_ips(agents)
+
+def agent_dump(agents):
+    print agents
+    cfg = '%s/conf/cluster.xml' % app_data_dir
+
+    s = ''
+    for ip in agents:
+        s += '\t<slave ip=\'%s\'></slave>\n' % ip
+
+    f = open(cfg, 'w')
+    f.write(
+"""
+<cluster>
+%s
+</cluster>
+""" % s)
+    f.close()
+
+## -----------------------------------------------------------------------
+## MANAGER
+## -----------------------------------------------------------------------
+class ClusterStart(Thread):
+    def __init__(self, cluster, ip):
+        Thread.__init__(self)
+        self.cluster = cluster
+        self.ip = ip
+    def run(self):
+        self.cluster.start_manager(self.ip)
+
+class Cluster:
+    def __init__(self):
+        self.cmd = ''
+        self.managers = cclib.get_managers()
+        self.agents   = get_agents()
+        self.ips      = cclib.local_ips()
+    def __init__(self, managers, agents):
+        self.cmd = ''
+        self.managers = managers
+        self.agents   = agents
+        self.ips      = cclib.local_ips()
+    def setcmd(self, cmd):
+        self.cmd = cmd
+    def run(self):
+        cclib.run_cmd(self.cmd, verbose)
+    def all_nodes(self):
+        l = self.managers + self.agents
+        return cclib.sort_ips(l)
+
+    # CLUSTER
+    def conf_cluster(self, managers):
+        self.cmd = 'bash %s/script/webctl.sh conf' % (app_src_dir)
+        self.run()
+        if not managers:
+            managers = self.managers
+        self.managers = cclib.sort_ips(managers)
+        self.cmd = '%s/script/make_erl_conf.erl %s' % (app_src_dir, ' '.join(self.managers))
+        self.run()
+    def _deploy_to_node(self, ip):
+        print '=> deploy to [ %s ]' % ip
+        self.cmd = 'ssh root@%s mkdir -p %s; mkdir -p %s;' % (ip, app_src_dir, app_data_dir)
+        self.run()
+        self.cmd = 'rsync -avz %s/../edog root@%s:%s/../' % (app_src_dir, ip, app_src_dir)
+        self.run()
+        self.cmd = 'rsync -avz %s/conf root@%s:%s/' % (app_data_dir, ip, app_data_dir)
+        self.run()
+    def deploy_to(self, ips):
+        for ip in self.__ip_list(ips):
+            self._deploy_to_node(ip)
+    def start(self):
+        self.stop()
+
+        self.start_all_managers()
+        self.start_all_agents()
+    def stop(self):
+        cluster.action('cluster_stop')
+        time.sleep(3)
+        self.stop_beams([])
+    def ping(self):
+        for ip in self.managers:
+            if cclib.ping_manager(ip, api_port, verbose):
+                print '==> [ %s ] is active!' % ip
+            else:
+                print '!!! [ %s ] is NOT active!' % ip
+    def check(self):
+        for ip in self.all_nodes():
+            self.cmd = 'ssh root@%s python %s/bin/check_deps.py' % (ip, app_src_dir)
+            self.run()
+
+    # MANAGERS
+    def get_local_manager(self):
+        for i in self.managers:
+            if i in self.ips:
+                return i
+        return ''
+    def start_manager(self, ip, fg=False):
+        self.stop_beam(ip, manager_name)
+
+        #self.start_web()
+        print '=> start manager %s ...' % ip
+        config = self.__ip_to_config(ip)
+        if fg:
+            self.cmd = 'bash %s/script/start_master.sh -f %s %s' % (app_src_dir, ip, config)
+        else:
+            self.cmd = 'ssh root@%s bash %s/script/start_master.sh %s %s' % (ip, app_src_dir, ip, config)
+        self.run()
+    def start_all_managers(self):
+        thread_list = []
+        for ip in self.managers:
+            t = ClusterStart(self, ip)
+            thread_list.append(t)
+            t.start()
+        for t in thread_list:
+            t.join()
+    def stop_manager(self, ip):
+        print '=> stop manager %s ...' % ip
+        self.stop_web()
+        self.cmd = 'ssh root@%s bash %s/script/start_master.sh -s %s' % (ip, app_src_dir, ip)
+        self.run()
+    def stop_all_managers(self):
+        for ip in self.managers:
+            self.stop_manager(ip)
+        self.stop_beams()
+    def add_manager(self, ip):
+        if ip in self.managers:
+            raise Exception("[%s] is already a manager!" % ip)
+        local_ip = self.get_local_manager()
+        if not local_ip:
+            raise Exception("This host is not a manager, please select a manager host to continue.")
+        if local_ip == ip:
+            raise Exception("We cannot add the controlling node, please specify another host.")
+
+        if not cclib.is_nodeup(ip):
+            raise Exception('%s is down' % ip)
+
+        #############################################################
+        # TODO pre-condition
+        # - node is up
+        #############################################################
+        dbfile = self.__pre_reconf()
+        self.managers.append(ip)
+        self.__db_deploy_dbfile(dbfile)
+        self.__post_reconf(dbfile)
+    def delete_manager(self, ip):
+        if ip not in self.managers:
+            raise Exception("[%s] is not a manager!" % ip)
+        if len(self.managers) <= 1:
+            raise Exception("There are too few managers to delete")
+        local_ip = self.get_local_manager()
+        if not local_ip:
+            raise Exception("This host is not a manager, please select a manager host to continue.")
+        if local_ip == ip:
+            raise Exception("We cannot delete the controlling node, please specify another host.")
+        if not cclib.is_nodeup(ip):
+            raise Exception('%s is down' % ip)
+
+        dbfile = self.__pre_reconf()
+        self.managers.remove(ip)
+        self.__db_deploy_dbfile(dbfile)
+        self.__post_reconf(dbfile)
+
+    def __pre_reconf(self):
+        dbfile = '/tmp/dbfile-%d' % int(time.time())
+        print '==> ..................................................'
+        print '==> backup db to %s' % dbfile
+        self.db_backup()
+        self.db_backup(dbfile)
+
+        print '==> clear db ...'
+        self.db_clear()
+        print '==> stop cluster ...'
+        self.stop()
+        print '==> remove db ...'
+        print '==> ..................................................'
+        self.db_remove()
+        return dbfile
+    def __post_reconf(self, dbfile):
+        print '==> reconf cluster ...'
+        self.conf_cluster(self.managers)
+        self.deploy_to([])
+        print '==> start cluster ...'
+        self.start()
+        # self.start()
+        print '==> wait for managers ...'
+        self.__wait_for_managers(dbfile)
+        print '==> recover db ...'
+        self.db_recover(dbfile)
+    def __db_deploy_dbfile(self, dbfile):
+        print '==> deploy %s to %s' % (dbfile, self.managers)
+        for x in self.managers:
+            cmd = 'scp %s root@%s:%s' % (dbfile, x, dbfile)
+            cclib.run_cmd(cmd, verbose)
+    def __wait_for_managers(self, dbfile):
+        cnt = 0
+        while True:
+            if not cclib.get_active_manager(self.managers, api_port):
+                print '... %4d: %s' % (cnt, dbfile)
+                time.sleep(3)
+                cnt = cnt + 1
+                if cnt == 5:
+                    self.db_remove()
+                    self.start()
+                    cnt = 0
+            else:
+                break
+        time.sleep(10)
+
+    # AGENTS
+    def agent_list(self):
+        print 'AGENTS:'
+        for idx in range(len(self.agents)):
+            print '\t%4d: %s' % (idx, self.agents[idx])
+    def start_agent(self, ip, fg=False):
+        print '=> start agent %s ...' % ip
+        if fg:
+            self.cmd = 'bash %s/script/start_agent.sh %s fg' % (app_src_dir, ip)
+        else:
+            self.cmd = 'ssh root@%s bash %s/script/start_agent.sh %s' % (ip, app_src_dir, ip)
+        self.run()
+    def start_all_agents(self):
+        for ip in self.agents:
+            self.start_agent(ip)
+    def stop_agent(self, ip):
+        print '=> stop agent %s ...' % ip
+        self.cmd = 'ssh root@%s bash %s/script/start_agent.sh %s stop' % (ip, app_src_dir, ip)
+        self.run()
+    def stop_all_agents(self):
+        for ip in self.agents:
+            self.stop_agent(ip)
+    def agent_add(self, ips):
+        print ips
+        agents = self.agents[0:]
+        for ip in ips:
+            if ip not in agents:
+                agents.append(ip)
+        if agents != self.agents:
+            self.agents = cclib.sort_ips(agents)
+            agent_dump(self.agents)
+            self.deploy_to([])
+    def agent_delete(self, ips):
+        print ips
+        agents = self.agents[0:]
+        for ip in ips:
+            if ip in agents:
+                agents.remove(ip)
+        if agents != self.agents:
+            self.agents = cclib.sort_ips(agents)
+            agent_dump(self.agents)
+            self.deploy_to([])
+            yn = cclib.ask_yn('start cluster, continue<y/n>? ')
+            if yn:
+                self.start()
+
+    ## DB
+    def db_backup(self, dbfile=''):
+        if dbfile:
+            params = {'action': 'db_backup', 'file': dbfile}
+        else:
+            params = {'action': 'db_backup'}
+        return self.__actions(params)
+    def db_backup_offline(self, dbfile=''):
+        local_ip = self.get_local_manager()
+        if not local_ip:
+            raise Exception("This host is not a manager, please select a manager to continue.")
+        self.cmd = 'bash %s/bin/db_reconf.sh backup %s %s' % (app_src_dir, local_ip, dbfile)
+        self.run()
+    def db_recover(self, dbfile=''):
+        if dbfile:
+            params = {'action': 'db_recover', 'file': dbfile}
+        else:
+            params = {'action': 'db_recover'}
+        return self.__actions(params)
+    def db_clear(self):
+        params = {'action': 'db_clear'}
+        return self.__actions(params)
+    def db_remove(self):
+        for ip in self.managers:
+            self.cmd = 'ssh root@%s rm -rf %s/db' % (ip, app_data_dir)
+            self.run()
+
+    ## BEAM
+    def show_beams(self, ips):
+        for ip in self.__ip_list(ips):
+            self.cmd = 'ssh root@%s bash %s/script/all_beams.sh %s show' % (ip, app_src_dir, ip)
+            self.run()
+    def stop_beams(self, ips):
+        for ip in self.__ip_list(ips):
+            self.cmd = 'ssh root@%s bash %s/script/find_node.sh %s@%s kill' % (ip, app_src_dir, manager_name, ip)
+            self.run()
+            self.cmd = 'ssh root@%s bash %s/script/find_node.sh %s@%s kill' % (ip, app_src_dir, agent_name, ip)
+            self.run()
+    def stop_beam(self, ip, nodename):
+        self.cmd = 'ssh root@%s bash %s/script/find_node.sh %s@%s kill' % (ip, app_src_dir, nodename, ip)
+        self.run()
+    def kill_beams(self, ips):
+        for ip in self.__ip_list(ips):
+            self.cmd = 'ssh root@%s pkill -9 heart; pkill -9 beam' % (ip)
+            self.run()
+
+    # WEB
+    def conf_web(self):
+        self.stop_web()
+        self.cmd = 'bash %s/script/webctl.sh conf' % (app_src_dir)
+        self.run()
+    def start_web(self):
+        self.__start_web()
+    def stop_web(self):
+        self.__stop_web()
+
+    ## MISC
+    def action(self, action):
+        params = {'action': action}
+        self.__actions(params)
+
+    ##########################################################################
+    def __actions(self, params):
+        primary = cclib.get_active_manager(self.managers, api_port)
+        if primary:
+            res = cclib.http_post(primary, api_port, '/actions', params)
+            cclib.handle_res(res, verbose)
+            return res
+        else:
+            print '!! There are not active managers.'
+    def __start_web(self):
+        self.cmd = 'bash %s/script/webctl.sh start' % (app_src_dir)
+        self.run()
+    def __stop_web(self):
+        self.cmd = 'bash %s/script/webctl.sh stop' % (app_src_dir)
+        self.run()
+    def __ip_to_config(self, ip):
+        n = self.managers.index(ip) + 1
+        return 'master%d' % n
+    def __ip_list(self, ips):
+        if not ips:
+            ips = self.all_nodes()
+        return ips
+
+if __name__ == '__main__':
+    parser = OptionParser()
+    parser.add_option("-v", "--verbose", dest ="verbose", action="store_true", default=False)
+    # parser.add_option("-n", "--idx",    dest ="idx", type="int",    default=1)
+    # parser.add_option("-w", "--frontip",dest ="frontip",type="string", default="127.0.0.1")
+
+    (options, args) = parser.parse_args()
+    # print options
+    # print args
+    verbose = options.verbose
+
+    if len(args) == 0:
+        usage()
+        exit(1)
+
+    if verbose:
+        print '%% CONFIGURATION'
+        print 'application name: %s' % application
+        print 'source dir      : %s' % app_src_dir
+        print 'data dir        : %s' % app_data_dir
+        print 'config dir      : %s/conf' % app_data_dir
+        print 'database dir    : %s/db' % app_data_dir
+
+    the_managers = cclib.get_managers()
+    the_agents   = get_agents()
+
+    print {"managers": the_managers}
+    print {"agents": the_agents}
+
+    if verbose:
+        print '\n%%% BEGIN'
+
+    try:
+        cluster = Cluster(the_managers, the_agents)
+        if args[0] == 'cluster':
+            if len(args) == 1:
+                cluster.ping()
+            elif args[1] == 'ping':
+                cluster.ping()
+            elif args[1] == 'conf':
+                cluster.conf_cluster(args[2:])
+                cluster.deploy_to([])
+            elif args[1] == 'deploy':
+                cluster.deploy_to(args[2:])
+            elif args[1] == 'start':
+                cluster.start()
+            elif args[1] == 'restart':
+                cluster.action('cluster_restart')
+            elif args[1] == 'stop':
+                cluster.stop()
+            elif args[1] == 'check':
+                cluster.check()
+            else:
+                raise Exception('command ***%s*** not supported!' % (args))
+        elif args[0] == 'manager':
+            if args[1] == 'start':
+                if len(args) == 2:
+                    cluster.start_all_managers()
+                elif len(args) > 3 and args[3] == 'fg':
+                    cluster.start_manager(args[2], True)
+                else:
+                    cluster.start_manager(args[2], False)
+            elif args[1] == 'stop':
+                if len(args) == 2:
+                    cluster.stop_all_managers()
+                else:
+                    cluster.stop_manager(args[2])
+            elif args[1] == 'add':
+                cluster.add_manager(args[2])
+            elif args[1] == 'delete':
+                cluster.delete_manager(args[2])
+            else:
+                raise Exception('command ***%s*** not supported!' % (args))
+        elif args[0] == 'agent':
+            if len(args) == 1:
+                cluster.agent_list()
+            elif args[1] == 'list':
+                cluster.agent_list()
+            elif args[1] == 'start':
+                if len(args) == 2:
+                    cluster.start_all_agents()
+                elif len(args) > 3 and args[3] == 'fg':
+                    cluster.start_agent(args[2], True)
+                else:
+                    cluster.start_agent(args[2], False)
+            elif args[1] == 'stop':
+                if len(args) == 2:
+                    cluster.stop_all_agents()
+                else:
+                    cluster.stop_agent(args[2])
+            elif args[1] == 'add':
+                cluster.agent_add(args[2:])
+            elif args[1] == 'delete':
+                cluster.agent_delete(args[2:])
+            else:
+                raise Exception('command ***%s %s*** not supported!' % (args))
+        elif args[0] == 'action':
+            cluster.action(args[1])
+        elif args[0] == 'db':
+            if args[1] == 'backup':
+                if len(args) == 2:
+                    cluster.db_backup()
+                else:
+                    cluster.db_backup(args[2])
+            elif args[1] == 'backup_offline':
+                if len(args) == 2:
+                    cluster.db_backup_offline()
+                else:
+                    cluster.db_backup_offline(args[2])
+            elif args[1] == 'recover':
+                if len(args) == 2:
+                    cluster.db_recover()
+                else:
+                    cluster.db_recover(args[2])
+            elif args[1] == 'clear':
+                cluster.db_clear()
+            elif args[1] == 'remove':
+                cluster.db_remove()
+            else:
+                raise Exception('command ***%s*** not supported!' % (args))
+        elif args[0] == 'beam':
+            if args[1] == 'show':
+                cluster.show_beams(args[2:])
+            elif args[1] == 'stop':
+                cluster.stop_beams(args[2:])
+            elif args[1] == 'kill':
+                cluster.kill_beams(args[2:])
+            else:
+                raise Exception('command ***%s*** not supported!' % (args))
+        elif args[0] == 'web':
+            # web group
+            if args[1] == 'conf':
+                cluster.conf_web()
+            elif args[1] == 'start':
+                cluster.start_web()
+            elif args[1] == 'stop':
+                cluster.stop_web()
+            else:
+                raise Exception('command ***%s*** not supported!' % (args))
+        elif args[0] == 'version':
+            print_version()
+        else:
+            raise Exception('command ***%s*** not supported!' % (args))
+    except Exception, e:
+        print '!!! Exception: ', e
+        if verbose:
+            usage()
+    if verbose:
+        print '\n%%% END'

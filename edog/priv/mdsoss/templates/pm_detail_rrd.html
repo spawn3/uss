@@ -1,0 +1,21 @@
+
+<!--
+<div style="float:left">
+<ul>
+<button align="right" type="button" onclick="ShowIframe('物理机下线','pm_down?pm_uuid={{pm.uuid}}',500,300)">下线</button>
+<button align="right" type="button" onclick="ShowIframe('物理机上线','pm_up?pm_uuid={{pm.uuid}}',500,300)">上线</button>
+</ul>
+</div>
+-->
+
+<input type="hidden" name="pm_uuid" id="pm_uuid" value={{pm.uuid}}>
+<table>
+    <tr>
+        <td><img class='img_refresh' src="monitor/rrds/{{pm.uuid}}/load.png?{{flag}}" ></td>
+        <td><img class='img_refresh' src="monitor/rrds/{{pm.uuid}}/mem.png?{{flag}}" ></td>
+    </tr>
+    <tr>
+        <td><img class='img_refresh' src="monitor/rrds/{{pm.uuid}}/swap.png?{{flag}}" ></td>
+        <td><img class='img_refresh' src="monitor/rrds/{{pm.uuid}}/net.png?{{flag}}" ></td>
+    </tr>
+</table>

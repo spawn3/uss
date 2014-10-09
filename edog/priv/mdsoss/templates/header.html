@@ -1,0 +1,101 @@
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="/static/css/admin_base.css" />
+
+<style type="text/css">
+#header {
+    background: #709CD2;
+    color: #FFFFFF;
+    overflow: hidden;
+}
+
+#branding h1 {
+    padding: 0 10px;
+    font-size: 18px;
+    margin: 8px 0;
+    font-weight: normal;
+    color: #FFFFFF;
+	height:5px;
+}
+
+#branding h2 {
+    padding: 0 10px;
+    font-size: 14px;
+    margin: -8px 0 8px 0;
+    font-weight: normal;
+    color: #ffc;
+}
+
+#user-tools {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1.2em 10px;
+    font-size: 11px;
+    text-align: right;
+}
+
+.menu1 a{
+	font-family:	Arial,Helvetica,sans-serif;
+	font-size:	17px;
+	font-weight:	400;
+	font-styl:e	normal;
+	text-transform:	none;
+	text-decoration:	none;
+	letter-spacing:	normal;
+	word-spacing:	0;
+	line-height:	36px;
+	text-align:	start;
+	vertical-align:	middle;
+	direction:	ltr;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Header -->
+<div id="header">
+    <div id="branding">
+        <h1>美地森麒云管理控制台 </h1>
+        <div style="text-align:right;font-size:13px">欢迎: {{ user.username }}&nbsp;&nbsp;&nbsp;
+            <a target ="mainland" href='user_Password' > 重置密码  </a>&nbsp;&nbsp;&nbsp;
+            <a target ="_parent" href="user_logout" >退出&nbsp;&nbsp;&nbsp;</a>
+        </div>
+    </div>
+
+    <!--
+    <div id="user-tools">
+        Welcome,
+        <strong>admin</strong>.
+        <a href="/admin/password_change/">Change password</a> /
+        <a href="/admin/logout/">Log out</a>
+    </div>
+    -->
+
+</div>
+    <!-- END Header -->
+
+    <div style='' class='menu1'>
+    <!--<div align="center">-->
+        <a target ="mainland" href="home" >&nbsp;&nbsp;首页&nbsp;&nbsp;</a>
+        <a target ="mainland" href="customer_list" >&nbsp;&nbsp;用户&nbsp;&nbsp;&nbsp;</a>
+        <a target ="mainland" href="pm_list">&nbsp;&nbsp;物理机&nbsp;&nbsp;&nbsp;</a>
+        <a target ="mainland" href="vm_list">&nbsp;&nbsp;虚拟机&nbsp;&nbsp;&nbsp;</a>
+        <a target ="mainland" href="virtualDisk_list" >&nbsp;&nbsp;虚拟磁盘&nbsp;&nbsp;&nbsp;</a>
+
+        <!--<a target ="mainland" href="option_list" style="font-size: 12px;">&nbsp;&nbsp;Option&nbsp;&nbsp;&nbsp;</a>-->
+        <a target ="mainland" href="stdVmImg_list" >&nbsp;&nbsp;虚拟机模板&nbsp;&nbsp;</a>
+        <a target ="mainland" href="global_view" >&nbsp;&nbsp;工具&nbsp;&nbsp;</a>
+        <a target ="mainland" href="recycle_bin" >&nbsp;&nbsp;回收站&nbsp;&nbsp;</a>
+        <!--
+        <a target ="mainland" href="yfs" style="font-weight: bold; font-size: 17px;">&nbsp;&nbsp;Yfs&nbsp;&nbsp;&nbsp;</a>
+        <a target ="mainland" href="user_userManagement" style="font-size: 12px;">&nbsp;&nbsp;User&nbsp;Management&nbsp;&nbsp;</a>
+        -->
+    </div>
+
+</body>
+</html>

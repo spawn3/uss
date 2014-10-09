@@ -1,0 +1,38 @@
+<domain type='kvm'>
+    <uuid>{{uuid}}</uuid>
+    <name>{{name}}</name>
+    <vcpu>{{vcpu}}</vcpu>
+    <memory>{{memory}}</memory>
+    <os>
+        <type arch='x86_64' machine='pc'>hvm</type>
+        <boot dev='hd' />
+    </os>
+    <devices>
+        <emulator>{{emulator}}</emulator>
+        {% for i in disks %}
+        <disk type='file' device='disk'>
+            <source file='{{i.file}}' />
+            <target dev='{{i.dev}}' bus='{{i.bus}}' />
+            <driver cache='{{i.cache}}' />
+        </disk>
+        {% endfor %}
+        {% for i in vifs %}
+        <interface type='bridge'>
+            <source bridge='{{i.bridge}}' />
+            <mac address='{{i.mac}}' />
+            <model type='{{i.model}}' />
+            <driver name='vhost' />
+        </interface>
+        {% endfor %}
+        <graphics type='vnc' listen='0.0.0.0' port='-1' />
+    </devices>
+    <features>
+        <acpi />
+    </features>
+    <clock offset='utc'>
+        <timer name='rtc' tickpolicy='catchup' track='wall'>
+            <catchup threshold='123' slew='120' limit='10000' />
+        </timer>
+        <timer name='pit' tickpolicy='delay' />
+    </clock>
+</domain>

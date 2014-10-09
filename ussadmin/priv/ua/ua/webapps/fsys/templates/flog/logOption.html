@@ -1,0 +1,40 @@
+<style type="text/css">
+    .logOption-button {
+        width: 150px;
+        height: 40px;
+        margin: 10px;
+        border: 1px solid #EEEEEE;
+        padding: 10px;
+        font-size: 12px;
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".logOption-button").click(function(){
+            if (confirm($(this).attr("title"))){
+                $("#logOption_result").html("正在进行中...");
+                $("#logOption_result").load("/fsys/flog/logOption", {
+                    "option":$(this).attr("option")
+                });
+            }
+            });
+    });
+
+</script>
+
+<div class="logOption">
+    <table class="content-tab">
+        <tbody>
+            <tr>
+                <td align="right"><button id="submit_logOption_clean" type="submit" option="clean_all" title="确定要清空所有日志吗？" class="logOption-button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false" >清空所有日志</button>
+                </td>
+                <td align="right"><button id="submit_logOption_backup" type="submit" option="backup_all" title="确定要备份所有日志吗？" class="logOption-button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false" >备份所有日志</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id="logOption_result"></div>

@@ -1,0 +1,9 @@
+{application, edogdb, [
+    {description, "Edog DB"},
+    {vsn, "1.6.1"},
+    {start_phases, []},
+    {registered, [edogdb]},
+    {applications, [kernel, stdlib]},
+    {mod, {edogdb_app, []}},
+    {env, []}
+ ]}.

@@ -1,0 +1,433 @@
+{% extends "world_base.html" %}
+{% block title %}创建虚拟机{% endblock %}
+{% block content %}
+
+
+<style type="text/css">
+form.submitForm fieldset { border:0 }
+
+label.error {
+    float: none;
+    color: red;
+    padding-left: .5em;
+    vertical-align: top;
+}
+label {
+	font-size: 13px;
+}
+
+p {
+    clear: both;
+}
+div.left {
+    float: left;
+    width: 190px;
+}
+div.right {
+    float: left;
+}
+div em {
+    float: left;
+    color: red;
+    margin: 0 10px;
+}
+div label, div radio, div select {
+    float:left;
+    margin: 5px;
+}
+div input[type="radio"] {
+	float: left;
+	clear: left;
+	width: 20px;
+}
+div input[type="submit"] {
+	float: left;
+	margin-left: 200px;
+}
+div input {
+    float: left;
+    width: 150px;
+}
+div button {
+    float: left;
+    margin: 0 10px;
+}
+
+div#vncs {
+    float: left;
+    width: 600px;
+}
+div#vncs label {
+    padding-right: 80px;
+    float: left;
+}
+div#vncs input {
+    margin-left: 25px;
+    float: left;
+    clear: right;
+}
+div#vncs select {
+    margin-left: 25px;
+	float: left;
+	width: 100px;
+	clear: left;
+}
+div#vncs radio {
+	float: left;
+	clear: left;
+}
+legend {
+    font-weight: bold;
+    font-size: 130%
+}
+#vdToMount input[type="checkbox"] {
+	width:20px;
+}
+</style>
+
+<script language="javascript">
+/***************************************************************/
+function checkSubmit() {
+    var vm_name = document.getElementById('vm_name');
+    var cpu_cores = document.getElementById('cpu_cores');
+    var mem_capacity = document.getElementById('mem_capacity');
+
+    var reg=/^([a-z0-9-:]){3,25}$/;
+    flag = reg.test(vm_name.value);
+    if(!flag)
+    {
+            document.getElementById("vm_name_error").innerHTML=" 标识符大于字符3，小于15个字符, 由'a-z', '0-9', '-', ':'组合";
+            return false;
+    }
+    document.getElementById("vm_name_error").innerHTML="";
+
+    var reg=/^\d{1,2}$/;
+    var flag = reg.test(cpu_cores.value);
+    if(cpu_cores.value<=0||cpu_cores.value>=32||!flag)
+    {
+            document.getElementById("cpu_cores_error").innerHTML="请输入允许cpu核数";
+            return false;
+    }
+    document.getElementById("cpu_cores_error").innerHTML="";
+
+    var reg=/^\d{1,2}$/;
+    var flag = reg.test(mem_capacity.value);
+    if(mem_capacity.value<=0||mem_capacity.value>=96||!flag)
+    {
+            document.getElementById("mem_capacity_error").innerHTML="请输入允许的容量";
+            return false;
+    }
+        document.getElementById("mem_capacity_error").innerHTML="";
+
+    if(!checkBridge() || (!checkMac())) {
+        return false;
+    }
+
+    var from_cust = document.getElementById('from_cust');
+    if(from_cust.checked) {
+        if(!checkImgFromCust()) {
+        	return false;
+        }
+    }
+
+    var flag = false;
+    $(".disk_select").each(function(){
+            var name = $(this).attr("checked");
+            if (name) {flag = true;}
+    });
+    if (flag)
+    {
+            if (!confirm("确定需要使用共享磁盘吗？")) {return false;}
+    }
+
+    return true;
+}
+
+function checkImgFromCust() {
+    var custVmImg = document.getElementById('custVmImg_selected');
+    if(!custVmImg.value) {
+        alert("请选择虚拟机镜像");
+        return false;
+    }
+    return true;
+}
+
+function checkBridge() {
+	reg = /^[A-Za-z0-9]+$/;
+
+    var bridges = document.getElementsByName("bridge");
+    for(i=0; i<bridges.length; i++) {
+        val = bridges[i].value.trim()
+        if("" == val || !reg.exec(val)) {
+            alert("请确保所有bridge栏均已输入正确的bridge！");
+            return false;
+        }
+    }
+    return true;
+}
+
+function checkMac() {
+    //reg = /([0-9A-Fa-f]{2})(-[0-9A-Fa-f]{2}){5}/;
+    //reg = /^([0-9a-fA-F]{2})(([/\s:-][0-9a-fA-F]{2}){5})$/;
+    reg = /^([0-9a-fA-F]{2})(([/\s:][0-9a-fA-F]{2}){5})$/;
+
+	var macs = document.getElementsByName("mac");
+	for(i=0; i<macs.length; i++) {
+	    val = macs[i].value.trim();
+		if("" != val && !reg.exec(val)) {
+			alert("请确保所有mac栏均已输入正确的mac地址！");
+            return false;
+		}
+	}
+	return true;
+}
+/*******************************
+<div id="vnc">
+<select name="model">
+	<option value="e1000">e1000</option>
+	</select>
+	<input name='bridge'>
+	<input name='bridge'>
+</div>
+********************************/
+function AddElement(){
+	m = Array("e1000","rtl8139","virtio","ne2k_isa",
+		"i82551","i82557b","i82559er","ne2k_pci","pcnet");
+	var html = "<tr class='add_element'>";
+	html = html + '<td> <select name="model">';
+	for(i=0; i<m.length; i++) {
+			var option = '<option value='+m[i]+'>'+m[i]+'</option>';
+			html = html + option;
+	}
+	html = html + '</select></td>';
+	html = html + '<td><input name="bridge"></td><td><input name="mac"></td>';
+	html = html + "</tr>";
+	$("#vnc_table").append(html);
+	}
+
+
+function RmvElement() {
+	$(".add_element:last").remove();
+}
+
+</script>
+
+<form class="submitForm" id="submitForm" name="submitForm" method="POST" action="vm_create">
+    <input type="hidden" name="customer_uuid" value={{customer_uuid}}>
+    <fieldset>
+        <legend>请输入虚拟机信息：</legend>
+        <table>
+            <tr>
+                <td>
+                    <div class="left">
+                        <label>虚拟机标识名:<br />('a-z', '0-9', '-', ':'的组合)</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="right"><em>*</em><input id="vm_name" name="vm_name" size="25" />
+                        <span id="vm_name_error" style="color:red; font:11px"></span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="left"><label>CPU内核数量:</label></div>
+                </td>
+                <td>
+                    <div class="right"><em>*</em><input id="cpu_cores" name="cpu_cores" size="25" />
+                        <span id="cpu_cores_error" style="color:red; font:11px"></span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="left"><label>内存大小(GB):</label></div>
+                </td>
+                <td>
+                    <div class="right"><em>*</em><input id="mem_capacity" name="mem_capacity" size="25" />
+                        <span id="mem_capacity_error" style="color:red; font:11px"></span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="left"><label>磁盘设备驱动程序:</label></div>
+                </td>
+                <td>
+                    <div class="right">
+                        <em>*</em>
+                        <select name="iodriver">
+                            <option value="virtio">virtio</option>
+                            <option value="ide">ide</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="left"><label>虚拟机操作系统镜像：</label></div>
+                </td>
+
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="left">
+                                    <em>*</em>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <input type="radio" name="select_vmimg" value="from_std" checked=true/><label>从标准镜像选择：</label>
+                                <select name="stdVmImg_selected">
+                                    {% for stdVmImg in stdVmImg_set %}
+                                    <option value="{{ stdVmImg.uuid }}">{{stdVmImg.os_release}}&nbsp;{{stdVmImg.os_version}}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <input type="radio" id="from_cust" name="select_vmimg" value="from_cust"/><label>从已有镜像选择：</label>
+                                <select id="custVmImg_selected" name="custVmImg_selected">
+                                    {% for virtualDisk in virtualDisk_set %}
+                                    {% if virtualDisk.is_vmimg and not virtualDisk.vm %}
+                                    <option value="{{ virtualDisk.uuid }}">path:{{virtualDisk.path}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="left"><label>虚拟网卡:</label></div>
+                </td>
+
+                <td>
+                    <div class="right" id="vncs">
+                        <table id="vnc_table">
+                            <tr>
+                                <td>
+                                    <em>*</em>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>驱动:</label>
+                                </td>
+                                <td>
+                                    <label>网桥:</label>
+                                </td>
+                                <td>
+                                    <label>MAC地址:</label>
+                                </td>
+                                <td>
+                                    <button type="button" style="width:40px" onclick="AddElement();">+</button>
+                                    <button type="button" style="width:40px" onclick="RmvElement();">--</button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <select name="model">
+                                        {% for vnc_model in vnc_models %}
+                                        <option value={{ vnc_model }} >{{ vnc_model }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                <td>
+                                    <input name="bridge" >
+                                </td>
+                                <td>
+                                    <input name="mac" >
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="left"><label>要挂载的虚拟磁盘：</label> </div>
+                </td>
+
+                <td>
+                    <div class="right">
+                        <em>&nbsp;*</em>
+                        <table id="vdToMount" class="v" style="width:700;">
+                            <thead>
+                                <tr>
+                                    <td></th>
+                                    <td>名称</td>
+                                    <td>位置</td>
+                                    <td>容量(G)</td>
+                                    <td>可启动</td>
+                                    <td>可共享</td>
+                                    <td>挂载次数</td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                {% for virtualDisk in virtualDisk_set %}
+
+                                <tr class="{% cycle 'row1' 'row2' %} virtualDisk_tr">
+
+                                    <td>
+                                        {% ifequal virtualDisk.shared  "true" %}
+                                        <input class='disk_select ' type="checkbox" name="virtualDisk_selected" value = "{{virtualDisk.uuid}}">
+                                        {% else %}
+                                        <input type="checkbox" name="virtualDisk_selected" value = "{{virtualDisk.uuid}}">
+                                        {% endifequal %}
+                                    </td>
+
+                                    <td>{{ virtualDisk.alias }}</td>
+                                    <td>{{ virtualDisk.path }}</td>
+                                    <td>{{ virtualDisk.capacity }}</td>
+                                    <td>{{ virtualDisk.is_vmimg }}</td>
+                                    {% ifequal virtualDisk.shared  "true" %}
+                                    <td><font color="#ea0000">{{ virtualDisk.shared }}</font></td>
+                                    {% else %}
+                                    <td>{{ virtualDisk.shared }}</td>
+                                    {% endifequal %}
+
+                                    <td>{{ virtualDisk.vm }}</td>
+
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <input type="submit" value="提交" onclick="return checkSubmit();"/>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+
+
+{% endblock %}

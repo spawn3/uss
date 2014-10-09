@@ -1,0 +1,12 @@
+/var/log/uss/ua/ear.log :里面保存了每一条接收到的信息。
+接收到的信息的格式为：
+	{u'info': u'192.168.1.201 joined', u'time': u'1303204251', u'catagory': u'alert', u'event': u'slave_join', u'level': u'info'}
+
+
+
+现在右边展现的信息只处理catagory为alert的信息。下一步可以考虑扩大右边展示信息的范围,就是其它的catagory的信息，
+在右边的信息，暂分为三个层级，
+info： 就是黑色，
+介于info 和error 之间的为： 黄色，(不是完全的黄色，因为纯黄色会显得扎眼)
+error: 红色，
+展示方式： 倒序方式，最新的信息展示在上面，

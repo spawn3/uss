@@ -1,0 +1,67 @@
+{% extends "world_base.html" %}
+
+{% block title %}首选项{% endblock %}
+
+{% block content %}
+
+<!-- Content --> 
+ <style type="text/css">
+	 .btn {
+		 BORDER-RIGHT: #7b9ebd 1px solid; 
+		 PADDING-RIGHT: 2px; 
+		 BORDER-TOP: #7b9ebd 1px solid; 
+		 PADDING-LEFT: 2px; 
+		 FONT-SIZE: 15px; 
+		 font-weight: bold;
+		 FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#cecfde); 
+		 BORDER-LEFT: #7b9ebd 1px solid; 
+		 CURSOR: pointer; 
+		 COLOR: #709CD2; 
+		 background:#ffffff;
+		 PADDING-TOP: 2px; 
+		 BORDER-BOTTOM: #7b9ebd 1px solid
+	 }
+</style>
+
+<div class='menu2' > 
+<a href="home">首页</a> 
+&rsaquo; 
+<a href="global_view">工具</a> 
+</div>
+<br/>
+<br/>
+<table align='center' class='v'>
+<tbody>
+	<tr>
+		<td align='left' >
+ <form action="/getGlobalInfo" method="get">
+ <button style="width:150px" type="submit" class="button btn" value="0">获取最新全局数据</button>
+ </form>
+		</td>
+		<td width=850>&nbsp;&nbsp;&nbsp;</td>
+	</tr>
+
+ 	<tr>
+		<td align='left' >
+ <form action="/static/download/vnc_whs.zip" method="get">
+ <button style="width:150px" type="submit" class="button btn" value="0">下载vnc插件安装包</button>
+ </form>
+		</td>
+		<td width=850>&nbsp;&nbsp;&nbsp;</td>
+	</tr>
+ 
+	<!--<tr>-->
+		<!--<td align='left'>-->
+ <!--<form action="/getMonitorInfo" method="get">-->
+ <!--<button style="width:150px" type="submit" class="btn" value="0">获取监控信息</button>-->
+ <!--</form>-->
+		<!--</td>-->
+		<!--<td width=850>&nbsp;&nbsp;&nbsp;</td>-->
+ <!--</tr>-->
+
+ </tbody>
+ </table>
+ 
+<!-- END Content -->
+
+{% endblock %}

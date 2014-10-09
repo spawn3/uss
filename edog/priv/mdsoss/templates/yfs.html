@@ -1,0 +1,144 @@
+{% extends "world_base.html" %}
+{% block title %}yfs list{% endblock %}
+{% block content %}
+
+
+<script type ="text/javascript" language ="javascript" >
+
+		function submitSelectedNode()
+		{
+			var yfs = document.yfs.yfs_selected;
+			var values="";
+			var flag=0;
+			
+			if(yfs.length == undefined)
+			{
+				if(yfs.checked)
+					ShowIframe("Yfs","yfs_startSelectedtYfs?yfs_selected="+yfs.value,400,300);
+			}	
+			
+			for(var i=0;i<yfs.length;i++)
+			{
+				if(yfs[i].checked)
+				{
+					flag=flag+1;
+					values+=yfs[i].value+",";
+				}
+			}
+			if(flag==0)
+			{
+			document.getElementById("yfs_error").innerHTML="请选择要启动的节点";
+			}
+			else
+			{
+			values=values.substring(0,values.length-1);
+			document.getElementById("yfs_error").innerHTML="";
+			ShowIframe("Yfs","yfs_startSelectedtYfs?yfs_selected="+values,350,200);
+	        }
+			
+		}
+		
+		
+      function submitNodeKind()
+      {
+      	var node_kind=document.yfs.yfs_kind.value;
+        ShowIframe("Yfs","yfs_startSelectedKindNode?nodeKind="+node_kind,350,200);  
+      	
+      }  
+</script>
+
+<div> 
+	<a href="home">Home</a> 
+	&rsaquo; 
+	<a href="yfs">YFS</a> 
+</div> 
+
+<br/>
+<br/>
+<div align="center">
+<div div style="color:#FF0000; text-align:center" id ="yfs_error"></div>
+<form name="yfs" method="get" action="startYfs">
+	
+	<table class="v"> 
+	
+	<thead> 
+		
+		<tr> 
+			<td></td>
+			<td>name</td>
+			<td>ip</td>
+			<td>num</td>
+			<td>status</td>			
+			<td>id</td>
+			<td>cmd</td>
+
+		</tr> 
+	</thead> 
+	
+	<tbody> 
+	
+		{% for yfs in yfs_result %}
+
+					<tr class="{% cycle 'row1' 'row2' %}">
+					
+					<td>
+						<input type="checkbox" id="yfs_selected" name="yfs_selected" value={{yfs.id}}>
+					</td>
+					
+					
+					<td>{{ yfs.name }}</td>
+					<td>{{ yfs.ip }}</td>
+					<td>{{ yfs.num }}</td>
+					<td>{{ yfs.status }}</td>
+					<td>
+					{% for pid in pid_result%}	
+						{% ifequal pid.yfs.id yfs.id %}
+							{{ pid.pid }} <br/>
+						{% endifequal %}  
+					{% endfor%}
+					
+					
+					</td>
+					
+					<td>
+					{% for pid in pid_result%}				
+						{% ifequal pid.yfs.id yfs.id %}
+							{{ pid.cmd }} <br/>
+						{% endifequal %}  
+					{% endfor%}
+					
+					
+					</td> 
+		</tr> 
+		{% endfor %}
+		
+
+		
+	</tbody> 
+	</table>
+	
+	<br class="clear" /> 
+		
+	<table  >	
+		<tr>
+	
+		<td align="left" width="130"><input type="button" value="启动所有节点"  onclick="ShowIframe('YFS','yfs_startAllNode',350,200)"/></td>
+		<td align="left" width="130"><input type="button" value="停止所有节点"  onclick="ShowIframe('YFS','yfs_stoptAllNode',350,200)"/></td>
+		<td align="left" width="130"><input type="button" value="启动指定节点" onclick="submitSelectedNode()" /></td>
+		<td align="right" width="280"><input type="button" value="启动指定类型节点" onclick="submitNodeKind()"/>
+		<select name="yfs_kind" size="1">
+		<option value="cds">cds
+		<option value="proxy">proxy
+		<option value="mds">mds
+		<option value="smds">smds
+		</select> 
+		</td>
+		</tr>
+	</table>
+</form>
+	
+ <hr>  
+</div>  
+
+
+{% endblock %}

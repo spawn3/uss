@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="zh-CN">
+  <head>
+	<title>uss admin login</title>
+	<meta name="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="../static/css/login.css" type="text/css" media="screen" />
+  </head>
+  
+  <body>
+	  <h3>{{ user }}</h3>
+	  <h2 id="caption">USS系统登录</h2>
+	  <h4 id="tip">{{ tip }}</h4>
+	  
+	  <form name="login_form" id="login_form" action="../login" method="post">
+		<p>
+		  <label>用户名<br>
+			<input type="text" name="username" id="username" ></label>
+		</p>
+		<p>
+		  <label>密码<br>
+			<input type="password" name="password" id="password" ></label>
+		</p>
+		<!-- <p><label><input name="rememberme" type="checkbox" id="rememberme" value="rememberme"> 记住我的登录信息</label></p> -->
+		<p> <input type="submit" value="登陆"></p>
+	  </form>
+
+  </body>
+</html>

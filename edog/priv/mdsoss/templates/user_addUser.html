@@ -1,0 +1,101 @@
+<html>
+<head><title>add user</title>
+<script type ="text/javascript" language ="javascript" >
+        var req; //定义变量，用来创建xmlhttprequest对象
+		var user,pwd;
+
+function check(){
+			user=document.getElementById("user").value;
+			pwd=document.getElementById("password").value;	
+			var pwd1=document.getElementById("password1").value;	
+			var reg=/^\w{3,15}$/;
+			var flag=reg.test(user);		
+			if(flag != true)
+			{
+				document.getElementById("error").innerHTML="用户名必须大于3字符，并小于15个字符，由字母和下划线组成";
+				return false;
+			}		
+			if(user==""||pwd=="")
+			{
+				document.getElementById("error").innerHTML="用户名和密码不能为空";
+				return false;
+			}
+			if(pwd!=pwd1)
+			{
+				document.getElementById("error").innerHTML="两次输入的密码不一致";
+				return false;
+			}
+			return true;
+	}
+
+
+
+		function creatReq() {
+			if (!check())
+				return false;
+			var user=document.getElementById("user").value;
+			var pwd=document.getElementById("password").value;	
+			var group=document.createUser.group.value;
+            var url="user_createUser?user="+user+"&password="+pwd+"&group="+group; //要请求的服务端地址
+            if(window.XMLHttpRequest) {
+                req=new XMLHttpRequest();
+            }
+            else if(window.ActiveXObject) {
+                req=new ActiveXObject("Microsoft.XMLHttp");
+            }
+            if(req) {
+                req.open("GET",url,true); //与服务端建立连接(请求方式post或get，地址,true表示异步)
+                req.onreadystatechange = callback; //指定回调函数
+                req.send(null); //发送请求
+            }
+        }
+        
+        function callback() {
+            if(req.readyState==4) //请求状态为4表示成功
+            {
+                    document.getElementById("error").innerHTML = req.responseText;
+					
+               
+        	}
+		}
+
+		function closed(){
+			parent.location.reload();
+			window.close();
+			}
+
+
+
+    </script>
+
+</head>
+<body>
+	<center>
+         <form id="v" name="createUser" method="post" action="" >
+           <div> 
+           <div style="color:#FF0000; font:11px" id="error"></div> 
+           
+           <div><label style="font-size:12px" for="user">用户名：
+           </label><input id="user" style="border:solid thin #B6B6B6" class="i"  type="text"  /></div><br />
+           
+           <div><label style="font-size:12px" for="password"> 密 码：</label>  
+           <input id="password" type="password" style="border:solid thin #B6B6B6" class="i" /> </div><br />
+           
+           <div><label style="font-size:12px" for="password">确认密码：</label> 
+            <input id="password1" type="password" style="border:solid thin #B6B6B6" class="i" /> </div><br />
+            
+          <!-- <div style="font-size:12px">普通用户<input type="radio" name="group" checked="checked" value="ordinaryUser"  /> &nbsp;&nbsp; 
+           超级用户<input type="radio" name="group" value="superUser"  /></div>-->
+           <label for="group" style="font-size:12px" id="error">选择用户组:</label>
+           <select name="group" size="1">
+          	{% for g in group_list %}
+		       <option value="{{ g.name }}">{{ g.name }}</option>
+            {% endfor %}   
+          </select>
+          <br />
+           <div ><input value="add User" type="button"  onclick="return creatReq()" /><input value="close" type="button"  onclick="closed()" /> </div>
+           </div>
+         </form>
+     </center>
+</body>
+</html>

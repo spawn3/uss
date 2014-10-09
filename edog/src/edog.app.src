@@ -1,0 +1,13 @@
+{application, edog, [
+    {description, "Edog Virtual Machine Management System"},
+    {vsn, "1.6.2"},
+    {start_phases, []},
+    {registered, [
+        edog_master,
+        edog_master_rt,
+        edog_slaves,
+        edog_slaves_rt ]},
+    {applications, [kernel, stdlib]},
+    {mod, {edog_app, []}},
+  {env, []}
+ ]}.

@@ -1,0 +1,1387 @@
+{tables,[{stddisk_t,[{record_name,stddisk_t},
+                     {attributes,[disk_id,path,size,os_type,os_version]}]},
+         {vm_t,[{record_name,vm_t},
+                {attributes,[vm_id,vm_name,cust_id,pm_id,vm_cpu,vm_mem,
+                             vm_imgid,vm_pcis,status,port,extra]}]},
+         {pm_t,[{record_name,pm_t},
+                {attributes,[pm_id,pm_ip,pm_cpu,pm_mem,pm_bridges,status]}]},
+         {disk_vm_t,[{record_name,disk_vm_t},{attributes,[id,target,extra]}]},
+         {disk_t,[{record_name,disk_t},
+                  {attributes,[disk_id,disk_alias,cust_id,path,size,canboot,
+                               vm_id,target,createtime,locktime,status]}]},
+         {cust_t,[{record_name,cust_t},
+                  {attributes,[cust_id,cust_name,cust_home,locked,locktime,
+                               company,address,contact,telephone,cellphone,
+                               email]}]},
+         {option_t,[{record_name,option_t},{attributes,[key,value]}]}]}.
+{stddisk_t,"2e1bafb9-4788-40d8-a675-54bac1571040",
+           "/public/windows2003-64.img",35,"win2003-35G","64bit"}.
+{stddisk_t,"2e7f1ac3-f135-44f8-9c4d-54a982c704c5",
+           "/public/windows2003-sp2-x86.img",35,"win2003-sp2-35G","32bit"}.
+{stddisk_t,"2ee285ce-9ae2-4918-9225-54984436f949",
+           "/public/windows2008-64.img",35,"win2008-sp2-35G","64bit"}.
+{stddisk_t,"2f258598-92cb-4be0-b50a-5fae305055b9",
+           "/public/superMap-CentOS5.4-x86_64.img",50,
+           "SuperMap-Centos5.4-50G","X86-64"}.
+{stddisk_t,"2f804b80-eaef-4fa5-b6e5-da0dac0f9927",
+           "/public/centos5.4-64-30g.img",30,"Centos5.4-30G","64bit"}.
+{stddisk_t,"2fd6bed8-1a4e-433b-bec3-11a564f6840a",
+           "/public/convirture-2.0-appliance.img",2,"convirt-2.0","32bit"}.
+{stddisk_t,"301be7ea-a69a-461a-9ea7-3e1f127c0cbf","/public/windowsXP-sp3.img",
+           30,"XP-SP3-30G","64bit"}.
+{stddisk_t,"305ee7b4-9e83-48e2-818c-4934fe95692f",
+           "/public/centos-5.6-x86.img",30,"Centos5.6-30G","32bit"}.
+{stddisk_t,"30aedf32-10bb-4c34-926c-1ca17337cf40","/public/Centos-6.0-64.img",
+           20,"Centos6.0-20G","64bit"}.
+{vm_t,"01090730-c37b-4246-986d-d101b75b18ea","win2003-39",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "09c5efa0-ad31-4f1e-b3e9-cf7cb7b21693",
+      [{nic_t,"virbr0","00:e0:a0:1c:0a:7f","e1000"},
+       {nic_t,"virbr1","00:e0:a0:1c:0a:ad","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"0d6fbba7-7f68-4fdd-98cc-27a9364b66b3","win2003-59-test",
+      "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",[],4,8388608,
+      "16ecfe52-ff51-44b0-a8fa-c1d6353dc894",
+      [{nic_t,"virbr1","00:e0:a0:1b:3a:0e","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"0f52acae-9e05-44ce-a271-3301386f476d","win2008-64bit-12",
+      "3f3e353d-e608-4226-96fc-5e7cb3ed13a6",[],2,2097152,
+      "18730029-3168-45c6-b3c5-316aba36399b",
+      [{nic_t,"virbr1","00:e0:a0:1e:7b:73","virtio"}],
+      shutoff,-1,[]}.
+{vm_t,"1028a1f1-a34e-43ad-bbd0-c72764ee51c0",<<"Centos-12">>,
+      "b5c8267d-ec57-4347-8bd5-856e244f6e5f","192.168.50.1",2,2097152,
+      "1e511265-abb6-4a1b-8f1e-81e8b68c561f",
+      [{nic_t,<<"virbr1">>,<<"00:e0:a0:1f:b5:db">>,<<"e1000">>}],
+      running,5902,[]}.
+{vm_t,"1100d54b-caa1-4aba-8c02-840a5ee44a45",<<"win2003-6">>,
+      "d847d121-88b9-4489-aa96-9bb7fb2c11b2","192.168.50.4",4,8388608,
+      "1a4c6271-f5b4-4d7d-a145-1e3ffd1eb1e4",
+      [{nic_t,<<"virbr1">>,<<"00:e0:a0:1c:04:4e">>,<<"virtio">>},
+       {nic_t,<<"virbr0">>,<<"00:e0:a0:1f:aa:91">>,<<"virtio">>}],
+      running,5900,[]}.
+{vm_t,"170921d0-a072-4de6-80e0-bcd432b78c08",<<"superMap-Centos-9">>,
+      "d847d121-88b9-4489-aa96-9bb7fb2c11b2",[],4,8388608,
+      "1e8a7edb-ea0e-4da5-92db-b064635d49f6",
+      [{nic_t,<<"virbr1">>,<<"00:e0:a0:19:1f:7f">>,<<"e1000">>},
+       {nic_t,<<"virbr0">>,<<"00:e0:a0:1f:d7:77">>,<<"virtio">>}],
+      shutoff,-1,[]}.
+{vm_t,"17e69e6f-35a3-480b-813d-c2c1af4ca77d","win2003-36",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "2057e1f2-d5e6-41bf-85d8-3097fdd997a0",
+      [{nic_t,"virbr0","00:e0:a0:1c:7b:8e","e1000"},
+       {nic_t,"virbr1","00:e0:a0:1c:7b:ba","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"191bb79d-b7df-44e8-847b-e78571cca93e","win2003-37",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "21d676c5-0d32-41a9-a2f8-c49cb0b77aa2",
+      [{nic_t,"virbr0","00:e0:a0:1c:9c:11","e1000"},
+       {nic_t,"virbr1","00:e0:a0:1c:9c:3d","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"1a64f980-d9da-4143-907a-591f763959d7","win2003-13-7",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "22549001-b30f-4595-8948-f391af6be9a6",
+      [{nic_t,"virbr0","00:e0:a0:1c:db:5f","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"1e746775-a480-4c45-b07f-0afb7bd9616d","convirt-2-0",
+      "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",[],2,2097152,
+      "2778a240-aee5-4c12-a8de-5753ab221411",
+      [{nic_t,"virbr0","00:e0:a0:1e:ad:b4","virtio"},
+       {nic_t,"virbr1","00:e0:a0:1e:ad:de","virtio"}],
+      shutoff,-1,[]}.
+{vm_t,"1fff5cba-372d-4e29-bb73-a7669a4a3258","win2003-oracle-23",
+      "2d14db4a-a0f4-48bf-b333-bf6cbaa5d67c",[],2,8388608,
+      "26b5911f-04aa-4579-a7c0-58520537aeb2",
+      [{nic_t,"virbr0","00:e0:a0:1b:a4:25","e1000"},
+       {nic_t,"virbr1","00:e0:a0:1b:a4:5a","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"21452ac9-e403-452d-a377-d63e2a005982","win2003-27",
+      "38dde542-ec09-47e3-942c-d66c6c1f066d",[],2,4194304,
+      "28e91c5e-73c5-465b-8564-e00b7168dbcb",
+      [{nic_t,"virbr1","00:e0:a0:1b:0e:5d","e1000"},
+       {nic_t,"virbr0","00:e0:a0:1b:e6:95","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"26fc5a5b-490e-41ea-bf75-4587e4d0de28",<<"superMap-win2003-10">>,
+      "d847d121-88b9-4489-aa96-9bb7fb2c11b2",[],4,8388608,
+      "32ee8a87-74c9-40d7-a5a6-d425c1b9933a",
+      [{nic_t,<<"virbr1">>,<<"00:e0:a0:1b:d6:ab">>,<<"e1000">>},
+       {nic_t,<<"virbr0">>,<<"00:e0:a0:25:65:5f">>,<<"e1000">>}],
+      shutoff,-1,
+      [{real_memory,1048576}]}.
+{vm_t,"2d49e78e-7d48-460a-8f15-e5f2b75e8ea3","win2003-web-26",
+      "2d14db4a-a0f4-48bf-b333-bf6cbaa5d67c",[],2,3145728,
+      "3564b7ba-ee2c-4c27-8bd3-1c308d0493e4",
+      [{nic_t,"virbr0","00:e0:a0:1b:2c:a1","virtio"},
+       {nic_t,"virbr1","00:e0:a0:1b:2c:d1","virtio"}],
+      shutoff,-1,[]}.
+{vm_t,"3dccdf48-9172-470a-af94-7524d5c4999b","win2003-13-5",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "49b217c1-42df-456e-a7cb-3b6c6a24450c",
+      [{nic_t,"virbr0","00:e0:a0:1c:f1:3a","e1000"},
+       {nic_t,"virbr1","00:e0:a0:20:72:02","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"41923949-7793-4c6e-9035-a9f7bb2aa52a","win2003-29",
+      "38dde542-ec09-47e3-942c-d66c6c1f066d",[],2,2097152,
+      "48a55cdf-3196-479a-bb5c-f6a663439137",
+      [{nic_t,"virbr1","00:e0:a0:1b:44:a2","e1000"},
+       {nic_t,"virbr0","00:e0:a0:1b:30:0e","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"424bbfe4-0c10-47d3-bea7-7f695ff4886d","centos",
+      "7b5f1b66-80b0-4160-83a5-b3fac61106bb",[],2,2097152,
+      "4d456475-8f9b-4c6f-be3d-0e3299455a34",
+      [{nic_t,"virbr0","00:e0:a0:18:4a:bc","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"482ebc64-dedd-42e1-bd70-a57533ff8a99","Centos-31",
+      "65e71c30-fc05-4d54-ace4-1f1bf80ca288",[],1,2097152,
+      "ada9203b-f9b4-4916-b89c-6749bf0e41ae",
+      [{nic_t,"virbr1","00:e0:a0:22:86:7f","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"53668ec4-6e7a-4fa2-8eeb-2b93425b99d5","win2003-web-25",
+      "2d14db4a-a0f4-48bf-b333-bf6cbaa5d67c",[],2,3145728,
+      "5cea4d49-ab8a-44ba-9617-29ebc5928088",
+      [{nic_t,"virbr0","00:e0:a0:1b:45:e7","e1000"},
+       {nic_t,"virbr1","00:e0:a0:1b:45:14","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"53ab0a97-86b3-41d9-bed5-e1406f7d6945","win2003-13-9",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "68d9a6ed-ced1-42e8-8f50-2059a0ab500f",
+      [{nic_t,"virbr0","00:e0:a0:1c:0a:4e","e1000"},
+       {nic_t,"virbr1","00:e0:a0:20:ed:5d","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"54bdf5a2-04bb-419f-a1b0-66a43b484d84",<<"win2003-15-3">>,
+      "d847d121-88b9-4489-aa96-9bb7fb2c11b2",[],4,4194304,
+      "5bfe7c2b-ead0-4ead-8dc5-70828140db48",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:29:31:12">>,<<"virtio">>}],
+      shutoff,-1,[]}.
+{vm_t,"5919b17b-9951-4a77-b1fb-3ed44e2d6dd4","centos1",
+      "fa73ac1b-c3ca-4abd-9041-a8f4fac17f49",[],2,4194304,
+      "5f6ea41e-5183-4dbe-a56f-1134f91721ef",
+      [{nic_t,"virbr0","00:e0:a0:17:99:45","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"5b1cf6de-4160-4ea1-b4c0-efe3313a81d0",<<"Centos-11">>,
+      "d847d121-88b9-4489-aa96-9bb7fb2c11b2",[],4,8388608,
+      "99bb0eb1-5774-47f0-b08f-544d28493040",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:27:d2:5a">>,<<"virtio">>},
+       {nic_t,<<"virbr1">>,<<"00:e0:a0:27:d2:93">>,<<"virtio">>}],
+      shutoff,-1,
+      [{real_memory,1048576}]}.
+{vm_t,"5c34968d-d62b-4b07-8540-463eb7af8e31","win2003-41",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "6cd8705c-478d-4bd3-a58e-599cab886a93",
+      [{nic_t,"virbr0","00:e0:a0:1c:4a:d4","e1000"},
+       {nic_t,"virbr1","00:e0:a0:1c:4a:05","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"5caeb364-5f47-4f18-a52c-98f2b3477b02","win2003-13-3",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "650c835a-c815-47fd-84ce-da467506dcb2",
+      [{nic_t,"virbr0","00:e0:a0:1c:b0:3c","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"5df00a02-0c03-49cc-bced-80b5ffb16650","win2003-28",
+      "38dde542-ec09-47e3-942c-d66c6c1f066d",[],2,2097152,
+      "6c02dda0-4894-4f54-ae43-ed910315aff7",
+      [{nic_t,"virbr1","00:e0:a0:1b:29:02","e1000"},
+       {nic_t,"virbr0","00:e0:a0:1b:1b:dc","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"62291f41-3988-4b14-bebd-a1d3dcdebd85",<<"win2003-13">>,
+      "0be7587e-9437-4676-a0ea-24e4d23adbc1","192.168.50.2",2,3145728,
+      "692af892-5078-4587-81eb-e36479964765",
+      [{nic_t,<<"virbr1">>,<<"00:e0:a0:1d:51:35">>,<<"virtio">>}],
+      running,5900,
+      [{real_memory,1048576}]}.
+{vm_t,"62baa70e-e64b-41cb-a4fb-79f3a35d97e0","win2003-13-6",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "6bce02d5-ff61-4238-8854-b0069c9b806c",
+      [{nic_t,"virbr0","00:e0:a0:1c:c1:f7","e1000"},
+       {nic_t,"virbr1","00:e0:a0:20:af:6c","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"68aed8d8-4284-4f82-aec7-0997915e63f7",<<"Centos-7">>,
+      "d847d121-88b9-4489-aa96-9bb7fb2c11b2",[],4,8388608,
+      "71338fe9-1a3d-4a04-9859-a3efecb8e28d",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:1f:2c:38">>,<<"virtio">>},
+       {nic_t,<<"virbr1">>,<<"00:e0:a0:1f:2c:63">>,<<"virtio">>}],
+      shutoff,-1,
+      [{real_memory,1048576}]}.
+{vm_t,"7103af23-b412-4fbf-8c34-4506769a27d3","ubuntu",
+      "fa73ac1b-c3ca-4abd-9041-a8f4fac17f49",[],2,2097152,
+      "900ea69e-fd01-4993-a8b6-db73a5520c78",
+      [{nic_t,"virbro","00:e0:a0:18:fc:d5","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"7a563e8f-bd53-4d46-a383-e749d4ac8e77","win2003-oracle-24",
+      "2d14db4a-a0f4-48bf-b333-bf6cbaa5d67c",[],2,8388608,
+      "81c87a9e-f83e-4c64-8a84-f11ffb5d167d",
+      [{nic_t,"virbr0","00:e0:a0:1b:0f:d9","e1000"},
+       {nic_t,"virbr1","00:e0:a0:1b:0f:04","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"7db7a732-cc67-4a06-beee-c468c08098c1","win2003-64bit-12",
+      "3f3e353d-e608-4226-96fc-5e7cb3ed13a6",[],2,2097152,
+      "858b2504-1c9d-4d2d-9ec8-acc9a734e906",
+      [{nic_t,"virbr1","00:e0:a0:1c:3a:9b","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"8254d2b9-b00c-4015-a090-dfd230b56654","win2003-40",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "2c493926-23a4-4dda-b32f-8a9c4e12d0b6",
+      [{nic_t,"virbr0","00:e0:a0:1c:2e:78","e1000"},
+       {nic_t,"virbr1","00:e0:a0:1c:2e:4e","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"8ae194d4-8f0e-4c5c-96a7-67a8e7019f29","Centos-50",
+      "60344569-78a0-46ce-86d3-7d6f2b02fa2f",[],1,2097152,
+      "9c302c08-cacb-443f-89b0-c8d2cb3c250a",
+      [{nic_t,"virbr1","00:e0:a0:1f:16:4b","virtio"}],
+      shutoff,-1,[]}.
+{vm_t,"8ecaa137-a0a2-4a3b-8e80-e39d1d23a759",<<"Centos-16">>,
+      "d847d121-88b9-4489-aa96-9bb7fb2c11b2",[],4,8388608,
+      "962fe593-613f-48cf-8787-251c7b4b25bd",
+      [{nic_t,<<"virbr1">>,<<"00:e0:a0:29:94:97">>,<<"e1000">>},
+       {nic_t,<<"virbr0">>,<<"00:e0:a0:29:4c:3a">>,<<"e1000">>}],
+      shutoff,-1,[]}.
+{vm_t,"90437d74-b3fa-40a7-95da-701feea1317f","jiankong-1",
+      "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",[],4,2097152,
+      "a5905bc3-1979-42f8-bc48-82ae73b98419",
+      [{nic_t,"virbr1","00:e0:a0:1c:c1:3a","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"92e7feca-502c-4cc2-902e-a66e1b28d04e","jiankong-2",
+      "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",[],3,5242880,
+      "9fc7ec26-3e2c-458d-ac00-8dee148c8b50",
+      [{nic_t,"virbr1","00:e0:a0:1c:db:f7","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"941b5c50-c572-4bf2-b09f-6305af385e59","win2003-13-2",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "9c999787-e004-462f-a334-9932864e581e",
+      [{nic_t,"virbr0","00:e0:a0:1c:90:54","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"9c2bbd77-64a4-43f4-b5aa-3e79fc0c273b","win2003-47",
+      "2fc1178f-c823-4a4f-b89f-327dbdc719ea",[],2,8388608,
+      "a57dc677-4cde-46fb-81ea-3cdade8b13ab",
+      [{nic_t,"virbr1","00:e0:a0:22:61:a0","virtio"}],
+      shutoff,-1,[]}.
+{vm_t,"ad0407c1-3970-4f78-bef7-db0db6194790",<<"win2008-8">>,
+      "d847d121-88b9-4489-aa96-9bb7fb2c11b2",[],4,8388608,
+      "b57df067-2b3d-4987-b78e-ce72ca56e8c9",
+      [{nic_t,<<"virbr1">>,<<"00:e0:a0:1e:a1:22">>,<<"e1000">>},
+       {nic_t,<<"virbr0">>,<<"00:e0:a0:1f:39:ea">>,<<"e1000">>}],
+      shutoff,-1,[]}.
+{vm_t,"af5b85f6-9915-451c-83e2-e07b17ece0f2","win2003-13",
+      "48443de5-7253-4daf-91b6-0783375fd564",[],2,2097152,
+      "b829b8ab-25df-42aa-8757-ea1463a540c8",
+      [{nic_t,"virbr1","00:e0:a0:1f:26:88","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"b3d9574e-7528-4add-837c-d286afa03914","jiankong-4",
+      "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",[],2,6291456,
+      "be3988be-d16a-491b-9850-1ea243f0c389",
+      [{nic_t,"virbr1","00:e0:a0:1c:2e:d7","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"b7a2d9c3-0191-4645-950b-e5b2cb66779b","win2003-35",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "bfb0b23b-f827-4bd8-a3ce-539a58837339",
+      [{nic_t,"virbr0","00:e0:a0:1c:86:ee","e1000"},
+       {nic_t,"virbr1","00:e0:a0:1c:86:17","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"be74c815-489c-445e-ae27-8109c75844cb","win2003-51",
+      "60344569-78a0-46ce-86d3-7d6f2b02fa2f",[],1,2097152,
+      "c79fe9fa-c1eb-45c9-b077-2666903c1455",
+      [{nic_t,"virbr1","00:e0:a0:23:02:ae","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"c29d1201-a126-416e-82b1-85a5640544fd",<<"win2003-5">>,
+      "d847d121-88b9-4489-aa96-9bb7fb2c11b2",[],4,8388608,
+      "cc1c7df5-b572-4658-8fdf-41362463d324",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:1f:90:73">>,<<"e1000">>},
+       {nic_t,<<"virbr1">>,<<"00:e0:a0:1f:90:9b">>,<<"e1000">>}],
+      shutoff,-1,
+      [{real_memory,1048576}]}.
+{vm_t,"c34cac33-930a-453a-b6b0-bee21e03d949","win2003-38",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "d25c5dfd-a090-4541-88a1-6e5987d85ec7",
+      [{nic_t,"virbr0","00:e0:a0:1c:bf:1a","e1000"},
+       {nic_t,"virbr1","00:e0:a0:1c:bf:46","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"c53f7a6a-23de-4d82-92b7-70690d8f0130","win2003-15-2",
+      "d847d121-88b9-4489-aa96-9bb7fb2c11b2","192.168.50.3",2,4194304,
+      "cb62b787-8739-4eb8-8b3f-42d257c0bb08",
+      [{nic_t,"virbr0","00:e0:a0:1f:e2:f6","e1000"}],
+      running,5900,
+      [{real_memory,1048576}]}.
+{vm_t,"cb6e0bd6-1296-4bac-8113-802e4f057913","centos-30G",
+      "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",[],2,2097152,
+      "d9ceada9-2cfc-446f-864a-9f12459ffc86",
+      [{nic_t,"virbr1","00:e0:a0:1f:09:75","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"cd025a7a-b1f2-489a-bf2f-768d915c8639","win2003-13-4",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "d3fdb7f2-0bbb-42c9-8b60-53f2a9cf8b48",
+      [{nic_t,"virbr0","00:e0:a0:1c:d2:0a","e1000"},
+       {nic_t,"virbr1","00:e0:a0:20:22:84","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"cfd3da60-6fa7-4437-9319-c76964e7a969","win2003-42",
+      "38dde542-ec09-47e3-942c-d66c6c1f066d",[],2,2097152,
+      "d6701f5e-4888-4a73-a370-e7a77ec3127e",
+      [{nic_t,"virbr0","00:e0:a0:1b:6a:5d","e1000"},
+       {nic_t,"virbr1","00:e0:a0:1d:38:16","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"d35c5ba2-c045-4ebf-b5aa-f41db385a7a5",<<"win2003-14">>,
+      "99720248-2a99-4752-899b-2a8746c970b5",[],2,4194304,
+      "df02e6e2-a28e-4a89-84fa-f216dea44f32",
+      [{nic_t,<<"virbr1">>,<<"00:e0:a0:23:7b:b5">>,<<"e1000">>}],
+      shutoff,-1,
+      [{real_memory,1048576}]}.
+{vm_t,"d5b3e955-6a15-4e78-9a2b-52b2f37057cc","win2003-web-32",
+      "88050e9c-501d-441a-a7c8-4c4e24c04cc8",[],4,8388608,
+      "e0b85c51-d38b-4387-8abc-886f73de06ef",
+      [{nic_t,"virbr1","00:e0:a0:1c:59:d8","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"d68d159c-0ec5-4073-b842-8c699dfdce2d","win2003-13-8",
+      "e599cb46-f803-4d97-b35c-361551200708",[],2,4194304,
+      "fe4181fa-09f6-4650-8b48-f4cf803f2209",
+      [{nic_t,"virbr0","00:e0:a0:1c:f1:00","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"de4e7265-5d16-4a13-b273-f1f367eb0084","win2003-web-33",
+      "88050e9c-501d-441a-a7c8-4c4e24c04cc8",[],4,8388608,
+      "ea2489e1-ffd3-47d6-bfb0-ce803255760d",
+      [{nic_t,"virbr1","00:e0:a0:1c:0f:49","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"e536a547-95b0-45ba-ba8d-7ccdb61073bd","win2003-32bit-12",
+      "3f3e353d-e608-4226-96fc-5e7cb3ed13a6",[],2,2097152,
+      "5bf6fb30-9aba-4375-b4c6-1a3cdfa8ff9d",
+      [{nic_t,"virbr1","00:e0:a0:1c:6f:2b","virtio"}],
+      shutoff,-1,[]}.
+{vm_t,"eaa9d16b-cb6f-4eb4-9745-3c72beb25c4e","win2003_x86_1",
+      "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",[],2,2097152,
+      "f26e2e41-0cf4-413b-8c25-3b18db7176ab",
+      [{nic_t,"virbr1","00:e0:a0:1b:64:68","virtio"}],
+      shutoff,-1,[]}.
+{vm_t,"ed0f612a-8de3-41f3-baec-2ecfb70587fd","jiankong",
+      "3f3e353d-e608-4226-96fc-5e7cb3ed13a6",[],2,2097152,
+      "f46c0063-fcf7-402b-bff5-eabf8f7c554b",
+      [{nic_t,"virbr1","00:e0:a0:1c:ea:3a","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"eee9b5f7-1601-4a93-aa14-42837ca55378","win2003-web-34",
+      "88050e9c-501d-441a-a7c8-4c4e24c04cc8",[],4,8388608,
+      "f772bf99-167f-4543-8da5-1fa35ad82a99",
+      [{nic_t,"virbr1","00:e0:a0:1c:42:21","e1000"}],
+      shutoff,-1,[]}.
+{vm_t,"f24f7a7c-6310-4786-99c9-c70ee960ba69","win2003-46",
+      "60344569-78a0-46ce-86d3-7d6f2b02fa2f",[],2,4194304,
+      "f417814e-b025-4a73-a012-4c50558937d5",
+      [{nic_t,"virbr1","00:e0:a0:22:ed:5f","virtio"}],
+      shutoff,-1,[]}.
+{vm_t,"f3e99b20-e344-4c13-abec-b960d842b7a1","win2003-31",
+      "c544810a-edc4-4c5c-a2a5-89912f9c71f4",[],2,4194304,
+      "fd782811-0641-419d-a414-5eac22967bb0",
+      [{nic_t,"virbr1","00:e0:a0:21:7f:50","virtio"}],
+      shutoff,-1,[]}.
+{vm_t,"f95cccf2-3f6c-4714-997f-8110b6dba887",<<"Centos-4">>,
+      "d847d121-88b9-4489-aa96-9bb7fb2c11b2","192.168.50.1",4,8388608,
+      "03054949-5705-4db2-ad9c-b70992417fda",
+      [{nic_t,<<"virbr1">>,<<"00:e0:a0:1f:57:91">>,<<"e1000">>},
+       {nic_t,<<"virbr0">>,<<"00:e0:a0:1f:04:4a">>,<<"e1000">>}],
+      running,5900,[]}.
+{vm_t,"fb9dc66e-5ea1-4af2-ac59-fed0c9b6cda7","Centos-58-test",
+      "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",[],4,8388608,
+      "083cdd48-e91a-410d-a245-fc9f186d5880",
+      [{nic_t,"virbr0","00:e0:a0:1f:27:d2","virtio"},
+       {nic_t,"virbr1","00:e0:a0:1f:27:fe","virtio"}],
+      shutoff,-1,[]}.
+{vm_t,"ff3296c8-a804-4b6a-a64d-7fb4e0a560ab","jiankong-3",
+      "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",[],1,4194304,
+      "0739f367-e173-40b8-be12-8970e97dd778",
+      [{nic_t,"virbr1","00:e0:a0:1c:13:e8","e1000"}],
+      shutoff,-1,[]}.
+{pm_t,"192.168.50.1","192.168.50.1",
+      [{cpu_info,"1","Intel(R) Xeon(R) CPU E5520 @ 2.27GHz",4},
+       {cpu_info,"0","Intel(R) Xeon(R) CPU E5520 @ 2.27GHz",4}],
+      [{mem_total,33740824576},
+       {mem_free,3495030784},
+       {mem_cached,15712317440},
+       {mem_buffered,1174212608},
+       {swap_total,8587149312},
+       {swap_free,8586944512}],
+      [{"virbr0","00:E0:81:B8:9D:BF","192.168.50.1","255.255.255.0"},
+       {"virbr1","00:E0:81:B8:9D:C0","192.168.60.3","255.255.255.0"}],
+      running}.
+{pm_t,"192.168.50.2","192.168.50.2",
+      [{cpu_info,"1","Intel(R) Xeon(R) CPU E5520 @ 2.27GHz",4},
+       {cpu_info,"0","Intel(R) Xeon(R) CPU E5520 @ 2.27GHz",4}],
+      [{mem_total,33740824576},
+       {mem_free,8637132800},
+       {mem_cached,19760640000},
+       {mem_buffered,2012086272},
+       {swap_total,8587149312},
+       {swap_free,8586948608}],
+      [{"virbr0","00:E0:81:B8:99:8F","192.168.50.2","255.255.255.0"},
+       {"virbr1","00:E0:81:B8:99:90","192.168.60.102","255.255.255.0"}],
+      running}.
+{pm_t,"192.168.50.3","192.168.50.3",
+      [{cpu_info,"1","Intel(R) Xeon(R) CPU E5520 @ 2.27GHz",4},
+       {cpu_info,"0","Intel(R) Xeon(R) CPU E5520 @ 2.27GHz",4}],
+      [{mem_total,33740824576},
+       {mem_free,14289473536},
+       {mem_cached,15429111808},
+       {mem_buffered,1065213952},
+       {swap_total,8587149312},
+       {swap_free,8586948608}],
+      [{"virbr0","00:E0:81:B8:99:68","192.168.50.3","255.255.255.0"},
+       {"virbr1","00:E0:81:B8:99:69","192.168.60.103","255.255.255.0"}],
+      running}.
+{pm_t,"192.168.50.4","192.168.50.4",
+      [{cpu_info,"1","Intel(R) Xeon(R) CPU E5520 @ 2.27GHz",4},
+       {cpu_info,"0","Intel(R) Xeon(R) CPU E5520 @ 2.27GHz",4}],
+      [{mem_total,33740824576},
+       {mem_free,98672640},
+       {mem_cached,22219210752},
+       {mem_buffered,759537664},
+       {swap_total,8587149312},
+       {swap_free,8366780416}],
+      [{"virbr0","00:E0:81:B8:9B:D2","192.168.50.4","255.255.255.0"},
+       {"virbr1","00:E0:81:B8:9B:D3","192.168.60.104","255.255.255.0"}],
+      running}.
+{disk_vm_t,{"003578d8-c875-4bb9-ab4f-c85e1a59b409",
+            "3dccdf48-9172-470a-af94-7524d5c4999b"},
+           "vdb",[]}.
+{disk_vm_t,{"03054949-5705-4db2-ad9c-b70992417fda",
+            "f95cccf2-3f6c-4714-997f-8110b6dba887"},
+           "vda",[]}.
+{disk_vm_t,{"0739f367-e173-40b8-be12-8970e97dd778",
+            "ff3296c8-a804-4b6a-a64d-7fb4e0a560ab"},
+           "vda",[]}.
+{disk_vm_t,{"083cdd48-e91a-410d-a245-fc9f186d5880",
+            "fb9dc66e-5ea1-4af2-ac59-fed0c9b6cda7"},
+           "vda",[]}.
+{disk_vm_t,{"09c5efa0-ad31-4f1e-b3e9-cf7cb7b21693",
+            "01090730-c37b-4246-986d-d101b75b18ea"},
+           "vda",[]}.
+{disk_vm_t,{"0b579398-a967-4373-8df5-d5e120f80020",
+            "af5b85f6-9915-451c-83e2-e07b17ece0f2"},
+           "vdb",[]}.
+{disk_vm_t,{"15e8abc9-5aaf-4efb-b0c0-8e66ccdb5857",
+            "5caeb364-5f47-4f18-a52c-98f2b3477b02"},
+           "vdb",[]}.
+{disk_vm_t,{"16ecfe52-ff51-44b0-a8fa-c1d6353dc894",
+            "0d6fbba7-7f68-4fdd-98cc-27a9364b66b3"},
+           "vda",[]}.
+{disk_vm_t,{"17f74fb3-f7d5-422d-8747-c42151d42c54",
+            "f95cccf2-3f6c-4714-997f-8110b6dba887"},
+           "vdb",[]}.
+{disk_vm_t,{"18730029-3168-45c6-b3c5-316aba36399b",
+            "0f52acae-9e05-44ce-a271-3301386f476d"},
+           "vda",[]}.
+{disk_vm_t,{"1a4c6271-f5b4-4d7d-a145-1e3ffd1eb1e4",
+            "1100d54b-caa1-4aba-8c02-840a5ee44a45"},
+           "vda",[]}.
+{disk_vm_t,{"1e511265-abb6-4a1b-8f1e-81e8b68c561f",
+            "1028a1f1-a34e-43ad-bbd0-c72764ee51c0"},
+           "vda",[]}.
+{disk_vm_t,{"1e8a7edb-ea0e-4da5-92db-b064635d49f6",
+            "170921d0-a072-4de6-80e0-bcd432b78c08"},
+           "vda",[]}.
+{disk_vm_t,{"2057e1f2-d5e6-41bf-85d8-3097fdd997a0",
+            "17e69e6f-35a3-480b-813d-c2c1af4ca77d"},
+           "vda",[]}.
+{disk_vm_t,{"21d676c5-0d32-41a9-a2f8-c49cb0b77aa2",
+            "191bb79d-b7df-44e8-847b-e78571cca93e"},
+           "vda",[]}.
+{disk_vm_t,{"22549001-b30f-4595-8948-f391af6be9a6",
+            "1a64f980-d9da-4143-907a-591f763959d7"},
+           "vda",[]}.
+{disk_vm_t,{"26b5911f-04aa-4579-a7c0-58520537aeb2",
+            "1fff5cba-372d-4e29-bb73-a7669a4a3258"},
+           "vda",[]}.
+{disk_vm_t,{"2778a240-aee5-4c12-a8de-5753ab221411",
+            "1e746775-a480-4c45-b07f-0afb7bd9616d"},
+           "vda",[]}.
+{disk_vm_t,{"28e91c5e-73c5-465b-8564-e00b7168dbcb",
+            "21452ac9-e403-452d-a377-d63e2a005982"},
+           "vda",[]}.
+{disk_vm_t,{"2c493926-23a4-4dda-b32f-8a9c4e12d0b6",
+            "8254d2b9-b00c-4015-a090-dfd230b56654"},
+           "vda",[]}.
+{disk_vm_t,{"2ffcdf2a-a3fb-441f-bd17-328ae5b6e107",
+            "1a64f980-d9da-4143-907a-591f763959d7"},
+           "vdb",[]}.
+{disk_vm_t,{"32ee8a87-74c9-40d7-a5a6-d425c1b9933a",
+            "26fc5a5b-490e-41ea-bf75-4587e4d0de28"},
+           "vda",[]}.
+{disk_vm_t,{"3564b7ba-ee2c-4c27-8bd3-1c308d0493e4",
+            "2d49e78e-7d48-460a-8f15-e5f2b75e8ea3"},
+           "vda",[]}.
+{disk_vm_t,{"3a1c33f7-4e9f-4fa6-8d02-44c337f0dfb2",
+            "62baa70e-e64b-41cb-a4fb-79f3a35d97e0"},
+           "vdb",[]}.
+{disk_vm_t,{"445181a0-62a8-4e6d-886d-b3a683157359",
+            "7a563e8f-bd53-4d46-a383-e749d4ac8e77"},
+           "vdb",[]}.
+{disk_vm_t,{"48a55cdf-3196-479a-bb5c-f6a663439137",
+            "41923949-7793-4c6e-9035-a9f7bb2aa52a"},
+           "vda",[]}.
+{disk_vm_t,{"49b217c1-42df-456e-a7cb-3b6c6a24450c",
+            "3dccdf48-9172-470a-af94-7524d5c4999b"},
+           "vda",[]}.
+{disk_vm_t,{"4a3a771d-34b8-4147-8199-c1f7e4017907",
+            "fb9dc66e-5ea1-4af2-ac59-fed0c9b6cda7"},
+           "vdb",[]}.
+{disk_vm_t,{"4c0949d0-b872-44ca-a415-38fce4cad353",
+            "41923949-7793-4c6e-9035-a9f7bb2aa52a"},
+           "vdb",[]}.
+{disk_vm_t,{"4d456475-8f9b-4c6f-be3d-0e3299455a34",
+            "424bbfe4-0c10-47d3-bea7-7f695ff4886d"},
+           "vda",[]}.
+{disk_vm_t,{"50d35637-a2ac-4a40-95b3-c451b9e38b50",
+            "5919b17b-9951-4a77-b1fb-3ed44e2d6dd4"},
+           "vdb",[]}.
+{disk_vm_t,{"55d775d4-8cf6-4dd8-8bc8-007ee12c0109",
+            "26fc5a5b-490e-41ea-bf75-4587e4d0de28"},
+           "vdb",[]}.
+{disk_vm_t,{"5b628883-f432-4fed-a30f-1bad2a52a1a6",
+            "0d6fbba7-7f68-4fdd-98cc-27a9364b66b3"},
+           "vdb",[]}.
+{disk_vm_t,{"5bf6fb30-9aba-4375-b4c6-1a3cdfa8ff9d",
+            "e536a547-95b0-45ba-ba8d-7ccdb61073bd"},
+           "vda",[]}.
+{disk_vm_t,{"5bfe7c2b-ead0-4ead-8dc5-70828140db48",
+            "54bdf5a2-04bb-419f-a1b0-66a43b484d84"},
+           "vda",[]}.
+{disk_vm_t,{"5cea4d49-ab8a-44ba-9617-29ebc5928088",
+            "53668ec4-6e7a-4fa2-8eeb-2b93425b99d5"},
+           "vda",[]}.
+{disk_vm_t,{"5f6ea41e-5183-4dbe-a56f-1134f91721ef",
+            "5919b17b-9951-4a77-b1fb-3ed44e2d6dd4"},
+           "vda",[]}.
+{disk_vm_t,{"5fb19d77-cc94-467c-a722-b0c77644e494",
+            "170921d0-a072-4de6-80e0-bcd432b78c08"},
+           "vdb",[]}.
+{disk_vm_t,{"628ec137-977c-4d58-8685-556fd0ebf570",
+            "941b5c50-c572-4bf2-b09f-6305af385e59"},
+           "vdb",[]}.
+{disk_vm_t,{"6451f514-73dc-4d9a-916f-adb6370857b6",
+            "c53f7a6a-23de-4d82-92b7-70690d8f0130"},
+           "vdb",[]}.
+{disk_vm_t,{"650c835a-c815-47fd-84ce-da467506dcb2",
+            "5caeb364-5f47-4f18-a52c-98f2b3477b02"},
+           "vda",[]}.
+{disk_vm_t,{"65a22991-596f-44b0-ad5f-ab4bdfdef790",
+            "cfd3da60-6fa7-4437-9319-c76964e7a969"},
+           "vdb",[]}.
+{disk_vm_t,{"68d9a6ed-ced1-42e8-8f50-2059a0ab500f",
+            "53ab0a97-86b3-41d9-bed5-e1406f7d6945"},
+           "vda",[]}.
+{disk_vm_t,{"692af892-5078-4587-81eb-e36479964765",
+            "62291f41-3988-4b14-bebd-a1d3dcdebd85"},
+           "vda",[]}.
+{disk_vm_t,{"6bce02d5-ff61-4238-8854-b0069c9b806c",
+            "62baa70e-e64b-41cb-a4fb-79f3a35d97e0"},
+           "vda",[]}.
+{disk_vm_t,{"6c02dda0-4894-4f54-ae43-ed910315aff7",
+            "5df00a02-0c03-49cc-bced-80b5ffb16650"},
+           "vda",[]}.
+{disk_vm_t,{"6cd8705c-478d-4bd3-a58e-599cab886a93",
+            "5c34968d-d62b-4b07-8540-463eb7af8e31"},
+           "vda",[]}.
+{disk_vm_t,{"6f2e514e-6420-45e9-99a3-dfe2678602a9",
+            "2d49e78e-7d48-460a-8f15-e5f2b75e8ea3"},
+           "vdb",[]}.
+{disk_vm_t,{"70733d53-681f-4c11-be79-aa0f6de41af8",
+            "ad0407c1-3970-4f78-bef7-db0db6194790"},
+           "vdb",[]}.
+{disk_vm_t,{"71338fe9-1a3d-4a04-9859-a3efecb8e28d",
+            "68aed8d8-4284-4f82-aec7-0997915e63f7"},
+           "vda",[]}.
+{disk_vm_t,{"71f4db3f-5344-40eb-a836-ab62e4b7fcf9",
+            "c34cac33-930a-453a-b6b0-bee21e03d949"},
+           "vdb",[]}.
+{disk_vm_t,{"722010b0-8f7e-4aad-bdcf-dceb3984aa30",
+            "d35c5ba2-c045-4ebf-b5aa-f41db385a7a5"},
+           "vdb",[]}.
+{disk_vm_t,{"7a6b53ae-da8c-4da8-9340-a9181ae8c6aa",
+            "eee9b5f7-1601-4a93-aa14-42837ca55378"},
+           "vdb",[]}.
+{disk_vm_t,{"7bad55ab-3e02-4b00-b92a-d3717f5faa64",
+            "de4e7265-5d16-4a13-b273-f1f367eb0084"},
+           "vdb",[]}.
+{disk_vm_t,{"7e4e37fc-c7d6-4198-a8b3-b8d8cc4e1f3d",
+            "c29d1201-a126-416e-82b1-85a5640544fd"},
+           "vdb",[]}.
+{disk_vm_t,{"7f3a5681-6a79-4de7-9663-60325195a98c",
+            "191bb79d-b7df-44e8-847b-e78571cca93e"},
+           "vdb",[]}.
+{disk_vm_t,{"7fcb047b-84b2-47c9-82fa-7f0e5cf2b455",
+            "68aed8d8-4284-4f82-aec7-0997915e63f7"},
+           "vdb",[]}.
+{disk_vm_t,{"802ef5ed-a2fa-4c69-93ca-82a2a27695d4",
+            "f24f7a7c-6310-4786-99c9-c70ee960ba69"},
+           "vdb",[]}.
+{disk_vm_t,{"81c87a9e-f83e-4c64-8a84-f11ffb5d167d",
+            "7a563e8f-bd53-4d46-a383-e749d4ac8e77"},
+           "vda",[]}.
+{disk_vm_t,{"858b2504-1c9d-4d2d-9ec8-acc9a734e906",
+            "7db7a732-cc67-4a06-beee-c468c08098c1"},
+           "vda",[]}.
+{disk_vm_t,{"87fd0ad7-9d92-4e59-8f62-068a2a1244c6",
+            "cd025a7a-b1f2-489a-bf2f-768d915c8639"},
+           "vdb",[]}.
+{disk_vm_t,{"8f66d156-dddd-4f3f-b0f7-b2c40fe49701",
+            "54bdf5a2-04bb-419f-a1b0-66a43b484d84"},
+           "vdb",[]}.
+{disk_vm_t,{"900ea69e-fd01-4993-a8b6-db73a5520c78",
+            "7103af23-b412-4fbf-8c34-4506769a27d3"},
+           "vda",[]}.
+{disk_vm_t,{"962fe593-613f-48cf-8787-251c7b4b25bd",
+            "8ecaa137-a0a2-4a3b-8e80-e39d1d23a759"},
+           "vda",[]}.
+{disk_vm_t,{"995791c3-7e7a-45c8-8235-f07f222dc069",
+            "1fff5cba-372d-4e29-bb73-a7669a4a3258"},
+           "vdb",[]}.
+{disk_vm_t,{"99bb0eb1-5774-47f0-b08f-544d28493040",
+            "5b1cf6de-4160-4ea1-b4c0-efe3313a81d0"},
+           "vda",[]}.
+{disk_vm_t,{"9c302c08-cacb-443f-89b0-c8d2cb3c250a",
+            "8ae194d4-8f0e-4c5c-96a7-67a8e7019f29"},
+           "vda",[]}.
+{disk_vm_t,{"9c999787-e004-462f-a334-9932864e581e",
+            "941b5c50-c572-4bf2-b09f-6305af385e59"},
+           "vda",[]}.
+{disk_vm_t,{"9fc7ec26-3e2c-458d-ac00-8dee148c8b50",
+            "92e7feca-502c-4cc2-902e-a66e1b28d04e"},
+           "vda",[]}.
+{disk_vm_t,{"a57dc677-4cde-46fb-81ea-3cdade8b13ab",
+            "9c2bbd77-64a4-43f4-b5aa-3e79fc0c273b"},
+           "vda",[]}.
+{disk_vm_t,{"a5905bc3-1979-42f8-bc48-82ae73b98419",
+            "90437d74-b3fa-40a7-95da-701feea1317f"},
+           "vda",[]}.
+{disk_vm_t,{"a9bfe0b7-f129-4501-997d-d9bd3c47b164",
+            "b7a2d9c3-0191-4645-950b-e5b2cb66779b"},
+           "vdb",[]}.
+{disk_vm_t,{"ada9203b-f9b4-4916-b89c-6749bf0e41ae",
+            "482ebc64-dedd-42e1-bd70-a57533ff8a99"},
+           "vda",[]}.
+{disk_vm_t,{"b57df067-2b3d-4987-b78e-ce72ca56e8c9",
+            "ad0407c1-3970-4f78-bef7-db0db6194790"},
+           "vda",[]}.
+{disk_vm_t,{"b829b8ab-25df-42aa-8757-ea1463a540c8",
+            "af5b85f6-9915-451c-83e2-e07b17ece0f2"},
+           "vda",[]}.
+{disk_vm_t,{"ba9fbb6b-679e-4bd4-b78f-5e794d8c827e",
+            "21452ac9-e403-452d-a377-d63e2a005982"},
+           "vdb",[]}.
+{disk_vm_t,{"bc550158-41cf-4a9e-b7b4-5b389abf0f5a",
+            "8254d2b9-b00c-4015-a090-dfd230b56654"},
+           "vdb",[]}.
+{disk_vm_t,{"be3988be-d16a-491b-9850-1ea243f0c389",
+            "b3d9574e-7528-4add-837c-d286afa03914"},
+           "vda",[]}.
+{disk_vm_t,{"bfb0b23b-f827-4bd8-a3ce-539a58837339",
+            "b7a2d9c3-0191-4645-950b-e5b2cb66779b"},
+           "vda",[]}.
+{disk_vm_t,{"c79fe9fa-c1eb-45c9-b077-2666903c1455",
+            "be74c815-489c-445e-ae27-8109c75844cb"},
+           "vda",[]}.
+{disk_vm_t,{"cb62b787-8739-4eb8-8b3f-42d257c0bb08",
+            "c53f7a6a-23de-4d82-92b7-70690d8f0130"},
+           "vda",[]}.
+{disk_vm_t,{"cbb48045-2c75-4dcd-8468-b465854620bf",
+            "17e69e6f-35a3-480b-813d-c2c1af4ca77d"},
+           "vdb",[]}.
+{disk_vm_t,{"cc1c7df5-b572-4658-8fdf-41362463d324",
+            "c29d1201-a126-416e-82b1-85a5640544fd"},
+           "vda",[]}.
+{disk_vm_t,{"cf256095-eb2f-4184-9d8b-222382459cd0",
+            "53668ec4-6e7a-4fa2-8eeb-2b93425b99d5"},
+           "vdb",[]}.
+{disk_vm_t,{"d25c5dfd-a090-4541-88a1-6e5987d85ec7",
+            "c34cac33-930a-453a-b6b0-bee21e03d949"},
+           "vda",[]}.
+{disk_vm_t,{"d3fdb7f2-0bbb-42c9-8b60-53f2a9cf8b48",
+            "cd025a7a-b1f2-489a-bf2f-768d915c8639"},
+           "vda",[]}.
+{disk_vm_t,{"d47c5a2d-2808-4b39-8212-2412c95d2be8",
+            "01090730-c37b-4246-986d-d101b75b18ea"},
+           "vdb",[]}.
+{disk_vm_t,{"d6701f5e-4888-4a73-a370-e7a77ec3127e",
+            "cfd3da60-6fa7-4437-9319-c76964e7a969"},
+           "vda",[]}.
+{disk_vm_t,{"d6aa465c-cd77-4cab-80b5-f04b631924e1",
+            "62291f41-3988-4b14-bebd-a1d3dcdebd85"},
+           "vdb",[]}.
+{disk_vm_t,{"d9ceada9-2cfc-446f-864a-9f12459ffc86",
+            "cb6e0bd6-1296-4bac-8113-802e4f057913"},
+           "vda",[]}.
+{disk_vm_t,{"db483215-6503-456c-b02d-34386b43261b",
+            "8ecaa137-a0a2-4a3b-8e80-e39d1d23a759"},
+           "vdb",[]}.
+{disk_vm_t,{"df02e6e2-a28e-4a89-84fa-f216dea44f32",
+            "d35c5ba2-c045-4ebf-b5aa-f41db385a7a5"},
+           "vda",[]}.
+{disk_vm_t,{"e0b85c51-d38b-4387-8abc-886f73de06ef",
+            "d5b3e955-6a15-4e78-9a2b-52b2f37057cc"},
+           "vda",[]}.
+{disk_vm_t,{"ea2489e1-ffd3-47d6-bfb0-ce803255760d",
+            "de4e7265-5d16-4a13-b273-f1f367eb0084"},
+           "vda",[]}.
+{disk_vm_t,{"ee648cb6-5adb-4dd2-9fc2-9e5601e318f2",
+            "d5b3e955-6a15-4e78-9a2b-52b2f37057cc"},
+           "vdb",[]}.
+{disk_vm_t,{"f26e2e41-0cf4-413b-8c25-3b18db7176ab",
+            "eaa9d16b-cb6f-4eb4-9745-3c72beb25c4e"},
+           "vda",[]}.
+{disk_vm_t,{"f3c04898-6b6b-4422-973d-f587b71da15d",
+            "d68d159c-0ec5-4073-b842-8c699dfdce2d"},
+           "vdb",[]}.
+{disk_vm_t,{"f417814e-b025-4a73-a012-4c50558937d5",
+            "f24f7a7c-6310-4786-99c9-c70ee960ba69"},
+           "vda",[]}.
+{disk_vm_t,{"f4280e61-fb51-4878-b06c-a32a9a9d1342",
+            "53ab0a97-86b3-41d9-bed5-e1406f7d6945"},
+           "vdb",[]}.
+{disk_vm_t,{"f46c0063-fcf7-402b-bff5-eabf8f7c554b",
+            "ed0f612a-8de3-41f3-baec-2ecfb70587fd"},
+           "vda",[]}.
+{disk_vm_t,{"f554fa88-abf6-4b6f-b728-00376e6bb258",
+            "5df00a02-0c03-49cc-bced-80b5ffb16650"},
+           "vdb",[]}.
+{disk_vm_t,{"f772bf99-167f-4543-8da5-1fa35ad82a99",
+            "eee9b5f7-1601-4a93-aa14-42837ca55378"},
+           "vda",[]}.
+{disk_vm_t,{"f7d4218c-d117-4366-bc1e-f23f6834434d",
+            "1100d54b-caa1-4aba-8c02-840a5ee44a45"},
+           "vdb",[]}.
+{disk_vm_t,{"fd273602-2780-4b5d-8128-16c1e48768d7",
+            "5c34968d-d62b-4b07-8540-463eb7af8e31"},
+           "vdb",[]}.
+{disk_vm_t,{"fd782811-0641-419d-a414-5eac22967bb0",
+            "f3e99b20-e344-4c13-abec-b960d842b7a1"},
+           "vda",[]}.
+{disk_vm_t,{"fe4181fa-09f6-4650-8b48-f4cf803f2209",
+            "d68d159c-0ec5-4073-b842-8c699dfdce2d"},
+           "vda",[]}.
+{disk_t,"003578d8-c875-4bb9-ab4f-c85e1a59b409","win135disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/003578d8-c875-4bb9-ab4f-c85e1a59b409/003578d8-c875-4bb9-ab4f-c85e1a59b409.img",
+        500,false,"3dccdf48-9172-470a-af94-7524d5c4999b","vdb",1309417490,0,
+        created}.
+{disk_t,"03054949-5705-4db2-ad9c-b70992417fda","system",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/03054949-5705-4db2-ad9c-b70992417fda/03054949-5705-4db2-ad9c-b70992417fda.img",
+        50,true,"f95cccf2-3f6c-4714-997f-8110b6dba887","vda",1311057687,0,
+        created}.
+{disk_t,"0739f367-e173-40b8-be12-8970e97dd778","system",
+        "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",
+        "/test/0739f367-e173-40b8-be12-8970e97dd778/0739f367-e173-40b8-be12-8970e97dd778.img",
+        35,true,"ff3296c8-a804-4b6a-a64d-7fb4e0a560ab","vda",1308791059,0,
+        created}.
+{disk_t,"083cdd48-e91a-410d-a245-fc9f186d5880","system",
+        "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",
+        "/test/083cdd48-e91a-410d-a245-fc9f186d5880/083cdd48-e91a-410d-a245-fc9f186d5880.img",
+        50,true,"fb9dc66e-5ea1-4af2-ac59-fed0c9b6cda7","vda",1311750887,0,
+        created}.
+{disk_t,"09c5efa0-ad31-4f1e-b3e9-cf7cb7b21693","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/09c5efa0-ad31-4f1e-b3e9-cf7cb7b21693/09c5efa0-ad31-4f1e-b3e9-cf7cb7b21693.img",
+        35,true,"01090730-c37b-4246-986d-d101b75b18ea","vda",1308294154,0,
+        created}.
+{disk_t,"0b579398-a967-4373-8df5-d5e120f80020","win13disk1",
+        "48443de5-7253-4daf-91b6-0783375fd564",
+        "/DiMengTeJia/0b579398-a967-4373-8df5-d5e120f80020/0b579398-a967-4373-8df5-d5e120f80020.img",
+        50,false,"af5b85f6-9915-451c-83e2-e07b17ece0f2","vdb",1311646153,0,
+        created}.
+{disk_t,"150c6697-4742-45fa-a8f5-a7bec34b557c","system",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/150c6697-4742-45fa-a8f5-a7bec34b557c/150c6697-4742-45fa-a8f5-a7bec34b557c.img",
+        30,true,"0972d30a-df48-4aba-87a0-721c60b5b791","vda",1317187187,
+        1321949655,locked}.
+{disk_t,"15e8abc9-5aaf-4efb-b0c0-8e66ccdb5857","win133disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/15e8abc9-5aaf-4efb-b0c0-8e66ccdb5857/15e8abc9-5aaf-4efb-b0c0-8e66ccdb5857.img",
+        1000,false,"5caeb364-5f47-4f18-a52c-98f2b3477b02","vdb",1309414360,0,
+        created}.
+{disk_t,"16ecfe52-ff51-44b0-a8fa-c1d6353dc894","system",
+        "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",
+        "/test/16ecfe52-ff51-44b0-a8fa-c1d6353dc894/16ecfe52-ff51-44b0-a8fa-c1d6353dc894.img",
+        35,true,"0d6fbba7-7f68-4fdd-98cc-27a9364b66b3","vda",1307682298,0,
+        created}.
+{disk_t,"17e87386-6eff-4bcf-a823-fdf39cc52bb8","system",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/17e87386-6eff-4bcf-a823-fdf39cc52bb8/17e87386-6eff-4bcf-a823-fdf39cc52bb8.img",
+        35,true,"0f22e5f4-33c0-4e9c-98ab-79e956bd7cf8","vda",1311057861,
+        1321949667,locked}.
+{disk_t,"17f74fb3-f7d5-422d-8747-c42151d42c54","centos7disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/17f74fb3-f7d5-422d-8747-c42151d42c54/17f74fb3-f7d5-422d-8747-c42151d42c54.img",
+        500,false,"f95cccf2-3f6c-4714-997f-8110b6dba887","vdb",1311123924,0,
+        created}.
+{disk_t,"18730029-3168-45c6-b3c5-316aba36399b","system",
+        "3f3e353d-e608-4226-96fc-5e7cb3ed13a6",
+        "/bcc/18730029-3168-45c6-b3c5-316aba36399b/18730029-3168-45c6-b3c5-316aba36399b.img",
+        35,true,"0f52acae-9e05-44ce-a271-3301386f476d","vda",1310364923,0,
+        created}.
+{disk_t,"1a4c6271-f5b4-4d7d-a145-1e3ffd1eb1e4","system",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/1a4c6271-f5b4-4d7d-a145-1e3ffd1eb1e4/1a4c6271-f5b4-4d7d-a145-1e3ffd1eb1e4.img",
+        35,true,"1100d54b-caa1-4aba-8c02-840a5ee44a45","vda",1308641540,0,
+        created}.
+{disk_t,"1e511265-abb6-4a1b-8f1e-81e8b68c561f","system",
+        "b5c8267d-ec57-4347-8bd5-856e244f6e5f",
+        "/kepu3/1e511265-abb6-4a1b-8f1e-81e8b68c561f/1e511265-abb6-4a1b-8f1e-81e8b68c561f.img",
+        50,true,"1028a1f1-a34e-43ad-bbd0-c72764ee51c0","vda",1311219061,0,
+        created}.
+{disk_t,"1e8a7edb-ea0e-4da5-92db-b064635d49f6","system",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/1e8a7edb-ea0e-4da5-92db-b064635d49f6/1e8a7edb-ea0e-4da5-92db-b064635d49f6.img",
+        50,true,"170921d0-a072-4de6-80e0-bcd432b78c08","vda",1305856607,0,
+        created}.
+{disk_t,"2057e1f2-d5e6-41bf-85d8-3097fdd997a0","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/2057e1f2-d5e6-41bf-85d8-3097fdd997a0/2057e1f2-d5e6-41bf-85d8-3097fdd997a0.img",
+        35,true,"17e69e6f-35a3-480b-813d-c2c1af4ca77d","vda",1308296827,0,
+        created}.
+{disk_t,"21d676c5-0d32-41a9-a2f8-c49cb0b77aa2","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/21d676c5-0d32-41a9-a2f8-c49cb0b77aa2/21d676c5-0d32-41a9-a2f8-c49cb0b77aa2.img",
+        35,true,"191bb79d-b7df-44e8-847b-e78571cca93e","vda",1308296860,0,
+        created}.
+{disk_t,"22549001-b30f-4595-8948-f391af6be9a6","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/22549001-b30f-4595-8948-f391af6be9a6/22549001-b30f-4595-8948-f391af6be9a6.img",
+        35,true,"1a64f980-d9da-4143-907a-591f763959d7","vda",1308538075,0,
+        created}.
+{disk_t,"26b5911f-04aa-4579-a7c0-58520537aeb2","system",
+        "2d14db4a-a0f4-48bf-b333-bf6cbaa5d67c",
+        "/xinxingjihua/26b5911f-04aa-4579-a7c0-58520537aeb2/26b5911f-04aa-4579-a7c0-58520537aeb2.img",
+        35,true,"1fff5cba-372d-4e29-bb73-a7669a4a3258","vda",1307675748,0,
+        created}.
+{disk_t,"2778a240-aee5-4c12-a8de-5753ab221411","system",
+        "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",
+        "/test/2778a240-aee5-4c12-a8de-5753ab221411/2778a240-aee5-4c12-a8de-5753ab221411.img",
+        2,true,"1e746775-a480-4c45-b07f-0afb7bd9616d","vda",1310719789,0,
+        created}.
+{disk_t,"28e91c5e-73c5-465b-8564-e00b7168dbcb","system",
+        "38dde542-ec09-47e3-942c-d66c6c1f066d",
+        "/CAXA/28e91c5e-73c5-465b-8564-e00b7168dbcb/28e91c5e-73c5-465b-8564-e00b7168dbcb.img",
+        35,true,"21452ac9-e403-452d-a377-d63e2a005982","vda",1307942350,0,
+        created}.
+{disk_t,"2b74905e-5744-443b-be1d-57aed1a73767","system",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/2b74905e-5744-443b-be1d-57aed1a73767/2b74905e-5744-443b-be1d-57aed1a73767.img",
+        35,true,"225f0b4e-a9cd-43b6-9dc5-003856fd2295","vda",1310369201,
+        1321949685,locked}.
+{disk_t,"2c493926-23a4-4dda-b32f-8a9c4e12d0b6","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/2c493926-23a4-4dda-b32f-8a9c4e12d0b6/2c493926-23a4-4dda-b32f-8a9c4e12d0b6.img",
+        35,true,"8254d2b9-b00c-4015-a090-dfd230b56654","vda",1308294190,0,
+        created}.
+{disk_t,"2ffcdf2a-a3fb-441f-bd17-328ae5b6e107","win137disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/2ffcdf2a-a3fb-441f-bd17-328ae5b6e107/2ffcdf2a-a3fb-441f-bd17-328ae5b6e107.img",
+        1000,false,"1a64f980-d9da-4143-907a-591f763959d7","vdb",1309414411,0,
+        created}.
+{disk_t,"32ee8a87-74c9-40d7-a5a6-d425c1b9933a","system",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/32ee8a87-74c9-40d7-a5a6-d425c1b9933a/32ee8a87-74c9-40d7-a5a6-d425c1b9933a.img",
+        35,true,"26fc5a5b-490e-41ea-bf75-4587e4d0de28","vda",1307608982,0,
+        created}.
+{disk_t,"3564b7ba-ee2c-4c27-8bd3-1c308d0493e4","system",
+        "2d14db4a-a0f4-48bf-b333-bf6cbaa5d67c",
+        "/xinxingjihua/3564b7ba-ee2c-4c27-8bd3-1c308d0493e4/3564b7ba-ee2c-4c27-8bd3-1c308d0493e4.img",
+        35,true,"2d49e78e-7d48-460a-8f15-e5f2b75e8ea3","vda",1307928300,0,
+        created}.
+{disk_t,"3a1c33f7-4e9f-4fa6-8d02-44c337f0dfb2","win136disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/3a1c33f7-4e9f-4fa6-8d02-44c337f0dfb2/3a1c33f7-4e9f-4fa6-8d02-44c337f0dfb2.img",
+        1000,false,"62baa70e-e64b-41cb-a4fb-79f3a35d97e0","vdb",1309414389,0,
+        created}.
+{disk_t,"445181a0-62a8-4e6d-886d-b3a683157359","oracle24disk1",
+        "2d14db4a-a0f4-48bf-b333-bf6cbaa5d67c",
+        "xinxingjihua/445181a0-62a8-4e6d-886d-b3a683157359/445181a0-62a8-4e6d-886d-b3a683157359.img",
+        1000,false,"7a563e8f-bd53-4d46-a383-e749d4ac8e77","vdb",1307931804,0,
+        created}.
+{disk_t,"48a55cdf-3196-479a-bb5c-f6a663439137","system",
+        "38dde542-ec09-47e3-942c-d66c6c1f066d",
+        "/CAXA/48a55cdf-3196-479a-bb5c-f6a663439137/48a55cdf-3196-479a-bb5c-f6a663439137.img",
+        35,true,"41923949-7793-4c6e-9035-a9f7bb2aa52a","vda",1307942404,0,
+        created}.
+{disk_t,"49b217c1-42df-456e-a7cb-3b6c6a24450c","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/49b217c1-42df-456e-a7cb-3b6c6a24450c/49b217c1-42df-456e-a7cb-3b6c6a24450c.img",
+        35,true,"3dccdf48-9172-470a-af94-7524d5c4999b","vda",1308535793,0,
+        created}.
+{disk_t,"4a3a771d-34b8-4147-8199-c1f7e4017907","centos58disk1",
+        "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",
+        "/test/4a3a771d-34b8-4147-8199-c1f7e4017907/4a3a771d-34b8-4147-8199-c1f7e4017907.img",
+        500,false,"fb9dc66e-5ea1-4af2-ac59-fed0c9b6cda7","vdb",1311753804,0,
+        created}.
+{disk_t,"4c0949d0-b872-44ca-a415-38fce4cad353","win29disk1",
+        "38dde542-ec09-47e3-942c-d66c6c1f066d",
+        "CAXA/4c0949d0-b872-44ca-a415-38fce4cad353/4c0949d0-b872-44ca-a415-38fce4cad353.img",
+        500,false,"41923949-7793-4c6e-9035-a9f7bb2aa52a","vdb",1307951084,0,
+        created}.
+{disk_t,"4d456475-8f9b-4c6f-be3d-0e3299455a34","system",
+        "7b5f1b66-80b0-4160-83a5-b3fac61106bb",
+        "/test2/4d456475-8f9b-4c6f-be3d-0e3299455a34/4d456475-8f9b-4c6f-be3d-0e3299455a34.img",
+        1,true,"424bbfe4-0c10-47d3-bea7-7f695ff4886d","vda",1304582218,0,
+        created}.
+{disk_t,"50d35637-a2ac-4a40-95b3-c451b9e38b50","test120g",
+        "fa73ac1b-c3ca-4abd-9041-a8f4fac17f49",
+        "test1/50d35637-a2ac-4a40-95b3-c451b9e38b50/50d35637-a2ac-4a40-95b3-c451b9e38b50.img",
+        20,false,"5919b17b-9951-4a77-b1fb-3ed44e2d6dd4","vdb",1303983835,0,
+        created}.
+{disk_t,"55d775d4-8cf6-4dd8-8bc8-007ee12c0109","Windows22disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "chaotu/55d775d4-8cf6-4dd8-8bc8-007ee12c0109/55d775d4-8cf6-4dd8-8bc8-007ee12c0109.img",
+        500,false,"26fc5a5b-490e-41ea-bf75-4587e4d0de28","vdb",1307618536,0,
+        created}.
+{disk_t,"5b628883-f432-4fed-a30f-1bad2a52a1a6","test1disk1",
+        "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",
+        "/test/5b628883-f432-4fed-a30f-1bad2a52a1a6/5b628883-f432-4fed-a30f-1bad2a52a1a6.img",
+        100,false,"0d6fbba7-7f68-4fdd-98cc-27a9364b66b3","vdb",1308640494,0,
+        created}.
+{disk_t,"5bf6fb30-9aba-4375-b4c6-1a3cdfa8ff9d","system",
+        "3f3e353d-e608-4226-96fc-5e7cb3ed13a6",
+        "/bcc/5bf6fb30-9aba-4375-b4c6-1a3cdfa8ff9d/5bf6fb30-9aba-4375-b4c6-1a3cdfa8ff9d.img",
+        35,true,"e536a547-95b0-45ba-ba8d-7ccdb61073bd","vda",1308107631,0,
+        created}.
+{disk_t,"5bfe7c2b-ead0-4ead-8dc5-70828140db48","system",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/5bfe7c2b-ead0-4ead-8dc5-70828140db48/5bfe7c2b-ead0-4ead-8dc5-70828140db48.img",
+        35,
+        [boot],
+        "54bdf5a2-04bb-419f-a1b0-66a43b484d84",undefined,1321936241,0,created}.
+{disk_t,"5cea4d49-ab8a-44ba-9617-29ebc5928088","system",
+        "2d14db4a-a0f4-48bf-b333-bf6cbaa5d67c",
+        "/xinxingjihua/5cea4d49-ab8a-44ba-9617-29ebc5928088/5cea4d49-ab8a-44ba-9617-29ebc5928088.img",
+        35,true,"53668ec4-6e7a-4fa2-8eeb-2b93425b99d5","vda",1307766021,0,
+        created}.
+{disk_t,"5f6ea41e-5183-4dbe-a56f-1134f91721ef","system",
+        "fa73ac1b-c3ca-4abd-9041-a8f4fac17f49",
+        "/test1/5f6ea41e-5183-4dbe-a56f-1134f91721ef/5f6ea41e-5183-4dbe-a56f-1134f91721ef.img",
+        1,true,"5919b17b-9951-4a77-b1fb-3ed44e2d6dd4","vda",1303976537,0,
+        created}.
+{disk_t,"5fb19d77-cc94-467c-a722-b0c77644e494","CentOS1disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "chaotu/5fb19d77-cc94-467c-a722-b0c77644e494/5fb19d77-cc94-467c-a722-b0c77644e494.img",
+        500,false,"170921d0-a072-4de6-80e0-bcd432b78c08","vdb",1307618501,0,
+        created}.
+{disk_t,"628ec137-977c-4d58-8685-556fd0ebf570","win132disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/628ec137-977c-4d58-8685-556fd0ebf570/628ec137-977c-4d58-8685-556fd0ebf570.img",
+        1000,false,"941b5c50-c572-4bf2-b09f-6305af385e59","vdb",1309414334,0,
+        created}.
+{disk_t,"6451f514-73dc-4d9a-916f-adb6370857b6","win152disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/6451f514-73dc-4d9a-916f-adb6370857b6/6451f514-73dc-4d9a-916f-adb6370857b6.img",
+        50,false,"c53f7a6a-23de-4d82-92b7-70690d8f0130","vdb",1311124078,0,
+        created}.
+{disk_t,"650c835a-c815-47fd-84ce-da467506dcb2","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/650c835a-c815-47fd-84ce-da467506dcb2/650c835a-c815-47fd-84ce-da467506dcb2.img",
+        35,true,"5caeb364-5f47-4f18-a52c-98f2b3477b02","vda",1308535728,0,
+        created}.
+{disk_t,"65a22991-596f-44b0-ad5f-ab4bdfdef790","resourceDisk1",
+        "38dde542-ec09-47e3-942c-d66c6c1f066d",
+        "CAXA/65a22991-596f-44b0-ad5f-ab4bdfdef790/65a22991-596f-44b0-ad5f-ab4bdfdef790.img",
+        100,false,"cfd3da60-6fa7-4437-9319-c76964e7a969","vdb",1307951017,0,
+        created}.
+{disk_t,"68d9a6ed-ced1-42e8-8f50-2059a0ab500f","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/68d9a6ed-ced1-42e8-8f50-2059a0ab500f/68d9a6ed-ced1-42e8-8f50-2059a0ab500f.img",
+        35,true,"53ab0a97-86b3-41d9-bed5-e1406f7d6945","vda",1308538122,0,
+        created}.
+{disk_t,"692af892-5078-4587-81eb-e36479964765","system",
+        "0be7587e-9437-4676-a0ea-24e4d23adbc1",
+        "/laobaosuo/692af892-5078-4587-81eb-e36479964765/692af892-5078-4587-81eb-e36479964765.img",
+        35,true,"62291f41-3988-4b14-bebd-a1d3dcdebd85","vda",1309855633,0,
+        created}.
+{disk_t,"6bce02d5-ff61-4238-8854-b0069c9b806c","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/6bce02d5-ff61-4238-8854-b0069c9b806c/6bce02d5-ff61-4238-8854-b0069c9b806c.img",
+        35,true,"62baa70e-e64b-41cb-a4fb-79f3a35d97e0","vda",1308538049,0,
+        created}.
+{disk_t,"6c02dda0-4894-4f54-ae43-ed910315aff7","system",
+        "38dde542-ec09-47e3-942c-d66c6c1f066d",
+        "/CAXA/6c02dda0-4894-4f54-ae43-ed910315aff7/6c02dda0-4894-4f54-ae43-ed910315aff7.img",
+        35,true,"5df00a02-0c03-49cc-bced-80b5ffb16650","vda",1307942377,0,
+        created}.
+{disk_t,"6cd8705c-478d-4bd3-a58e-599cab886a93","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/6cd8705c-478d-4bd3-a58e-599cab886a93/6cd8705c-478d-4bd3-a58e-599cab886a93.img",
+        35,true,"5c34968d-d62b-4b07-8540-463eb7af8e31","vda",1308294218,0,
+        created}.
+{disk_t,"6e7c28f2-4618-49a4-a681-408c46c65101","win153disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/6e7c28f2-4618-49a4-a681-408c46c65101/6e7c28f2-4618-49a4-a681-408c46c65101.img",
+        50,false,"0f22e5f4-33c0-4e9c-98ab-79e956bd7cf8","vdb",1311124114,
+        1321949730,locked}.
+{disk_t,"6f2e514e-6420-45e9-99a3-dfe2678602a9","web26disk1",
+        "2d14db4a-a0f4-48bf-b333-bf6cbaa5d67c",
+        "xinxingjihua/6f2e514e-6420-45e9-99a3-dfe2678602a9/6f2e514e-6420-45e9-99a3-dfe2678602a9.img",
+        80,false,"2d49e78e-7d48-460a-8f15-e5f2b75e8ea3","vdb",1307931869,0,
+        created}.
+{disk_t,"70733d53-681f-4c11-be79-aa0f6de41af8","win45disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/70733d53-681f-4c11-be79-aa0f6de41af8/70733d53-681f-4c11-be79-aa0f6de41af8.img",
+        300,false,"ad0407c1-3970-4f78-bef7-db0db6194790","vdb",1310379400,0,
+        created}.
+{disk_t,"71338fe9-1a3d-4a04-9859-a3efecb8e28d","system",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/71338fe9-1a3d-4a04-9859-a3efecb8e28d/71338fe9-1a3d-4a04-9859-a3efecb8e28d.img",
+        50,true,"68aed8d8-4284-4f82-aec7-0997915e63f7","vda",1311233516,0,
+        created}.
+{disk_t,"71f4db3f-5344-40eb-a836-ab62e4b7fcf9","win38disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/71f4db3f-5344-40eb-a836-ab62e4b7fcf9/71f4db3f-5344-40eb-a836-ab62e4b7fcf9.img",
+        1000,false,"c34cac33-930a-453a-b6b0-bee21e03d949","vdb",1309414296,0,
+        created}.
+{disk_t,"722010b0-8f7e-4aad-bdcf-dceb3984aa30","win10disk1",
+        "99720248-2a99-4752-899b-2a8746c970b5",
+        "/TianJianXing/722010b0-8f7e-4aad-bdcf-dceb3984aa30/722010b0-8f7e-4aad-bdcf-dceb3984aa30.img",
+        100,false,"d35c5ba2-c045-4ebf-b5aa-f41db385a7a5","vdb",1315452146,0,
+        created}.
+{disk_t,"7a6b53ae-da8c-4da8-9340-a9181ae8c6aa","web34disk1",
+        "88050e9c-501d-441a-a7c8-4c4e24c04cc8",
+        "kepu1/7a6b53ae-da8c-4da8-9340-a9181ae8c6aa/7a6b53ae-da8c-4da8-9340-a9181ae8c6aa.img",
+        300,false,"eee9b5f7-1601-4a93-aa14-42837ca55378","vdb",1308189666,0,
+        created}.
+{disk_t,"7bad55ab-3e02-4b00-b92a-d3717f5faa64","web33disk1",
+        "88050e9c-501d-441a-a7c8-4c4e24c04cc8",
+        "kepu1/7bad55ab-3e02-4b00-b92a-d3717f5faa64/7bad55ab-3e02-4b00-b92a-d3717f5faa64.img",
+        300,false,"de4e7265-5d16-4a13-b273-f1f367eb0084","vdb",1308189649,0,
+        created}.
+{disk_t,"7e4e37fc-c7d6-4198-a8b3-b8d8cc4e1f3d","win8disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/7e4e37fc-c7d6-4198-a8b3-b8d8cc4e1f3d/7e4e37fc-c7d6-4198-a8b3-b8d8cc4e1f3d.img",
+        500,false,"c29d1201-a126-416e-82b1-85a5640544fd","vdb",1311123985,0,
+        created}.
+{disk_t,"7f3a5681-6a79-4de7-9663-60325195a98c","win37disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/7f3a5681-6a79-4de7-9663-60325195a98c/7f3a5681-6a79-4de7-9663-60325195a98c.img",
+        1000,false,"191bb79d-b7df-44e8-847b-e78571cca93e","vdb",1309414275,0,
+        created}.
+{disk_t,"7fcb047b-84b2-47c9-82fa-7f0e5cf2b455","centos17disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/7fcb047b-84b2-47c9-82fa-7f0e5cf2b455/7fcb047b-84b2-47c9-82fa-7f0e5cf2b455.img",
+        500,false,"68aed8d8-4284-4f82-aec7-0997915e63f7","vdb",1311236107,0,
+        created}.
+{disk_t,"802ef5ed-a2fa-4c69-93ca-82a2a27695d4","win46disk1",
+        "60344569-78a0-46ce-86d3-7d6f2b02fa2f",
+        "/SiTuKeJi/802ef5ed-a2fa-4c69-93ca-82a2a27695d4/802ef5ed-a2fa-4c69-93ca-82a2a27695d4.img",
+        100,false,"f24f7a7c-6310-4786-99c9-c70ee960ba69","vdb",1314327476,0,
+        created}.
+{disk_t,"81c87a9e-f83e-4c64-8a84-f11ffb5d167d","system",
+        "2d14db4a-a0f4-48bf-b333-bf6cbaa5d67c",
+        "/xinxingjihua/81c87a9e-f83e-4c64-8a84-f11ffb5d167d/81c87a9e-f83e-4c64-8a84-f11ffb5d167d.img",
+        35,true,"7a563e8f-bd53-4d46-a383-e749d4ac8e77","vda",1307765967,0,
+        created}.
+{disk_t,"858b2504-1c9d-4d2d-9ec8-acc9a734e906","system",
+        "3f3e353d-e608-4226-96fc-5e7cb3ed13a6",
+        "/bcc/858b2504-1c9d-4d2d-9ec8-acc9a734e906/858b2504-1c9d-4d2d-9ec8-acc9a734e906.img",
+        35,true,"7db7a732-cc67-4a06-beee-c468c08098c1","vda",1308107578,0,
+        created}.
+{disk_t,"87fd0ad7-9d92-4e59-8f62-068a2a1244c6","win134disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/87fd0ad7-9d92-4e59-8f62-068a2a1244c6/87fd0ad7-9d92-4e59-8f62-068a2a1244c6.img",
+        500,false,"cd025a7a-b1f2-489a-bf2f-768d915c8639","vdb",1309417460,0,
+        created}.
+{disk_t,"8f66d156-dddd-4f3f-b0f7-b2c40fe49701","win153disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/8f66d156-dddd-4f3f-b0f7-b2c40fe49701/8f66d156-dddd-4f3f-b0f7-b2c40fe49701.img",
+        100,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1321949850,0,created}.
+{disk_t,"900ea69e-fd01-4993-a8b6-db73a5520c78","system",
+        "fa73ac1b-c3ca-4abd-9041-a8f4fac17f49",
+        "/test1/900ea69e-fd01-4993-a8b6-db73a5520c78/900ea69e-fd01-4993-a8b6-db73a5520c78.img",
+        5,true,"7103af23-b412-4fbf-8c34-4506769a27d3","vda",1304574204,0,
+        created}.
+{disk_t,"962fe593-613f-48cf-8787-251c7b4b25bd","system",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/962fe593-613f-48cf-8787-251c7b4b25bd/962fe593-613f-48cf-8787-251c7b4b25bd.img",
+        30,
+        [boot],
+        "8ecaa137-a0a2-4a3b-8e80-e39d1d23a759",undefined,1321936084,0,created}.
+{disk_t,"995791c3-7e7a-45c8-8235-f07f222dc069","oracle23disk1",
+        "2d14db4a-a0f4-48bf-b333-bf6cbaa5d67c",
+        "xinxingjihua/995791c3-7e7a-45c8-8235-f07f222dc069/995791c3-7e7a-45c8-8235-f07f222dc069.img",
+        1000,false,"1fff5cba-372d-4e29-bb73-a7669a4a3258","vdb",1307931783,0,
+        created}.
+{disk_t,"99bb0eb1-5774-47f0-b08f-544d28493040","system",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/99bb0eb1-5774-47f0-b08f-544d28493040/99bb0eb1-5774-47f0-b08f-544d28493040.img",
+        50,true,"5b1cf6de-4160-4ea1-b4c0-efe3313a81d0","vda",1319096466,0,
+        created}.
+{disk_t,"9c302c08-cacb-443f-89b0-c8d2cb3c250a","system",
+        "60344569-78a0-46ce-86d3-7d6f2b02fa2f",
+        "/SiTuKeJi/9c302c08-cacb-443f-89b0-c8d2cb3c250a/9c302c08-cacb-443f-89b0-c8d2cb3c250a.img",
+        30,true,"8ae194d4-8f0e-4c5c-96a7-67a8e7019f29","vda",1311734998,0,
+        created}.
+{disk_t,"9c999787-e004-462f-a334-9932864e581e","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/9c999787-e004-462f-a334-9932864e581e/9c999787-e004-462f-a334-9932864e581e.img",
+        35,true,"941b5c50-c572-4bf2-b09f-6305af385e59","vda",1308535696,0,
+        created}.
+{disk_t,"9fc7ec26-3e2c-458d-ac00-8dee148c8b50","system",
+        "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",
+        "/test/9fc7ec26-3e2c-458d-ac00-8dee148c8b50/9fc7ec26-3e2c-458d-ac00-8dee148c8b50.img",
+        35,true,"92e7feca-502c-4cc2-902e-a66e1b28d04e","vda",1308791003,0,
+        created}.
+{disk_t,"a57dc677-4cde-46fb-81ea-3cdade8b13ab","system",
+        "2fc1178f-c823-4a4f-b89f-327dbdc719ea",
+        "/YouBaoShiJi/a57dc677-4cde-46fb-81ea-3cdade8b13ab/a57dc677-4cde-46fb-81ea-3cdade8b13ab.img",
+        35,true,"9c2bbd77-64a4-43f4-b5aa-3e79fc0c273b","vda",1314947041,0,
+        created}.
+{disk_t,"a5905bc3-1979-42f8-bc48-82ae73b98419","system",
+        "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",
+        "/test/a5905bc3-1979-42f8-bc48-82ae73b98419/a5905bc3-1979-42f8-bc48-82ae73b98419.img",
+        35,true,"90437d74-b3fa-40a7-95da-701feea1317f","vda",1308790977,0,
+        created}.
+{disk_t,"a9bfe0b7-f129-4501-997d-d9bd3c47b164","win35disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/a9bfe0b7-f129-4501-997d-d9bd3c47b164/a9bfe0b7-f129-4501-997d-d9bd3c47b164.img",
+        500,false,"b7a2d9c3-0191-4645-950b-e5b2cb66779b","vdb",1309417409,0,
+        created}.
+{disk_t,"ad5ee391-cd0a-4351-af92-73d497be8914","win44disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/ad5ee391-cd0a-4351-af92-73d497be8914/ad5ee391-cd0a-4351-af92-73d497be8914.img",
+        300,false,"225f0b4e-a9cd-43b6-9dc5-003856fd2295","vdb",1310379374,
+        1321949749,locked}.
+{disk_t,"ada9203b-f9b4-4916-b89c-6749bf0e41ae","system",
+        "65e71c30-fc05-4d54-ace4-1f1bf80ca288",
+        "/FuWuBu/ada9203b-f9b4-4916-b89c-6749bf0e41ae/ada9203b-f9b4-4916-b89c-6749bf0e41ae.img",
+        30,true,"482ebc64-dedd-42e1-bd70-a57533ff8a99","vda",1314669830,0,
+        created}.
+{disk_t,"b57df067-2b3d-4987-b78e-ce72ca56e8c9","system",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/b57df067-2b3d-4987-b78e-ce72ca56e8c9/b57df067-2b3d-4987-b78e-ce72ca56e8c9.img",
+        35,true,"ad0407c1-3970-4f78-bef7-db0db6194790","vda",1310379297,0,
+        created}.
+{disk_t,"b829b8ab-25df-42aa-8757-ea1463a540c8","system",
+        "48443de5-7253-4daf-91b6-0783375fd564",
+        "/DiMengTeJia/b829b8ab-25df-42aa-8757-ea1463a540c8/b829b8ab-25df-42aa-8757-ea1463a540c8.img",
+        35,true,"af5b85f6-9915-451c-83e2-e07b17ece0f2","vda",1311573222,0,
+        created}.
+{disk_t,"ba9fbb6b-679e-4bd4-b78f-5e794d8c827e","dbDisk1",
+        "38dde542-ec09-47e3-942c-d66c6c1f066d",
+        "CAXA/ba9fbb6b-679e-4bd4-b78f-5e794d8c827e/ba9fbb6b-679e-4bd4-b78f-5e794d8c827e.img",
+        500,false,"21452ac9-e403-452d-a377-d63e2a005982","vdb",1307951129,0,
+        created}.
+{disk_t,"bc550158-41cf-4a9e-b7b4-5b389abf0f5a","win40disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/bc550158-41cf-4a9e-b7b4-5b389abf0f5a/bc550158-41cf-4a9e-b7b4-5b389abf0f5a.img",
+        500,false,"8254d2b9-b00c-4015-a090-dfd230b56654","vdb",1309417573,0,
+        created}.
+{disk_t,"be3988be-d16a-491b-9850-1ea243f0c389","system",
+        "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",
+        "/test/be3988be-d16a-491b-9850-1ea243f0c389/be3988be-d16a-491b-9850-1ea243f0c389.img",
+        35,true,"b3d9574e-7528-4add-837c-d286afa03914","vda",1308791086,0,
+        created}.
+{disk_t,"bfb0b23b-f827-4bd8-a3ce-539a58837339","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/bfb0b23b-f827-4bd8-a3ce-539a58837339/bfb0b23b-f827-4bd8-a3ce-539a58837339.img",
+        35,true,"b7a2d9c3-0191-4645-950b-e5b2cb66779b","vda",1308294022,0,
+        created}.
+{disk_t,"c79fe9fa-c1eb-45c9-b077-2666903c1455","system",
+        "60344569-78a0-46ce-86d3-7d6f2b02fa2f",
+        "/SiTuKeJi/c79fe9fa-c1eb-45c9-b077-2666903c1455/c79fe9fa-c1eb-45c9-b077-2666903c1455.img",
+        35,true,"be74c815-489c-445e-ae27-8109c75844cb","vda",1315193282,0,
+        created}.
+{disk_t,"cb62b787-8739-4eb8-8b3f-42d257c0bb08","system",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/cb62b787-8739-4eb8-8b3f-42d257c0bb08/cb62b787-8739-4eb8-8b3f-42d257c0bb08.img",
+        35,true,"c53f7a6a-23de-4d82-92b7-70690d8f0130","vda",1311057826,0,
+        created}.
+{disk_t,"cbb48045-2c75-4dcd-8468-b465854620bf","win36disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/cbb48045-2c75-4dcd-8468-b465854620bf/cbb48045-2c75-4dcd-8468-b465854620bf.img",
+        500,false,"17e69e6f-35a3-480b-813d-c2c1af4ca77d","vdb",1309417427,0,
+        created}.
+{disk_t,"cc1c7df5-b572-4658-8fdf-41362463d324","system",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/cc1c7df5-b572-4658-8fdf-41362463d324/cc1c7df5-b572-4658-8fdf-41362463d324.img",
+        35,true,"c29d1201-a126-416e-82b1-85a5640544fd","vda",1311057744,0,
+        created}.
+{disk_t,"cf256095-eb2f-4184-9d8b-222382459cd0","web25disk1",
+        "2d14db4a-a0f4-48bf-b333-bf6cbaa5d67c",
+        "xinxingjihua/cf256095-eb2f-4184-9d8b-222382459cd0/cf256095-eb2f-4184-9d8b-222382459cd0.img",
+        80,false,"53668ec4-6e7a-4fa2-8eeb-2b93425b99d5","vdb",1307931847,0,
+        created}.
+{disk_t,"d25c5dfd-a090-4541-88a1-6e5987d85ec7","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/d25c5dfd-a090-4541-88a1-6e5987d85ec7/d25c5dfd-a090-4541-88a1-6e5987d85ec7.img",
+        35,true,"c34cac33-930a-453a-b6b0-bee21e03d949","vda",1308296895,0,
+        created}.
+{disk_t,"d3fdb7f2-0bbb-42c9-8b60-53f2a9cf8b48","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/d3fdb7f2-0bbb-42c9-8b60-53f2a9cf8b48/d3fdb7f2-0bbb-42c9-8b60-53f2a9cf8b48.img",
+        35,true,"cd025a7a-b1f2-489a-bf2f-768d915c8639","vda",1308535762,0,
+        created}.
+{disk_t,"d47c5a2d-2808-4b39-8212-2412c95d2be8","win39disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/d47c5a2d-2808-4b39-8212-2412c95d2be8/d47c5a2d-2808-4b39-8212-2412c95d2be8.img",
+        500,false,"01090730-c37b-4246-986d-d101b75b18ea","vdb",1309417548,0,
+        created}.
+{disk_t,"d6701f5e-4888-4a73-a370-e7a77ec3127e","system",
+        "38dde542-ec09-47e3-942c-d66c6c1f066d",
+        "/CAXA/d6701f5e-4888-4a73-a370-e7a77ec3127e/d6701f5e-4888-4a73-a370-e7a77ec3127e.img",
+        35,true,"cfd3da60-6fa7-4437-9319-c76964e7a969","vda",1307942698,0,
+        created}.
+{disk_t,"d6aa465c-cd77-4cab-80b5-f04b631924e1","win43disk1",
+        "0be7587e-9437-4676-a0ea-24e4d23adbc1",
+        "/laobaosuo/d6aa465c-cd77-4cab-80b5-f04b631924e1/d6aa465c-cd77-4cab-80b5-f04b631924e1.img",
+        200,false,"62291f41-3988-4b14-bebd-a1d3dcdebd85","vdb",1310366680,0,
+        created}.
+{disk_t,"d9ceada9-2cfc-446f-864a-9f12459ffc86","system",
+        "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",
+        "/test/d9ceada9-2cfc-446f-864a-9f12459ffc86/d9ceada9-2cfc-446f-864a-9f12459ffc86.img",
+        30,true,"cb6e0bd6-1296-4bac-8113-802e4f057913","vda",1311145417,0,
+        created}.
+{disk_t,"db483215-6503-456c-b02d-34386b43261b","centos16disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/db483215-6503-456c-b02d-34386b43261b/db483215-6503-456c-b02d-34386b43261b.img",
+        500,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1321949796,0,created}.
+{disk_t,"df02e6e2-a28e-4a89-84fa-f216dea44f32","system",
+        "99720248-2a99-4752-899b-2a8746c970b5",
+        "/TianJianXing/df02e6e2-a28e-4a89-84fa-f216dea44f32/df02e6e2-a28e-4a89-84fa-f216dea44f32.img",
+        35,true,"d35c5ba2-c045-4ebf-b5aa-f41db385a7a5","vda",1315447355,0,
+        created}.
+{disk_t,"e0b85c51-d38b-4387-8abc-886f73de06ef","system",
+        "88050e9c-501d-441a-a7c8-4c4e24c04cc8",
+        "/kepu1/e0b85c51-d38b-4387-8abc-886f73de06ef/e0b85c51-d38b-4387-8abc-886f73de06ef.img",
+        35,true,"d5b3e955-6a15-4e78-9a2b-52b2f37057cc","vda",1308105305,0,
+        created}.
+{disk_t,"ea2489e1-ffd3-47d6-bfb0-ce803255760d","system",
+        "88050e9c-501d-441a-a7c8-4c4e24c04cc8",
+        "/kepu1/ea2489e1-ffd3-47d6-bfb0-ce803255760d/ea2489e1-ffd3-47d6-bfb0-ce803255760d.img",
+        35,true,"de4e7265-5d16-4a13-b273-f1f367eb0084","vda",1308105487,0,
+        created}.
+{disk_t,"ee648cb6-5adb-4dd2-9fc2-9e5601e318f2","web32disk1",
+        "88050e9c-501d-441a-a7c8-4c4e24c04cc8",
+        "kepu1/ee648cb6-5adb-4dd2-9fc2-9e5601e318f2/ee648cb6-5adb-4dd2-9fc2-9e5601e318f2.img",
+        300,false,"d5b3e955-6a15-4e78-9a2b-52b2f37057cc","vdb",1308189616,0,
+        created}.
+{disk_t,"f26e2e41-0cf4-413b-8c25-3b18db7176ab","system",
+        "ae86fbcf-13aa-4f9e-a299-30ef9d9fc351",
+        "/test/f26e2e41-0cf4-413b-8c25-3b18db7176ab/f26e2e41-0cf4-413b-8c25-3b18db7176ab.img",
+        35,true,"eaa9d16b-cb6f-4eb4-9745-3c72beb25c4e","vda",1307606820,0,
+        created}.
+{disk_t,"f2b64d5e-c5d3-48f6-8ffd-a01364bc20ba","windows20disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/f2b64d5e-c5d3-48f6-8ffd-a01364bc20ba/f2b64d5e-c5d3-48f6-8ffd-a01364bc20ba.img",
+        500,false,"0972d30a-df48-4aba-87a0-721c60b5b791","vdb",1308641614,
+        1321949770,locked}.
+{disk_t,"f3c04898-6b6b-4422-973d-f587b71da15d","win138disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/f3c04898-6b6b-4422-973d-f587b71da15d/f3c04898-6b6b-4422-973d-f587b71da15d.img",
+        1000,false,"d68d159c-0ec5-4073-b842-8c699dfdce2d","vdb",1309414435,0,
+        created}.
+{disk_t,"f417814e-b025-4a73-a012-4c50558937d5","system",
+        "60344569-78a0-46ce-86d3-7d6f2b02fa2f",
+        "/SiTuKeJi/f417814e-b025-4a73-a012-4c50558937d5/f417814e-b025-4a73-a012-4c50558937d5.img",
+        35,true,"f24f7a7c-6310-4786-99c9-c70ee960ba69","vda",1314265453,0,
+        created}.
+{disk_t,"f4280e61-fb51-4878-b06c-a32a9a9d1342","win139disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/f4280e61-fb51-4878-b06c-a32a9a9d1342/f4280e61-fb51-4878-b06c-a32a9a9d1342.img",
+        1000,false,"53ab0a97-86b3-41d9-bed5-e1406f7d6945","vdb",1309414463,0,
+        created}.
+{disk_t,"f46c0063-fcf7-402b-bff5-eabf8f7c554b","system",
+        "3f3e353d-e608-4226-96fc-5e7cb3ed13a6",
+        "/bcc/f46c0063-fcf7-402b-bff5-eabf8f7c554b/f46c0063-fcf7-402b-bff5-eabf8f7c554b.img",
+        35,true,"ed0f612a-8de3-41f3-baec-2ecfb70587fd","vda",1308722154,0,
+        created}.
+{disk_t,"f554fa88-abf6-4b6f-b728-00376e6bb258","win28disk1",
+        "38dde542-ec09-47e3-942c-d66c6c1f066d",
+        "CAXA/f554fa88-abf6-4b6f-b728-00376e6bb258/f554fa88-abf6-4b6f-b728-00376e6bb258.img",
+        100,false,"5df00a02-0c03-49cc-bced-80b5ffb16650","vdb",1307950970,0,
+        created}.
+{disk_t,"f772bf99-167f-4543-8da5-1fa35ad82a99","system",
+        "88050e9c-501d-441a-a7c8-4c4e24c04cc8",
+        "/kepu1/f772bf99-167f-4543-8da5-1fa35ad82a99/f772bf99-167f-4543-8da5-1fa35ad82a99.img",
+        35,true,"eee9b5f7-1601-4a93-aa14-42837ca55378","vda",1308105538,0,
+        created}.
+{disk_t,"f7d4218c-d117-4366-bc1e-f23f6834434d","win15disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/f7d4218c-d117-4366-bc1e-f23f6834434d/f7d4218c-d117-4366-bc1e-f23f6834434d.img",
+        500,false,"1100d54b-caa1-4aba-8c02-840a5ee44a45","vdb",1315463629,0,
+        created}.
+{disk_t,"fd273602-2780-4b5d-8128-16c1e48768d7","win41disk1",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/fd273602-2780-4b5d-8128-16c1e48768d7/fd273602-2780-4b5d-8128-16c1e48768d7.img",
+        500,false,"5c34968d-d62b-4b07-8540-463eb7af8e31","vdb",1309417593,0,
+        created}.
+{disk_t,"fd782811-0641-419d-a414-5eac22967bb0","system",
+        "c544810a-edc4-4c5c-a2a5-89912f9c71f4",
+        "/kepu4/fd782811-0641-419d-a414-5eac22967bb0/fd782811-0641-419d-a414-5eac22967bb0.img",
+        35,true,"f3e99b20-e344-4c13-abec-b960d842b7a1","vda",1313465791,0,
+        created}.
+{disk_t,"fe4181fa-09f6-4650-8b48-f4cf803f2209","system",
+        "e599cb46-f803-4d97-b35c-361551200708",
+        "/kepu2/fe4181fa-09f6-4650-8b48-f4cf803f2209/fe4181fa-09f6-4650-8b48-f4cf803f2209.img",
+        35,true,"d68d159c-0ec5-4073-b842-8c699dfdce2d","vda",1308538097,0,
+        created}.
+{cust_t,"06ed28d4-f691-4e7b-972f-f33a2466baa8","web","web",true,1307606423,
+        "web","web","lengzhonghai","010-11111111","11111111111",
+        "111@mail.com"}.
+{cust_t,"0be7587e-9437-4676-a0ea-24e4d23adbc1","laobaosuo","laobaosuo",false,
+        0,"LaoDongBaoHuKeXueYanJiuSuo","beijing","LiuLei","010-11111111",
+        "13581809241","1@bcc.cn"}.
+{cust_t,"0f622d3a-afdd-4bd0-9979-111123c83a98","jinyi","jinyi",true,
+        1307606398,"123","123","123","010-12345678","12345678911",
+        "123@f12.com"}.
+{cust_t,"2d14db4a-a0f4-48bf-b333-bf6cbaa5d67c","xinxingjihua","xinxingjihua",
+        false,0,"xinxingjihua","beijing","lengzhonghai","010-82961066",
+        "11111111111","lenghai923@163.com"}.
+{cust_t,"2fc1178f-c823-4a4f-b89f-327dbdc719ea","YouBaoShiJi","YouBaoShiJi",
+        false,0,"YouBaoShiJi","beijing","TongFeng","010-11111111",
+        "15810015982","1@bcc.cn"}.
+{cust_t,"36b85310-b953-4685-95f7-f5065d4e0ad0","test123","test123",true,
+        1304663118,"lsjdflk","bjacc","lsjdfk","010-22222222","13811111111",
+        "kljdf@jkf.com"}.
+{cust_t,"38dde542-ec09-47e3-942c-d66c6c1f066d","CAXA","CAXA",false,0,"CAXA",
+        "CAXA","chenyuansheng","010-11111111","11111111111",
+        "chenys@bcc.ac.cn"}.
+{cust_t,"3f3e353d-e608-4226-96fc-5e7cb3ed13a6","bcc","bcc",false,0,"bcc",
+        "bcc","bcc","010-11111111","11111111111","shicj@bcc.ac.cn"}.
+{cust_t,"48443de5-7253-4daf-91b6-0783375fd564","DiMengTeJia","DiMengTeJia",
+        false,0,"DiMengTeJia","beijing","MrGuo","010-51530503","13611230310",
+        "3@bcc.cn"}.
+{cust_t,"60344569-78a0-46ce-86d3-7d6f2b02fa2f","SiTuKeJi","SiTuKeJi",false,0,
+        "SiTuKeJi","beijing","SunShiJie","010-11111111","15810592644",
+        "1@bcc.cn"}.
+{cust_t,"65e71c30-fc05-4d54-ace4-1f1bf80ca288","FuWuBu","FuWuBu",false,0,
+        "bcc","bcc","chenyuansheng","010-11111111","11111111111","1@bcc.cn"}.
+{cust_t,"7b5f1b66-80b0-4160-83a5-b3fac61106bb","test2","test2",true,
+        1305254361,"ddd","ddd","ddd","010-11111111","12111111111",
+        "111@bcc.ac.cn"}.
+{cust_t,"85e5143f-d1d4-4224-9bb9-8c43bb11217f","qingbaosuo","qingbaosuo",true,
+        1307606439,"qingbaosuo","qingbaosuo","zhangchuanwen","010-11111111",
+        "13810055246","mervyn1024@163.com"}.
+{cust_t,"88050e9c-501d-441a-a7c8-4c4e24c04cc8","kepu1","kepu1",false,0,
+        "qingbaosuoKePu","kepu","zhangchuanwen","010-11111111","13810055246",
+        "mervyn1024@163.com"}.
+{cust_t,"99720248-2a99-4752-899b-2a8746c970b5","TianJianXing","TianJianXing",
+        false,0,"TianJianXing","beijing","hou","010-11111111","11111111111",
+        "1@bcc.cn"}.
+{cust_t,"ae86fbcf-13aa-4f9e-a299-30ef9d9fc351","test","test",false,0,
+        "testuser","fffff","fffff","010-11111111","11111111111",
+        "fff@gmail.com"}.
+{cust_t,"b5c8267d-ec57-4347-8bd5-856e244f6e5f","kepu3","kepu3",false,0,
+        "qingbaosuoKePu","kepu","ZhuRuiYang","010-68721911","13811517006",
+        "ruiy@std.net"}.
+{cust_t,"c544810a-edc4-4c5c-a2a5-89912f9c71f4","kepu4","kepu4",true,
+        1314265257,"qingbaosuoKePu","111","111","010-11111111","11111111111",
+        "1@bcc.cn"}.
+{cust_t,"d847d121-88b9-4489-aa96-9bb7fb2c11b2","chaotu","chaotu",false,0,
+        "chaotu","chaotu","Mrchen","010-11111111","11111111111",
+        "chaotu@bcc.ac.cn"}.
+{cust_t,"e599cb46-f803-4d97-b35c-361551200708","kepu2","kepu2",false,0,
+        "qingbaosuoKePu","kepu","chenzhiqiang","010-11111111","13426393339",
+        "czq88oo@163.com"}.
+{cust_t,"fa73ac1b-c3ca-4abd-9041-a8f4fac17f49","test1","test1",true,
+        1307505562,"111111","lksdf","skdf","010-22334444","11111111111",
+        "cc@cc.com"}.
+{option_t,disk_format,"raw"}.
+{option_t,edog_load_diff,100}.
+{option_t,edog_load_flag,avg5}.
+{option_t,edog_load_min,256}.
+{option_t,edog_load_on,false}.
+{option_t,edog_load_timeout,10000}.
+{option_t,edog_start_flag,max_memory}.
+{option_t,ws_ip,"127.0.0.1"}.
+{option_t,ws_port,9500}.

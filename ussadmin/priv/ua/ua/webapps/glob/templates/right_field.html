@@ -1,0 +1,83 @@
+<link rel="stylesheet" type="text/css" href="../static/css/right_field.css" />
+<style>
+    .div_right_alert {
+            font-size: 14px;
+            width: 97%;
+    }
+
+    .div_right_highlight {
+            border: 1px solid red;
+            color: red;
+            margin: 4px 2px;
+
+            border-radius: 2px;
+            -moz-border-radius: 2px;
+    }
+
+    .div_right_healthy {
+            border: 1px solid #424242;
+            color: #424242;
+            margin: 4px 2px;
+
+            border-radius: 2px;
+            -moz-border-radius: 2px;
+    }
+
+    .div_right_lowlight {
+            border: 1px solid #868A08;
+            color: #868A08;
+            margin: 4px 2px;
+
+            border-radius: 2px;
+            -moz-border-radius: 2px;
+    }
+
+</style>
+
+<script>
+    $(document).ready(function(){
+        $('#right_field_content').load('ear/srvc/async_events');
+        $.extend({
+            refresh_notice:function(){
+                //			 if ($("#interval_tip").hasClass("right_async_events"))
+                //			 {
+                    $('#right_field_content').load('ear/srvc/async_events');
+                    //			 }
+            }
+        });
+        setInterval("$.refresh_notice()",10000);
+
+        $("#div_right_hide").click(function(){
+            $('#right_field_content').hide();
+        });
+
+        $("#div_right_show").click(function(){
+            $('#right_field_content').show();
+        });
+
+});
+</script>
+
+
+<div class="caption"><label>提示</label></div>
+
+<!--
+<table id="div_right_table">
+    <tr width="100%">
+        <td>
+            <a id="div_right_hide">隐藏</a>
+        </td>
+        <td>
+            <a id="div_right_show">显示</a>
+        </td>
+    </tr>
+</table>
+-->
+
+<div id="right_field_content" style="overflow: auto;height: 94%;">
+</div>
+
+<!--下面id为interval_tip的label，class在使用时要把类变成right_async_events
+<label id="interval_tip" class="right_async_events"> </label>
+-->
+<label id="interval_tip" class="right_async_events_down"> </label>

@@ -1,0 +1,187 @@
+<style>
+    button {
+        margin: 20px 0px 10px 10px;
+        width: 150px;
+        height: 40px;
+    }
+
+    .ctrl_unit {
+        width: 520px;
+        height: 160px;
+    }
+
+    /*
+    #btn_syst_start {
+        margin-left: 250px;
+    }
+
+    #btn_syst_stop {
+        margin-left: 400px;
+    }
+    */
+
+    h1{
+        font-size: 24px;
+        margin-left:50px;
+        margin-top: 20px;
+    }
+    /*
+    span {
+        color: green;
+    }
+    */
+
+    .unit {
+        margin: 10px;
+    }
+
+    .highlight {
+        color: red;
+        cursor:pointer;
+    }
+    .healthy {
+        color: green;
+        cursor:pointer;
+    }
+
+    #div_hightlight_list a {
+        cursor:pointer;
+    }
+</style>
+
+<script>
+    $.ajaxSetup({
+        type: 'GET',
+        error: function(xhr) {
+            //$('#div_glob_stat').load('div/glob_stat');
+            //alert('Error: ' + xhr.status + ' ' + xhr.statusText);
+        }
+    });
+
+    $(function(){
+        // 0: start
+        // 1: stop
+        // 2: deploy
+        // 3: test
+        cluster_status_flag = 1;
+
+        $('button').button();
+
+        $('#btn_syst_deploy').click(function() {
+            if(confirm("确定执行集群部署?")){
+                $('#div_tips').text("集群部署中...");
+                $.ajax({
+                    url: 'syst/ctrl/syst_deploy',
+                    success: function(resp){
+                        if(resp.substring(0,4)=='SUCC'){
+                            cluster_status_flag = 2;
+                        } else {
+                            cluster_status_flag = -2;
+                            alert("错误信息：" + resp);
+                        }
+                    },
+                    error: function(xhr) {
+                        alert('Error: ' + xhr.status + ' ' + xhr.statusText);
+                    }
+                });
+            }
+
+            return false;
+        });
+
+        $('#btn_syst_test').click(function(){
+            if(confirm("确定启动集群测试?")){
+                $('#div_tips').text("集群测试中...");
+                $.ajax({
+                    url: 'syst/ctrl/syst_test',
+                    success: function(resp){
+                        if(resp.substring(0,4)=='SUCC'){
+                            cluster_status_flag = 3;
+                        } else {
+                            cluster_status_flag = -3
+                            alert("错误信息：" + resp);
+                        }
+                    },
+                    error: function(xhr) {
+                        alert('Error: ' + xhr.status + ' ' + xhr.statusText);
+                    }
+                });
+            }
+
+            return false;
+        });
+
+        $('#btn_syst_start').click(function(){
+            if(confirm("确定启动集群?")){
+                $('#div_tips').text("集群启动中...");
+                $.ajax({
+                    url: 'syst/ctrl/syst_start',
+                    success: function(resp){
+                        if(resp.substring(0,4)=='SUCC'){
+                            cluster_status_flag = 0;
+                            $('#div_glob_stat').load('div/glob_stat');
+                        } else {
+                            alert('错误消息：' + resp);
+                        }
+                    },
+                    error: function(xhr) {
+                        alert('Error: ' + xhr.status + ' ' + xhr.statusText);
+                    }
+                });
+            }
+
+            return false;
+        });
+
+        $('#btn_syst_stop').click(function(){
+            if(confirm("确定停止集群?")){
+                $('#div_tips').text("集群停止中...");
+                $.ajax({
+                    url: 'syst/ctrl/syst_stop',
+                    success: function(resp){
+                        if(resp.substring(0,4)=='SUCC'){
+                            cluster_status_flag = 1;
+                            $('#div_glob_stat').load('div/glob_stat');
+                        } else {
+                            alert('错误消息：' + resp);
+                        }
+                    },
+                    error: function(xhr) {
+                        alert('Error: ' + xhr.status + ' ' + xhr.statusText);
+                    }
+                });
+            }
+
+            return false;
+        });
+
+        $('#div_glob_stat').load('div/glob_stat');
+
+        $.extend({
+            refresh_glob_stat:function() {
+                if ($('#interval_tip').hasClass('ctrl')) {
+                    $('#div_glob_stat').load('div/glob_stat');
+                }
+            }
+        });
+        setInterval("$.refresh_glob_stat()", 30000);
+
+    });
+</script>
+
+<label id="interval_tip" class="ctrl"> </label>
+
+<div id="div_glob_stat"></div>
+
+<div class="ctrl_unit unit">
+    <div id="div_tips"></div>
+
+    <button id="btn_syst_deploy">部署集群</button>
+    <button id="btn_syst_test">测试集群</button>
+    <br/>
+    <button id="btn_syst_start">启动集群</button>
+    <button id="btn_syst_stop">停止集群</button>
+    <!--
+    <button id="btn_syst_stop" style="display:none">停止集群</button>
+    -->
+</div>

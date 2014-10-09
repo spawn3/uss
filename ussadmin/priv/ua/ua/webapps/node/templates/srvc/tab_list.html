@@ -1,0 +1,188 @@
+<style>
+#btn_node_add {
+	float: left;
+	margin-left: 450px;
+}
+
+#btn_rack_mng {
+	float: left;
+	margin-left:20px;
+}
+.div_filter {
+	width: 1100px;
+}
+
+#div_node_tb {
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	
+	box-shadow: 0 3px 3px#C8C8C8;
+	-webkit-box-shadow: 0 3px 3px #C8C8C8;
+	-moz-box-shadow: 0 3px 3px #C8C8C8;
+}
+
+#div_node_tb {
+	float: left;
+	margin-top: 10px;
+}
+
+#tb_drvs {
+	font-size: 8px;
+}
+#tb_node_srvc tr{
+}
+</style>
+
+
+<script>
+$(document).ready(function(){
+	$('#btn_node_add').click(function(){
+		$('#div_node_add').load('node/node_add');
+		return false;
+	});
+	
+	$('#btn_rack_mng').click(function(){
+		$('#dialog_node_add').dialog("open");
+		return false;
+	});
+	
+	$('#btn_resetview').click(function(){
+		//$('#middle_field_content').load('node/page');
+		$('#div_node_dtls').html('');
+		$("#tb_node_mng").setGridHeight(470);
+		
+		return false;
+	});
+	
+	
+/*
+	$('#slt_rack').change(function(){
+		r = $('#slt_rack option:selected').val();
+		t = $('#slt_time option:selected').val();
+		$('#div_statd_graph').load('node/stat_graph', {rack=r, time=t});
+	});
+	
+	$('#slt_time').change(function(){
+		r = $('#slt_rack option:selected').val();
+		t = $('#slt_time option:selected').val();
+		$('#div_stat_graph').load('node/stat_graph', {rack=r, time=t});
+	});
+*/
+});
+</script>
+
+<div class="div_filter">
+	<div class="div_filter_block">
+		<input type="radio" name="type" value="all" checked/>
+		<label class="lbl_right">all<label>
+	</div>
+
+    <div class="div_filter_block">
+		<input type="radio" name="type" value="mds"/>
+		<label class="lbl_right">mds<label>
+	</div>
+	
+	<div class="div_filter_block">
+		<input type="radio" name="type" value="cds"/>
+		<label class="lbl_right">cds<label>
+	</div>
+	
+	<div class="div_filter_block">
+		<input type="radio" name="type" value="c60"/>
+		<label class="lbl_right">c60<label>
+	</div>
+	
+	<div class="div_filter_block">
+        <label for="rack" class="lbl_right">Time:</label>
+        <select name="time" id="slt_time">
+            <option value="all">all</option>
+            <option value="error">error</option>
+            <option value="shutoff">shutoff</option>
+            <option value="running">running</option>
+        </select>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+	
+	$('#tb_node_srvc').jqGrid({
+		url:'node/srvc',
+		datatype: 'json',
+		mtype: 'GET',
+		colNames:['ID', 'IP', 'Type',
+					'Status',
+					'Pid'],
+		colModel :[ 
+		  {name:'id', index:'id', width:40, align:'center'}, 
+		  {name:'ip', index:'ip', width:80, align:'center'},
+		  {name:'type', index:'type', width:70, align:'center'},
+		  {name:'status', index:'status', width:50, align:'center'},
+		  {name:'pid', index:'pid', width:60, align:'center'}
+		],
+		pager: '#div_node_mng_pager',
+		rowNum:10,
+		rowList:[10,20,30],
+		sortname: 'id',
+		sortorder: 'desc',
+		viewrecords: true,
+		caption: 'Node Resource Used',
+		//shrinkToFit:false,
+		width: 1100,
+		height: 470,
+		
+		onCellSelect: function(rowid, iCol, cellcontent, e){
+			//监听单元格点击事件，响应第n个单元格的点击。
+			//$("#tb_node_mng").setGridWidth($(window).width()*0.5);
+				//$(idtable).parent().parent().css("height", "120px");
+				$("#tb_node_mng").setGridHeight($(window).height()*0.2);
+				
+				$.get("/node/dtls", 
+						{"id": rowid}, 
+						function(data){
+							$("#div_node_dtls").html(data);
+							if (DEBUG){
+									alert(data);
+									alert("after onselectrow.");
+							}
+						});
+				return false;
+			},
+	})
+		.navGrid("#div_node_srvc_pager")
+	/*	.navButtonAdd('#div_node_srvc_pager',{
+			caption: "",
+			position: "last",
+			title: "forbidden ",
+			buttonicon: "ui-icon-gear",
+			onClickButton: function(){
+				//alert("adding Row");	
+				$("#tb_node_mng").setColumns(options);
+		   		return false;
+			},
+		});
+	*/
+	$(window).bind('resize', function() {
+		//$('.div_filter').setGridWidth($(window).width()*0.85);
+		//$('#tb_node_mng').setGridWidth($(window).width()*0.85);
+		//$('#tb_node_mng').setGridHeight($(window).height()*0.68);
+	}).trigger('resize');
+	
+//	$('#tb_node_mng').closest(".ui-jqgrid-bdiv").css({ 'overflow-x' : 'scroll' });
+
+	
+	//$('#div_node_dtls').load('/node/dtls');
+}); 
+</script>
+
+
+<div id="div_node_tb"> 
+<table id="tb_node_srvc"></table>
+<div id="div_node_srvc_pager"></div>
+</div>
+
+<div id="div_node_dtls"></div>

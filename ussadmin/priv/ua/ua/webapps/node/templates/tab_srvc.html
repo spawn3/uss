@@ -1,0 +1,122 @@
+<style>
+    #div_srvc_tb {
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+
+        box-shadow: 0 3px 3px#C8C8C8;
+        -webkit-box-shadow: 0 3px 3px #C8C8C8;
+        -moz-box-shadow: 0 3px 3px #C8C8C8;
+
+        float: left;
+        margin-top: 10px;
+    }
+
+    #tb_drvs {
+        font-size: 8px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var current_type = "{{type}}";
+
+        $('#tb_srvc').jqGrid({
+                url:'node/srvc/'+current_type,
+                datatype: 'json',
+                mtype: 'GET',
+                colNames:['IP', '类别', 'ID', '状态', 'Pid', '操作'],
+                colModel :[
+                  {name:'ip',     index:'ip',     width:80, align:'center'},
+                  {name:'type',   index:'type',   width:70, align:'center'},
+                  {name:'id',     index:'n',      width:40, align:'center'},
+                  {name:'status', index:'status', width:50, align:'center'},
+                  {name:'pid',    index:'pid',    width:60, align:'center'},
+                  {name:'opt',    index:'opt',    width:60, align:'center'},
+                ],
+                pager: '#div_srvc_pager',
+                rowNum:50,
+                rowList:[50,100,150],
+                sortname: 'ip',
+                sortorder: 'desc',
+                viewrecords: true,
+                caption: '进程状态',
+                //shrinkToFit:false,
+                width: 960,
+                height: 470,
+                onCellSelect: function(rowid, iCol, cellcontent, e){
+                    $("#tb_srvc").setGridHeight($(window).height()*0.3);
+                    $("#div_srvc_dtls").load('node/srvc_dtls', {'sid': rowid});
+                    return false;
+                },
+        }).navGrid("#div_srvc_pager", {add:false, edit:false, del:false, search:false});
+
+        $(window).bind('resize', function() {
+            //$('.div_filter').setGridWidth($(window).width()*0.85);
+            //$('#tb_srvc').setGridWidth($(window).width()*0.71);
+            //$('#tb_node_mng').setGridHeight($(window).height()*0.68);
+        }).trigger('resize');
+
+        $('input[name="type"]').click(function(){
+            $('#tb_srvc').jqGrid('setGridParam',{url:'node/srvc/'+$(this).val()});
+            $('#tb_srvc').trigger("reloadGrid");
+            current_type = $(this).val();
+        });
+
+        $('input[value="' + current_type + '"]').attr('checked', true);
+
+        $('#btn_resetview').click(function(){
+            $('#div_srvc_dtls').html('');
+            $("#tb_srvc").setGridHeight(470);
+            return false;
+        });
+
+		$.extend({
+            refresh_tb_srvc:function(){
+                if ($('#interval_tip').hasClass('tb_srvc'))
+                {
+                    $('#tb_srvc').trigger("reloadGrid");
+                }
+	    }
+		});
+		setInterval("$.refresh_tb_srvc()", 30000);
+});
+
+    function srvc_opt(id, opt){
+            $.post('node/srvc/', {'id':id, 'opt':opt},
+                function(resp){
+                        if(resp.substring(0,4)=='SUCC'){
+														$('#tb_srvc').trigger("reloadGrid");
+                        }
+                        else{
+                            alert(resp);
+                        }
+                });
+    }
+
+</script>
+
+<div class="div_filter">
+    <div class="div_filter_block">
+        <input type="radio" name="type" value="all" checked/>
+        <label class="lbl_right">all</label>
+    </div>
+
+    {% for service in services %}
+    <div class="div_filter_block">
+        <input type="radio" name="type" value="{{service}}"/>
+        <label class="lbl_right">{{service}}</label>
+    </div>
+    {% endfor %}
+
+    <div class="div_filter_block">
+        <button id="btn_resetview">重置视图</button>
+    </div>
+</div>
+
+<div id="div_srvc_tb">
+    <table id="tb_srvc"></table>
+    <div id="div_srvc_pager"></div>
+</div>
+
+<div id="div_srvc_dtls"></div>

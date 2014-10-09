@@ -1,0 +1,102 @@
+<html>
+<head>
+<script type ="text/javascript" language ="javascript" >
+	function checkPmSel(pm)
+	{
+		var pm = document.submitForm.pm_selected;
+		var flag = false;
+		if(pm.length == undefined)
+		{
+			if(pm.checked)
+			{
+				return true;
+			}
+		}
+		for(var i=0;i<pm.length;i++)
+		{
+			if(pm[i].checked)
+			{
+				return true;
+			}
+		}
+		
+		document.getElementById("error").innerHTML = "请选择要启动的目标物理机"
+		return false;
+	}
+</script>
+
+
+<style type="text/css">
+.v {border-collapse: collapse; font-size:12}
+.v td{white-space:nowrap; border:1px dotted #000;width:100;height:10}
+.v thead td{white-space:nowrap; border:1px dotted #000;width:100;height:10; font-weight:bold}
+
+.row1 { background: #EDF3FE; }
+
+.row2 { background: white; }
+</style>
+</head>
+
+<body class="b">
+
+
+<form  class="submitForm" name="submitForm" id="submitForm" method="POST" action="vm_startOnPm">
+<input type="hidden" name="vm_uuid" value="{{vm_uuid}}" />
+ 
+<table align="center">
+
+<tr>
+<td>
+ <label>指定启动目标物理机：</label>
+ <div id ="error" style="color:#ff0000; text-align:center" > </div>
+</td>
+
+<tr>
+<td>
+<table class="v" align="center">
+<thead>
+<td></td>
+<td>IP地址</td>
+<!--<td>uuid</td>-->
+
+<td>处理器个数</td>
+<td>内存总数(G)</td>
+<td>已用内存(G)</td>
+<td>正在运行</td>
+<!--<td>vm&nbsp;set</td>-->
+</thead>
+
+<tbody>
+<!--<input type="hidden" name="pm_selected" value="" />-->
+{% for pm in pm_set %}
+
+<tr class="{% cycle 'row1' 'row2' %}">
+
+<td><input type="radio" name="pm_selected" value = "{{ pm.uuid }}" ></td>
+<!--<td>{{ pm.ip }}</td>-->
+<td>{{ pm.uuid }}</td>
+
+<td>{{ pm.cpu_cores }}</td>
+<td>{{ pm.mem_capacity }}</td>
+<td>{{ pm.mem_used }}</td>
+<td>{{ pm.is_running }}</td>
+<!--<td>vm_set</td>-->
+
+</tr> 
+{% endfor %}
+</tbody>
+</table>
+</td>
+
+</tr> 
+
+<tr>
+<td><button align="center" type="submit" onClick="return checkPmSel()">启动此虚拟机</button></td>
+</tr>
+</table>
+
+</form> 
+
+
+</body>
+</html>

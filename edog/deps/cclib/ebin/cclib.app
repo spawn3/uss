@@ -1,0 +1,12 @@
+{application,cclib,
+             [{description,"Cloud Computing Base Library"},
+              {vsn,"1.0.0"},
+              {registered,[]},
+              {applications,[kernel,stdlib]},
+              {env,[]},
+              {modules,[cclib,cclib_app,cclib_async,cclib_bmap,cclib_cmd,
+                        cclib_dbg,cclib_dhcp,cclib_file,cclib_http,cclib_init,
+                        cclib_json,cclib_lists,cclib_mnesia,cclib_mochijson2,
+                        cclib_mochinum,cclib_network,cclib_node,cclib_os,
+                        cclib_pmap,cclib_ssh,cclib_utils,cclib_uuid,cclib_xml,
+                        cclib_xref,cclib_yfs,user_default]}]}.

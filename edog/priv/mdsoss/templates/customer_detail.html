@@ -1,0 +1,103 @@
+{% extends "world_base.html" %}
+
+{% block title %}用户详细资料{% endblock %}
+
+{% block content %}
+
+<!-- Content --> 
+
+<div class='menu2'> 
+<a href="home">首页</a> 
+&rsaquo; 
+<a href="customer_detail?customer_uuid={{customer.uuid}}">用户详细资料</a> 
+</div> 
+
+<div style="float:left">
+<ul>
+<button align="right" type="button" onclick="ShowIframe('编辑用户信息','get_customer_update?customer_uuid={{customer.uuid}}',500,300)">编辑</button>
+<br />
+<button align="right" type="button" onclick="ShowIframe('抛弃此用户','customer_lock?customer_uuid={{customer.uuid}}',500,300)">抛弃</button>
+<br />
+<button align="right" type="button" onclick="ShowIframe('恢复此用户','customer_unlock?customer_uuid={{customer.uuid}}',500,300)">恢复</button>
+</ul>
+</div>
+
+<table align="center" style="border:1 dotted; font-size:12px">
+<tr>
+			<td align="left">ID:</td><td>{{customer.uuid}}</td>
+            
+</tr>
+<tr>
+			<td align="left">用户名:</td><td>{{customer.alias}}</td>
+			<td align="left">公司名:</td><td>{{customer.company}}</td>
+</tr>
+<tr>
+			<td align="left">联系地址:</td><td>{{customer.address}}</td>
+			<td align="left">联系电话:</td><td>{{customer.telephone}}</td>
+</tr>
+<tr>
+			<td align="left">联系人:</td><td>{{customer.contact_person}}</td>
+			<td align="left">手机:</td><td>{{customer.cellphone}}</td>
+</tr>
+<tr>
+			<td align="left">邮箱:</td><td>{{customer.email}}</td>
+</tr>
+
+</table>
+
+<br />
+<br />
+
+
+<table align="center">
+
+	<tr>
+		<td align="left">
+			<div align="">
+				<table>
+					<tr>
+						<td>
+							<label align="left" style="font-weight:bold; font-size=12px; color:#066;">虚拟机</label> 
+
+							{% if not customer.locked %}
+							<button align="right" type="button" onclick="ShowIframe('创建虚拟机','vm_action?customer_uuid={{customer.uuid}}&action_type=vm_create',1000,600)">创建虚拟机</button>
+							{% endif %}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{% include "vm_list_block.html" %}
+						</td>
+					</tr>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td align="left">
+				<div align="">
+					<table>
+						<tr>
+							<td>
+								<label style="font-weight:bold; font-size=12px; color:#066;">虚拟磁盘</label> 
+								{% if not customer.locked %}
+								<button type="button" onclick="ShowIframe('创建虚拟磁盘','virtualDisk_action?customer_uuid={{customer.uuid}}&action_type=virtualDisk_create',700,300)">创建虚拟磁盘</button>
+								{% endif %}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{% include "virtualDisk_list_block.html" %}
+							</td>
+						</tr>
+					</div>
+				</td>
+			</tr>
+
+		</table>
+
+<!--*****************************************************-->
+
+
+
+{% endblock %}

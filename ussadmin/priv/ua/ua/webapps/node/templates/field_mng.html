@@ -1,0 +1,228 @@
+<style>
+    .div_btn_block {
+        float: right;
+        margin-right: 100px;
+    }
+
+    #div_node_tb {
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+
+        box-shadow: 0 3px 3px#C8C8C8;
+        -webkit-box-shadow: 0 3px 3px #C8C8C8;
+        -moz-box-shadow: 0 3px 3px #C8C8C8;
+
+        float: left;
+        margin-top: 10px;
+    }
+    /*
+    #tb_drvs {
+        font-size: 8px;
+    }
+    */
+</style>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	var current_status = "joined";
+
+	var tb_node_mng = $('#tb_node_mng');
+
+	tb_node_mng.jqGrid({
+		url:'node/rsrc/'+current_status,
+		datatype: 'json',
+		mtype: 'GET',
+		colNames:['ID', 'IP', 'Hostname',
+					'状态',
+					'CPU使用率', 'Load', 'Mem使用率', 'Swap使用率',
+					'网络(in,out)(M)',
+					'存储使用率',
+					'进程状态',
+					'操作'],
+		colModel :[
+		  {name:'id', index:'id', width:40, align:'center'},
+		  {name:'ip', index:'ip', width:80, align:'center'},
+		  {name:'hostname', index:'hostname', width:70, align:'center'},
+		  {name:'stat', index:'stat', width:70, align:'center'},
+		  {name:'cpu', index:'cpu', width:80, align:'center'},
+		  {name:'load', index:'load', width:50, align:'center'},
+		  {name:'mem', index:'mem', width:80, align:'center'},
+		  {name:'swap', index:'swap', width:70, align:'center'},
+		  {name:'nw', index:'nw', width:110, align:'center'},
+		  {name:'drvs', index:'drvs', width:80, align:'center'},
+		  {name:'srvc', index:'srvc', width:120, align:'center'},
+		  {name:'opt', index:'opt', width:80, align:'center'}
+		],
+		pager: '#div_node_mng_pager',
+		rowNum:15,
+		rowList:[15,30,45],
+		sortname: 'id',
+		sortorder: 'desc',
+		viewrecords: true,
+		caption: '节点',
+		//shrinkToFit:false,
+		width: 1000,
+		height: 470,
+		//loadui: 'disable',
+		//multiselect: true,
+		hoverrows: false,
+
+		onSelectRow: function(rowid, iCol, cellcontent, e){
+                    $("#tb_node_mng").setGridHeight($(window).height()*0.2);
+
+                    $.get("div/node_dtls",
+                        {"id": rowid},
+                        function(data){
+                            $("#div_node_dtls").html(data);
+                        });
+                    //selectedRowId = rowid;
+                    return false;
+		}
+	});
+
+	tb_node_mng.navGrid("#div_node_mng_pager", {add:false, edit:false, del:false, search:false});
+
+	$('#btn_backtoctrl').click(function(){
+            $('#a_tab_node_ctrl').text('控制');
+            $('#div_ctrl_mng_field').load('node/field_ctrl');
+	});
+
+	$('#btn_set_mds_c60').click(function(){
+            $('#div_node_role_set').load('div/node_role_set');
+            return false;
+	});
+
+	$('#btn_node_add').click(function(){
+	    $('#div_node_add').load('div/node_add');
+	    return false;
+	});
+
+	$('#btn_rack_mng').click(function(){
+	    $('#div_rack_mng').load('div/rack_mng');
+	    return false;
+	});
+
+	$('#btn_resetview').click(function(){
+            $('#div_node_dtls').html('');
+            $("#tb_node_mng").setGridHeight(470);
+            return false;
+	});
+
+	$('input[name="status"]').click(function(){
+            tb_node_mng.jqGrid('setGridParam',{url:'node/rsrc/'+$(this).val()});
+            tb_node_mng.trigger("reloadGrid");
+            current_status = $(this).val();
+	});
+
+	$.extend({
+            refresh:function(){
+                if ($('#interval_tip').hasClass('field_mng'))
+               {
+                    $('#tb_node_mng').trigger("reloadGrid");
+                }
+	    }
+	});
+	setInterval("$.refresh()", 30000);
+
+});
+
+function node_edit(id) {
+	$('#div_node_add').load('div/node_add');
+	return false;
+}
+
+function node_del(id){
+	if(confirm("确定删除此节点?")){
+        $.post('node/node_del', {'id':id},
+            function(resp){
+                    if(resp.substring(0,4)=='SUCC'){
+                            $('#tb_node_mng').trigger("reloadGrid");
+                    }
+                    else{
+                            alert(resp);
+                    }
+            });
+    }
+    else{
+    }
+	return false;
+}
+
+function node_join(id){
+	if(confirm("确定将此节点加入集群中?")){
+        $.post('node/node_join', {'id':id},
+            function(resp){
+                    if(resp.substring(0,4)=='SUCC'){
+                            $('#tb_node_mng').trigger("reloadGrid");
+                    }
+                    else{
+                            alert(resp);
+                    }
+            });
+    }
+    else{
+    }
+	return false;
+}
+
+function node_exit(id){
+    if(confirm("确定将此节点从集群中脱离?")){
+        $.post('node/node_exit', {'id':id},
+           function(resp){
+               if(resp.substring(0,4)=='SUCC'){
+                   $('#tb_node_mng').trigger("reloadGrid");
+               }
+               else{
+                   alert(resp);
+               }
+           });
+    }
+    else{
+    }
+    return false;
+}
+</script>
+
+<div class="div_filter" id="node_mng_filter">
+
+    <!--
+    <div class="div_filter_block">
+        <label for="rack" class="lbl_right">Rack:</label>
+        <select name="rack" id="slt_rack">
+            <option value="all">all</option>
+            {% for r in racks %}
+            <option value="{{ r.id }}">{{ r.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    -->
+
+    <div class="div_filter_block">
+        <input type="radio" name="status" value="joined" checked/>
+        <label class="lbl_right">集群中节点</label>
+    </div>
+
+    <div class="div_filter_block">
+        <input type="radio" name="status" value="exited"/>
+        <label class="lbl_right">集群外节点</label>
+    </div>
+
+    <div class="div_filter_block div_btn_block">
+        <button id="btn_rack_mng">Rack管理</button>
+        <button id="btn_node_add">添加节点</button>
+        <button id="btn_set_mds_c60">设置MDS和C60</button>
+        <button id="btn_resetview">重置视图</button>
+    </div>
+</div>
+
+<div id="div_node_tb">
+    <table id="tb_node_mng"></table>
+    <div id="div_node_mng_pager"></div>
+</div>
+
+<div id="div_node_role_set"></div>
+<div id="div_node_add"></div>
+<div id="div_rack_mng"></div>
+
+<div id="div_node_dtls"></div>
+

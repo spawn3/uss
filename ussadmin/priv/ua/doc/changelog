@@ -1,0 +1,2255 @@
+commit 92a474e4e674aabed268df41b7dee34b9a95edc4
+Author: zz2 <zjfhappy@126.com>
+Date:   Thu May 5 09:39:19 2011 +0800
+
+    add log clean and log backup
+
+commit 21f42f5f16e9b6515b4f88aa94d441bd2568a918
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Fri Apr 29 10:08:05 2011 +0800
+
+    提交
+
+commit 9e3596d449493962174bd0f5178b365d5ed11bbe
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Mon Apr 25 15:05:16 2011 +0800
+
+    修正chrome不能查看日志问题，改善设置mds和c60,并修正部分表格翻页功能
+
+commit 2fb8e7c951b05773f36663efab2312c070e773f3
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Mon Apr 25 10:54:43 2011 +0800
+
+    添加了一个辅助清除uss_ua临时数据的脚本，给界面上表格添加安顺序排列的功能，调整rrdtool显示
+
+commit 7a9a4acfaf92159754754af184d2927911bfc6b7
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Fri Apr 22 22:05:30 2011 +0800
+
+    加入了日志系统， 调整了rrdtool的执行周期，并完善了前端展示事件的功能，调整访问erl方法
+
+commit 43f78687c1aa50ae7cf8a017e2d016f116dfc2ea
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Thu Apr 21 18:36:27 2011 +0800
+
+    commit
+
+commit b4b9d67280e5424178287cbad5b5cb91f1d2cc1e
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Tue Apr 19 18:36:40 2011 +0800
+
+    梳理控制start, stop, test按钮相关的js， 修正erl模块里面的一个问题，插入sqlite时的错误
+
+commit b375ced492c2f56212d4bf6369e5d1a24c2d01dc
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Mon Apr 18 18:46:53 2011 +0800
+
+    添加了一用户设置密码的工具，并修正了用户设置mds,c60的逻辑错误，并修改start,stop,test返回消息格式，并调整系统中进程视图
+
+commit 94afc5b226cb26f2d129559195ea6ba804bf2ec6
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Sat Apr 16 19:18:08 2011 +0800
+
+    添加了用户修改密码的操作
+
+commit 8a8caae172bc264e745a5ff67471a0b3d810d6da
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Fri Apr 15 18:38:00 2011 +0800
+
+    对在界面上看到配置内容做了支持，并为下步alert的支持做了准备工作
+
+commit 2771c5e19ed1d12fd899831e228146a6cfab01d6
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Thu Apr 14 18:42:15 2011 +0800
+
+    对日志进行支持， 对lvm的输入进行了检查
+
+commit 8812cbc39480dd15db8d741b0898389618cb150e
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Wed Apr 13 19:28:04 2011 +0800
+
+    同上
+
+commit b8e9d963d14c93ccd51a9a31b7667f66942ac7ff
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Wed Apr 13 19:25:50 2011 +0800
+
+    和erl就lvm的操作进行了交换
+
+commit f4264887bf6dce5ff89ffd0282160ea7d439867c
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Tue Apr 12 21:07:52 2011 +0800
+
+    引入了python的包管理，使用python setup.py develop进行开发，部署时需要python setup.py install,
+
+commit cbb6940c4e298faa6f8a629259c72655d4d3ab87
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Tue Apr 12 11:15:34 2011 +0800
+
+    添加了对日志的支持，在添加节点的时候，增加了分发key的操作，也对配置进行了支持
+
+commit e7957ed46ca08f2035672e898fbb322f571fe687
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Sat Apr 9 19:11:05 2011 +0800
+
+    添加了lvm的操作，日志的操作，并修正了不必要刷新的情况
+
+commit 94f08fe6a8538c601cfa70a6f5e665637e7839ed
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Thu Apr 7 17:12:01 2011 +0800
+
+    1，修正了添加用户管理后，按钮失效的问题。 2， 同时把登录功能给取消了，当时没登录成功，就把相关代码给注释了。
+
+commit 3c61520651060ac9168fa105b793d250b5e431ea
+Author: root <root@zkz-desktop.(none)>
+Date:   Wed Mar 30 11:55:28 2011 +0800
+
+    sth
+
+commit b19fae7c889df8f03518c1618c83e1892eee7b26
+Author: root <root@zkz-desktop.(none)>
+Date:   Wed Mar 30 11:53:10 2011 +0800
+
+    system_test/start/stop confirm
+
+commit d98c9e9a87161f0fc88ff40b6b6c28ad574bd992
+Author: root <root@zkz-desktop.(none)>
+Date:   Wed Mar 30 11:15:40 2011 +0800
+
+    %
+
+commit ecda59f5582c74d5068dd63934392944bf577668
+Author: root <root@zkz-desktop.(none)>
+Date:   Tue Mar 29 18:22:36 2011 +0800
+
+    sth
+
+commit be0828cdaa63eb27c5457d83496321d1def55893
+Author: root <root@zkz-desktop.(none)>
+Date:   Tue Mar 29 18:20:38 2011 +0800
+
+    sth
+
+commit a6aaae9f042d82f88c919bbf067d6e90e65bd1a6
+Author: root <root@zkz-desktop.(none)>
+Date:   Tue Mar 29 17:30:57 2011 +0800
+
+    glob_stat状态中running_nodes只显示集群中的节点
+
+commit 950906750f6922c7f9dd9c244faf9a77947b82cb
+Author: root <root@zkz-desktop.(none)>
+Date:   Tue Mar 29 15:43:59 2011 +0800
+
+    cluster<-1
+
+commit 465de92f878169e89be9b3d741ec7a4f0886bb4a
+Author: root <root@zkz-desktop.(none)>
+Date:   Tue Mar 29 14:34:29 2011 +0800
+
+    sth
+
+commit b09f1f7555b5dec998ea83985ce6e1d8fcefb76a
+Author: root <root@zkz-desktop.(none)>
+Date:   Tue Mar 29 14:29:24 2011 +0800
+
+    sth
+
+commit c536ea1a68dcfd1d7fe8b65cc082ba71eac9977d
+Author: root <root@zkz-desktop.(none)>
+Date:   Tue Mar 29 13:29:27 2011 +0800
+
+    login->chinese
+
+commit 14e826ed005a0224411797f00d918a07578b8fe6
+Author: root <root@zkz-desktop.(none)>
+Date:   Fri Mar 25 14:43:57 2011 +0800
+
+    三个节点脱离一个,节点状态为“运行中[3]”
+
+commit edf21c2b27284071c99a4539553bca085145f3bb
+Author: root <root@zkz-desktop.(none)>
+Date:   Thu Mar 24 12:23:12 2011 +0800
+
+    sth
+
+commit 9ab86163d5fe34fd4721806adc754a540a008b57
+Author: root <root@zkz-desktop.(none)>
+Date:   Thu Mar 24 12:06:35 2011 +0800
+
+    redeploy translate
+
+commit d5f7b2456dd314fe5b79be6f11e545d06f86fa0b
+Author: root <root@zkz-desktop.(none)>
+Date:   Thu Mar 24 11:56:53 2011 +0800
+
+    sth
+
+commit 1ae012489815abff0920f31728ffd0ab7dd3c927
+Author: root <root@zkz-desktop.(none)>
+Date:   Thu Mar 24 11:43:51 2011 +0800
+
+    sth
+
+commit 7dd218d10244f21eb912d95c370abf97e9a3eb6e
+Author: root <root@zkz-desktop.(none)>
+Date:   Wed Mar 23 17:39:21 2011 +0800
+
+    sth
+
+commit 7e562f4ea98d6b4931d95eb5b73c7f50166c80d4
+Author: root <root@zkz-desktop.(none)>
+Date:   Wed Mar 23 17:32:54 2011 +0800
+
+    syst ctrl tips
+
+commit 1d5e8630eb445cdd8a169403b938cf743d90f410
+Author: root <root@zkz-desktop.(none)>
+Date:   Wed Mar 23 17:03:04 2011 +0800
+
+    sth
+
+commit 788442b14ce507883cc41d73258d42aa6e94c22d
+Author: root <root@zkz-desktop.(none)>
+Date:   Wed Mar 23 16:57:04 2011 +0800
+
+    test start stop
+
+commit 84f11380e111ba528062d02065ec867707f09e70
+Author: root <root@zkz-desktop.(none)>
+Date:   Wed Mar 23 16:46:52 2011 +0800
+
+    test start stop
+
+commit 21970c303c7021bde5c0f3f79b8d1ff53b344681
+Author: root <root@zkz-desktop.(none)>
+Date:   Wed Mar 23 15:33:12 2011 +0800
+
+    sth
+
+commit 173b6c926e015d3188fcbcf32064c2b408fe31e6
+Merge: 11c3da0 fb6e2ee
+Author: root <root@zkz-desktop.(none)>
+Date:   Wed Mar 23 15:32:08 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit fb6e2ee369073574b1d1d398bd3b4af1ab814476
+Author: root <root@zkz-desktop.(none)>
+Date:   Wed Mar 23 15:30:44 2011 +0800
+
+    test start stop
+
+commit 2c3edf93feffcd23b035e3eefbbf6c96a0a7660d
+Author: root <root@zkz-desktop.(none)>
+Date:   Wed Mar 23 14:46:30 2011 +0800
+
+    js refresh
+
+commit 11c3da0af3d0cd2f6b7062b4ac48bbf8bccb691d
+Author: root <root@zkz-desktop.(none)>
+Date:   Wed Mar 23 14:44:27 2011 +0800
+
+    js refresh
+
+commit 43416d62271c053dc18936c27d71babefc1ee2df
+Merge: 7365978 88b342c
+Author: root <root@zkz-desktop.(none)>
+Date:   Tue Mar 22 14:12:45 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 88b342c06d57518fc69a317e7ae11e0db751ef26
+Author: root <root@zkz-desktop.(none)>
+Date:   Tue Mar 22 14:12:31 2011 +0800
+
+    sth
+
+commit a989879e3e214eaeae16997d9aad0fb41ce4e9b3
+Author: root <root@zkz-desktop.(none)>
+Date:   Tue Mar 22 12:36:52 2011 +0800
+
+    debug
+
+commit 73659784badca079c1613641142c29bed3e9b37f
+Merge: 7d2af48 7401426
+Author: root <root@zkz-desktop.(none)>
+Date:   Mon Mar 21 14:49:17 2011 +0800
+
+    merge ua 汉化
+
+commit 7401426267a9d64a5e9c1f9685ddc7d0e6080e3d
+Author: root <root@zkz-desktop.(none)>
+Date:   Mon Mar 21 14:30:12 2011 +0800
+
+    sth
+
+commit 0b8c140b7b7b27e3c531d848b36c3c31d6520f9f
+Author: root <root@zkz-desktop.(none)>
+Date:   Mon Mar 21 13:36:38 2011 +0800
+
+    汉化
+
+commit 7d2af48623ac5aaa9be131bd09dd3e753cd5baeb
+Merge: 6a61821 2c3ac42
+Author: gj <happydgj@gmail.com>
+Date:   Fri Mar 18 12:02:14 2011 +0800
+
+    Merge branch 'test' of http://192.168.1.2/uss into test
+
+commit 6a6182119fc7d8dfde385287428654347049d23d
+Author: gj <happydgj@gmail.com>
+Date:   Fri Mar 18 12:02:09 2011 +0800
+
+    yfs_delete_master
+
+commit 2c3ac42aab75679d8aa4aad8cc30dea2084802a6
+Merge: 53c9c6d a63f5da
+Author: root <root@zkz-desktop.(none)>
+Date:   Fri Mar 18 10:50:56 2011 +0800
+
+    translate
+
+commit a63f5da4e6793c8d87b4e844011f189c106970f3
+Author: root <root@zkz-desktop.(none)>
+Date:   Fri Mar 18 10:48:36 2011 +0800
+
+    translate
+
+commit 9e7c53ec3a712d94f74e7465f7dbe617f3e4a361
+Author: root <root@zkz-desktop.(none)>
+Date:   Thu Mar 17 18:44:19 2011 +0800
+
+    translate
+
+commit be5c159166401b5a7debf78519e7ce1c4393ed26
+Author: root <root@zkz-desktop.(none)>
+Date:   Thu Mar 17 18:14:16 2011 +0800
+
+    test system
+
+commit 53c9c6df167ba5ffbb593bfffb61e339debbe47b
+Author: gj <happydgj@gmail.com>
+Date:   Thu Mar 17 18:07:10 2011 +0800
+
+    cluster deploy/check
+
+commit 2f6f7b17c1103f5868f97aece6c2bcfd07876019
+Author: gj <happydgj@gmail.com>
+Date:   Wed Mar 16 11:18:10 2011 +0800
+
+    set_mds_c60
+
+commit 1fe0095b0fa67c61bf94608a50b5cb76ced1cfaa
+Author: root <root@zkz-desktop.(none)>
+Date:   Tue Mar 15 18:46:33 2011 +0800
+
+    set_mds_c60
+
+commit 0c05433e7c5850017aa2d7b14b8c5ffea8b8b6ae
+Author: root <root@zkz-desktop.(none)>
+Date:   Mon Mar 14 16:56:35 2011 +0800
+
+    node_join/node_exit
+
+commit 46f5f0e6ee541dae4c4b7e4e19c6dac3754bcbd5
+Author: gj <happydgj@gmail.com>
+Date:   Thu Mar 10 14:56:42 2011 +0800
+
+    rsync
+
+commit bdc25cb1884ee466d96c0951f3f02ad15b964b8e
+Merge: 7c51870 435c71e
+Author: gj <happydgj@gmail.com>
+Date:   Mon Mar 7 17:02:35 2011 +0800
+
+    Merge branch 'dev' into test
+
+commit 435c71e460df0f2fb96ede5f63e7ed2236bedda0
+Author: gj <happydgj@gmail.com>
+Date:   Mon Mar 7 17:02:25 2011 +0800
+
+    pm_update_cluster
+
+commit 7c51870c70131c3f93a47abcc235c7c239621782
+Author: gj <happydgj@gmail.com>
+Date:   Thu Mar 3 16:54:46 2011 +0800
+
+    db-4.8
+
+commit 2dfb21766a9fc08db205389cf7de84a480e08cdf
+Author: gj <happydgj@gmail.com>
+Date:   Thu Mar 3 11:59:31 2011 +0800
+
+    make install
+
+commit 69be9523f2f0d9fde2f57f5e67cf8d2fd00856a2
+Author: root <root@zkz-desktop.(none)>
+Date:   Thu Mar 3 11:56:10 2011 +0800
+
+    chongzhuang
+
+commit 62a8d538eb4059949553e45cb0b22e2b2f88437f
+Author: gj <happydgj@gmail.com>
+Date:   Thu Mar 3 10:44:20 2011 +0800
+
+    edog_yfs:stopped
+
+commit a858b8665582b3623c372d2bcaa80182c7bd1898
+Author: gj <happydgj@gmail.com>
+Date:   Thu Mar 3 10:37:36 2011 +0800
+
+    format
+
+commit 6e2087b0b828775d8ff65f852518c17b78c28c5b
+Author: gj <happydgj@gmail.com>
+Date:   Wed Mar 2 16:49:40 2011 +0800
+
+    df
+
+commit d201274f35883342fcb454421abd6fc4be6fecd6
+Merge: 0cb9696 d4fee21
+Author: gj <happydgj@gmail.com>
+Date:   Tue Mar 1 16:10:43 2011 +0800
+
+    merge test
+
+commit d4fee21b0182791f9e5020da283e8afd3d8caa01
+Author: gj <happydgj@gmail.com>
+Date:   Tue Mar 1 16:05:59 2011 +0800
+
+    os_cmd_no_report
+
+commit 0cb969660aaa2f17cc0f504a73ee66d54329134e
+Author: gj <happydgj@gmail.com>
+Date:   Tue Mar 1 15:56:33 2011 +0800
+
+    pm_update_sql
+
+commit b6be8e0aef3a393bfccabdf10710614e93a966cf
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Mar 1 15:52:31 2011 +0800
+
+    node -> joined/exited
+
+commit ef670d8e3c428911fd710f834c3868a6eaf6e40d
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Mar 1 15:45:52 2011 +0800
+
+    rm tmp
+
+commit a3066f75c7008c8a8baf87edb6471f838dff5df6
+Author: gj <happydgj@gmail.com>
+Date:   Mon Feb 28 17:52:16 2011 +0800
+
+    - remove xml-related
+    - {Ip, Type, N} -> #service_id{}
+
+commit b4bd7dbc8e55a5d571e3e6a04dff482159308a7c
+Author: gj <happydgj@gmail.com>
+Date:   Mon Feb 28 16:29:08 2011 +0800
+
+    edog_yfs as a slave process
+
+commit 4915d26a0c6245a2eb757e7fdac71b351443a241
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 28 11:18:13 2011 +0800
+
+    ua_deployment
+
+commit a90b058e0d493ce2c7a6ce2162041a8ed729880f
+Merge: 69a5490 7b4653f
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 26 11:48:38 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 7b4653f8e1e8450227848c8fdfc8a74eda06cc4b
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 26 11:48:13 2011 +0800
+
+    ear>srvc \n
+
+commit 69a54900f8e5e01b4cc45e9c19346bf8b9f834aa
+Merge: a2b4b7c 4eb6364
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 26 11:42:16 2011 +0800
+
+    sth
+
+commit 4eb6364c9b048d35a6a55d260b9b02764fc15757
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 26 11:40:28 2011 +0800
+
+    status:unavailable
+
+commit 52ba05a69493f4f24e00727ae33dfdc111d39dec
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 25 17:58:54 2011 +0800
+
+    sth
+
+commit a2b4b7c930f73dc4f57073360e8e35440bfd52cb
+Merge: 160e210 96b2fd5
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 25 17:06:16 2011 +0800
+
+    Merge branch 'test' of http://192.168.1.2/uss into test
+
+commit 160e210148337609eb6deb359bc0304c031338d6
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 25 17:06:05 2011 +0800
+
+    clear pm info when unavailable
+
+commit 080c721b5f27bd72646caefd4a3aff136ece2879
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 25 16:50:01 2011 +0800
+
+    stage check
+
+commit 96b2fd5b2e2650fc7b99bffeb567aa32791f13be
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 25 13:56:54 2011 +0800
+
+    merge ua:sth
+
+commit 20e0692658b985635fcd5372c81f56656c42edf5
+Merge: b8f1d0f b31489c
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 25 13:56:31 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit b31489cb603807f5285e4222307f9b23652aa13a
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 25 13:56:07 2011 +0800
+
+    sth
+
+commit ad86d61a4f02cc61043f08b628947ffef82ada7b
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 25 11:57:29 2011 +0800
+
+    moni
+
+commit 49bf43a65fc51598d9151996119bae8ff0bb2b42
+Merge: c6a12a9 b9adf70
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 25 09:48:58 2011 +0800
+
+    Merge branch 'test' into dev
+
+commit cb92677724d5decd3704332b65197d13e8638bf9
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 24 20:27:54 2011 +0800
+
+    glob_load/node_count
+
+commit 04a89caed495b21dc5491f646b0c429c29680b2e
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 24 17:39:31 2011 +0800
+
+    sth
+
+commit b8f1d0f96e0ec3766df59795477425654d0fe0ac
+Merge: b9adf70 c0d49c1
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 24 17:30:49 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit c0d49c18865efa2a15b8ab2a8a92032c1f8f15a0
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 24 17:30:31 2011 +0800
+
+    rrdtool
+
+commit 8795941ab218ed8e6a4985bb822e7c1f201a565f
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 24 17:24:06 2011 +0800
+
+    rrdtool
+
+commit 3cfd1101c462be1e8d05f070f7468f585ec681cf
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 24 17:15:20 2011 +0800
+
+    sth
+
+commit 24a3f1e8bdc764f206c72b61d542d6049c8a9145
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 24 17:13:34 2011 +0800
+
+    rrdtool
+
+commit 35f1d898ac5f136c647f124b78f8b18ace242078
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 24 14:39:46 2011 +0800
+
+    rrdtool
+
+commit aa3227f4c406cbb8f85728daf28f78c279f6d174
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 24 14:03:18 2011 +0800
+
+    rrdtool
+
+commit f3359b2ecefd7aeb32d236ac3502c77b99fd4409
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 24 11:01:42 2011 +0800
+
+    sth
+
+commit 44191b271d84505c4e5e0aa9ea768f0eca8d1f8c
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 24 11:01:33 2011 +0800
+
+    sth
+
+commit abda7a01698015969f4653cca5ba0c40a0b011b7
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 24 10:26:42 2011 +0800
+
+    sth
+
+commit b9adf709745468ef8ae07a02f35532ef49f274a3
+Author: gj <happydgj@gmail.com>
+Date:   Wed Feb 23 18:13:52 2011 +0800
+
+    edog_mnesia:select
+
+commit f8bed3f70d0f81d7f3394ae72f5b2f34b757f608
+Author: gj <happydgj@gmail.com>
+Date:   Wed Feb 23 17:55:27 2011 +0800
+
+    pm_to_node
+
+commit c6a12a96d33fe88f9f49b0735a099f5fe336b4d3
+Merge: fa95510 a3da8d6
+Author: gj <happydgj@gmail.com>
+Date:   Wed Feb 23 17:50:42 2011 +0800
+
+    merge dev
+
+commit a3da8d6fd723af85acc266e8db6bd6e4fe1d4ecf
+Author: gj <happydgj@gmail.com>
+Date:   Wed Feb 23 17:46:06 2011 +0800
+
+    add pm_t:cluster
+
+commit cb0857d4a516d1fe0b100e74c228d89f16692c6f
+Merge: 3089560 0759fdf
+Author: gj <happydgj@gmail.com>
+Date:   Wed Feb 23 17:23:30 2011 +0800
+
+    Merge branch 'test' of http://192.168.1.2/uss into test
+
+commit 3089560e88fa4ccbd33c932e8cae4dd0cc6b1cdb
+Author: gj <happydgj@gmail.com>
+Date:   Wed Feb 23 17:23:22 2011 +0800
+
+    check_pm
+
+commit 0759fdffdb99ae80352fa80af78bdecee8c45cb5
+Merge: 2b4b31f 68c6c0e
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Feb 23 17:11:04 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 68c6c0e61891fab8fbda17d5392c0658c8803feb
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Feb 23 17:08:40 2011 +0800
+
+    debug rack_mng
+
+commit 2b4b31f9cffef6f2bfab98d85f11ba3ce2aaa00f
+Merge: b826ed5 8af8eb3
+Author: gj <happydgj@gmail.com>
+Date:   Wed Feb 23 17:03:11 2011 +0800
+
+    Merge branch 'test' of http://192.168.1.2/uss into test
+
+commit b826ed5885efeeb069530936f0f9062bded04bb6
+Author: gj <happydgj@gmail.com>
+Date:   Wed Feb 23 17:03:03 2011 +0800
+
+    network rx_bytes
+
+commit 8af8eb3706ef0a592d4e1a257313a7790f8d14cf
+Merge: 46c87e1 bec4835
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Feb 23 16:59:53 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit bec483554c9725b68817ae7da22202f0d11aea6b
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Feb 23 16:59:14 2011 +0800
+
+    debug rack_mng
+
+commit 46c87e1736583bfdaec7d6e2d83e4ff227a97fbf
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Feb 23 15:58:25 2011 +0800
+
+    merge ua:debug rack_mng, notice->lowlight
+
+commit 2c9e7f45891cb997a1259ab1d7d4175ab3e73fc5
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Feb 23 15:57:10 2011 +0800
+
+    debug rack_mng;notice->lowlight
+
+commit fa95510c3838b201e0d17d16ed4d52e858efcb7f
+Author: gj <happydgj@gmail.com>
+Date:   Wed Feb 23 15:26:40 2011 +0800
+
+    new flag
+
+commit f07dedbc49b3e752531b70fad252bf57ceaf8b0c
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Feb 22 22:53:36 2011 +0800
+
+    merge ua rack_del/node_del
+
+commit ab903e91dc97d1de58874e2b902fb27c2862f5f2
+Merge: f93eeff 3dabbec
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Feb 22 22:52:41 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 3dabbec8945e35e8211e9d6fc2cec0e8c211af60
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Feb 22 22:50:57 2011 +0800
+
+    sth
+
+commit 3dc7298c2d22fc066e52c6bedee0769e65543c07
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Feb 22 22:10:50 2011 +0800
+
+    node_ctrl_mng_field
+
+commit a8aac7751e620150edbb5b5f7ef67f86428170b5
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Feb 22 20:00:16 2011 +0800
+
+    cluster status
+
+commit f93eeffc71bc3954fb2a78493f159fc438cc0f28
+Author: gj <happydgj@gmail.com>
+Date:   Tue Feb 22 18:41:36 2011 +0800
+
+    cluster virtual table
+
+commit abb9213703339848c16fe6ededb8c398e5504e47
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Feb 22 17:57:54 2011 +0800
+
+    rack_del, node_del
+
+commit 21ad93ea2fea794b340fcd9398ef346f1a82f5dd
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Feb 22 15:42:48 2011 +0800
+
+    sth
+
+commit 9e3642033e575af0c7fa828e605275b9d760623e
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Feb 22 15:37:04 2011 +0800
+
+    sth
+
+commit e7eeff166a95aec2c0aa5890e2a92532be2d2642
+Author: gj <happydgj@gmail.com>
+Date:   Tue Feb 22 15:12:16 2011 +0800
+
+    queue_t
+
+commit d5dc6feb83a790cd20ec0b0e56b6fc8f688dba97
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Feb 22 14:13:16 2011 +0800
+
+    sth
+
+commit a587dba594daf4f62966b8b2db6b982b6ebaae98
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Feb 22 12:11:47 2011 +0800
+
+    sth
+
+commit e3c0877aab5c8585f761e3fed8147afeceba80c5
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Feb 22 10:42:28 2011 +0800
+
+    sth
+
+commit 2be503098ae895b67d2cdb4f1baa63feb4154652
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 22:10:28 2011 +0800
+
+    rrdtool mem used->free
+
+commit 66ce842cffbbe4d86f2a41c285d881101dffb416
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 22:01:15 2011 +0800
+
+    sth
+
+commit 807b6bce655d8b50134349e5ccab5260a75530c3
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 20:36:44 2011 +0800
+
+    sth
+
+commit a9ecc6737465755a0fa75c441a14fce3e9de98df
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 20:18:08 2011 +0800
+
+    sth
+
+commit 504a7481cf8efa08004aa5b57a0144e5d53b7fcb
+Merge: 08a1293 4a1627f
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 17:34:49 2011 +0800
+
+    merge ua
+
+commit 4a1627f42ab8765f786cd9321d7c0fa035903d3d
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 17:33:33 2011 +0800
+
+    sth
+
+commit 72f2624072cd9d7cd57d06e1c286f1121bc07dca
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 17:33:00 2011 +0800
+
+    sth
+
+commit 965ee7d14c0efcb204b74b71d379c23ca491be62
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 17:30:20 2011 +0800
+
+    sth
+
+commit b22014d83182b98fde8d2590385eb0bc3a30b003
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 17:30:13 2011 +0800
+
+    sth
+
+commit 08a12931200a2d5d613c516b05dfad7368024d0a
+Merge: 10e647f 579b01a
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 15:55:16 2011 +0800
+
+    merge ua
+
+commit 579b01a0faab22b7e8633bc8f2de0d6e3a6f9624
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 15:54:54 2011 +0800
+
+    new rack 连续添加的问题
+
+commit 10e647f307f65db3eb51645c607c3b3feca23ed3
+Merge: ca5721a 6992d3e
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 15:13:10 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 6992d3e6cda74b8ed19647d58772b425646504a5
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 15:13:04 2011 +0800
+
+    README
+
+commit ca5721ac7979a5e173d2420bc1b8dfb5f6944381
+Merge: eeaba26 68c83a3
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 15:09:22 2011 +0800
+
+    merge ua README,requirements
+
+commit 68c83a366246797124bd622d048d2a1ab2bb0888
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 21 15:07:16 2011 +0800
+
+    README, requirements
+
+commit eeaba2667aae33c6c0d575fe4398ccf230516773
+Author: gj <happydgj@gmail.com>
+Date:   Mon Feb 21 14:22:33 2011 +0800
+
+    et
+
+commit d8e8e68ac98aa6bec4c98e56a87856f28c16a8c2
+Merge: 6ab5cd6 72afd23
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 21:58:02 2011 +0800
+
+    merge ua
+
+commit 72afd23498c10163ba0e94756d5a4cf7451a51b7
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 21:37:27 2011 +0800
+
+    aysnc mkdirs(/store/log)
+
+commit c144b5b88b4f4fd348f56f3db0710c62c3bc8270
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 21:15:03 2011 +0800
+
+    .gitignore rm async_events
+
+commit d42695f06baefd81d61f4132b153ff1b0e74b88a
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 20:47:47 2011 +0800
+
+    aysnc_events
+
+commit 29f47fc976e78ff53e9b239098a00fd5aac0d127
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 18:57:11 2011 +0800
+
+    aysnc_events
+
+commit 6ab5cd65f75e88bd2e824c3b5b4df43b98ae927d
+Merge: 578d93b 781fe35
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 16:41:33 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 781fe356563de0d68705d674c7c307a709c2f02c
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 16:41:21 2011 +0800
+
+    async_tmp
+
+commit 578d93b75d3294d80f124077cd236ba0b1a57e3e
+Merge: 7ed008b 6f9233f
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 16:18:09 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 6f9233f8665ff72bb53f9cb28b57eac666117603
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 16:17:53 2011 +0800
+
+    disk rrdtool/piechat
+
+commit 7ed008b0ae9d3c4bdfbca0f098159dd55495d593
+Merge: 86fc4d6 7b237db
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 11:57:24 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 7b237db3fff06ddb4eaffb959e84b68eef4bdad9
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 11:57:10 2011 +0800
+
+    if prev_stat==stat:highlight
+
+commit 86fc4d61bbc83a860cedde9ea3db79ad1c98e37d
+Merge: 96cfde4 5434914
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 11:50:57 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 54349149bf024e847cf52ab20513721c4be0b33f
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 11:50:37 2011 +0800
+
+    node_srvc type filter
+
+commit 96cfde429f5b93592a8f0472ef9b4ab2875e2bcb
+Merge: 3cc311d 30ee157
+Author: gj <happydgj@gmail.com>
+Date:   Sat Feb 19 11:14:30 2011 +0800
+
+    Merge branch 'test' of http://192.168.1.2/uss into test
+
+commit 3cc311d7c1776348151789a65ef67a5e19ccbba8
+Author: gj <happydgj@gmail.com>
+Date:   Sat Feb 19 11:14:17 2011 +0800
+
+    event_service
+
+commit 94ae1b5baa63ee5c9df6195fc6f2571763257350
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 10:55:07 2011 +0800
+
+    glob_stat->filesystem/connection
+
+commit 30ee1572c099863bb5a1f3b19edb90e0a8f38e47
+Merge: 892e55c a0d7fbe
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 10:35:26 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit a0d7fbe933042bc47bebc4df0b0afd66fd01b40a
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sat Feb 19 10:35:04 2011 +0800
+
+    filesystem
+
+commit 3ba64e96f39fa13f64d67b356f6fdc1455dc45ca
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 20:50:54 2011 +0800
+
+    srvc
+
+commit 344dafc0a6370b77f3220503e81bc4e81efc7f6a
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 20:40:01 2011 +0800
+
+    filesystem connection
+
+commit 892e55c441bafa7ca45a96e317772303e81ba085
+Merge: be16a9f 0a6684e
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 17:57:31 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 0a6684e3fb1762a349d76ca7afa105caa7949b3c
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 17:56:48 2011 +0800
+
+    node_dtls cpu
+
+commit be16a9f8f01492c7499e08283f4b204021472589
+Merge: f2a4a4f cee3d40
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 17:43:11 2011 +0800
+
+    Merge branch 'test' of http://192.168.1.2/uss into test
+
+commit f2a4a4f22d030c8f9a8451d60fe6a6eb4202fef4
+Merge: c9a239d 08b05c6
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 17:42:28 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 08b05c6b129525ff0230f196d8bd61eac4d47d59
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 17:42:09 2011 +0800
+
+    node_dtls nw
+
+commit cee3d402012a2a3ecd5820ca92ffb5717ba6d450
+Merge: c9a239d 3f1b22b
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 18 17:01:15 2011 +0800
+
+    Merge branch 'dev' into test
+
+commit 3f1b22b28b60dc1348d8994f8fc64da4451bc76e
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 18 17:01:05 2011 +0800
+
+    pm_update_status
+
+commit c9a239da0e9ef2d56b63be38f96e541577bb94b2
+Merge: 6520a03 d841d98
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 15:37:33 2011 +0800
+
+    Merge branch 'test' of http://192.168.1.2/uss into test
+
+commit 6520a03b8a849191c7ee7c02a8957e85f3f76a7c
+Merge: 8ff539c c71be67
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 15:36:53 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 8ff539c79c0c59ee42fb6aec3d4d612e3cf8a970
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 15:36:46 2011 +0800
+
+    modified: .gitignore
+
+commit c71be677e4338715d7c8fb9c1da7fc822d41be08
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 15:34:54 2011 +0800
+
+    git rm ua/store/db/session.db
+
+commit c8f6bacd399b1f938ba2064b96066234c37d867a
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 15:33:56 2011 +0800
+
+    rrdtool thread
+
+commit d841d9849af89079095173f75dba0aeac2c02af5
+Merge: 0e801c7 a6fec09
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 18 14:39:49 2011 +0800
+
+    Merge branch 'test' of http://192.168.1.2/uss into test
+
+commit 0e801c7f9110842f319d3f118e39c9512547da16
+Merge: 1d39289 79db7f6
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 18 14:39:34 2011 +0800
+
+    Merge branch 'dev' into test
+
+commit 79db7f66e6f380e765a4a31227871231e5840255
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 18 14:39:24 2011 +0800
+
+    yfs_update_status
+
+commit 6eecec23f072f6a55ed15ad500e082ab168ef40b
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 14:03:49 2011 +0800
+
+    sth
+
+commit a6fec09ade8fd8e52f04efefa4b233ed3a7d82ff
+Merge: 1d39289 5c13fbe
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 13:40:03 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 5c13fbe354667f0c8a5cc04824769da0a56e938c
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 13:39:47 2011 +0800
+
+    rrdtool
+
+commit 7d5b2b7b7cac474b403fbaca49681ede79c41aae
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 13:32:50 2011 +0800
+
+    rrdtool
+
+commit 7021dd384a90e467e4ac52c0a6e2ca59c47f73d2
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 12:00:11 2011 +0800
+
+    sth
+
+commit c5b1f12410bad83f7c517c1b4a30527765ff2b26
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Feb 18 11:53:18 2011 +0800
+
+    rrdtool
+
+commit 1d39289e10d7b1d23e116a63da3c01d756d3a8a1
+Merge: dc775b8 4943e98
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 18 10:10:30 2011 +0800
+
+    Merge branch 'dev' into test
+
+commit 4943e98cdb3c207eea5b5603f236d830749a8904
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 18 10:10:15 2011 +0800
+
+    cluster_deploy
+
+commit 18d07480683514f7ba8394731e80ee3849758c23
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 17 21:11:03 2011 +0800
+
+    rm rrd_tplt
+
+commit 7e6d2a6f905933e99bb0081f0518714948f9190d
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 17 20:56:04 2011 +0800
+
+    tools.graph
+
+commit 01c4f07257595639afc274df3730090b9d9aba14
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 17 20:39:32 2011 +0800
+
+    use bridge_node
+
+commit d76e9d02a3810760eb0ff21fe103201e8b9fee65
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 17 20:35:28 2011 +0800
+
+    grapher
+
+commit a7dfe93f2e806ec48b213ec56285e5f0964b7d09
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 17 20:20:09 2011 +0800
+
+    updater
+
+commit c2f35352354fa51376f37cd6d8924545d2b7da40
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 17 19:46:21 2011 +0800
+
+    sth
+
+commit 50f2df937dff1f0d9cca625d5bceff756ca6d0e5
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 17 17:29:03 2011 +0800
+
+    sth
+
+commit bd586bf348d5aaa7c77b70afb300bf6a04d17444
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 17 16:44:05 2011 +0800
+
+    node_dtls
+
+commit 93798f1022878658860129d5a0c189880751b039
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 17 16:42:01 2011 +0800
+
+    node_dtls
+
+commit de8c8030dae12a41963d36dcd9c63862c67302e6
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 17 16:18:28 2011 +0800
+
+    sth
+
+commit dea4b2de9c546e279803689383e7d5df20579b34
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 17 15:30:34 2011 +0800
+
+    sth
+
+commit b0265cd291c2eea333597cdc38ee37917bd5b8c3
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 17 15:26:05 2011 +0800
+
+    sth
+
+commit a385a2abcbbeef1e25f8de4d80c4aa096c0b9f2c
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Feb 17 15:15:44 2011 +0800
+
+    sth
+
+commit aab6572f6ad63d0f80b05f1e3be1e33b116a75cb
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Feb 16 22:04:30 2011 +0800
+
+    node_rrd
+
+commit 3afe281d8960762ae81fb0c19c3bf1d321bcf51c
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Feb 16 21:07:28 2011 +0800
+
+    rrdtool
+
+commit dc775b8a886f16d54422e0c20822d93d8d701924
+Merge: 21d500d 466dd2e
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Feb 16 18:03:30 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 466dd2ed6943167a75848b8ca50eb808614df107
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Feb 16 18:03:04 2011 +0800
+
+    sth
+
+commit c936ad663e14ffed327f477251f2f05f03e9e109
+Author: gj <happydgj@gmail.com>
+Date:   Wed Feb 16 17:04:03 2011 +0800
+
+    mail.py
+
+commit 5a258626d0fcb52624ab2c706e1b9acc7f828bc2
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Feb 16 14:03:31 2011 +0800
+
+    sth
+
+commit 36925ab943a09412cfa52a6eb89464abfc639c4b
+Author: gj <happydgj@gmail.com>
+Date:   Wed Feb 16 12:55:37 2011 +0800
+
+    move to /sysy/yfs/ussadmin
+
+commit a33e2d058c689ac13734f5c547d2359fd8d870fb
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Feb 15 19:52:18 2011 +0800
+
+    sth
+
+commit 21d500d431980230cb0bd7ee8f9bafe15a8d099b
+Author: gj <happydgj@gmail.com>
+Date:   Tue Feb 15 16:48:24 2011 +0800
+
+    cluster_deploy
+
+commit df2932048e3ae65610c0fd905ab3e3d679e6190e
+Author: gj <happydgj@gmail.com>
+Date:   Tue Feb 15 11:53:21 2011 +0800
+
+    select * from service where (ip=xx and type=xx)
+
+commit 0f21e21bc09476b347a7ceef2e41aa8b3576af4b
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 14 20:36:07 2011 +0800
+
+    clean
+
+commit fdb6a6e94be4d12a7a1bae810c80857a8fa0bc63
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 14 20:06:31 2011 +0800
+
+    notfound
+
+commit 383d1e925fa3d675a86d713ca46d41c794c5116c
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 14 17:04:26 2011 +0800
+
+    merge ua and modify ua.conf
+
+commit 98e371e8d021858a16e9b14701d8aa59cfd02470
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 14 17:02:06 2011 +0800
+
+    node list
+
+commit 687cb65fbf71ab63b6b09cc2339e77d8ac8cc486
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 14 16:36:57 2011 +0800
+
+    delete async_events.log
+
+commit 60746f1f40ebe6776665a5ae53de02173faf407c
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 14 16:31:43 2011 +0800
+
+    ua.conf
+
+commit 0714811bcd7ddbbbccde8a24d969e8624be5d934
+Merge: fb58b96 f855414
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 14 16:27:48 2011 +0800
+
+    merge ua sth
+
+commit f8554148f91a90eb84492d29ffb44b19601a4368
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 14 16:26:32 2011 +0800
+
+    mv async files to store/log/
+
+commit fb58b96e7d437932ede4a5d5ae2da96e84e582fb
+Merge: 9c26a32 04f8d91
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 14 16:10:34 2011 +0800
+
+    Merge branch 'test' of http://192.168.1.2/uss into test
+
+commit 9c26a32ecbbc1ddca05239f4a0de00892bea06b2
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 14 16:10:02 2011 +0800
+
+    ua.conf->edog_host
+
+commit d17eaf61465dd099050452c26245b8a815e425d6
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 14 15:57:53 2011 +0800
+
+    rack_mng
+
+commit b4c518145d10a59d60fe87067f55aec27c9c3ead
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Feb 14 14:55:02 2011 +0800
+
+    rack_mng
+
+commit 04f8d91f4f26297b1c2136e5a4ddde0c2e4fe4d6
+Author: gj <happydgj@gmail.com>
+Date:   Mon Feb 14 11:01:32 2011 +0800
+
+    ussadmin
+
+commit 6d037ff8c9f6503bceae7d2a9dcf7d593d62703f
+Author: gj <happydgj@gmail.com>
+Date:   Sat Feb 12 09:32:41 2011 +0800
+
+    ebin/__include_me
+
+commit 1eb0f8ef8a1c9a878af41c97a91f7c9e9508ee77
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 11 18:09:06 2011 +0800
+
+    9501 -- 9601
+
+commit 3794f74e4babd224cd24b2fa91b0b4f6e33350a7
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 11 18:02:33 2011 +0800
+
+    rename edog dir to ussadmin
+
+commit 0d58f3d2cbc8b15b67c840830c04caebf28e01a1
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 11 17:44:40 2011 +0800
+
+    pm
+
+commit ab8749300ab559581744b3fb901192931dd21ef3
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 11 17:35:26 2011 +0800
+
+    ussadmin
+
+commit df097b3438a5635722187567c3ddacd943ea45bf
+Author: gj <happydgj@gmail.com>
+Date:   Fri Feb 11 14:15:51 2011 +0800
+
+    format
+
+commit 0cd5384749cb95d8af4818244bd877250daa71e4
+Author: gj <happydgj@gmail.com>
+Date:   Sat Jan 29 10:52:41 2011 +0800
+
+    - __skip_me__
+    - is_fas
+
+commit 01627eed874194d11f59a47811e755852cc17921
+Author: gj <happydgj@gmail.com>
+Date:   Fri Jan 28 16:40:21 2011 +0800
+
+    cluster ops
+
+commit 85d7a4e0ff5a7094bf0b1233ddcd7471263f4a04
+Author: gj <happydgj@gmail.com>
+Date:   Fri Jan 28 15:34:31 2011 +0800
+
+    edog_slaves:EVENT
+
+commit 806190dbaf29347ed32ab008a0f9b674b242450b
+Author: gj <happydgj@gmail.com>
+Date:   Fri Jan 28 13:53:21 2011 +0800
+
+    event_service
+
+commit d5dba28f689af2005288736fd7b104b2052cdfe1
+Merge: 10fa81d 97b1595
+Author: gj <happydgj@gmail.com>
+Date:   Fri Jan 28 10:58:50 2011 +0800
+
+    Merge branch 'test' of http://192.168.1.2/uss into test
+
+commit 10fa81d2c9dd1eb1111a994c0bb9f973de66fb00
+Author: gj <happydgj@gmail.com>
+Date:   Fri Jan 28 10:58:45 2011 +0800
+
+    INSTALL.otl
+
+commit 97b1595e309707b5c5616fc4e0550a631094e719
+Merge: 2a92586 9e1423e
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Jan 28 10:39:29 2011 +0800
+
+    Merge branch 'test' of http://192.168.1.2/uss into test
+
+commit 2a925864e9c3ea4ebe9715b97aead6c5f01f0688
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 22:38:16 2011 +0800
+
+    merge ua
+
+commit 59dd1aacef0991ffc204f97a628e28a22f071079
+Merge: 9f15dc9 940c163
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 22:35:57 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 940c16326018e6673d0150227b2c838c5109a3d2
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 22:35:06 2011 +0800
+
+    async
+
+commit de278a4612067e4654d2eebc6b6b58d661353b2f
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 22:21:02 2011 +0800
+
+    current
+
+commit 5eaf989ea4f44f68ba2ce7a8d98465a5674a2a55
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 22:19:26 2011 +0800
+
+    async
+
+commit 9e1423ee762331a3dd151a78cc3de21d7c16984a
+Author: gj <happydgj@gmail.com>
+Date:   Thu Jan 27 22:16:00 2011 +0800
+
+    after_deploy
+
+commit 9f15dc98878bea39a67d85d4a02c25b4b2d114e7
+Merge: e71d455 f080d33
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 19:53:23 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit f080d338cd4b351e72ea1d585d4b0be02ee029d8
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 19:45:56 2011 +0800
+
+    clean
+
+commit e71d455f2208839350de5dbf42f4fe7bfc987d2c
+Merge: ab41b5f 603e8b2
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 19:32:23 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 603e8b2d43a7b87fbac97d46bae088df48550361
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 19:32:01 2011 +0800
+
+    ua.py --> 0.0.0.0
+
+commit ab41b5f89a72e58d6d54be9d7708cf174f022220
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 19:30:02 2011 +0800
+
+    ua.conf->0.0.0.0
+
+commit 3dd0463f808eea10a685291bc779f0e0ee5d7a4e
+Merge: 84ab25b 9a2725f
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 19:29:03 2011 +0800
+
+    Merge branch 'ua' into test
+
+commit 9a2725f0ed24ace73fbe3d6756add2290d99a82b
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 19:28:35 2011 +0800
+
+    sth
+
+commit e1d7116fca47802441943189c7f3a599fa368238
+Author: gj <happydgj@gmail.com>
+Date:   Thu Jan 27 18:53:38 2011 +0800
+
+    deploy
+
+commit 01d28e7e16d400efd42bfff97a6a7cafc06c3aed
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 18:53:38 2011 +0800
+
+    reslt:empty
+
+commit 247f9b416b63ab228bbfd758c97cb2397b122f07
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 15:02:08 2011 +0800
+
+    font
+
+commit 84ab25ba865db89d59b4753ff3f717e58ccff54a
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 14:39:25 2011 +0800
+
+    ua reinit
+
+commit 57975e42d297724041cbe753b2e8738b1e1411a7
+Merge: 934e520 7f94820
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 14:38:52 2011 +0800
+
+    sth
+
+commit 7f94820727df16314471fe66bee62a51360db174
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 14:35:45 2011 +0800
+
+    sth
+
+commit 934e520e052e4f4e1827533166cf086db47d60f4
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 12:49:49 2011 +0800
+
+    font
+
+commit 2fca6ca7c5bb779a860acbc8fc22568d1a588c4c
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 12:14:11 2011 +0800
+
+    sth
+
+commit 6fc79a7a7891d8262f7a843c7cef215d2ee5d7b4
+Merge: 7c869fa c934e2e
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 12:11:35 2011 +0800
+
+    Merge branch 'test' of http://192.168.1.2/uss into test
+
+commit 7c869fa34b0304885d4fa46456994e87a694806d
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 12:10:50 2011 +0800
+
+    rm paramiko
+
+commit c934e2e22b7a1bd831faaf936698e91f79774016
+Author: gj <happydgj@gmail.com>
+Date:   Thu Jan 27 12:08:29 2011 +0800
+
+    make nif
+
+commit 4119bbdeccd58b71e6c8dd31be96d521aac73a25
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 27 12:02:48 2011 +0800
+
+    rm paramiko, pexpect
+
+commit 9382c8d92222812df347f8a0daec5f9fdcfde4e1
+Merge: a71ecb7 4c73ea0
+Author: gj <happydgj@gmail.com>
+Date:   Thu Jan 27 10:26:36 2011 +0800
+
+    merge ua
+
+commit 43ae58f7d11bc1a4a46c5aa8596b6693593f58ee
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Jan 26 23:32:13 2011 +0800
+
+    clean
+
+commit 61459a54c018c2e991581b7e3a5fc70cb3c88deb
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Jan 26 23:30:44 2011 +0800
+
+    clean for kupan-1
+
+commit 4c73ea00e2ab955f123ce8633b099e205a98c8ef
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Jan 26 23:16:21 2011 +0800
+
+    node-srvc
+
+commit a71ecb74ef5194a6ee4f5347a5779b8e40108f67
+Author: gj <happydgj@gmail.com>
+Date:   Wed Jan 26 16:30:23 2011 +0800
+
+    event
+
+commit fcbffa874363fce4accfd1ca19bb0d875ce5ca85
+Merge: 7f58275 6fb9b9c
+Author: gj <happydgj@gmail.com>
+Date:   Wed Jan 26 13:56:31 2011 +0800
+
+    merge ua
+
+commit 2963a2e04046750516cca235a19ed77d0e15b286
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Jan 26 13:56:25 2011 +0800
+
+    sth
+
+commit 7f58275eab156eff70be391a6c8ab1b0abc942e1
+Author: gj <happydgj@gmail.com>
+Date:   Wed Jan 26 13:51:47 2011 +0800
+
+    yfs_start/yfs_stop
+
+commit ca17e394c77490612c46655cb13dfaed2eb6e1c2
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Jan 25 21:13:30 2011 +0800
+
+    func_moni
+
+commit 6328030065adde1e607bdbc4775cc40edaebf51e
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Jan 25 19:34:47 2011 +0800
+
+    clean
+
+commit f43365ecf31d8fa0219d2ef49f9d9c7576df1e11
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Jan 25 19:29:40 2011 +0800
+
+    sth
+
+commit f0c54c69250f80520c6e0155614f8ec04f17fe4c
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Jan 24 19:25:24 2011 +0800
+
+    glob_status
+
+commit 04ceca94cebc4d8b41acbce5bc6352083c2a43ea
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Jan 24 12:55:35 2011 +0800
+
+    rrdtool
+
+commit 88e9a720f26fdcebf9dfc4cb88baaaa0189a3fce
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sun Jan 23 22:49:42 2011 +0800
+
+    rrdtool
+
+commit b871e9cc94b1be3fb865d28b80db4271baec5b80
+Author: gj <happydgj@gmail.com>
+Date:   Sun Jan 23 15:06:48 2011 +0800
+
+    dev
+
+commit 6fb9b9cb6a783117f97e6a535a86756b0f167c73
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Jan 21 20:39:41 2011 +0800
+
+    node
+
+commit 9b56016fe38a282b8cc172802ad0736900ccbb2a
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Jan 21 16:53:39 2011 +0800
+
+    node
+
+commit e8a984ec4e035805495ae59b81cef8a33fc38850
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Jan 19 22:03:20 2011 +0800
+
+    node->list/dtls
+
+commit fad25093572ed5c1ae79056863a38abbd16c65d0
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Jan 19 17:54:05 2011 +0800
+
+    node->list/dtls
+
+commit 20a1e79a9505a765bc1e52607995a99583901e0f
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Jan 19 16:26:48 2011 +0800
+
+    NodeOpt-->ListView
+
+commit 80cfe06da81ec658620fd4ad0071ed18b17dc282
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Jan 19 13:31:52 2011 +0800
+
+    rest/sql.py
+
+commit 442d0cd0ade3b63f65bf906a71560b5e7a1e15af
+Author: gj <happydgj@gmail.com>
+Date:   Wed Jan 19 11:31:59 2011 +0800
+
+    tu ua
+
+commit 8f7ef330e2e9fac3105f4b3ad99aa2b8e97ff6ca
+Author: gj <happydgj@gmail.com>
+Date:   Mon Jan 17 18:18:09 2011 +0800
+
+    gen.sh
+
+commit e4c5ef40ddd0caad4063ac3017e21dbf828a256e
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Jan 17 17:35:25 2011 +0800
+
+    NodeOpt
+
+commit d9152787c38216dd876ec370d5914c8464fa8943
+Author: gj <happydgj@gmail.com>
+Date:   Mon Jan 17 15:50:35 2011 +0800
+
+    rm conf/cluster.xml
+
+commit cd93bb39ca3e34746f84e87ca86b071f1dcc9b3b
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Jan 14 20:06:02 2011 +0800
+
+    sth
+
+commit ed00339c536054c0d869655aa96c2f6e4e343895
+Author: gj <happydgj@gmail.com>
+Date:   Fri Jan 14 18:56:37 2011 +0800
+
+    pm_info
+
+commit c6c0c552b12afc0915b234942afb3b83605faeeb
+Author: gj <happydgj@gmail.com>
+Date:   Thu Jan 13 18:37:24 2011 +0800
+
+    decode/encode
+
+commit df3ff90e8a8e36a6e54dde47c758da0e1d967f94
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 13 18:02:30 2011 +0800
+
+    NodeOpt
+
+commit 9909187084a2933af9514992a8f0d0b4fa0348be
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 13 16:19:02 2011 +0800
+
+    NodeOpt
+
+commit b24cea002a5325fb487e7927a8e6d789ab40efa3
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Jan 13 13:59:00 2011 +0800
+
+    sth
+
+commit 528d395271d9ab2898b975573ed2138f9d9cb924
+Author: gj <happydgj@gmail.com>
+Date:   Wed Jan 12 18:20:14 2011 +0800
+
+    README.otl
+
+commit 8687d166404e2f36ffe222f5a7bb6261a7ebde9e
+Author: gj <happydgj@gmail.com>
+Date:   Wed Jan 12 18:19:53 2011 +0800
+
+    README.otl
+
+commit 5356af0702470238d2390fa12b60a94214d8052a
+Author: gj <happydgj@gmail.com>
+Date:   Wed Jan 12 13:00:09 2011 +0800
+
+    test
+
+commit 8331bf33eb96eefc00ced194734ed237012c3d0a
+Author: gj <happydgj@gmail.com>
+Date:   Tue Jan 11 17:03:05 2011 +0800
+
+    opt_
+
+commit 6379cb9c850a3361f5e370d72856a377776cfa8e
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Jan 11 15:00:06 2011 +0800
+
+    delete pyc
+
+commit bd1419d6e6c52e3cb4b4b8b3d1350bdca4f237e6
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Jan 11 14:41:37 2011 +0800
+
+    sth
+
+commit 466fa72cb11f6d5233259397ada453b586fc4800
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Jan 11 14:37:37 2011 +0800
+
+    sth
+
+commit d6b381df2ac46d2c59b8830acc01a687ae6adc72
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Jan 11 14:28:12 2011 +0800
+
+    sth
+
+commit 1f4e5c0740fc43f0d91bec67cd2e6f7f4806acdc
+Author: gj <happydgj@gmail.com>
+Date:   Tue Jan 11 14:13:32 2011 +0800
+
+    switch to ua
+
+commit d4b59ed7dd5b871de9eaa34830b8a42fc78e6a12
+Author: gj <happydgj@gmail.com>
+Date:   Mon Jan 10 16:30:21 2011 +0800
+
+     - edog_pm:cluster_status
+     - edog_mnesia:p_check_cluster_before_start
+     - etc.
+
+commit e23cdb0d4fdc6b3bbc91c94aa44025e3d570621a
+Author: gj <happydgj@gmail.com>
+Date:   Fri Jan 7 18:10:15 2011 +0800
+
+    yfs_update
+
+commit a994cb6c5873598ce9ef3ac9e5dfc35b0feef873
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Jan 7 13:58:37 2011 +0800
+
+    sth
+
+commit 8fd04b65663b22b09982cf496d4eae195304f4cb
+Author: gj <happydgj@gmail.com>
+Date:   Thu Jan 6 18:16:28 2011 +0800
+
+    edog_pm added
+
+commit 2383a671ff955483c87f99af318e56d8a76b2836
+Author: gj <happydgj@gmail.com>
+Date:   Thu Jan 6 15:26:53 2011 +0800
+
+    README
+
+commit 87193e56ebcabe5a17ba8f06e0eb3be58584d820
+Author: gj <happydgj@gmail.com>
+Date:   Wed Jan 5 17:44:15 2011 +0800
+
+    json test
+
+commit d96336fe68bfe796839664adecc2c0935f27f086
+Author: gj <happydgj@gmail.com>
+Date:   Tue Jan 4 09:54:13 2011 +0800
+
+    json
+
+commit 541950905b44a5cd1ca30ec9cf7102d16371d765
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Dec 31 15:47:18 2010 +0800
+
+    sth
+
+commit 91a6e3076787ced6e9ef0f3ab426c5691af7a1e4
+Author: gj <happydgj@gmail.com>
+Date:   Fri Dec 31 14:40:33 2010 +0800
+
+    i'll be back
+
+commit fe900d80366a73959193fce7cf89e5e534bc1ea9
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Dec 28 11:26:31 2010 +0800
+
+    sth
+
+commit e8824099306d4a152cc671383d43c5b1ccdddfab
+Author: gj <happydgj@gmail.com>
+Date:   Fri Dec 24 18:10:56 2010 +0800
+
+    json
+
+commit 8085a1df4576910e1a71383628d29832de1cda34
+Author: gj <happydgj@gmail.com>
+Date:   Thu Dec 23 16:50:10 2010 +0800
+
+    json
+
+commit b48e3cc0814deec0eec30dc5a3e6d455d8c587c6
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Dec 23 14:36:21 2010 +0800
+
+    sth
+
+commit 0a78750c89159f7cd05b006ed69799d3b4dbd00c
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Dec 22 19:20:26 2010 +0800
+
+    rest
+
+commit e65083030543ad66a34d3d5796bee5738e575a11
+Author: gj <happydgj@gmail.com>
+Date:   Wed Dec 22 18:28:07 2010 +0800
+
+    30% test coverage
+
+commit c96cc933c5e62210889d7a4916a76517cc073290
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Dec 22 15:33:10 2010 +0800
+
+    sth
+
+commit 0af7c8d3ab6eb1cdbbfc9cd2f681c2853f15a2f3
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Dec 22 14:09:29 2010 +0800
+
+    rest_moni
+
+commit ed33438fee53e969756cf77efce7324c04608638
+Author: gj <happydgj@gmail.com>
+Date:   Tue Dec 21 18:13:38 2010 +0800
+
+    start/stop
+
+commit edbba2f53a174960879f5ee7dfd28a2ccffa4722
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Dec 21 13:46:44 2010 +0800
+
+    dtls
+
+commit 0a6b862fb3d576b336243fceda4871a53f92aae0
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Dec 20 20:24:37 2010 +0800
+
+    sth
+
+commit 2f189afd4c6bcc11c6e6d9f24fee04674bf357d6
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Dec 20 12:28:24 2010 +0800
+
+    node management
+
+commit dea660b9d44e2a39891f7af55f9291560a6dda1c
+Author: gj <happydgj@gmail.com>
+Date:   Mon Dec 20 09:39:38 2010 +0800
+
+    ct
+
+commit 84a2c815f1b89764c8b2aab6f7602cb7e08064b1
+Author: gj <happydgj@gmail.com>
+Date:   Fri Dec 17 18:20:53 2010 +0800
+
+    nif
+
+commit 87869afdb510dac61e8d795c987d5f1bcbb80423
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Dec 17 11:24:29 2010 +0800
+
+    sth
+
+commit bdcc43ef6a5a182e24eab7bd819106e6b81bac19
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Dec 17 10:51:54 2010 +0800
+
+    rm admin
+
+commit ef0a904fd3feb626c1e42e0a792c1c603e1380c5
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Dec 16 19:17:46 2010 +0800
+
+    something
+
+commit ed7becfdd0f49989fece8e0f352bdca547c23bc1
+Author: gj <happydgj@gmail.com>
+Date:   Thu Dec 16 17:00:46 2010 +0800
+
+    TDD
+
+commit 7d70d73f7ac5bea3811907a529f877f5f95d4fef
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Dec 15 21:18:08 2010 +0800
+
+    node_graph, monitoring, control
+
+commit ad19c331054c9462f1bad86d0896e3b3d62d12c5
+Author: gj <happydgj@gmail.com>
+Date:   Wed Dec 15 15:39:52 2010 +0800
+
+    ct
+
+commit 8be0542bd1730db789710e8cbb150bc25ddb85fe
+Author: gj <happydgj@gmail.com>
+Date:   Wed Dec 15 15:09:07 2010 +0800
+
+    from now
+
+commit 8fecaa4975e2348b5e08a137e03d41079d2e096c
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Dec 14 14:59:06 2010 +0800
+
+    something
+
+commit 9591a0b4ee1092a23639797e21fbd9b979cd6a86
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Dec 14 14:49:58 2010 +0800
+
+    user_tree
+
+commit 3cfefa4f3710f5d298c9ab7070d771b6e415f1ef
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Dec 10 18:15:53 2010 +0800
+
+    jsTree
+
+commit 4958f3b8ca8f0089c73cefeab6786fa5d95d98bd
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Dec 10 15:56:27 2010 +0800
+
+    sth
+
+commit 88f40ea324333c9debdd4d56ce75338c6fbb24d6
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Dec 10 15:29:57 2010 +0800
+
+    sth
+
+commit e8ff2eb3ae86e8f43f5d34f4478ea8f805da34fc
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Dec 10 14:19:45 2010 +0800
+
+    something
+
+commit 5d86357e930e4a173d9ab162e84b9395b24d3a58
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Dec 9 23:02:36 2010 +0800
+
+    1209
+
+commit 1c41f867897282f7de3cea98c635d7d17c760694
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Dec 9 14:23:25 2010 +0800
+
+    clean static
+
+commit 50d1d948563da470d1b82ea8f39f041ca16d7ef4
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Dec 9 14:20:43 2010 +0800
+
+    devc_add
+
+commit 4f14c078bea8a8e87fe6cd0c95be6bcf4f2c5b56
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Dec 8 20:43:09 2010 +0800
+
+    dialog_rack_add
+
+commit 92ca8bd2e1de274ba5d49fc20cf3d1531b819ad5
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Wed Dec 8 20:00:35 2010 +0800
+
+    sth
+
+commit b094ba68810f26d336d067e518f37a3901b00d44
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Dec 7 18:31:11 2010 +0800
+
+    add device
+
+commit 26cdb9cff819e2a796bd32096851b98d5877d500
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Dec 7 13:03:34 2010 +0800
+
+    sth
+
+commit 6a94a34ee6312b940ec43ebdbaf82e2fbfd6e8cb
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Tue Dec 7 10:39:46 2010 +0800
+
+    .gitignore
+
+commit 82d1f4e09c9cd0b84ca2581c24bf06d37be1f383
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Mon Dec 6 13:29:59 2010 +0800
+
+    monday
+
+commit 5da02edd593199f432ef78a82d88e35bc537ff94
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Sun Dec 5 21:39:10 2010 +0800
+
+    sunday
+
+commit 327163152c104a4c57cb8fb194949c5a7aa54c51
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Dec 3 21:25:38 2010 +0800
+
+    one day
+
+commit 9298f75e6d8d715cf24c1e1dce8cf70ade8c61b5
+Merge: 8ed047c 19894ad
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Dec 3 21:10:29 2010 +0800
+
+    node
+
+commit 19894ad83561033fafaad91481c3ccc23d69b42a
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Dec 3 17:31:55 2010 +0800
+
+    something
+
+commit 8ed047c4e52b22e682d7db8fc8cb7ede1fe15fb9
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Dec 3 17:18:26 2010 +0800
+
+    something
+
+commit 188fa396ed4308dffafffa2e3f9985f16fc62a3e
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Dec 3 13:00:56 2010 +0800
+
+    rm admin
+
+commit 117c892539643ebe3331552f893cf9d06088b183
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Fri Dec 3 12:55:30 2010 +0800
+
+    node
+
+commit 286b90324c411887d5da41e6b1a7685e19471cdf
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Dec 2 12:11:38 2010 +0800
+
+    del admin
+
+commit a8a6faf1d596b571b799ed808bdeea38e180050b
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Dec 2 11:28:25 2010 +0800
+
+    del admin
+
+commit 16f1a7e2b7e8fff25c6eedf4a3a81099eb1a41f6
+Author: zhengkaizhong <zhengkaizhong@meidisen.com>
+Date:   Thu Dec 2 11:26:43 2010 +0800
+
+    ua
+
+commit 294a07245396abf1abc3bca22be5aa316cea93b4
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Thu Dec 2 09:58:06 2010 +0800
+
+    _
+
+commit c5ac747d9a9db7ce5fa8e4da6213165d38ddf502
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Wed Dec 1 17:33:57 2010 +0800
+
+    对dtls div的显示隐藏的支持
+
+commit 6066ed03bf19d99a9b00b8e62cb77a540a6c920d
+Merge: d5948c2 2a2b8b8
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Wed Dec 1 14:24:00 2010 +0800
+
+    Merge branch 'dev' of http://192.168.1.2/uss into dev
+
+commit d5948c222fa39daa442942a885f3917b78b8f11a
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Wed Dec 1 14:22:28 2010 +0800
+
+    描述node.api
+
+commit 2a2b8b8eb5698dbe54fb8efef1ebdc635b169ba0
+Author: gj <happydgj@gmail.com>
+Date:   Wed Dec 1 11:27:31 2010 +0800
+
+    docs
+
+commit 111a93cc3b5743906c49a82fb1cc3539b58077c2
+Merge: adf4f09 95f0549
+Author: gj <happydgj@gmail.com>
+Date:   Wed Dec 1 10:25:39 2010 +0800
+
+    Merge branch 'dev' of http://192.168.1.2/uss into dev
+
+commit adf4f09c53940e9002344b4c9ec0644c02cff26b
+Author: gj <happydgj@gmail.com>
+Date:   Wed Dec 1 10:09:13 2010 +0800
+
+    cutoff
+
+commit 95f05490e320ff6eac56b71e00bc95a0a5d9b613
+Author: zhangjunfeng <zjfhappy@zjfhappy-desktop.(none)>
+Date:   Tue Nov 30 18:07:44 2010 +0800
+
+    __
+
+commit 8c77d73fe4705fad29a3714c09943f27a96558fd
+Author: gj <happydgj@gmail.com>
+Date:   Tue Nov 30 16:57:30 2010 +0800
+
+    init
+
+commit f1733ad8c3799ff45364d54167327f0a671777d9
+Author: teivd <teivd@teivd-pc.(none)>
+Date:   Tue Nov 30 16:50:56 2010 +0800
+
+    testfile

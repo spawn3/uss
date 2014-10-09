@@ -1,0 +1,15 @@
+<table class="tb_simple">
+<tr><th>ID</th><th>IP</th><th>Hostname</th><th>进程</th><th>MDS</th><th>C60</th></tr>
+
+{% for n in nodes %}
+<tr>
+<td>{{ n.id }}</td>
+<td>{{ n.ip }}</td>
+<td>{{ n.hostname }}</td>
+<td>{{ n.srvc }}</td>
+<td><input class="checkbox_role_mds" type="checkbox" name="role_mds" value="{{ n.id }}" /></td>
+<td><input class="checkbox_role_c60" type="checkbox" name="role_c60" value="{{ n.id }}" /></td>
+</tr>
+{% endfor %}
+
+</table>

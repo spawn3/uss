@@ -1,0 +1,32 @@
+{% extends "world_base.html" %}
+
+{% block title %}stdVmImg_detail{% endblock %}
+
+{% block content %}
+<!-- Content -->
+
+<div class='menu2'>
+    <a href="home">Home</a>
+    &rsaquo;
+    <a href="stdVmImg_detail?stdVmImg_uuid={{stdVmImg.uuid}}" >std vm img detail</a>
+</div>
+
+<table align="center" style="border:1 dotted; font-size:12px">
+    <tr>
+        <td align="left">uuid:</td><td>{{stdVmImg.uuid}}</td>
+    </tr>
+    <tr>
+        <td align="left">capacity(GB):</td><td>{{stdVmImg.capacity}}</td>
+        <td align="left">os_version:</td><td>{{stdVmImg.os_version}}</td>
+    </tr>
+    <tr>
+        <td align="left">path:</td><td>{{stdVmImg.path}}</td>
+        <td align="left">os_release:</td><td>{{stdVmImg.os_release}}</td>
+    </tr>
+</table>
+
+<br /><br />
+<div align="center">vm_set,拷贝日志</div>
+
+    <!-- END Content -->
+{% endblock %}

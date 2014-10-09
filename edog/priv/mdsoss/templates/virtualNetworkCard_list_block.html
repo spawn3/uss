@@ -1,0 +1,50 @@
+<table class="v">  
+
+<thead> 
+<tr> 
+
+<td></td>
+<td>驱动</td>
+<td>MAC地址</td>
+<td>网桥</td>
+</tr> 
+</thead> 
+
+<tbody> 
+
+{% for virtualNetworkCard in virtualNetworkCard_set %}
+
+<tr class="{% cycle 'row1' 'row2' %}">
+
+<td class='td_checkbox'>
+<input type="checkbox" name="virtualNetworkCard_selected" value = "{{virtualNetworkCard.uuid|default:"nothing"}}">
+</td>
+<td>{{ virtualNetworkCard.model }}</td>
+
+<td>{{ virtualNetworkCard.mac }}</td>
+
+<td>{{ virtualNetworkCard.bridge }}</td>
+
+</tr> 
+{% endfor %}
+<tr>
+	<td>
+<p>{{ virtualNetworkCard_set|length }} 个网卡</p>
+	</td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+</tbody> 
+</table> 
+
+
+</form>
+
+</div> 
+</div> 
+ 
+<br class="clear" /> 
+</div>
+
+</div> 

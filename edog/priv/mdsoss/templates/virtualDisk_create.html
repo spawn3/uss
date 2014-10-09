@@ -1,0 +1,122 @@
+{% extends "world_base.html" %}
+{% block title %}virtualDisk_create{% endblock %}
+{% block content %}
+
+<script type="text/javascript">
+function checkVD() {
+    var capacity = document.getElementById('capacity');
+    var disk_alias = document.getElementById('disk_alias');
+    var myCheck = document.getElementById('myCheck');
+
+	if (disk_alias.value == "")
+	{
+		document.getElementById("disk_alias_error").innerHTML="请输入标识符";
+		return false;
+	}
+
+	var reg=/^([a-z0-9-:]){3,25}$/;
+	flag = reg.test(disk_alias.value);
+	if(!flag)
+	{
+		document.getElementById("disk_alias_error").innerHTML=" 标识符大于字符3，小于15个字符, 由'a-z', '0-9', '-', ':'组合";
+		return false;
+	}
+		document.getElementById("disk_alias_error").innerHTML="";
+
+	if (capacity.value == "")
+	{
+		document.getElementById("capacity_error").innerHTML="请输入磁盘容量";
+		return false;
+	}
+	var reg=/^\d{1,4}$/;
+	var flag = reg.test(capacity.value);
+
+	if(capacity.value<1||capacity.value>1500||!flag)
+	{
+		document.getElementById("capacity_error").innerHTML="请输入允许的容量";
+		return false;
+	}
+		document.getElementById("capacity_error").innerHTML="";
+
+	if(myCheck.checked)
+	{
+		var r = confirm("您选择创建一块共享磁盘，是否确定？");
+		if (r==true)
+		{
+
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	return fasle;
+
+}
+</script>
+
+
+<style type="text/css">
+        form.submitForm fieldset { border:0 }
+
+        label {    
+            width: 18em;    
+            float: left;    
+        }   
+        label.error {    
+            float: none;    
+            color: red;    
+            padding-left: .5em;    
+            vertical-align: top;    
+        }   
+        p {    
+            clear: both;    
+        }   
+        .submit {    
+            margin-left: 17em;    
+        }   
+        em {    
+            font-weight: bold;    
+            padding-right: 1em;    
+            vertical-align: top;   
+            color:red 
+        }   
+        
+        legend {
+            font-weight: bold;
+            font-size: 130%
+        }
+           
+</style>
+
+ <form class="submitForm" id="submitForm" name="submitForm" method="POST" action="virtualDisk_create">
+     <input type="hidden" name="customer_uuid" value="{{ customer_uuid }}">
+     <fieldset>
+         <legend>请输入虚拟磁盘信息：</legend>
+         <p>
+         <label for="alias">磁盘别名:<br />(标识此磁盘，是'a-z', '0-9', '-', ':'的组合)</label>  
+         <em>*</em><input id="disk_alias" name="alias" size="25" />  <span id="disk_alias_error" style="color:red; font:11px"></span>
+         </p>
+
+         <p>
+         <label for="capacity">磁盘容量(GB):<br />(大于等于1G,小于等于1500G)</label>
+         <em>*</em><input id="capacity" name="capacity" size="25" max="10000" min="1"/> <span id="capacity_error" style="color:red; font:11px;"></span>
+         </p>
+
+         <p>
+         <label for="shared">共享:<br />(多个虚拟机共用)</label>  
+         <em></em>
+         <input type="checkbox" id="myCheck" name="shared"/ size="25">
+         </p>
+
+         <!--<p>-->
+         <!--<input type="radio" name="is_share" value = "true">共享<br>-->
+         <!--<input type="radio" name="is_share" value = "false">独享<br>-->
+         <!--</p>-->
+
+         <p><input class="submit" type="submit" value="提交" onclick="return checkVD()"/></p>  
+     </fieldset>
+ </form>
+
+{% endblock %}

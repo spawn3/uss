@@ -1,0 +1,188 @@
+<style>
+input.text, select.text {
+	margin-bottom:12px;
+	width:95%;
+	padding: .4em;
+}
+
+.ui-dialog .ui-state-error {
+	padding: .3em;
+}
+
+.validateTips {
+	border: 1px solid transparent;
+	padding: 0.3em;
+}
+
+#btn_add_rack {
+	margin-right: 20px;
+}
+
+.tb_simple {
+    border-collapse: collapse;
+    border: 1px solid #B6B6B6;
+    width: 300px;
+    margin: 10px;
+}
+.tb_simple th, .tb_simple td {
+    border: 1px solid #B6B6B6;
+}
+
+.tb_simple a:link  {
+	text-decoration: none;
+	color: blue;
+}
+.tb_simple a:hover {
+	text-decoration: underline;
+	color: blue;
+}
+</style>
+
+<script>
+$(function() {
+	var rack_name = $("#rack_name"),
+		allFields = $([]).add(rack_name),
+		tips = $(".validateTips"),
+		dialog_rack_mng = $('#dialog_rack_mng')
+		btn_add_rack = $('#btn_add_rack')
+		fm_add_rack = $('#fm_add_rack')
+		fm_edit_rack = $('#fm_edit_rack')
+		smt_add_rack = $("#smt_add_rack")
+		smt_edit_rack = $("#smt_edit_rack")
+		div_rack_list = $('#div_rack_list')
+
+	div_rack_list.load('div/rack_list');
+
+	function updateTips(t) {
+		tips.text(t).addClass("ui-state-highlight").css('color', 'red');
+	}
+
+	function checkLength(o, n, min, max) {
+		if (o.val().length > max || o.val().length < min) {
+			o.addClass("ui-state-error");
+			updateTips("Length of " + n + " must be between " +
+				min + " and " + max + ".");
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	function checkRegexp(o, regexp, n) {
+		if (!(regexp.test(o.val()))) {
+			o.addClass("ui-state-error");
+			updateTips( n );
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	dialog_rack_mng.dialog({
+		autoOpen: true,
+		height: 500,
+		width: 400,
+		modal: true,
+		buttons: {
+			"取消": function() {
+				$(this).dialog("close");
+			}
+		},
+		close: function() {
+			allFields.val("").removeClass("ui-state-error").addClass("validateTips");
+		}
+	});
+
+	btn_add_rack.click(function(){
+		fm_add_rack.toggle();
+		return false;
+	});
+
+	smt_add_rack.click(function() {
+		var bValid = true;
+		allFields.removeClass("ui-state-error");
+		bValid = bValid && checkLength( rack_name, "Rack name", 3, 16 );
+		bValid = bValid && checkRegexp( rack_name, /^[a-z]([0-9a-z_])+$/i, "Rack名称包含英文字母，数字和下划线, 并且以字母开头.");
+
+		if ( bValid ) {
+			$.post('node/rack_add', {'name':rack_name.val()}, function(resp){
+				if(resp=="SUCC"){
+					div_rack_list.load('div/rack_list');
+					fm_add_rack.toggle();
+					rack_name.val("");
+				}
+				else{
+					alert(resp);
+				}
+			});
+			return false;
+		}
+	});
+
+	smt_edit_rack.click(function() {
+		var bValid = true;
+		allFields.removeClass("ui-state-error");
+		bValid = bValid && checkLength( rack_name, "Rack name", 3, 16 );
+		bValid = bValid && checkRegexp( rack_name, /^[a-z]([0-9a-z_])+$/i, "Rack名称包含英文字母，数字和下划线, 并且以字母开头.");
+
+		if ( bValid ) {
+			$.post('node/rack_edit', {'ip':$('#inpt_edit_rack_id').val(),
+									  'name':$('#rack_name').val()}, function(resp){
+				if(resp=="SUCC"){
+					div_rack_list.load('div/rack_list');
+				}
+				else{
+					alert(resp);
+				}
+			});
+			return false;
+		}
+	});
+});
+
+function rack_edit(id){
+	fm_edit_rack.toggle();
+	$('#inpt_edit_rack_id').val(id);
+	return false;
+}
+
+function rack_del(id){
+	if(confirm("确定要删除此Rack吗?")){
+        $.post('node/rack_del', {'id':id},
+				function(resp){
+					if(resp.substring(0,4)=='SUCC'){
+						div_rack_list.load('div/rack_list');
+					}
+					else{
+						alert(resp);
+					}
+				}
+		);
+    }
+    else{
+    }
+	return false;
+}
+</script>
+
+
+
+<div id="dialog_rack_mng" title="Rack管理">
+    <div id="div_rack_list"></div>
+
+    <button id="btn_add_rack">新建Rack</button>
+
+    <form id="fm_add_rack" style="display:none;">
+        <label for="rack_name">Rack名称:</label>
+        <input type="text" name="rack_name" id="rack_name" class="text ui-widget-content ui-corner-all" />
+        <input type="submit" value="确定" id="smt_add_rack"/>
+    </form>
+
+    <form id="fm_edit_rack" style="display:none;">
+        <input type="hidden" id="inpt_edit_rack_id" name="id" value="" />
+        <label for="rack_name">Rack名称:</label>
+        <input type="text" name="rack_name" id="rack_name" class="text ui-widget-content ui-corner-all" />
+        <input type="submit" value="确定" id="smt_edit_rack"/>
+    </form>
+</div>
+

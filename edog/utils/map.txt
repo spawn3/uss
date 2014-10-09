@@ -1,0 +1,11 @@
+chaotu.centos-4
+chaotu.centos7disk1
+chaotu.win153disk1
+chaotu.win15disk1
+chaotu.win2003-15-3
+chaotu.win2003-6
+kepu3.centos-12
+laobaosuo.win2003-13
+laobaosuo.win43disk1
+tianjianxing.win10disk1
+tianjianxing.win2003-14

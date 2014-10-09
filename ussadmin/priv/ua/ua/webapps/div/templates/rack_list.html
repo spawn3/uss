@@ -1,0 +1,18 @@
+<table class="tb_simple">
+<tr><th>ID</th><th>Rack名称</th><th>节点数量</th><th>操作</th></tr>
+
+{% for r in racks %}
+<tr>
+<td>{{ r.id }}</td>
+<td>{{ r.name }}</td>
+<td>{{ r.node_count }}</td>
+<td>
+	<!--<button onclick="rack_edit({{ r.id }})">Edit</button>-->
+	{% if r.node_count==0 %}
+		<button onclick="rack_del({{ r.id }});">删除</button>
+	{% endif %}
+</td>
+</tr>
+{% endfor %}
+
+</table>

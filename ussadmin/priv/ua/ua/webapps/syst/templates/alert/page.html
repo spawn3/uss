@@ -1,0 +1,34 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#tb_syst_alert").jqGrid({
+		url:'syst/alert/rsrc',
+		datatype: 'json',
+		mtype: 'GET',
+		height: 300,
+		width: 600,
+//		colNames:['ID', '时间', '级别', '信息', '静音'],
+		colNames:['ID', '时间', '级别', '信息'],
+		colModel :[
+		  {name:'id', index:'id', width:40, align:'center'},
+		  {name:'atime', index:'atime', width:120, align:'center'},
+		  {name:'level', index:'level', width:60, align:'center'},
+		  {name:'info', index:'info', width:300, align:'left'},
+		],
+		pager: '#div_syst_alert_pager',
+		rowNum:10,
+		rowList:[10,20,30],
+		sortname: 'id',
+		sortorder: 'desc',
+		viewrecords: true,
+		caption: 'Node',
+		width: 900,
+		height: 500
+	})
+});
+	tb_syst_alert.navGrid("#div_syst_alert_pager", {add:false, edit:false, del:false, search:false});
+</script>
+
+<div class="div_dev">
+    <table id="tb_syst_alert"></table>
+    <div id="div_syst_alert_pager"></div>
+</div>

@@ -1,0 +1,114 @@
+{% extends "world_base.html" %}
+{% block title %}yfs list{% endblock %}
+{% block content %}
+<a href="home">Home</a> 
+&rsaquo; 
+<a href="user_userManagement">user management</a> 
+<br />
+<br />
+<script type ="text/javascript" language ="javascript" >
+
+	function changeGroupPermissions()
+	{
+			var group=document.user_list.group_selected;
+			var flag=0;
+			if(group.length == undefined)
+			{
+				if(group.checked)
+					ShowIframe('delete group permission','user_groupPermission?group='+group.value,400,300);
+			}		
+			for(var i=0;i<group.length;i++)
+			{
+				if(group[i].checked==true)
+				{
+					flag++;
+					group=group[i].value;
+					ShowIframe('change group permission','user_groupPermission?group='+group,400,300);
+					break;	
+				}
+	
+			}
+			if(flag==0)
+				document.getElementById("errorg").innerHTML="请选择要修改的用户组！！";
+	}	
+	
+	
+	
+	function delGroup()
+	{		
+			var flag=0;
+			var group=document.user_list.group_selected;
+			
+			if(group.length == undefined)
+			{
+				if(group.checked)
+					ShowIframe('delete group','user_deleteGroup?group='+group.value,340,120);
+			}		
+			for(var i=0;i<group.length;i++)
+			{
+				if(group[i].checked==true)
+				{
+					flag++;
+					group=group[i].value;
+					ShowIframe('delete group','user_deleteGroup?group='+group,340,120);
+					break;	
+				}
+			}
+				if(flag == 0)
+				{
+					document.getElementById("errorg").innerHTML="请选择要删除的用户组！！";
+				}
+		}
+	
+	
+	
+	
+	
+	
+</script>
+<a href = "user_userManagement" > User List</a>
+   <div align="center">
+   <form name="user_list">
+        <div  id="showGroup" style="display:block">
+		<table class="v">
+          <thead>
+        	<div style="color:#FF0000;text-align:center" id="errorg"></div>
+         	<tr><td width="5"></td><td>group name</td><td>permissions</td></tr>
+          </thead>
+          <tbody>
+         	{%for group in group_list %}
+         	<tr class="{% cycle 'row1' 'row2' %}">
+            <td><input type="radio" id="group_selected" name="group_selected" value={{group.name}}></td>
+            <td>{{ group.name }}</td> 
+            <td>
+            {% ifequal group.name 'superUser' %}
+            	all
+            {% else %}
+            {% for p in group.permissions.all %} {{ p.name }}{% if forloop.last %}{% else %},{% endif %} {% endfor %}</td> 
+            {% endifequal %}
+            </tr>
+            {% endfor %}
+            <tr align="left">
+            <td colspan="4">
+            <input type="button" value="add group" onClick="ShowIframe('addGroup','user_newGroup',400,300);">
+            <input type="button" value="delete group"  onClick="delGroup()">
+            <input type="button" value="change group permission"  onClick="changeGroupPermissions()">
+          <!--  <input type="button" value="alter user" > -->
+            </td>
+            </tr>
+            </tbody>
+
+         </table> 
+     </form>                
+     </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

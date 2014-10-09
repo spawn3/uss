@@ -1,0 +1,151 @@
+ ua 和 ussadmin接口规范草稿。
+
+headers["Content-Type"] = "application/json" 
+
+d = {}
+params = json.dumps(d)
+通过http来交互，数据格式为json。
+
+host = ""
+port = ""
+是可以配置的。
+
+1,
+	控制相关操作 对应rest/ctrl.py
+1.1,
+	得到当前系统配置信息:
+		path_info = "/uss/misc/syst"
+		method = "POST"
+		d = {"action": "get_conf"}
+		params = json.dumps(d)
+	唯一正确的返回样式:
+		[{u'doc': u'subnet ip', u'value': u'192.168.1.2', u'catagory': u'yfs', u'mode': u'undefined', u'key': u'network', u'type': u'undefined'}, {u'doc': u'subnet mask', u'value': u'255.255.255.0', u'catagory': u'yfs', u'mode': u'undefined', u'key': u'netmask', u'type': u'undefined'}, {u'doc': u'mds count', u'value': 1, u'catagory': u'yfs', u'mode': u'undefined', u'key': u'mds_count', u'type': u'undefined'}, {u'doc': u'cds count', u'value': 2, u'catagory': u'yfs', u'mode': u'undefined', u'key': u'cds_count', u'type': u'undefined'}, {u'doc': u'client count', u'value': 1, u'catagory': u'yfs', u'mode': u'undefined', u'key': u'client_count', u'type': u'undefined'}]
+
+1.2
+	请求获得日志:
+	path_info = "/uss/misc/syst"
+	method = "POST"
+	d = {}
+	d['action'] = "get_log"
+	d['ip'] = ip 
+	d['type'] = "mds/cds/c60/nfs/proxy/cifs/http/ftp"
+	d['n'] = n "整数类型"
+	d['level'] = "all/warn/error"
+	d['lines'] = lines "整数类型"
+	params = json.dumps(d)
+	唯一正确的返回样式:
+	{u'result': u"1301306864:/home/gj/git/new2/work/code/ylib/lib/daemon.c:daemon_lock( ): 274:  1996:140498628491072: INFO: lock /sysy/yfs/mds/1/status/status\n1301306864:/home/gj/git/new2/work/code/ylib/lib/daemon.c:get_nodeid( ):  89:  1996:140498628491072: INFO: get nodeid 0f276870-6657-4b8d-8b49-c0212b17f028\n1301306864:/home/gj/git/new2/work/code/yfs/libyfs/yfs_lib.c:ly_init( ): 386:  1996:140498628491072: INFO: set /sysy/yfs/mds/1/status/clustername yfs_magic\n1301306864:/home/gj/git/new2/work/code/ynet/rpc/rpc_passive.c:rpc_passive( ):  74:  1996:140498628491072: INFO: pasv port 62119 sd 13\n} 
+
+1.3
+	逻辑卷操作
+	path_info = "/uss/misc/syst"
+	method = "POST"
+	d = {}
+	d['action'] = "lvm_create/lvm_resize/lvm_list"
+	d['name'] = "name" "小写字母大写字母数字和下划线的组合"
+	d['size'] = size "整数类型，默认的单位是G"
+	params = json.dumps(d)
+	唯一正确的返回样式:
+	create操作： {u'result': True}
+	resize操作: {u'result': True}
+	list操作: 
+	[{"name":"test1","id":1,"size":1024,"fileid":"1_v1000"},{"name":"test2","id":2,"size":1024,"fileid":"1_v1001"}]
+
+1.4
+	分发操作
+	path_info = "/uss/misc/syst"
+	method = "POST"
+	d = {}
+	d['action'] = "deploy"
+	params = json.dumps(d)
+	唯一正确的返回样式:
+		{u'result': u'ok'}
+
+1.5
+	设置mds, c60
+	path_info = "/uss/misc/syst"
+	method = "POST"
+	d = {}
+	d['action'] = 'set_mds_c60'
+	d['mds'] = mds_list
+	d['c60'] = c60_list
+	params = json.dumps(d)
+	唯一正确的返回样式:
+		{u'result': u'ok'}
+	对传入的参数存在疑问，完全设置，而不是增量设置
+
+1.6
+	节点脱离,把节点从集群中删掉
+	path_info = "/uss/misc/syst"
+	method = "POST"
+	d = {}
+	d['action'] = 'node_exit'
+	d['id'] = id "整数类型"
+	params = json.dumps(d)
+	唯一正确的返回样式:
+		{u'id': 1}
+1.7
+	向集群内添加节点
+	path_info = "/uss/misc/syst"
+	method = "POST"
+	d = {}
+	d['action'] = 'node_join'
+	d['id'] = id "整数类型"
+	params = json.dumps(d)
+	唯一正确的返回样式:
+		{u'id': 1}
+
+1.8 测试集群
+		path_info = "/uss/misc/syst"
+		method = "POST"
+		d = {}
+		d['action'] = 'test'
+		params = json.dumps(d)
+	唯一正确的返回样式：
+	{u'error': u'{unavailable_c60, no_c60}'}
+
+1.9 启动集群
+		path_info = "/uss/misc/syst"
+		method = "POST"
+		d = {}
+		d['action'] = 'start'
+		params = json.dumps(d)
+	唯一正确的返回样式：
+	{u'result': u'ok'}
+
+1.10 停止集群
+		path_info = "/uss/misc/syst"
+		method = "POST"
+		d = {}
+		d['action'] = 'stop'
+		params = json.dumps(d)
+	唯一正确的返回样式：
+	{u'result': u'stopping'}
+	{u'result': u'already_stoped'}
+
+1.11 日志的清除
+
+
+1.12 日志的备份
+
+
+
+
+
+
+
+
+
+
+
+===============================================
+1, 
+	有的部分是调用common/bridge/* ,有的是调用common/secty/*(不包括rest目录下的)
+
+2,
+	bridge目录下的对返回的数据，格式上进行了一步的加工, 现在的理解，bridge里面涉及到的基本上是查询的内容,没有涉及到ctrl
+	注，下面再添加新功能的时候，可以保持bridge不动。都放到common/secty/下，所有的数据都来自与rest/目录下， 经过处理后返回给上层模块的调用者
+	从某种程度上来说，bridge是common/secty/* 下的补充，可以考虑取消到bridge这个目录，都合并到一起。
+
+
+

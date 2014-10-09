@@ -1,0 +1,46 @@
+{% extends "world_base.html" %}
+
+{% block content %}
+<!-- Content -->
+
+<div class='menu2'>
+    <a href="home">首页</a>
+    &rsaquo;
+    <a href="stdVmImg_list">虚拟机模板</a>
+</div>
+
+<br />
+<br />
+
+<table class="v" align="center">
+    <thead>
+        <tr>
+            <td></td>
+            <td>ID</td>
+            <td>操作系统版本</td>
+            <td>位置</td>
+            <td>容量(GB)</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for stdVmImg in stdVmImg_set %}
+        <tr class="{% cycle 'row1' 'row2' %}">
+            <td class='td_checkbox'><input type="checkbox" name="action_on_who" value = "action_on_who"></td>
+            <td>{{ stdVmImg.uuid }}</td>
+            <td>{{ stdVmImg.os_release }} {{ stdVmImg.os_version }}</td>
+            <td>{{ stdVmImg.path }}</td>
+            <td>{{ stdVmImg.capacity }}</td>
+        </tr>
+        {% endfor %}
+
+<tr>
+<td>
+<p>{{ stdVmImg_set|length }} 个模板</p>
+</td>
+</tr>
+    </tbody>
+</table>
+
+
+{% endblock %}

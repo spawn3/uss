@@ -1,0 +1,86 @@
+<html>
+	<head>
+    	<title>  change User Group </title>
+        
+<script type ="text/javascript" language ="javascript" >        
+
+		function creatReq() {
+			var flag=0;
+			var group=document.group_list.group; 
+			var user=document.group_list.userName.value;
+			if(group.length != undefined && !group.checked)
+			{
+				for(var i=0;i<group.length;i++)
+				{
+					if(group[i].checked)
+					{
+						flag++;
+						group=group[i].value;
+						break;
+					}
+					
+				}	
+			if(flag==0)
+			{
+				document.getElementById("error").innerHTML="请选择要加入的用户组";
+				return false;
+				}
+				
+			}
+			else
+			{
+				group=group.value;		
+			}
+
+            var url="user_changeUserGroup?user="+user+"&group="+group; //要请求的服务端地址
+            if(window.XMLHttpRequest) {
+                req=new XMLHttpRequest();
+            }
+            else if(window.ActiveXObject) {
+                req=new ActiveXObject("Microsoft.XMLHttp");
+            }
+            if(req) {
+                req.open("GET",url,true); //与服务端建立连接(请求方式post或get，地址,true表示异步)
+                req.onreadystatechange = callback; //指定回调函数
+                req.send(null); //发送请求
+            }
+        }
+        
+        function callback() {
+            if(req.readyState==4) //请求状态为4表示成功
+            {
+                    document.getElementById("error").innerHTML = req.responseText;
+					
+               
+        	}
+		}
+
+		function closed(){
+			parent.location.reload();
+			window.close();
+			}
+  </script>      
+    </head>
+    <body>
+    	<div style="font-size:12px"> 
+    	用户名：{{ user.username }}<br  />
+        <hr  />
+        请选择要加入的组：<br  />
+        </div>        
+        <div style="color:#FF0000" id="error"></div>
+
+    	<form name="group_list" >
+        	<input type="hidden" name="userName" value="{{ user.username }}"  />
+            <div>
+            	
+                {% for g in group_list %}
+                    <input type="radio" name="group" id="group" value="{{ g.name }}" /></td><td><label for="group">{{ g.name }}</label>
+                {% endfor %}
+               
+            </div>    <br  />
+            <div>
+ 			<center><input type="button" value="submit" onclick="creatReq()"  /> <input value="close" type="button"  onclick="closed()" /></center>
+            </div>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<table class="v"> 
+<thead> 
+<tr> 
+
+<!--<td></td>-->
+<!--<td>alias</td>-->
+<!--<td>company</td>-->
+<!--<td>contact person</td>-->
+
+<!--<td>telephone</td>-->
+<!--<td>vm_set</td>-->
+<!--<td>virtualDisk</td>-->
+
+<td></td>
+<td>用户名</td>
+<td>公司名</td>
+<td>联系人</td>
+
+<td>联系电话</td>
+<td>虚拟机</td>
+<td>虚拟磁盘</td>
+
+</tr> 
+</thead> 
+
+<tbody> 
+
+{% for customer in customer_set %}
+
+<tr class="{% cycle 'row1' 'row2' %}">
+
+<td class='td_checkbox'><input type="checkbox" id="customer_selected" name="customer_selected" value = {{customer.uuid|default:"nothing"}}></td>
+<td style="font-weight:bold"><a href="customer_detail?customer_uuid={{customer.uuid}}">{{ customer.alias }}</td>
+<td>{{ customer.company }}</th>
+<td>{{ customer.contact_person }}</td>
+
+<td>{{ customer.telephone }}</td>
+
+
+<td><a href="customer_detail?customer_uuid={{customer.uuid}}">vm_set</a></td>
+
+<td><a href="customer_detail?customer_uuid={{customer.uuid}}">virtualDisk_set</a></td>
+
+
+</tr> 
+{% endfor %}
+<tr>
+	<td>
+<p>{{ customer_set|length }} 位用户</p>
+	</td>
+</tr>
+</tbody> 
+</table> 
+
+
+</form>

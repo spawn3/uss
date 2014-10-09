@@ -1,0 +1,85 @@
+<html>
+<head>
+<style type="text/css">
+.v {border-collapse: collapse; font-size:12}
+.v td{white-space:nowrap; border:1px dotted #000;width:100;height:10}
+.v thead td{white-space:nowrap; border:1px dotted #000;width:100;height:10; font-weight:bold}
+
+.row1 { background: #EDF3FE; }
+
+.row2 { background: white; }
+</style>
+</head>
+
+<body class="b">
+
+
+<form  class="submitForm" id="submitForm" name="submitForm" method="POST" action="vm_migrate">
+<input type="hidden" name="vm_uuid" value="{{vm_uuid}}" />
+ 
+<table align="center">
+
+<tr>
+<td>
+ <input type="radio" name="select_pm" value="liveMigrate_auto" disabled="true"/>
+ <label>自动选择迁移目标物理机：</label>
+ </td>
+</tr>
+
+<tr>
+<td>
+
+ <input type="radio" name="select_pm" value="liveMigrate_aim" checked="true" />
+ <label>指定迁移目标物理机：</label>
+</td>
+
+<tr>
+<td>
+<table class="v" align="center">
+<thead>
+<td></td>
+<td>IP地址</td>
+<!--<td>uuid</td>-->
+
+<td>处理器个数</td>
+<td>内存总数(G)</td>
+<td>已用内存(G)</td>
+<td>正在运行</td>
+
+<!--<td>vm&nbsp;set</td>-->
+</thead>
+
+<tbody>
+<!--<input type="hidden" name="pm_selected" value="" />-->
+{% for pm in pm_set %}
+
+<tr class="{% cycle 'row1' 'row2' %}">
+
+<td><input type="radio" name="pm_selected" value = "{{ pm.uuid }}"></td>
+<!--<td>{{ pm.ip }}</td>-->
+<td>{{ pm.uuid }}</td>
+
+<td>{{ pm.cpu_cores }}</td>
+<td>{{ pm.mem_capacity }}</td>
+<td>{{ pm.mem_used }}</td>
+<td>{{ pm.is_running }}</td>
+<!--<td>vm_set</td>-->
+
+</tr> 
+{% endfor %}
+</tbody>
+</table>
+</td>
+
+</tr> 
+
+<tr>
+<td><button align="center" type="submit">迁移此虚拟机</button></td>
+</tr>
+</table>
+
+</form> 
+
+
+</body>
+</html>

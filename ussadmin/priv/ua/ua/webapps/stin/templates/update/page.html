@@ -1,0 +1,34 @@
+<style>
+button {
+	margin: 20px 0px 20px 50px;
+	width: 150px;
+	height: 40px;
+}
+</style>
+
+<script>
+$(function(){
+	$('button').button();
+	
+	$('#btn_redeploy').click(function(){
+		$.ajax({
+			url: 'stin/update/redeploy',
+			type: 'GET',
+			success: function(resp){
+				if(resp.substring(0,4)=='SUCC'){
+					alert("部署完成!");
+				}
+				else{
+					alert(resp);
+				}
+			},
+			error: function(){
+						alert('sth wrong');
+					}
+		});
+		return false;
+	});
+});
+</script>
+
+<button id="btn_redeploy" >重新部署集群</button>

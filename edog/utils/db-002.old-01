@@ -1,0 +1,145 @@
+{tables,[{stddisk_t,[{record_name,stddisk_t},
+                     {attributes,[disk_id,path,size,os_type,os_version]}]},
+         {vm_t,[{record_name,vm_t},
+                {attributes,[vm_id,vm_name,cust_id,pm_id,vm_cpu,vm_mem,
+                             vm_imgid,vm_pcis,status,port,extra]}]},
+         {pm_t,[{record_name,pm_t},
+                {attributes,[pm_id,pm_ip,pm_cpu,pm_mem,pm_bridges,status]}]},
+         {disk_vm_t,[{record_name,disk_vm_t},{attributes,[id,target,extra]}]},
+         {disk_t,[{record_name,disk_t},
+                  {attributes,[disk_id,disk_alias,cust_id,path,size,canboot,
+                               vm_id,target,createtime,locktime,status]}]},
+         {cust_t,[{record_name,cust_t},
+                  {attributes,[cust_id,cust_name,cust_home,locked,locktime,
+                               company,address,contact,telephone,cellphone,
+                               email]}]},
+         {option_t,[{record_name,option_t},{attributes,[key,value]}]}]}.
+{stddisk_t,"2e1bafb9-4788-40d8-a675-54bac1571040",
+           "/public/windows2003-64.img",35,"win2003-35G","64bit"}.
+{stddisk_t,"2e7f1ac3-f135-44f8-9c4d-54a982c704c5",
+           "/public/windows2003-sp2-x86.img",35,"win2003-sp2-35G","32bit"}.
+{stddisk_t,"2ee285ce-9ae2-4918-9225-54984436f949",
+           "/public/windows2008-64.img",35,"win2008-sp2-35G","64bit"}.
+{stddisk_t,"2f258598-92cb-4be0-b50a-5fae305055b9",
+           "/public/superMap-CentOS5.4-x86_64.img",50,
+           "SuperMap-Centos5.4-50G","X86-64"}.
+{stddisk_t,"2f804b80-eaef-4fa5-b6e5-da0dac0f9927",
+           "/public/centos5.4-64-30g.img",30,"Centos5.4-30G","64bit"}.
+{stddisk_t,"2fd6bed8-1a4e-433b-bec3-11a564f6840a",
+           "/public/convirture-2.0-appliance.img",2,"convirt-2.0","32bit"}.
+{stddisk_t,"301be7ea-a69a-461a-9ea7-3e1f127c0cbf","/public/windowsXP-sp3.img",
+           30,"XP-SP3-30G","64bit"}.
+{stddisk_t,"305ee7b4-9e83-48e2-818c-4934fe95692f",
+           "/public/centos-5.6-x86.img",30,"Centos5.6-30G","32bit"}.
+{stddisk_t,"30aedf32-10bb-4c34-926c-1ca17337cf40","/public/Centos-6.0-64.img",
+           20,"Centos6.0-20G","64bit"}.
+{vm_t,"1028a1f1-a34e-43ad-bbd0-c72764ee51c0","centos-12",
+      "b5c8267d-ec57-4347-8bd5-856e244f6e5f",[],2,2097152,"kepu3.centos-12",
+      [{nic_t,<<"virbr1">>,<<"00:e0:a0:1f:b5:db">>,<<"e1000">>}],
+      shutoff,-1,
+      [{iodriver,virtio}]}.
+{vm_t,"1100d54b-caa1-4aba-8c02-840a5ee44a45","win2003-6",
+      "d847d121-88b9-4489-aa96-9bb7fb2c11b2",[],4,8388608,"chaotu.win2003-6",
+      [{nic_t,<<"virbr1">>,<<"00:e0:a0:1c:04:4e">>,<<"virtio">>},
+       {nic_t,<<"virbr0">>,<<"00:e0:a0:1f:aa:91">>,<<"virtio">>}],
+      shutoff,-1,
+      [{iodriver,virtio}]}.
+{vm_t,"54bdf5a2-04bb-419f-a1b0-66a43b484d84","win2003-15-3",
+      "d847d121-88b9-4489-aa96-9bb7fb2c11b2",[],4,4194304,
+      "chaotu.win2003-15-3",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:29:31:12">>,<<"virtio">>}],
+      shutoff,-1,
+      [{iodriver,virtio}]}.
+{vm_t,"62291f41-3988-4b14-bebd-a1d3dcdebd85","win2003-13",
+      "0be7587e-9437-4676-a0ea-24e4d23adbc1",[],2,3145728,
+      "laobaosuo.win2003-13",
+      [{nic_t,<<"virbr1">>,<<"00:e0:a0:1d:51:35">>,<<"virtio">>}],
+      shutoff,-1,
+      [{iodriver,virtio}]}.
+{vm_t,"d35c5ba2-c045-4ebf-b5aa-f41db385a7a5","win2003-14",
+      "99720248-2a99-4752-899b-2a8746c970b5",[],2,4194304,
+      "tianjianxing.win2003-14",
+      [{nic_t,<<"virbr1">>,<<"00:e0:a0:23:7b:b5">>,<<"e1000">>}],
+      shutoff,-1,
+      [{iodriver,virtio}]}.
+{vm_t,"f95cccf2-3f6c-4714-997f-8110b6dba887","centos-4",
+      "d847d121-88b9-4489-aa96-9bb7fb2c11b2",[],4,8388608,"chaotu.centos-4",
+      [{nic_t,<<"virbr1">>,<<"00:e0:a0:1f:57:91">>,<<"e1000">>},
+       {nic_t,<<"virbr0">>,<<"00:e0:a0:1f:04:4a">>,<<"e1000">>}],
+      shutoff,-1,
+      [{iodriver,virtio}]}.
+{disk_vm_t,{"chaotu.centos-4","f95cccf2-3f6c-4714-997f-8110b6dba887"},
+           "vda",[]}.
+{disk_vm_t,{"chaotu.centos7disk1","f95cccf2-3f6c-4714-997f-8110b6dba887"},
+           "vdb",[]}.
+{disk_vm_t,{"chaotu.win2003-6","1100d54b-caa1-4aba-8c02-840a5ee44a45"},
+           "vda",[]}.
+{disk_vm_t,{"kepu3.centos-12","1028a1f1-a34e-43ad-bbd0-c72764ee51c0"},
+           "vda",[]}.
+{disk_vm_t,{"chaotu.win2003-15-3","54bdf5a2-04bb-419f-a1b0-66a43b484d84"},
+           "vda",[]}.
+{disk_vm_t,{"laobaosuo.win2003-13","62291f41-3988-4b14-bebd-a1d3dcdebd85"},
+           "vda",[]}.
+{disk_vm_t,{"tianjianxing.win10disk1","d35c5ba2-c045-4ebf-b5aa-f41db385a7a5"},
+           "vdb",[]}.
+{disk_vm_t,{"chaotu.win153disk1","54bdf5a2-04bb-419f-a1b0-66a43b484d84"},
+           "vdb",[]}.
+{disk_vm_t,{"laobaosuo.win43disk1","62291f41-3988-4b14-bebd-a1d3dcdebd85"},
+           "vdb",[]}.
+{disk_vm_t,{"tianjianxing.win2003-14","d35c5ba2-c045-4ebf-b5aa-f41db385a7a5"},
+           "vda",[]}.
+{disk_vm_t,{"chaotu.win15disk1","1100d54b-caa1-4aba-8c02-840a5ee44a45"},
+           "vdb",[]}.
+{disk_t,"chaotu.centos-4","centos-4","d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/centos-4/0",50,true,"f95cccf2-3f6c-4714-997f-8110b6dba887",
+        "vda",1311057687,0,created}.
+{disk_t,"chaotu.centos7disk1","centos7disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2","/chaotu/centos7disk1/0",500,
+        false,"f95cccf2-3f6c-4714-997f-8110b6dba887","vdb",1311123924,0,
+        created}.
+{disk_t,"chaotu.win2003-6","win2003-6","d847d121-88b9-4489-aa96-9bb7fb2c11b2",
+        "/chaotu/win2003-6/0",35,true,"1100d54b-caa1-4aba-8c02-840a5ee44a45",
+        "vda",1308641540,0,created}.
+{disk_t,"kepu3.centos-12","centos-12","b5c8267d-ec57-4347-8bd5-856e244f6e5f",
+        "/kepu3/centos-12/0",50,true,"1028a1f1-a34e-43ad-bbd0-c72764ee51c0",
+        "vda",1311219061,0,created}.
+{disk_t,"chaotu.win2003-15-3","win2003-15-3",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2","/chaotu/win2003-15-3/0",35,
+        [boot],
+        "54bdf5a2-04bb-419f-a1b0-66a43b484d84",undefined,1321936241,0,created}.
+{disk_t,"laobaosuo.win2003-13","win2003-13",
+        "0be7587e-9437-4676-a0ea-24e4d23adbc1","/laobaosuo/win2003-13/0",35,
+        true,"62291f41-3988-4b14-bebd-a1d3dcdebd85","vda",1309855633,0,
+        created}.
+{disk_t,"tianjianxing.win10disk1","win10disk1",
+        "99720248-2a99-4752-899b-2a8746c970b5","/tianjianxing/win10disk1/0",
+        100,false,"d35c5ba2-c045-4ebf-b5aa-f41db385a7a5","vdb",1315452146,0,
+        created}.
+{disk_t,"chaotu.win153disk1","win153disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2","/chaotu/win153disk1/0",100,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1321949850,0,created}.
+{disk_t,"laobaosuo.win43disk1","win43disk1",
+        "0be7587e-9437-4676-a0ea-24e4d23adbc1","/laobaosuo/win43disk1/0",200,
+        false,"62291f41-3988-4b14-bebd-a1d3dcdebd85","vdb",1310366680,0,
+        created}.
+{disk_t,"tianjianxing.win2003-14","win2003-14",
+        "99720248-2a99-4752-899b-2a8746c970b5","/tianjianxing/win2003-14/0",
+        35,true,"d35c5ba2-c045-4ebf-b5aa-f41db385a7a5","vda",1315447355,0,
+        created}.
+{disk_t,"chaotu.win15disk1","win15disk1",
+        "d847d121-88b9-4489-aa96-9bb7fb2c11b2","/chaotu/win15disk1/0",500,
+        false,"1100d54b-caa1-4aba-8c02-840a5ee44a45","vdb",1315463629,0,
+        created}.
+{cust_t,"0be7587e-9437-4676-a0ea-24e4d23adbc1","laobaosuo","laobaosuo",false,
+        0,"LaoDongBaoHuKeXueYanJiuSuo","beijing","LiuLei","010-11111111",
+        "13581809241","1@bcc.cn"}.
+{cust_t,"99720248-2a99-4752-899b-2a8746c970b5","tianjianxing","TianJianXing",
+        false,0,"TianJianXing","beijing","hou","010-11111111","11111111111",
+        "1@bcc.cn"}.
+{cust_t,"b5c8267d-ec57-4347-8bd5-856e244f6e5f","kepu3","kepu3",false,0,
+        "qingbaosuoKePu","kepu","ZhuRuiYang","010-68721911","13811517006",
+        "ruiy@std.net"}.
+{cust_t,"d847d121-88b9-4489-aa96-9bb7fb2c11b2","chaotu","chaotu",false,0,
+        "chaotu","chaotu","Mrchen","010-11111111","11111111111",
+        "chaotu@bcc.ac.cn"}.

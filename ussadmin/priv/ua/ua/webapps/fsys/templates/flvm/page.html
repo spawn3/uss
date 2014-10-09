@@ -1,0 +1,44 @@
+<script type="text/javascript">
+$(document).ready(function(){
+$("#tb_fsys_flvm").jqGrid({
+		url:'fsys/flvm/rsrc',
+		datatype: 'json',
+		mtype: 'GET',
+		colNames:['ID', '卷名称', '容量限制(G)'],
+		colModel :[
+		  {name:'id',   index:'id',   width:50,  align:'center'},
+		  {name:'name', index:'name', width:150, align:'center', editable:true},
+		  {name:'size', index:'size', width:80,  align:'center', editable:true},
+		],
+		pager: '#div_fsys_flvm_pager',
+		rowNum:10,
+		rowList:[10,20,30],
+		sortname: 'id',
+		sortorder: 'desc',
+		viewrecords: true,
+		caption: '逻辑卷',
+		shrinkToFit:false,
+		width: 900,
+		height: 500,
+		editurl: '/fsys/flvm/rsrc',
+
+}).navGrid("#div_fsys_flvm_pager", {del:false})
+	.navButtonAdd('#div_fsys_flvm_pager',{
+		caption: "",
+		position: "last",
+		title: "forbidden ",
+		buttonicon: "ui-icon-gear",
+		onClickButton: function(){
+			alert("adding Row");
+			$("#tb_dev_list").setColumns(options);
+	   		return false;
+		},
+	});
+
+});
+</script>
+
+<div class="div_dev">
+    <table id="tb_fsys_flvm"></table>
+    <div id="div_fsys_flvm_pager"></div>
+</div>

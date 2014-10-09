@@ -1,0 +1,10 @@
+{application,edogdb,
+             [{description,"Edog DB"},
+              {vsn,"1.6.1"},
+              {start_phases,[]},
+              {registered,[edogdb]},
+              {applications,[kernel,stdlib]},
+              {mod,{edogdb_app,[]}},
+              {env,[]},
+              {modules,[edogdb,edogdb_app,edogdb_backup,edogdb_cluster,
+                        edogdb_config,edogdb_monitor,edogdb_sup]}]}.

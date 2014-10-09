@@ -1,0 +1,70 @@
+<meta name="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css" href="../static/css/left_field.css" />
+<script type="text/javascript">
+    $(function(){
+        // Accordion
+        $("#accordion").accordion({
+             header: "h3",
+             autoHeight: false,
+             navigation: true
+             //event: "mouseover"
+        });
+
+        $('#accordion div a').click(function(){
+            var title = $(this).attr('title');
+            var href  = $(this).attr('name');
+            var text  = $(this)[0].text;
+
+            $('#middle_field_content')[0].innerHTML = '';
+            $('#middle_field_content').load(href);
+            $('#lb_mid_caption').html(title + " &rsaquo;&rsaquo; " + text);
+            return false;
+        });
+    });
+</script>
+
+<div class="caption"><label>导航</label></div>
+<div id="accordion">
+
+    <h3><a>集群</a></h3>
+    <div>
+        <a id="a_node"  name='node/page/0'     title='集群'>节点</a><br/>
+        <a id="a_ctrl"  name='syst/ctrl/page'  title='集群'>控制</a><br/>
+        <a id="a_moni"  name='syst/moni/page'  title='集群'>监视</a><br/>
+        <a id="a_alert" name='syst/alert/page' title='集群'>事件</a><br/>
+    </div>
+
+    <!--
+    <h3><a>节点</a></h3>
+    <div>
+    </div>
+    -->
+
+    <h3><a>文件系统</a></h3>
+    <div>
+        <a id="a_conf" name='fsys/conf/page'   title='文件系统'>参数配置</a><br />
+        <a id="a_flvm" name='fsys/flvm/page'   title='文件系统'>卷管理</a><br />
+        <a id="a_flog" name='fsys/flog/page/0' title='文件系统'>日志操作</a><br />
+        <!--
+        <a id="a_conn" name='fsys/conn/page/0'>连接</a><br />
+        <a id="a_fshr" name='fsys/fshr/page'>文件共享</a><br />
+        <a id="a_nmsp" name='fsys/nmsp/page'>名字空间</a><br />
+        <a id="a_auth" name='fsys/auth/page'>认证</a><br />
+        -->
+    </div>
+
+    <!--
+    <h3><a>设置</a></h3>
+    <div>
+        <a id="a_nw">配置</a><br />
+        <a id="a_nw">网络</a><br />
+        <a id="a_update">更新</a>
+    </div>
+    -->
+
+    <h3><a>用户</a></h3>
+    <div>
+        <a id="a_user" name='user/changepasswd' title='用户'>用户</a><br />
+    </div>
+</div>

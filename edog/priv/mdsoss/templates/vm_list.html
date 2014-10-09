@@ -1,0 +1,17 @@
+{% extends "world_base.html" %}
+{% block title %}vm list{% endblock %}
+{% block content %}
+
+<div class='menu2' >
+    <a href="home">首页</a>
+    &rsaquo;
+    <a href="vm_list">虚拟机</a>
+</div>
+
+<br/>
+<br/>
+<div align="center">
+    {% include "vm_list_block.html" %}
+</div>
+
+{% endblock %}

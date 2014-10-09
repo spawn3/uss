@@ -1,0 +1,10 @@
+%% ------------------------------------------------------------
+@author Dongguanjun <dongguanjun@meidisen.com>
+@copyright 2010 Meidisen Co.,Ltd
+@version 1.0.0
+@title Welcome to the 'edog' application!
+@TODO Network Virtualization
+@TODO 要评估迁移的影响，如果必要，须维护全局Tap空间
+@doc `edog'
+@end
+%% ------------------------------------------------------------

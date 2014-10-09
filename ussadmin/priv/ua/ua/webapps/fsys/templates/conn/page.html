@@ -1,0 +1,30 @@
+<script type="text/javascript">
+	$(function() {
+		$("#tabs_fsys_conn").tabs({
+			ajaxOptions: {
+				error: function(xhr, status, index, anchor) {
+					$(anchor.hash).html("Couldn't load this tab. We'll try to fix this as soon as possible.");
+				}
+			},
+			cache: true,
+			selected: {{index}}
+		});
+	});
+</script>		
+
+<style>
+#tabs_fsys_conn > div {
+	padding: 2px;
+}
+</style>
+
+<div id="tabs_fsys_conn" style="border: none; padding: 0px;height: 625px;">
+	<ul>
+		<li><a href="/fsys/conn/tab_proxy">Proxy</a></li>
+		<li><a href="/fsys/conn/tab_nfs">NFS</a></li>
+		<li><a href="/fsys/conn/tab_cifs">CIFS</a></li>
+		<li><a href="/fsys/conn/tab_ftp">FTP</a></li>
+		<li><a href="/fsys/conn/tab_http">HTTP</a></li>
+	</ul>
+</div>
+

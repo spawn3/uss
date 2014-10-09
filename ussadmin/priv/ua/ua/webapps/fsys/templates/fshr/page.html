@@ -1,0 +1,51 @@
+<script type="text/javascript">
+$(document).ready(function(){ 
+$("#tb_fsys_fshr").jqGrid({
+		url:'fsys/fshr/rsrc',
+		datatype: 'json',
+		mtype: 'GET',
+		colNames:['ID', '目录', '容量限制', '已用', '协议', 'NFS', 'CIFS', 'FTP', 'HTTP', '认证'],
+		colModel :[ 
+		  {name:'id', index:'id', width:50, align:'center'}, 
+		  {name:'dir', index:'dir', width:150, align:'center', editable:true},
+		  {name:'sizelimit', index:'sizelimit', width:80, align:'center'},
+		  {name:'size', index:'size', width:80, align:'center'},
+		  {name:'protocol', index:'protocol', width:100, align:'center', editable:true, edittype:'checkbox', editoptions:{ value:"Yes:No" }},
+		  
+		  {name:'nfs', index:'nfs', width:40, align:'center', editable:true, edittype:'checkbox', editoptions:{ value:"Yes:No" }},
+		  {name:'cifs', index:'cifs', width:40, align:'center', editable:true, edittype:'checkbox', editoptions:{ value:"Yes:No" }},
+		  {name:'ftp', index:'ftp', width:40, align:'center', editable:true, edittype:'checkbox', editoptions:{ value:"Yes:No" }},
+		  {name:'http', index:'http', width:40, align:'center', editable:true, edittype:'checkbox', editoptions:{ value:"Yes:No" }},
+		  
+		  {name:'auth', index:'auth', width:100, align:'center', editable:true}
+		],
+		pager: '#div_fsys_fshr_pager',
+		rowNum:10,
+		rowList:[10,20,30],
+		sortname: 'id',
+		sortorder: 'desc',
+		viewrecords: true,
+		caption: 'Node',
+		shrinkToFit:false,
+		width: 900,
+		height: 500
+})
+	.navGrid("#div_fsys_fshr_pager")
+	.navButtonAdd('#div_fsys_fshr_pager',{
+		caption: "",
+		position: "last",
+		title: "forbidden ",
+		buttonicon: "ui-icon-gear",
+		onClickButton: function(){
+			alert("adding Row");	
+			$("#tb_dev_list").setColumns(options);
+	   		return false;
+		},
+	});
+}); 
+</script>
+ 
+<div class="div_dev">
+<table id="tb_fsys_fshr"></table>
+<div id="div_fsys_fshr_pager"></div>
+</div>

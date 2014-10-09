@@ -1,0 +1,113 @@
+<script>
+$(document).ready(function(){
+	var current_attr = "load";
+
+	$('#div_stat_graph').load('div/node_rrd', {"attr":current_attr});
+	
+	$.extend({
+	   refresh_node_rrd:function(){
+				if ($('#interval_tip').hasClass('tab_rrd'))
+				{
+					$('#div_stat_graph').load('div/node_rrd', {"attr":current_attr});
+				}
+	   }
+	});
+	setInterval("$.refresh_node_rrd()",300000);
+	
+/*
+	$('#slt_rack').change(function(){
+		r = $('#slt_rack option:selected').val();
+		t = $('#slt_time option:selected').val();
+		$('#div_statd_graph').load('node/stat_graph', {rack=r, time=t});
+	});
+	
+	$('#slt_time').change(function(){
+		r = $('#slt_rack option:selected').val();
+		t = $('#slt_time option:selected').val();
+		$('#div_stat_graph').load('div/node_moni', {rack=r, time=t});
+	});
+*/
+
+	$('input[name="attr"]').click(function(){
+		$('#div_stat_graph').load('div/node_rrd', {"attr":$(this).val()});
+		current_attr = $(this).val();
+	});
+});
+</script>
+
+<div class="div_filter">
+	<!--
+    <div class="div_filter_block">
+        <label for="rack" class="lbl_right">Rack:</label>
+        <select name="rack" id="slt_rack">
+            <option value="all">all</option>
+            {% for r in racks %}
+            <option value="{{ r['id'] }}">{{ r['name'] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    
+    <div class="div_filter_block">
+        <label for="rack" class="lbl_right">时间:</label>
+        <select name="time" id="slt_time">
+            <option value="10m">last 10 minutes</option>
+            <option value="1h">last hour</option>
+            <option value="3h">last 3 hours</option>
+            <option value="6h">last 6 hours</option>
+            <option value="12h">last 12 hours</option>
+            <option value="1d">last day</option>
+            <option value="15d">last 15 days</option>
+            <option value="1ms">last mounth</option>
+            <option value="3ms">last 3 mounths</option>
+            <option value="6ms">last 6 mounths</option>
+            <option value="1y">last year</option>
+        </select>
+    </div>
+    -->
+	
+	<div class="div_filter_block">
+		<label class="lbl_right">排序:<label>
+	</div>
+	
+	<div class="div_filter_block">
+		<input type="radio" name="attr" value="load" checked/>
+		<label class="lbl_right">Load Average<label>
+	</div>
+	
+	<div class="div_filter_block">
+		<input type="radio" name="attr" value="mem"/> <!--mem_used, buffers, cached, swap-->
+		<label class="lbl_right">Memory<label>
+	</div>
+	
+	<div class="div_filter_block">
+		<input type="radio" name="attr" value="swap"/>
+		<label class="lbl_right">Swap<label>
+	</div>
+	
+	<div class="div_filter_block">
+		<input type="radio" name="attr" value="nw"/>
+		<label class="lbl_right">Network<label>
+	</div>
+	
+	<!--
+	<div class="div_filter_block">
+		<input type="radio" name="attr" value="bandwidth"/>
+		<label class="lbl_right">Bandwidth<label>
+	</div>
+	-->
+	
+	<div class="div_filter_block">
+		<input type="radio" name="attr" value="iops"/>
+		<label class="lbl_right">Iops<label>
+	</div>
+	
+	<div class="div_filter_block">
+		<input type="radio" name="attr" value="disk"/>
+		<label class="lbl_right">Disk<label>
+	</div>
+
+</div>
+
+
+<div id="div_stat_graph" ></div>

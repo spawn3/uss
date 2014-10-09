@@ -1,0 +1,42 @@
+<link type="text/css" href="../static/css/node.css" rel="stylesheet" />
+
+<style>
+    #tabs_page_node {
+        height: 99.2%;
+        border: none;
+        padding: 0px;
+    }
+
+    #tabs_page_node > div {
+        padding: 2px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#tabs_page_node").tabs({
+            ajaxOptions: {
+                error: function(xhr, status, index, anchor) {
+                    $(anchor.hash).html("Couldn't load this tab. We'll try to fix this as soon as possible.");
+                }
+            },
+            cache: true,
+            selected: {{index}}
+        });
+
+        $('#a_tab_node_ctrl_log').click(function(){
+            $('#interval_tip').removeClass();
+            $('#interval_tip').addClass('a_tab_node_ctrl_log');
+            });
+
+    });
+</script>
+
+
+<div id="tabs_page_node">
+    <ul>
+        <label id="interval_tip" class="a_tab_node_ctrl_log"> </label>
+        <li><a id="a_tab_node_ctrl_log" href="/fsys/flog/tab_ctrl_mng">日志查看</a></li>
+        <li><a id='a_tab_logOption' href="/fsys/flog/logOption"> 日志操作</a></li>
+    </ul>
+</div>

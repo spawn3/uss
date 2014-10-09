@@ -1,0 +1,62 @@
+{% extends "world_base.html" %}
+{% block title %}物理机{% endblock %}
+{% block content %}
+
+<style type="text/css">
+    div.loadbar_01 {width:130px;height:18px;overflow:hidden;background-color:#EEEEEE;}
+    div.loadbar_01 span {float:left;height:18px;text-indent:8px;font:normal 10px/20px Arial, Verdana,Lucida, Helvetica, sans-serif;color:#FFFBCE;background-color:#59A9F2;}
+</style>
+<div class='menu2'>
+    <a href="home">首页</a>
+    &rsaquo;
+    <a href="pm_list">物理机</a>
+</div>
+
+<br />
+<br />
+<div align="center">
+    <table class="v">
+        <thead>
+            <tr>
+                <td></td>
+                <td>IP地址</td>
+                <td>虚拟机数</td>
+                <td>CPU数</td>
+                <td>*VCPU数</td>
+                <td>内存总数(GB)</td>
+                <td>已用内存(GB)</td>
+                <td>*已配置内存(GB)</td>
+                <td>运行中</td>
+                <!--
+                <td>vm_set</td>
+                <td>bridge_set</td>
+                -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for pm in pm_set %}
+            <tr class="{% cycle 'row1' 'row2' %}">
+                <td class='td_checkbox'><input type="checkbox" name="action_on_who" value = "action_on_who"></td>
+                <td><a href="pm_detail?pm_uuid={{pm.uuid}}">{{ pm.uuid }}</a></td>
+                <td>{{ pm.ip }}</td>
+                <td>{{ pm.cpu_cores }}</td>
+                <td>{{ pm.cpu_alloced }}</td>
+                <td>{{ pm.mem_capacity }}</td>
+                <td>{{ pm.mem_used }}</td>
+                <td>{{ pm.mem_alloced }}</td>
+                <td>{{ pm.is_running }}</td>
+                <!--
+                <td>vm_set</th>
+                <td>pm.bridge_set</th>
+                -->
+            </tr>
+            {% endfor %}
+
+            <tr>
+                <td><p>{{ pm_set|length }} 个物理机</p> </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

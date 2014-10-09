@@ -1,0 +1,63 @@
+{% extends "world_base.html" %}
+
+{% block title %}customer_list{% endblock %}
+
+{% block content %}
+
+<!-- Content --> 
+
+<div class='menu2' > 
+<a href="home">首页</a> 
+&rsaquo; 
+<a href="recycle_bin">回收站</a> 
+</div>
+
+<br/>
+<br/>
+
+<table align="center">
+
+	<tr>
+		<td align="left">
+			<div >
+				<table>
+					<tr>
+						<td>
+							<label style="">用户</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{% include "customer_list_block.html" %}
+						</td>
+					</tr>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td align="left">
+				<div align="">
+					<table>
+						<br/>
+						<tr>
+							<td>
+								<label style="">虚拟磁盘</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{% include "virtualDisk_list_block.html" %}
+							</td>
+						</tr>
+					</div>
+				</td>
+			</tr>
+
+		</table>
+
+
+
+
+
+{% endblock %}

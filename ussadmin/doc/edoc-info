@@ -1,0 +1,7 @@
+{application,edog}.
+{packages,[]}.
+{modules,[edog_app,edog_cluster,edog_common,edog_dbg,edog_dhcp,edog_fg,
+          edog_libvirt,edog_load,edog_master,edog_master_rt,edog_mnesia,
+          edog_network,edog_ops,edog_os,edog_select,edog_slaves,
+          edog_slaves_rt,edog_sup,edog_uuid,edog_vm,edog_vmsup,edog_web,
+          edog_yfs]}.

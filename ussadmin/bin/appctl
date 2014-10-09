@@ -1,0 +1,266 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import shlex
+import subprocess
+import commands
+from optparse import OptionParser
+from xml.etree.ElementTree import ElementTree
+
+working_dir = os.path.dirname(os.path.realpath(__file__))
+# app_root_dir = '/sysy/yfs/ussadmin'
+application = 'ussadmin'
+app_src_dir = '%s/..' % working_dir
+app_data_dir = '%s/../../data' % working_dir
+
+print '----------------------------------------------------------------'
+print 'application name: %s' % application
+print 'source dir      : %s' % app_src_dir
+print 'data dir        : %s' % app_data_dir
+print 'config dir      : %s/conf' % app_data_dir
+print 'database dir    : %s/edog_masters' % app_data_dir
+
+sys.path.insert(0, '%s/script' % app_src_dir)
+from ping_managers import get_masters
+from ping_managers import get_primary_ip
+
+def usage():
+    print '*********************************************'
+    print 'usage:'
+    print '\tappctl cluster conf    [master_ip|..]'
+    print '\tappctl web conf'
+    print '\tappctl yfs conf'
+    print
+    print '\tappctl manager deploy [ip1|..]'
+    print '\tappctl manager start  [<ip> [fg]]'
+    print '\tappctl manager stop   [<ip>]'
+    print '\tappctl manager ping'
+    print
+    print '\tappctl agent start <ip> [fg]'
+    print '\tappctl agent stop  <ip>'
+    print
+    print '\tappctl cluster deploy'
+    print '\tappctl cluster check'
+    print '\tappctl cluster restart'
+    print '\tappctl cluster stop'
+    print
+    #print '\tappctl web start'
+    #print '\tappctl web stop'
+    #print
+    #print '\tappctl db [remove]'
+    ##print
+    print '*********************************************'
+
+def run_cmd(cmd):
+    print '***cmd*** %s' % cmd
+    args = shlex.split(cmd)
+    res = subprocess.call(args)
+    return res
+
+def get_plugins():
+    with open('%s/conf/plugins.tpl' % (app_src_dir)) as f:
+        return [x.strip() for x in f]
+
+class Cluster:
+    def __init__(self):
+        self.cmd = ''
+        self.managers = [x.split('@')[1] for x in get_masters()]
+    def setcmd(self, cmd):
+        self.cmd = cmd
+    def run(self):
+        run_cmd(self.cmd)
+
+    def conf(self, masters):
+        self.cmd = '%s/script/make_erl_conf.erl %s' % (app_src_dir, ' '.join(masters))
+        self.run()
+
+    def restart(self):
+        primary_ip = get_primary_ip()
+        self.cmd = '%s/script/nodetool -name ussadmin_master@%s -setcookie ussadmin rpc uss_manager cluster_restart' % (app_src_dir, primary_ip)
+        self.run()
+    def stop(self):
+        primary_ip = get_primary_ip()
+        self.cmd = '%s/script/nodetool -name ussadmin_master@%s -setcookie ussadmin rpc uss_manager cluster_stop' % (app_src_dir, primary_ip)
+        self.run()
+    def deploy(self):
+        primary_ip = get_primary_ip()
+        self.cmd = '%s/script/nodetool -name ussadmin_master@%s -setcookie ussadmin rpc uss_manager cluster_deploy' % (app_src_dir, primary_ip)
+        self.run()
+    def check(self):
+        primary_ip = get_primary_ip()
+        self.cmd = '%s/script/nodetool -name ussadmin_master@%s -setcookie ussadmin rpc uss_manager cluster_check' % (app_src_dir, primary_ip)
+        self.run()
+
+    def _deploy_to_node(self, ip):
+        self.cmd = 'ssh root@%s mkdir -p %s; mkdir -p %s;' % (ip, app_src_dir, app_data_dir)
+        self.run()
+        self.cmd = 'rsync -avz %s/../ussadmin root@%s:%s/../' % (app_src_dir, ip, app_src_dir)
+        self.run()
+        self.cmd = 'rsync -avz %s/conf root@%s:%s/' % (app_data_dir, ip, app_data_dir)
+        self.run()
+    def deploy_to(self, ips):
+        for ip in ips:
+            self._deploy_to_node(ip)
+    def start_manager(self, ip, fg=False):
+        #self.start_web()
+        config = self.__ip_to_config(ip)
+        if fg:
+            self.cmd = '%s/script/start_master.sh -f %s %s' % (app_src_dir, ip, config)
+        else:
+            self.cmd = '%s/script/start_master.sh %s %s' % (app_src_dir, ip, config)
+        self.run()
+    def stop_manager(self, ip):
+        self.stop_web()
+        self.cmd = '%s/script/start_master.sh -s %s' % (app_src_dir, ip)
+        self.run()
+    def show_all_managers(self):
+        self.cmd = 'python %s/script/show_all_managers.py' % (app_src_dir)
+        self.run()
+    def start_all_managers(self):
+        self.cmd = 'python %s/script/start_all_managers.py' % (app_src_dir)
+        self.run()
+    def stop_all_managers(self):
+        self.cmd = 'python %s/script/stop_all_managers.py' % (app_src_dir)
+        self.run()
+    def ping(self):
+        self.cmd = 'python %s/script/ping_managers.py' % (app_src_dir)
+        self.run()
+
+    def start_agent(self, ip, fg=False):
+        if fg:
+            self.cmd = '%s/script/start_agent.sh %s fg' % (app_src_dir, ip)
+        else:
+            self.cmd = '%s/script/start_agent.sh %s' % (app_src_dir, ip)
+        self.run()
+    def stop_agent(self, ip):
+        self.cmd = '%s/script/start_agent.sh %s stop' % (app_src_dir, ip)
+        self.run()
+
+    # WEB
+    def conf_web(self):
+        self.stop_web()
+        self.cmd = 'python %s/web-conf.py' % (app_src_dir)
+        self.run()
+    def start_web(self):
+        self.__start_uss_web()
+    def stop_web(self):
+        self.__stop_uss_web()
+
+    # YFS
+    def yfs_conf(self):
+        self.cmd = '%s/script/make_yfs_conf.erl %s/conf/yfs.conf.tpl /sysy/yfs/etc/yfs.conf' % (app_src_dir, app_src_dir)
+        self.run()
+
+    def remove_db(self):
+        self.cmd = 'rm -rf %s/edog_masters' % (app_data_dir)
+        self.run()
+
+    ##########################################################################
+    def __start_uss_web(self):
+        self.cmd = 'bash %s/script/webctl.sh start' % (app_src_dir)
+        self.run()
+    def __stop_uss_web(self):
+        self.cmd = 'bash %s/script/webctl.sh stop' % (app_src_dir)
+        self.run()
+
+    def __ip_to_config(self, ip):
+        n = self.managers.index(ip) + 1
+        return 'master%d' % n
+
+if __name__ == '__main__':
+    parser = OptionParser()
+    # parser.add_option("-m", "--master", dest ="master", action="store_true", default=False)
+    # parser.add_option("-n", "--idx",    dest ="idx", type="int",    default=1)
+    # parser.add_option("-w", "--frontip",dest ="frontip",type="string", default="127.0.0.1")
+    # parser.add_option("-f", "--front",  dest ="front",  type="int", default=9600)
+    # parser.add_option("-p", "--port",   dest ="port",   type="int", default=9601)
+    # parser.add_option("-t", "--trace",  dest ="trace",  type="int", default=9602)
+    # parser.add_option("-s", "--strace", dest ="strace", type="int", default=9603)
+    (options, args) = parser.parse_args()
+
+    # print options
+    # print args
+    print '---------------------------------------------------------------'
+    # print 'plugins %s enabled!' % get_plugins()
+
+    try:
+        cluster = Cluster()
+        if args[0] == 'cluster':
+            # cluster group
+            if args[1] == 'conf':
+                cluster.conf(args[2:])
+            elif args[1] == 'restart':
+                cluster.restart()
+            elif args[1] == 'stop':
+                cluster.stop()
+            elif args[1] == 'deploy':
+                cluster.deploy()
+            elif args[1] == 'check':
+                cluster.check()
+            else:
+                raise Exception('command ***%s*** not supported!' % (args))
+        elif args[0] == 'manager':
+            # master group
+            if args[1] == 'deploy':
+                cluster.deploy_to(args[2:])
+            #elif args[1] == 'show':
+            #    cluster.show_all_managers()
+            elif args[1] == 'start':
+                if len(args) == 2:
+                    cluster.start_all_managers()
+                elif len(args) == 3:
+                    fg = False
+                    cluster.start_manager(args[2], fg)
+                elif len(args) > 3 and args[3] == 'fg':
+                    if args[3] == 'fg':
+                        fg = True
+                    else:
+                        fg = False
+                    cluster.start_manager(args[2], fg)
+            elif args[1] == 'stop':
+                if len(args) == 2:
+                    cluster.stop_all_managers()
+                else:
+                    cluster.stop_manager(args[2])
+            elif args[1] == 'ping':
+                cluster.ping()
+            else:
+                raise Exception('command ***%s*** not supported!' % (args))
+        elif args[0] == 'agent':
+            # master group
+            if args[1] == 'start':
+                if len(args) > 2 and args[3] == 'fg':
+                    fg = True
+                else:
+                    fg = False
+                cluster.start_agent(args[2], fg)
+            elif args[1] == 'stop':
+                cluster.stop_agent(args[2])
+            else:
+                raise Exception('command ***%s %s*** not supported!' % (args))
+        elif args[0] == 'web':
+            # web group
+            if args[1] == 'conf':
+                cluster.conf_web()
+            elif args[1] == 'start':
+                cluster.start_web()
+            elif args[1] == 'stop':
+                cluster.stop_web()
+            else:
+                raise Exception('command ***%s*** not supported!' % (args))
+        elif args[0] == 'yfs':
+            if args[1] == 'conf':
+                cluster.yfs_conf()
+            else:
+                raise Exception('command ***%s*** not supported!' % (args))
+        elif args[0] == 'db':
+            if args[1] == 'remove':
+                cluster.remove_db()
+            else:
+                raise Exception('command ***%s*** not supported!' % (args))
+        else:
+            raise Exception('command ***%s*** not supported!' % (args))
+    except Exception, e:
+        print e
+        usage()

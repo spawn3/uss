@@ -1,0 +1,62 @@
+{% extends "world_base.html" %}
+
+{% block title %}磁盘详细信息{% endblock %}
+
+{% block content %}
+<!-- Content -->
+
+
+<table align="center" style="font-size:12px">
+
+		<tr>
+        <td align="left">名称:</td><td>{{virtualDisk.alias}}</td>
+		</tr>
+
+    <tr>
+        <td align="left">状态:</td><td>{{virtualDisk.status}}</td>
+        <td align="left">用户:</td><td>{{virtualDisk.customer.company}}</td>
+    </tr>
+
+		<tr>
+        <td align="left">可共享:</td><td>{{virtualDisk.shared}}</td>
+		</tr>
+
+    <tr>
+        <td align="left">挂载次数:</td><td>{{virtualDisk.vm}}</td>
+    </tr>
+
+		{% for i in diskvms%}
+			<tr>
+        <td align="left">挂载虚拟机:</td><td>{{i.vm_id}}</td>
+        <td align="left">目标:</td><td>{{i.target}}</td>
+			</tr>
+		{%endfor%}
+
+    <tr>
+        <td align="left">容量:</td><td>{{virtualDisk.capacity}}</td>
+        <td align="left">可启动:</td><td>{{virtualDisk.is_vmimg}}</td>
+    </tr>
+    <tr>
+        <td align="left">ID:</td><td colspan="3">{{virtualDisk.uuid}}</td>
+    </tr>
+    <tr>
+        <td align="left">位置:</td><td colspan="3">{{virtualDisk.path}}</td>
+    </tr>
+
+</table>
+
+<br />
+{% if not virtualDisk.customer.locked %}
+<div style="text-align:center;">
+<ul>
+
+<button type="button"  onclick="window.location.href='virtualDisk_lock?virtualDisk_uuid={{virtualDisk.uuid}}'">抛弃</button>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<button type="button" onclick="window.location.href='virtualDisk_unlock?virtualDisk_uuid={{virtualDisk.uuid}}'">恢复</button>
+</ul>
+</div>
+{% endif %}
+
+
+    <!-- END Content -->
+{% endblock %}

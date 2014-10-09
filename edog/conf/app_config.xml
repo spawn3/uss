@@ -1,0 +1,9 @@
+<app name='whs' cookie='edog'>
+    <manager name='edog_master'></manager>
+    <agent name='edog'></agent>
+    <web port='9501'></web>
+    <cluster>
+        <manager ip='192.168.1.201'></manager>
+        <agent ip='192.168.1.201'></agent>
+    </cluster>
+</app>

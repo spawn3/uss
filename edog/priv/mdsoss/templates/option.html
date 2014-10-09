@@ -1,0 +1,51 @@
+{% extends "world_base.html" %}
+{% block title %}Option list{% endblock %}
+{% block content %}
+<div class='menu2'> 
+	<a href="home">Home</a> 
+	&rsaquo; 
+	<a href="option_list">Option</a> 
+</div> 
+
+<style type="text/css">
+
+</style>
+
+<form name="option_list"  action="option">
+	<div align="center">
+        <table class="v"> 
+        
+        <thead> 
+    
+            <tr> 
+                <td></td>
+                <td>key</td>
+                <td>value</td>
+            </tr> 
+        </thead> 
+        
+        <tbody> 
+            {% for option in option_list %}
+            <tr class="{% cycle 'row1' 'row2' %}">
+           		 <td></td>
+                <td>{{ option.key }}</td>
+                <td> 
+                    <div style="position:relative;">
+                    <span style="margin-left:100px;width:18px;overflow:hidden; ">
+                    <select style="width:118px;margin-left:-100px;color:#09F;border:1px; margin-left:10px" class="{% cycle 'row1' 'row2' %}" onchange="this.parentNode.nextSibling.value=this.value">
+                    <option value="{{ option.value }}"> {{ option.value }} </option>
+                     <option value="{{ option.value }}"> {{ option.value }} </option>
+                    </select>
+                    </span>
+                    <input name="{{ option.key}}" class="{% cycle 'row1' 'row2' %}" value="{{ option.value }}" style="width:96px;position:absolute; border:0px;left:110px;">
+                    </div>
+            </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+
+       </div>
+       <input type="submit" value="sumbit"  />
+ </form>
+{% endblock %}

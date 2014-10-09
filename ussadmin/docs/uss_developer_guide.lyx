@@ -1,0 +1,1274 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass scrbook
+\begin_preamble
+% DO NOT ALTER THIS PREAMBLE!!!
+%
+% This preamble is designed to ensure that this document prints
+% out as advertised. If you mess with this preamble,
+% parts of this document may not print out as expected.  If you
+% have problems LaTeXing this file, please contact 
+% the documentation team
+% email: lyx-docs@lists.lyx.org
+
+\usepackage{ifpdf} % part of the hyperref bundle
+\ifpdf % if pdflatex is used
+
+ % set fonts for nicer pdf view
+ \IfFileExists{lmodern.sty}
+  {\usepackage{lmodern}}{}
+
+\fi % end if pdflatex is used
+
+% the pages of the TOC is numbered roman
+% and a pdf-bookmark for the TOC is added
+\let\myTOC\tableofcontents
+\renewcommand\tableofcontents{%
+  \frontmatter
+  \pdfbookmark[1]{\contentsname}{}
+  \myTOC
+  \mainmatter }
+
+% redefine the \LyX macro for PDF bookmarks
+\def\LyX{\texorpdfstring{%
+  L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+  {LyX}}
+
+% used for multi-column text
+\usepackage{multicol}
+
+\usepackage{indentfirst}
+\usepackage[body={17cm,25cm},centering,dvipdfm]{geometry}
+
+\XeTeXlinebreaklocale="zh"
+\XeTeXlinebreakskip=0pt plus 1pt minus .1pt
+\end_preamble
+\options a4paper,10pt,openany,twoside
+\use_default_options false
+\begin_modules
+logicalmkup
+\end_modules
+\maintain_unincluded_children false
+\begin_local_layout
+Format 35
+InsetLayout Flex:MenuItem
+LyxType               charstyle
+LabelString           menu
+LatexType             command
+LatexName             menuitem
+Font
+Family              Sans
+EndFont
+Preamble
+\newcommand*{\menuitem}[1]{{\sffamily #1}}
+EndPreamble
+End
+# In case we need to do with sans...
+#InsetLayout CharStyle:Code
+#Font
+#Family              Sans
+#EndFont
+#Preamble
+#\renewcommand{\code}[1]{{\sffamily #1}}
+#EndPreamble
+#End
+\end_local_layout
+\language chinese-simplified
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman YaHei Consolas Hybrid
+\font_sans YaHei Consolas Hybrid
+\font_typewriter YaHei Consolas Hybrid
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\font_cjk gbsn
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing single
+\use_hyperref true
+\pdf_title "LyX Configuration Manual"
+\pdf_author "LyX Team"
+\pdf_subject "LyX-documentation Customization"
+\pdf_keywords "LyX, documentation, customization"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle false
+\pdf_quoted_options "dvipdfm,colorlinks,pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=FitH, plainpages=false,CJKbookmarks=true,unicode=false"
+\papersize a4paper
+\use_geometry false
+\use_amsmath 0
+\use_esint 0
+\use_mhchem 0
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\branch OutDated
+\selected 0
+\filename_suffix 0
+\color #f5fae7
+\end_branch
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle headings
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict true
+\end_header
+
+\begin_body
+
+\begin_layout Title
+USSAdmin开发者手册
+\end_layout
+
+\begin_layout Author
+美地森科技
+\end_layout
+
+\begin_layout Date
+2011.07.12
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+需求分析
+\end_layout
+
+\begin_layout Section
+集群管理
+\end_layout
+
+\begin_layout Subsection
+集群
+\end_layout
+
+\begin_layout Subsection
+
+\emph on
+机架
+\end_layout
+
+\begin_layout Subsection
+节点
+\end_layout
+
+\begin_layout Subsection
+文件系统及其服务
+\end_layout
+
+\begin_layout Itemize
+配置参数
+\end_layout
+
+\begin_layout Itemize
+运行监控
+\end_layout
+
+\begin_layout Itemize
+日志管理
+\end_layout
+
+\begin_layout Itemize
+逻辑卷管理
+\end_layout
+
+\begin_layout Itemize
+MDS重建
+\end_layout
+
+\begin_layout Itemize
+扩容
+\end_layout
+
+\begin_layout Itemize
+文件浏览器
+\end_layout
+
+\begin_layout Itemize
+IPSAN
+\end_layout
+
+\begin_layout Itemize
+快照
+\end_layout
+
+\begin_layout Itemize
+CDP
+\end_layout
+
+\begin_layout Itemize
+远程备份
+\end_layout
+
+\begin_layout Section
+
+\color red
+资源监控
+\end_layout
+
+\begin_layout Subsection
+物理资源
+\end_layout
+
+\begin_layout Itemize
+CPU
+\end_layout
+
+\begin_layout Itemize
+Memory/Swap
+\end_layout
+
+\begin_layout Itemize
+Network(Host/Interface)
+\end_layout
+
+\begin_layout Itemize
+Disk(SSD, Smart)
+\end_layout
+
+\begin_layout Subsection
+文件系统
+\end_layout
+
+\begin_layout Itemize
+Process
+\end_layout
+
+\begin_layout Itemize
+
+\color red
+Throughput
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+IOPS
+\end_layout
+
+\begin_layout Itemize
+Response Time
+\end_layout
+
+\begin_layout Itemize
+Capacity
+\end_layout
+
+\begin_layout Section
+
+\color red
+故障处理
+\end_layout
+
+\begin_layout Subsection
+故障分类
+\end_layout
+
+\begin_layout Subsection
+处理策略
+\end_layout
+
+\begin_layout Subsection
+多Master
+\end_layout
+
+\begin_layout Subsection
+数据备份和恢复
+\end_layout
+
+\begin_layout Section
+用户管理
+\end_layout
+
+\begin_layout Subsection
+local user
+\end_layout
+
+\begin_layout Subsection
+操作权限
+\end_layout
+
+\begin_layout Subsection
+LDAP
+\end_layout
+
+\begin_layout Section
+文档
+\end_layout
+
+\begin_layout Section
+企业
+\end_layout
+
+\begin_layout Itemize
+https
+\end_layout
+
+\begin_layout Itemize
+snmp
+\end_layout
+
+\begin_layout Chapter
+系统设计
+\end_layout
+
+\begin_layout Section
+系统架构
+\end_layout
+
+\begin_layout Subsection
+模块
+\end_layout
+
+\begin_layout Itemize
+Web （HTML/Javascript/CSS/Python）
+\end_layout
+
+\begin_layout Itemize
+Erlang（Erlang/C）
+\end_layout
+
+\begin_layout Subsection
+数据视图
+\end_layout
+
+\begin_layout Itemize
+数据安全
+\end_layout
+
+\begin_layout Section
+
+\emph on
+\color red
+事件处理
+\end_layout
+
+\begin_layout Subsection
+事件分类
+\end_layout
+
+\begin_layout Itemize
+TRAP
+\end_layout
+
+\begin_layout Subsection
+事件处理过程
+\end_layout
+
+\begin_layout Section
+用户界面
+\end_layout
+
+\begin_layout Itemize
+API -> Web
+\end_layout
+
+\begin_layout Itemize
+CLI
+\end_layout
+
+\begin_layout Section
+消息控制台
+\end_layout
+
+\begin_layout Itemize
+page layout
+\end_layout
+
+\begin_layout Itemize
+可折叠
+\end_layout
+
+\begin_layout Itemize
+可滚动
+\end_layout
+
+\begin_layout Section
+系统日志
+\end_layout
+
+\begin_layout Section
+
+\color red
+同步操作
+\end_layout
+
+\begin_layout Itemize
+模态对话框？
+\end_layout
+
+\begin_layout Itemize
+进度条
+\end_layout
+
+\begin_layout Itemize
+进度消息
+\end_layout
+
+\begin_layout Section
+异步操作
+\end_layout
+
+\begin_layout Section
+消息中间件
+\end_layout
+
+\begin_layout Itemize
+队列
+\end_layout
+
+\begin_layout Itemize
+持久化
+\end_layout
+
+\begin_layout Chapter
+开发计划
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+类型
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+特性
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+实现
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+时间
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+说明
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+UI
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+目前开发重点主要有：
+\end_layout
+
+\begin_layout Itemize
+测试发现的问题
+\end_layout
+
+\begin_layout Itemize
+
+\color red
+事件处理框架
+\end_layout
+
+\begin_layout Itemize
+整体页面布局和操作流程的考虑
+\end_layout
+
+\begin_layout Itemize
+服务发现机制
+\end_layout
+
+\begin_layout Itemize
+YFS新功能的添加
+\end_layout
+
+\begin_layout Chapter
+系统部署
+\end_layout
+
+\begin_layout Section
+程序目录
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+|-- ABOUTS
+\end_layout
+
+\begin_layout Plain Layout
+|-- bin
+\end_layout
+
+\begin_layout Plain Layout
+|-- ChangeLog
+\end_layout
+
+\begin_layout Plain Layout
+|-- conf
+\end_layout
+
+\begin_layout Plain Layout
+|-- ct
+\end_layout
+
+\begin_layout Plain Layout
+|-- deps
+\end_layout
+
+\begin_layout Plain Layout
+|-- doc
+\end_layout
+
+\begin_layout Plain Layout
+|-- docs
+\end_layout
+
+\begin_layout Plain Layout
+|-- ebin
+\end_layout
+
+\begin_layout Plain Layout
+|-- git.vsn
+\end_layout
+
+\begin_layout Plain Layout
+|-- include
+\end_layout
+
+\begin_layout Plain Layout
+|-- INSTALL.rst
+\end_layout
+
+\begin_layout Plain Layout
+|-- Makefile
+\end_layout
+
+\begin_layout Plain Layout
+|-- mktags.sh
+\end_layout
+
+\begin_layout Plain Layout
+|-- plugins
+\end_layout
+
+\begin_layout Plain Layout
+|-- priv
+\end_layout
+
+\begin_layout Plain Layout
+|-- README.markdown
+\end_layout
+
+\begin_layout Plain Layout
+|-- rebar
+\end_layout
+
+\begin_layout Plain Layout
+|-- rebar.config
+\end_layout
+
+\begin_layout Plain Layout
+|-- script
+\end_layout
+
+\begin_layout Plain Layout
+|-- src
+\end_layout
+
+\begin_layout Plain Layout
+|-- test
+\end_layout
+
+\begin_layout Plain Layout
+|-- tree.txt
+\end_layout
+
+\begin_layout Plain Layout
+|-- web-conf.py
+\end_layout
+
+\begin_layout Plain Layout
+`-- www
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+系统配置
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+控制脚本bin
+\emph default
+/ussctl
+\end_layout
+
+\begin_layout Standard
+---------------------------------------------------------------
+\end_layout
+
+\begin_layout Standard
+plugins ['edog'] enabled!
+\end_layout
+
+\begin_layout Standard
+*********************************************
+\end_layout
+
+\begin_layout Standard
+usage:
+\end_layout
+
+\begin_layout Standard
+ussctl cluster conf [master_ip|..]
+\end_layout
+
+\begin_layout Standard
+ussctl cluster restart <ip>
+\end_layout
+
+\begin_layout Standard
+ussctl cluster stop <ip>
+\end_layout
+
+\begin_layout Standard
+ussctl cluster deploy <ip>
+\end_layout
+
+\begin_layout Standard
+ussctl cluster check <ip>
+\end_layout
+
+\begin_layout Standard
+ussctl manager start <ip> <config> [fg]
+\end_layout
+
+\begin_layout Standard
+ussctl manager stop <ip> <config>
+\end_layout
+
+\begin_layout Standard
+ussctl agent start <ip> [fg]
+\end_layout
+
+\begin_layout Standard
+ussctl agent stop <ip>
+\end_layout
+
+\begin_layout Standard
+ussctl web conf
+\end_layout
+
+\begin_layout Standard
+ussctl web start
+\end_layout
+
+\begin_layout Standard
+ussctl web stop
+\end_layout
+
+\begin_layout Standard
+*********************************************
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Subsection
+WHS作为USS的插件进行管理
+\end_layout
+
+\begin_layout Standard
+conf/plugins.tpl每行启用一个插件，可以通过该文件控制是否启用某插件，例如：
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+edog
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+USS Web配置
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+bin/ussctl web conf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+WHS Web配置
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+python manage.py syncdb
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+USS Admin配置
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+bin/ussctl cluster conf ip1 ip2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+当提供多个ip时，支持多manager启动，由此来解决数据的单点问题。
+\end_layout
+
+\begin_layout Section
+存储系统USS
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+bin/ussctl manager start ip1 master1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+启动manager后，就可以登录ussadmin界面进行进一步的集群配置，包括：
+\end_layout
+
+\begin_layout Itemize
+rack管理
+\end_layout
+
+\begin_layout Itemize
+节点管理
+\end_layout
+
+\begin_layout Itemize
+设置c60/mds
+\end_layout
+
+\begin_layout Itemize
+启动/关闭yfs分布式存储系统等
+\end_layout
+
+\begin_layout Section
+虚拟机管理系统WHS
+\end_layout
+
+\begin_layout Standard
+WHS的独立启动问题？？
+\end_layout
+
+\begin_layout Chapter
+FAQ
+\end_layout
+
+\begin_layout Section
+如果有不同IP的beam已经启动，start_agent.sh启动失败。
+\end_layout
+
+\begin_layout Section
+Agent与YFS能否运行在不同的网段？
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+不能。在启动YFS是，会根据集群的节点IP生成两个文件：/sysy/yfs/etc/c60_node和/sysy/yfs/etc/fence.conf。在启动YF
+S时，会利用这些文件。如果运行在不同的网段，会造成c60无法启动的问题。
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Agent没有正常启动
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+缺少edog_nif.so文件，可以观察到监控数据没有变化。需要在manager上生成该文件，然后分发到各个节点。
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+网络数据异常
+\end_layout
+
+\begin_layout Section
+重新配置web时，需要先关闭
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+否则，造成数据库无法正常访问，可以先清除data/store/db，然后重试。
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_body
+\end_document

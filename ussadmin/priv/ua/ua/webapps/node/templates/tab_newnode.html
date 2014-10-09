@@ -1,0 +1,183 @@
+<style>
+#btn_node_add {
+	float: left;
+	margin-left: 300px;
+}
+
+#btn_rack_mng {
+	float: left;
+	margin-left:20px;
+}
+
+#div_node_tb {
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	
+	box-shadow: 0 3px 3px#C8C8C8;
+	-webkit-box-shadow: 0 3px 3px #C8C8C8;
+	-moz-box-shadow: 0 3px 3px #C8C8C8;
+	
+	float: left;
+	margin-top: 10px;
+}
+
+#tb_drvs {
+	font-size: 8px;
+}
+</style>
+
+<script>
+$(document).ready(function(){
+	$('#btn_node_add').click(function(){
+		$('#div_node_add').load('div/node_add');
+		return false;
+	});
+	
+	$('#btn_rack_mng').click(function(){
+		$('#div_rack_mng').load('div/rack_mng');
+		return false;
+	});
+	
+	$('#btn_resetview').click(function(){
+		//$('#middle_field_content').load('node/page');
+		$('#div_node_dtls').html('');
+		$("#tb_node_mng").setGridHeight(470);
+		
+		return false;
+	});
+	
+	
+/*
+	$('#slt_rack').change(function(){
+		r = $('#slt_rack option:selected').val();
+		t = $('#slt_time option:selected').val();
+		$('#div_statd_graph').load('node/stat_graph', {rack=r, time=t});
+	});
+	
+	$('#slt_time').change(function(){
+		r = $('#slt_rack option:selected').val();
+		t = $('#slt_time option:selected').val();
+		$('#div_stat_graph').load('node/stat_graph', {rack=r, time=t});
+	});
+*/
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+	
+	$('#tb_node_mng').jqGrid({
+		url:'node/rsrc',
+		datatype: 'json',
+		mtype: 'GET',
+		colNames:['ID', 'IP', 'Hostname',
+					'Status',
+					'CPU', 'Load', 'Mem', 'Swap',
+					'NW(in,out)(M)', 
+					'Drive Used', 
+					'Service'],
+		colModel :[ 
+		  {name:'id', index:'id', width:40, align:'center'}, 
+		  {name:'ip', index:'ip', width:110, align:'center'},
+		  {name:'hostname', index:'hostname', width:80, align:'center'},
+		  {name:'stat', index:'stat', width:90, align:'center'},
+		  {name:'cpu', index:'cpu', width:60, align:'center'},
+		  {name:'load', index:'load', width:60, align:'center'},
+		  {name:'mem', index:'mem', width:60, align:'center'},
+		  {name:'swap', index:'swap', width:60, align:'center'},
+		  {name:'nw', index:'nw', width:140, align:'center'},
+		  {name:'drvs', index:'drvs', width:100, align:'center'},
+		  {name:'srvc', index:'srvc', width:150, align:'center'}
+		],
+		pager: '#div_node_mng_pager',
+		rowNum:15,
+		rowList:[15,30,45],
+		sortname: 'id',
+		sortorder: 'desc',
+		viewrecords: true,
+		caption: 'Node Resource Used',
+		//shrinkToFit:false,
+		width: 1000,
+		height: 470,
+		loadui: 'disable',
+		multiselect: true,
+
+		onSelectRow: function(rowid, iCol, cellcontent, e){
+				//$("#tb_node_mng").setGridWidth($(window).width()*0.5);
+				$("#tb_node_mng").setGridHeight($(window).height()*0.2);
+				
+				$.get("div/node_dtls", 
+						{"id": rowid}, 
+						function(data){
+							$("#div_node_dtls").html(data);
+						});
+				//$('#tb_node_mng').resetSelection();
+				return false;
+			}
+	})
+		.navGrid("#div_node_mng_pager")
+	/*	.navButtonAdd('#div_node_mng_pager',{
+			caption: "",
+			position: "last",
+			title: "forbidden ",
+			buttonicon: "ui-icon-gear",
+			onClickButton: function(){
+				//alert("adding Row");	
+				$("#tb_node_mng").setColumns(options);
+		   		return false;
+			},
+		});
+	*/
+	$(window).bind('resize', function() {
+		//$('.div_filter').setGridWidth($(window).width()*0.85);
+		//$('#tb_node_mng').setGridWidth($(window).width()*0.71);
+		//$('#tb_node_mng').setGridHeight($(window).height()*0.68);
+	}).trigger('resize');
+	
+//	$('#tb_node_mng').closest(".ui-jqgrid-bdiv").css({ 'overflow-x' : 'scroll' });
+
+	
+	//$('#div_node_dtls').load('/node/dtls');
+	
+	
+	$.extend({
+	   refresh:function(){
+	    	$('#tb_node_mng').trigger("reloadGrid");
+	   }
+	});
+	setInterval("$.refresh()",300000);
+}); 
+</script>
+
+<div class="div_filter">
+
+    <div class="div_filter_block">
+        <label for="rack" class="lbl_right">Rack:</label>
+        <select name="rack" id="slt_rack">
+            <option value="all">all</option>
+            {% for r in racks %}
+            <option value="{{ r.id }}">{{ r.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+	
+	<div class="div_filter_block">
+		<button id="btn_node_add">New Node</button>
+		<button id="btn_rack_mng">Rack Management</button> 
+		<button id="btn_add_to_cluster">Add to cluster</button>
+		<button id="btn_resetview">Reset View</button> 
+	</div>
+</div>
+
+
+<div id="div_node_tb"> 
+<table id="tb_node_mng"></table>
+<div id="div_node_mng_pager"></div>
+</div>
+
+
+<div id="div_node_add"></div>
+<div id="div_rack_mng"></div>
+
+<div id="div_node_dtls"></div>
+

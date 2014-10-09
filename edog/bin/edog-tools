@@ -1,0 +1,146 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+import os
+import sys
+import shlex
+import subprocess
+import commands
+import re
+import time
+from optparse import OptionParser
+from threading import Thread
+from xml.etree.ElementTree import ElementTree
+
+working_dir  = os.path.dirname(os.path.realpath(__file__))
+app_src_dir  = '%s/..' % working_dir
+app_data_dir = '%s/../../edog_runtime' % working_dir
+
+# sys.path.append('%s/script' % app_src_dir)
+
+import cclib
+import cclib_format
+
+application  = 'edog'
+manager_name = 'edog_master'
+agent_name   = 'edog'
+api_port     = 9501
+verbose      = False
+
+def usage():
+    print '*********************************************'
+    print 'Usage:'
+    print '\tedog-tools cluster [ping]'
+    print '\tedog-tools vmlist [running|all|<vmid>]'
+    print
+    print '\tedog-tools disk list [all]'
+    print '\tedog-tools disk delete <diskid>'
+    print
+    print '*********************************************'
+
+## -----------------------------------------------------------------------
+## MANAGER
+## -----------------------------------------------------------------------
+class Cluster:
+    def __init__(self):
+        self.cmd = ''
+        self.managers = cclib.get_managers()
+        self.primary  = cclib.get_active_manager(self.managers, api_port)
+        #self.primary = '192.168.2.15'
+    def __del__(self):
+        pass
+
+    def ping(self):
+        res = cclib.get_active_manager(self.managers, api_port)
+        cclib.handle_res(res, verbose)
+        return res
+
+    ## all: ''
+    ## running: 'running'
+    ## one: '<vmid>'
+    def vm_list(self, vmid):
+        if vmid == 'all':
+            vmid = ''
+        res = cclib.http_get(self.primary, api_port, '/vms/%s' % vmid)
+        cclib.handle_res(res, verbose)
+        if res['status'] < 300:
+            form = cclib_format.VmFormat(res['data'])
+            form.format()
+        else:
+            exit(1)
+        return res
+
+    def disk_list(self, free=True):
+        if free:
+            url = '/disks/free'
+        else:
+            url = '/disks'
+
+        res = cclib.http_get(self.primary, api_port, url)
+        cclib.handle_res(res, verbose)
+        if res['status'] < 300:
+            form = cclib_format.DiskFormat(res['data'])
+            form.format()
+        else:
+            exit(1)
+        return res
+
+    def disk_delete(self, diskid):
+        res = cclib.http_delete(self.primary, api_port, '/disks/%s' % diskid)
+        cclib.handle_res(res, verbose)
+        return res
+
+    def __actions(self, params):
+        if primary:
+            res = cclib.http_post(self.primary, api_port, '/actions', params)
+            cclib.handle_res(res, verbose)
+            return res
+        else:
+            print '!! There are not active managers.'
+
+if __name__ == '__main__':
+    parser = OptionParser()
+    parser.add_option("-v", "--verbose", dest ="verbose", action="store_true", default=False)
+    # parser.add_option("-n", "--idx",    dest ="idx", type="int",    default=1)
+    (options, args) = parser.parse_args()
+    verbose = options.verbose
+
+    if len(args) == 0:
+        usage()
+        exit(1)
+
+    try:
+        cluster = Cluster()
+        if args[0] == 'cluster':
+            if len(args) == 1:
+                print cluster.ping()
+            elif args[1] == 'ping':
+                print cluster.ping()
+            else:
+                raise Exception('command ***%s*** not supported!' % (args))
+        elif args[0] == 'vmlist':
+            if len(args) == 1:
+                cluster.vm_list('running')
+            elif len(args) > 1:
+                cluster.vm_list(args[1])
+            else:
+                raise Exception('command ***%s*** not supported!' % (args))
+        elif args[0] == 'disk':
+            if len(args) == 1:
+                cluster.disk_list(True)
+            elif args[1] == 'list':
+                if len(args) > 2 and args[2] == 'all':
+                    cluster.disk_list(False)
+                else:
+                    cluster.disk_list(True)
+            elif args[1] == 'delete':
+                cluster.disk_delete(args[2])
+            else:
+                raise Exception('command ***%s %s*** not supported!' % (args))
+        else:
+            raise Exception('command ***%s*** not supported!' % (args))
+    except Exception, e:
+        print '!!! Exception: ', e
+        if verbose:
+            usage()
+        exit(1)

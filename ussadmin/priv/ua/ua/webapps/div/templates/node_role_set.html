@@ -1,0 +1,142 @@
+<style>
+input.text, select.text { 
+	margin-bottom:12px; 
+	width:95%; 
+	padding: .4em; 
+}
+
+.ui-dialog .ui-state-error { 
+	padding: .3em; 
+}
+
+.validateTips {
+	border: 1px solid transparent; 
+	padding: 0.3em; 
+}
+
+.tb_simple {
+    border-collapse: collapse; 
+    border: 1px solid #B6B6B6;
+    width: 300px;
+    margin: 10px;
+}
+
+.tb_simple th, .tb_simple td {
+    border: 1px solid #B6B6B6;
+}
+
+.tb_simple a:link  {
+	text-decoration: none;
+	color: blue;
+}
+
+.tb_simple a:hover {
+	text-decoration: underline;
+	color: blue;
+}
+</style>
+	
+<script>
+$(function() {
+	var tips = $(".validateTips"),
+		dialog_node_role_set = $('#dialog_node_role_set'),
+		div_node_role_list = $('#div_node_role_list'),
+		smt_set_mds_c60 = $('#smt_set_mds_c60')
+		
+	div_node_role_list.load('div/node_role_list');
+
+	function updateTips(t) {
+		tips.text(t).addClass("ui-state-highlight").css('color', 'red');
+	}
+
+	dialog_node_role_set.dialog({
+		autoOpen: true,
+		height: 500,
+		width: 400,
+		modal: true,
+		buttons: {
+//			"确定": function(){
+//				mds_list = [];
+//				c60_list = [];
+//				$('.checkbox_role_mds:checked').each(function(){
+//					//			alert("role_mds" + $(this).val());
+//					mds_list.push($(this).val());
+//				});
+//				$('.checkbox_role_c60:checked').each(function(){
+//					//			alert("role_c60" + $(this).val());
+//					c60_list.push($(this).val());
+//				});
+//				//		alert(mds_list);
+//				//		alert(c60_list);
+//				if(confirm("确定要重新设置mds和c60吗?")){
+//					$.post('node/set_mds_c60', {'mds_list':mds_list.join(','),
+//						'c60_list':c60_list.join(',')},
+//					function(resp){
+//						if(resp.substring(0,4)=='SUCC'){
+//							//alert(resp);
+//							alert("添加成功！");
+//						}
+//						else{
+//							alert("设置是失败：" + resp);
+//						}
+//					});
+//					}else{
+//				}
+//				$(this).dialog("close");
+//				return false;
+//			},
+			"取消": function() {
+				//	alert("cancel");
+				$(this).dialog("close");
+			}
+		},
+		close: function() {
+			//alert("close");
+			$('input').each(function(){
+				$(this).attr("checked", false); //退出的时候，要把选择的痕迹清除掉
+			});
+			allFields.val("").removeClass("ui-state-error").addClass("validateTips");
+		},
+	});
+smt_set_mds_c60.click(function(){
+		mds_list = [];
+		c60_list = [];
+		$('.checkbox_role_mds:checked').each(function(){
+//			alert("role_mds" + $(this).val());
+			mds_list.push($(this).val());
+		});
+		$('.checkbox_role_c60:checked').each(function(){
+//			alert("role_c60" + $(this).val());
+			c60_list.push($(this).val());
+		});
+//		alert(mds_list);
+//		alert(c60_list);
+		if(confirm("Are you sure to comfirm?")){
+        	$.post('node/set_mds_c60', {'mds_list':mds_list.join(','),
+        								'c60_list':c60_list.join(',')},
+					function(resp){
+						if(resp.substring(0,4)=='SUCC'){
+							//alert(resp);
+							alert("添加成功！");
+						}
+						else{
+							alert("设置是失败：" + resp);
+						}
+					});
+    	}else{
+    	}
+		return false;
+	});
+	
+});
+
+</script>
+
+
+
+
+<div id="dialog_node_role_set" title="设定MDS和C60">
+	<div id="div_node_role_list"></div>
+	<button id="smt_set_mds_c60" >确定</button>
+</div>
+

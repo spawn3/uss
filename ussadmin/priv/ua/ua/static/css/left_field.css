@@ -1,0 +1,25 @@
+#accordion div a {
+	font-size: 13px;
+	margin: 2px 0px;
+}
+
+#accordion h3 {
+	font-weight: bold;
+}
+
+#accordion a {
+	cursor:pointer;
+}
+#accordion div a img {
+	margin-right: 5px;
+	width: 16px;
+	height: 16px;
+}
+
+#accordion ul {
+	list-style-type:none;
+	margin-left: -20px;
+}
+#accordion ul a {
+	font-weight: normal;
+}

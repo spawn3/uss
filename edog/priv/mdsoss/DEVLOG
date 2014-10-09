@@ -1,0 +1,45 @@
+python manage.py syncdb
+~/git/uss/edog/priv/mdsoss$ python manage.py runserver 0.0.0.0:9500
+
+思路，
+vmdisk 添加一个shared的属性， 原有的vm属性不删除
+
+新建一个对象，
+DiskVm
+diskuuid  vmuuid
+这样原有vmdisk里面的vm属性可以通过这个表链接查询出来
+
+更新disk的target
+
+
+201005101826
+
+1.初步实现了输入校验
+2.解决了response.txt少于8行不能读取的问题
+
+201005101918
+
+1.暂时关闭vm_migtate时“自动选择物理机”的选项
+2.将vm目前所在pm从vm_migrate时的可选目标pm中排除
+
+201005111011
+
+1.实现了自动获取本机ip
+
+201005111139
+
+1.修正了javascript  window.location地址的问题
+2.删除了'reponse_temp.txt'及相关东西
+
+201005111541
+
+1.修正了vm_detail和vm_create时的vritualDisk_set排除locked的问题
+
+201005112208
+
+1.整理了vm_start,vm_stop, vm_pause, vm_resume的HttpResponse
+2.试图实现vm_migrate时的输入校验
+
+201005121110
+
+1.整理了vm_start,vm_stop, vm_pause, vm_resume的HttpResponse

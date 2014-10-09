@@ -1,0 +1,2 @@
+-module(edog_driver_qemu).
+-compile(export_all).

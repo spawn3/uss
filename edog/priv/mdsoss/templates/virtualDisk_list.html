@@ -1,0 +1,17 @@
+{% extends "world_base.html" %}
+{% block title %}虚拟磁盘{% endblock %}
+{% block content %}
+
+<div class='menu2' > 
+<a href="home">首页</a> 
+&rsaquo; 
+<a href="virtualDisk_list">虚拟磁盘</a> 
+</div> 
+
+<br/>
+<br/>
+<div align="center">
+{% include "virtualDisk_list_block.html" %}
+</div>
+
+{% endblock %}

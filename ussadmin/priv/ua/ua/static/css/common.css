@@ -1,0 +1,10 @@
+.rrd_img {
+	float: left;
+	width: 297px;
+	height: 119px;
+	margin: 5px;
+
+	box-shadow: 0 4px 4px#C8C8C8;
+	-webkit-box-shadow: 0 4px 4px #C8C8C8;
+	-moz-box-shadow: 0 4px 4px #C8C8C8;
+}

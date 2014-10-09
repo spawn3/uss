@@ -1,0 +1,74 @@
+<style>
+    #div_srvc_dtls_graph {
+        white-space:normal; width:100%;
+        float:left;
+
+    }
+</style>
+
+<script>
+    $(document).ready(function(){
+	var current_attr = "all";
+
+	$('#div_srvc_dtls_graph').load('/fsys/flog/loginfo', {"attr":current_attr, "sid":$('#sid').attr("flag")});
+
+	$.extend({
+	   refresh_node_log_dtls:function(){
+                 if ($('#interval_tip').hasClass("a_tab_node_ctrl_log")) {
+                    $('#div_srvc_dtls_graph').load('/fsys/flog/loginfo', {"attr":current_attr, "sid":$('#sid').attr("flag")});
+                 }
+	   }
+	});
+	setInterval("$.refresh_node_log_dtls()", 10000);
+
+/*
+	$('#slt_rack').change(function(){
+		r = $('#slt_rack option:selected').val();
+		t = $('#slt_time option:selected').val();
+		$('#div_statd_graph').load('node/stat_graph', {rack=r, time=t});
+	});
+
+	$('#slt_time').change(function(){
+		r = $('#slt_rack option:selected').val();
+		t = $('#slt_time option:selected').val();
+		$('#div_srvc_dtls_graph').load('div/node_moni', {rack=r, time=t});
+	});
+*/
+
+	$('input[name="attr"]').click(function(){
+            $('#div_srvc_dtls_graph').load('/fsys/flog/loginfo', {"attr":$(this).val(), "sid":$('#sid').attr("flag")});
+            current_attr = $(this).val();
+	});
+});
+</script>
+
+<div class="div_filter">
+    <div class="div_filter_block">
+        <label id="sid" class="lbl_right" flag="{{sid}}">{{sid}}</label>
+    </div>
+
+    <div class="div_filter_block">
+        <label class="lbl_right">排序:</label>
+    </div>
+
+    <div class="div_filter_block">
+        <input type="radio" name="attr" value="all" checked/>
+        <label class="lbl_right">all</label>
+    </div>
+
+    <div class="div_filter_block">
+        <input type="radio" name="attr" value="warning"/>
+        <label class="lbl_right">warn</label>
+    </div>
+
+    <div class="div_filter_block">
+        <input type="radio" name="attr" value="error"/>
+        <label class="lbl_right">error</label>
+    </div>
+
+    <div class="div_filter_block">
+    </div>
+
+</div>
+
+<div id="div_srvc_dtls_graph" ></div>

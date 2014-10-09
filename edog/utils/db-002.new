@@ -1,0 +1,487 @@
+{tables,[{stddisk_t,[{record_name,stddisk_t},
+                     {attributes,[disk_id,path,size,os_type,os_version]}]},
+         {vm_t,[{record_name,vm_t},
+                {attributes,[vm_id,vm_name,cust_id,pm_id,vm_cpu,vm_mem,
+                             vm_imgid,vm_pcis,status,port,extra]}]},
+         {pm_t,[{record_name,pm_t},
+                {attributes,[pm_id,pm_ip,pm_cpu,pm_mem,pm_bridges,status]}]},
+         {disk_vm_t,[{record_name,disk_vm_t},{attributes,[id,target,extra]}]},
+         {disk_t,[{record_name,disk_t},
+                  {attributes,[disk_id,disk_alias,cust_id,path,size,canboot,
+                               vm_id,target,createtime,locktime,status]}]},
+         {cust_t,[{record_name,cust_t},
+                  {attributes,[cust_id,cust_name,cust_home,locked,locktime,
+                               company,address,contact,telephone,cellphone,
+                               email]}]},
+         {option_t,[{record_name,option_t},{attributes,[key,value]}]}]}.
+{stddisk_t,"4ec75b68-d805-438c-b20a-51a78fd1ed0e","/public/3",4,"win2003",
+           "2003"}.
+{stddisk_t,"5b4a0a36-c2c9-4a32-be71-272711310450","/public/ubuntu.img",1,
+           "ubuntu","1004"}.
+{stddisk_t,"65608cd7-84a1-4732-a6b2-87038b8c5fa3","/public/0",4,"redhat",
+           "5.6"}.
+{stddisk_t,"6606f7ac-2638-4e1a-bf6f-9207f915b097","/public/xp_vol.img",4,
+           "xp_vol","2007"}.
+{stddisk_t,"976695ba-5e32-4b30-96ff-019c46af8176","/public/2",4,"centos",
+           "5.4"}.
+{stddisk_t,"9c13f84a-8910-48f0-81df-113456b6b95d","/public/1",4,"ubuntu",
+           "10.1"}.
+{vm_t,"297a91da-33e9-42ef-8380-985cfbf40993",<<"centos02">>,
+      "76710f28-1e36-4d0b-a246-7013c3df124a",[],2,4194304,"centos.centos02",
+      [{nic_t,<<"virbr0">>,"00:e0:a0:30:00:fb",<<"virtio">>}],
+      shutoff,-1,
+      [{iodriver,virtio}]}.
+{vm_t,"308425c3-8b26-46df-99a6-7c8c2c65f35f",<<"banana05">>,
+      "bab04bbc-3598-41cb-bcc5-cf645e1b3428","192.168.2.17",2,6291456,
+      "monkey.banana05",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:2c:d0:20">>,<<"e1000">>}],
+      running,5900,
+      [{iodriver,virtio}]}.
+{vm_t,"405c7eab-ac2e-4ae8-b626-8b8923fdd42c",<<"error01">>,
+      "b64af5a9-2eb7-4fb8-ac60-8668c934496b",[],1,2097152,"tea.error01",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:2c:60:cf">>,<<"e1000">>}],
+      shutoff,-1,
+      [{iodriver,ide}]}.
+{vm_t,"4ecfdcf5-30ec-41c8-92c5-5d4eb7764bd1",<<"peer01">>,
+      "bab04bbc-3598-41cb-bcc5-cf645e1b3428",[],1,2097152,"monkey.peer01",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:2c:87:2f">>,<<"e1000">>}],
+      shutoff,-1,
+      [{real_memory,1048576},{iodriver,virtio}]}.
+{vm_t,"5005eca6-5560-4594-8430-78d74ad05fba",<<"banana02">>,
+      "bab04bbc-3598-41cb-bcc5-cf645e1b3428",[],2,6291456,"monkey.banana02",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:2c:9c:54">>,<<"virtio">>}],
+      shutoff,-1,
+      [{iodriver,virtio}]}.
+{vm_t,"5f816aaa-8022-45d5-8875-f577d74a431b",<<"test01">>,
+      "bab04bbc-3598-41cb-bcc5-cf645e1b3428",[],1,2097152,"monkey.test01",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:2c:28:c6">>,<<"e1000">>}],
+      shutoff,-1,
+      [{iodriver,virtio}]}.
+{vm_t,"7e62d71f-4942-417b-816c-96d69db4f334",<<"centos01">>,
+      "76710f28-1e36-4d0b-a246-7013c3df124a",[],2,4194304,"centos.centos01",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:30:ea:e8">>,<<"virtio">>}],
+      shutoff,-1,
+      [{iodriver,virtio}]}.
+{vm_t,"947dc9cd-36fa-4b11-821d-52c599d44d3e",<<"test03">>,
+      "bab04bbc-3598-41cb-bcc5-cf645e1b3428",[],1,1048576,"monkey.test03",
+      [{nic_t,<<"virbr0">>,"00:e0:a0:2c:84:07",<<"e1000">>}],
+      shutoff,-1,
+      [{iodriver,ide}]}.
+{vm_t,"ad6adbec-6b8a-42d9-9876-903a5ea46bb4",<<"test02">>,
+      "bab04bbc-3598-41cb-bcc5-cf645e1b3428",[],1,1048576,"monkey.test02",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:2c:9c:99">>,<<"e1000">>}],
+      shutoff,-1,
+      [{iodriver,ide}]}.
+{vm_t,"b496eea2-21b3-4221-b006-97214b653574",<<"banana04">>,
+      "bab04bbc-3598-41cb-bcc5-cf645e1b3428","192.168.2.19",2,3145728,
+      "monkey.banana04",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:2c:ba:63">>,<<"e1000">>}],
+      running,5900,
+      [{iodriver,virtio}]}.
+{vm_t,"b90ecfc6-4706-4e1e-ad7a-55e3b2dd6c00",<<"banana06">>,
+      "bab04bbc-3598-41cb-bcc5-cf645e1b3428","192.168.2.15",4,8388608,
+      "monkey.banana06",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:30:40:f1">>,<<"virtio">>}],
+      running,5900,
+      [{iodriver,virtio}]}.
+{vm_t,"c0a98517-cc2b-4261-9010-d9ad861e7563",<<"banana03">>,
+      "bab04bbc-3598-41cb-bcc5-cf645e1b3428","192.168.2.18",2,6291456,
+      "monkey.banana03",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:2c:a9:74">>,<<"virtio">>}],
+      running,5900,
+      [{iodriver,virtio}]}.
+{vm_t,"c4a0854e-85e0-47c3-996b-1124d7284eb2",<<"win01">>,
+      "b491bfcb-76d4-4d1b-abdc-5d4a16a4a9d8",[],2,4194304,"win2003.win01",
+      [{nic_t,<<"virbr0">>,"00:e0:a0:30:8c:af",<<"virtio">>}],
+      shutoff,-1,
+      [{real_memory,1048576},{iodriver,virtio}]}.
+{vm_t,"f2df89fe-2315-46c8-93fd-3f7eb05e13a9",<<"banana01">>,
+      "bab04bbc-3598-41cb-bcc5-cf645e1b3428",[],2,4194304,"monkey.banana01",
+      [{nic_t,<<"virbr0">>,<<"00:e0:a0:2c:a1:a7">>,<<"virtio">>}],
+      shutoff,-1,
+      [{iodriver,virtio}]}.
+{pm_t,"192.168.2.15","192.168.2.15",
+      [{cpu_info,"0","Intel(R) Xeon(R) CPU E5405 @ 2.00GHz",4},
+       {cpu_info,"1","Intel(R) Xeon(R) CPU E5405 @ 2.00GHz",4}],
+      [{mem_total,16725135360},
+       {mem_free,211296256},
+       {mem_cached,4845920256},
+       {mem_buffered,557617152},
+       {swap_total,8589926400},
+       {swap_free,8564297728}],
+      [{"virbr0","90:E6:BA:1F:C5:EE","192.168.1.15","255.255.255.0"}],
+      running}.
+{pm_t,"192.168.2.17","192.168.2.17",
+      [{cpu_info,"0","Intel(R) Xeon(R) CPU E5430 @ 2.66GHz",4}],
+      [{mem_total,16727363584},
+       {mem_free,161574912},
+       {mem_cached,4440399872},
+       {mem_buffered,2128543744},
+       {swap_total,8589926400},
+       {swap_free,8576651264}],
+      [{"virbr0","BC:AE:C5:28:4E:92","192.168.1.17","255.255.255.0"}],
+      running}.
+{pm_t,"192.168.2.18","192.168.2.18",
+      [{cpu_info,"0","Intel(R) Xeon(R) CPU E5430 @ 2.66GHz",4}],
+      [{mem_total,16725622784},
+       {mem_free,461033472},
+       {mem_cached,5743378432},
+       {mem_buffered,1429028864},
+       {swap_total,8589926400},
+       {swap_free,8574865408}],
+      [{"virbr0","20:CF:30:21:EC:48","192.168.1.18","255.255.255.0"}],
+      running}.
+{pm_t,"192.168.2.19","192.168.2.19",
+      [{cpu_info,"0","Intel(R) Xeon(R) CPU E5405 @ 2.00GHz",4}],
+      [{mem_total,8254222336},
+       {mem_free,119390208},
+       {mem_cached,2240573440},
+       {mem_buffered,557477888},
+       {swap_total,8589926400},
+       {swap_free,8573374464}],
+      [{"virbr0","00:23:54:AA:45:64","192.168.1.19","255.255.255.0"}],
+      running}.
+{pm_t,"192.168.2.21","192.168.2.21",
+      [{cpu_info,"0","Intel(R) Core(TM)2 Quad CPU Q9450 @ 2.66GHz",4}],
+      [{mem_total,8253411328},
+       {mem_free,71737344},
+       {mem_cached,4374331392},
+       {mem_buffered,1666871296},
+       {swap_total,8589926400},
+       {swap_free,8586829824}],
+      [{"virbr0","20:CF:30:38:61:71","192.168.1.21","255.255.255.0"}],
+      running}.
+{disk_vm_t,{"centos.centos01","7e62d71f-4942-417b-816c-96d69db4f334"},
+           "vda",[]}.
+{disk_vm_t,{"centos.centos02","297a91da-33e9-42ef-8380-985cfbf40993"},
+           "vda",[]}.
+{disk_vm_t,{"centos.hazard01","7e62d71f-4942-417b-816c-96d69db4f334"},
+           "vdb",[]}.
+{disk_vm_t,{"monkey.ban0201","308425c3-8b26-46df-99a6-7c8c2c65f35f"},"vdd",[]}.
+{disk_vm_t,{"monkey.ban0202","308425c3-8b26-46df-99a6-7c8c2c65f35f"},"vdb",[]}.
+{disk_vm_t,{"monkey.ban0203","308425c3-8b26-46df-99a6-7c8c2c65f35f"},"vde",[]}.
+{disk_vm_t,{"monkey.ban0204","308425c3-8b26-46df-99a6-7c8c2c65f35f"},"vdf",[]}.
+{disk_vm_t,{"monkey.ban0205","308425c3-8b26-46df-99a6-7c8c2c65f35f"},"vdc",[]}.
+{disk_vm_t,{"monkey.ban0301","c0a98517-cc2b-4261-9010-d9ad861e7563"},"vdd",[]}.
+{disk_vm_t,{"monkey.ban0302","c0a98517-cc2b-4261-9010-d9ad861e7563"},"vdb",[]}.
+{disk_vm_t,{"monkey.ban0303","c0a98517-cc2b-4261-9010-d9ad861e7563"},"vde",[]}.
+{disk_vm_t,{"monkey.ban0304","c0a98517-cc2b-4261-9010-d9ad861e7563"},"vdf",[]}.
+{disk_vm_t,{"monkey.ban0305","c0a98517-cc2b-4261-9010-d9ad861e7563"},"vdc",[]}.
+{disk_vm_t,{"monkey.ban0401","b496eea2-21b3-4221-b006-97214b653574"},"vdc",[]}.
+{disk_vm_t,{"monkey.ban0402","b496eea2-21b3-4221-b006-97214b653574"},"vdd",[]}.
+{disk_vm_t,{"monkey.ban0403","b496eea2-21b3-4221-b006-97214b653574"},"vdb",[]}.
+{disk_vm_t,{"monkey.ban0601","b90ecfc6-4706-4e1e-ad7a-55e3b2dd6c00"},"vdd",[]}.
+{disk_vm_t,{"monkey.ban0602","b90ecfc6-4706-4e1e-ad7a-55e3b2dd6c00"},"vdb",[]}.
+{disk_vm_t,{"monkey.ban0603","b90ecfc6-4706-4e1e-ad7a-55e3b2dd6c00"},"vde",[]}.
+{disk_vm_t,{"monkey.ban0604","b90ecfc6-4706-4e1e-ad7a-55e3b2dd6c00"},"vdf",[]}.
+{disk_vm_t,{"monkey.ban0605","b90ecfc6-4706-4e1e-ad7a-55e3b2dd6c00"},"vdc",[]}.
+{disk_vm_t,{"monkey.banana01","f2df89fe-2315-46c8-93fd-3f7eb05e13a9"},
+           "vda",[]}.
+{disk_vm_t,{"monkey.banana02","5005eca6-5560-4594-8430-78d74ad05fba"},
+           "vda",[]}.
+{disk_vm_t,{"monkey.banana03","c0a98517-cc2b-4261-9010-d9ad861e7563"},
+           "vda",[]}.
+{disk_vm_t,{"monkey.banana04","b496eea2-21b3-4221-b006-97214b653574"},
+           "vda",[]}.
+{disk_vm_t,{"monkey.banana05","308425c3-8b26-46df-99a6-7c8c2c65f35f"},
+           "vda",[]}.
+{disk_vm_t,{"monkey.banana06","b90ecfc6-4706-4e1e-ad7a-55e3b2dd6c00"},
+           "vda",[]}.
+{disk_vm_t,{"monkey.peer01","4ecfdcf5-30ec-41c8-92c5-5d4eb7764bd1"},"vda",[]}.
+{disk_vm_t,{"monkey.test01","5f816aaa-8022-45d5-8875-f577d74a431b"},"vda",[]}.
+{disk_vm_t,{"monkey.test02","ad6adbec-6b8a-42d9-9876-903a5ea46bb4"},"hda",[]}.
+{disk_vm_t,{"monkey.test03","947dc9cd-36fa-4b11-821d-52c599d44d3e"},"hda",[]}.
+{disk_vm_t,{"tea.error01","405c7eab-ac2e-4ae8-b626-8b8923fdd42c"},"hda",[]}.
+{disk_vm_t,{"win2003.win01","c4a0854e-85e0-47c3-996b-1124d7284eb2"},"vda",[]}.
+{disk_t,"centos.centos01",<<"centos01">>,
+        "76710f28-1e36-4d0b-a246-7013c3df124a","/centos/centos01/0",4,
+        [boot],
+        "7e62d71f-4942-417b-816c-96d69db4f334",undefined,1328062442,0,created}.
+{disk_t,"centos.centos02",<<"centos02">>,
+        "76710f28-1e36-4d0b-a246-7013c3df124a","/centos/centos02/0",4,
+        [boot],
+        "297a91da-33e9-42ef-8380-985cfbf40993",undefined,1328069632,0,created}.
+{disk_t,"centos.hazard01","hazard01","76710f28-1e36-4d0b-a246-7013c3df124a",
+        "/centos/hazard01/0",50,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328068897,0,created}.
+{disk_t,"monkey.apple01","apple01","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/apple01/0",10,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1324347253,0,created}.
+{disk_t,"monkey.apple02","apple02","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/apple02/0",10,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1324347271,0,created}.
+{disk_t,"monkey.apple03","apple03","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/apple03/0",10,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1324347286,0,created}.
+{disk_t,"monkey.apple04","apple04","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/apple04/0",10,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1324347300,0,created}.
+{disk_t,"monkey.apple05","apple05","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/apple05/0",10,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1324347322,0,created}.
+{disk_t,"monkey.ban0201","ban0201","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0201/0",1000,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328694191,0,created}.
+{disk_t,"monkey.ban0202","ban0202","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0202/0",1000,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328694204,0,created}.
+{disk_t,"monkey.ban0203","ban0203","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0203/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328694217,0,created}.
+{disk_t,"monkey.ban0204","ban0204","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0204/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328694229,0,created}.
+{disk_t,"monkey.ban0205","ban0205","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0205/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328694241,0,created}.
+{disk_t,"monkey.ban0301","ban0301","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0301/0",1000,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328694449,0,created}.
+{disk_t,"monkey.ban0302","ban0302","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0302/0",1000,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328694462,0,created}.
+{disk_t,"monkey.ban0303","ban0303","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0303/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328694476,0,created}.
+{disk_t,"monkey.ban0304","ban0304","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0304/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328694489,0,created}.
+{disk_t,"monkey.ban0305","ban0305","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0305/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328694502,0,created}.
+{disk_t,"monkey.ban0401","ban0401","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0401/0",1000,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328694648,0,created}.
+{disk_t,"monkey.ban0402","ban0402","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0402/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328694664,0,created}.
+{disk_t,"monkey.ban0403","ban0403","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0403/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328694675,0,created}.
+{disk_t,"monkey.ban0601","ban0601","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0601/0",1000,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328693808,0,created}.
+{disk_t,"monkey.ban0602","ban0602","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0602/0",1000,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328693917,0,created}.
+{disk_t,"monkey.ban0603","ban0603","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0603/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328693930,0,created}.
+{disk_t,"monkey.ban0604","ban0604","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0604/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328693943,0,created}.
+{disk_t,"monkey.ban0605","ban0605","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/ban0605/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328693963,0,created}.
+{disk_t,"monkey.banana01",<<"banana01">>,
+        "bab04bbc-3598-41cb-bcc5-cf645e1b3428","/monkey/banana01/0",4,
+        [boot],
+        "f2df89fe-2315-46c8-93fd-3f7eb05e13a9",undefined,1324304545,0,created}.
+{disk_t,"monkey.banana02",<<"banana02">>,
+        "bab04bbc-3598-41cb-bcc5-cf645e1b3428","/monkey/banana02/0",4,
+        [boot],
+        "5005eca6-5560-4594-8430-78d74ad05fba",undefined,1324305564,0,created}.
+{disk_t,"monkey.banana03",<<"banana03">>,
+        "bab04bbc-3598-41cb-bcc5-cf645e1b3428","/monkey/banana03/0",4,
+        [boot],
+        "c0a98517-cc2b-4261-9010-d9ad861e7563",undefined,1324305577,0,created}.
+{disk_t,"monkey.banana04",<<"banana04">>,
+        "bab04bbc-3598-41cb-bcc5-cf645e1b3428","/monkey/banana04/0",4,
+        [boot],
+        "b496eea2-21b3-4221-b006-97214b653574",undefined,1324305594,0,created}.
+{disk_t,"monkey.banana05",<<"banana05">>,
+        "bab04bbc-3598-41cb-bcc5-cf645e1b3428","/monkey/banana05/0",4,
+        [boot],
+        "308425c3-8b26-46df-99a6-7c8c2c65f35f",undefined,1324305616,0,created}.
+{disk_t,"monkey.banana06",<<"banana06">>,
+        "bab04bbc-3598-41cb-bcc5-cf645e1b3428","/monkey/banana06/0",4,
+        [boot],
+        "b90ecfc6-4706-4e1e-ad7a-55e3b2dd6c00",undefined,1328256832,0,created}.
+{disk_t,"monkey.big01","big01","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big01/0",1500,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328254871,0,created}.
+{disk_t,"monkey.big02","big02","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big02/0",1000,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328254909,0,created}.
+{disk_t,"monkey.big020","big020","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big020/0",1000,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328691706,0,created}.
+{disk_t,"monkey.big021","big021","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big021/0",1000,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328691752,0,created}.
+{disk_t,"monkey.big03","big03","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big03/0",500,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328254930,0,created}.
+{disk_t,"monkey.big030","big030","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big030/0",1000,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328579842,0,created}.
+{disk_t,"monkey.big031","big031","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big031/0",1000,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328579892,0,created}.
+{disk_t,"monkey.big032","big032","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big032/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328691814,0,created}.
+{disk_t,"monkey.big033","big033","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big033/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328691994,0,created}.
+{disk_t,"monkey.big04","big04","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big04/0",100,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328254949,0,created}.
+{disk_t,"monkey.big040","big040","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big040/0",1000,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328580270,0,created}.
+{disk_t,"monkey.big041","big041","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big041/0",1300,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328580298,0,created}.
+{disk_t,"monkey.big042","big042","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big042/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328691848,0,created}.
+{disk_t,"monkey.big05","big05","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big05/0",1500,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328256258,0,created}.
+{disk_t,"monkey.big06","big06","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big06/0",1500,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328256853,0,created}.
+{disk_t,"monkey.big07","big07","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big07/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328257981,0,created}.
+{disk_t,"monkey.big08","big08","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big08/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328499121,0,created}.
+{disk_t,"monkey.big09","big09","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big09/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328499135,0,created}.
+{disk_t,"monkey.big10","big10","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big10/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328499154,0,created}.
+{disk_t,"monkey.big11","big11","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big11/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328499399,0,created}.
+{disk_t,"monkey.big12","big12","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big12/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328500392,0,created}.
+{disk_t,"monkey.big13","big13","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/big13/0",1200,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328500407,0,created}.
+{disk_t,"monkey.cherry-try","cherry-try",
+        "bab04bbc-3598-41cb-bcc5-cf645e1b3428","/monkey/cherry-try/0",10,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1328692539,0,created}.
+{disk_t,"monkey.pear01","pear01","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/pear01/0",50,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1324347476,0,created}.
+{disk_t,"monkey.pear02","pear02","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/pear02/0",50,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1324347529,0,created}.
+{disk_t,"monkey.pear03","pear03","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/pear03/0",50,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1324347543,0,created}.
+{disk_t,"monkey.pear04","pear04","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/pear04/0",50,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1324347558,0,created}.
+{disk_t,"monkey.pear05","pear05","bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/pear05/0",50,
+        [{boot,false},{shared,false}],
+        undefined,undefined,1324347572,0,created}.
+{disk_t,"monkey.peer01",<<"peer01">>,"bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/peer01/0",4,
+        [boot],
+        "4ecfdcf5-30ec-41c8-92c5-5d4eb7764bd1",undefined,1324889991,0,created}.
+{disk_t,"monkey.peer02",<<"peer02">>,"bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/peer02/0",1,
+        [boot],
+        "d47311ff-a5e7-4e34-b774-4b79af2c0e71",undefined,1324890485,0,created}.
+{disk_t,"monkey.test01",<<"test01">>,"bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/test01/0",4,
+        [boot],
+        "5f816aaa-8022-45d5-8875-f577d74a431b",undefined,1324634920,0,created}.
+{disk_t,"monkey.test02",<<"test02">>,"bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/test02/0",1,
+        [boot],
+        "ad6adbec-6b8a-42d9-9876-903a5ea46bb4",undefined,1324636060,0,created}.
+{disk_t,"monkey.test03",<<"test03">>,"bab04bbc-3598-41cb-bcc5-cf645e1b3428",
+        "/monkey/test03/0",1,
+        [boot],
+        "947dc9cd-36fa-4b11-821d-52c599d44d3e",undefined,1324637060,0,created}.
+{disk_t,"tea.error01",<<"error01">>,"b64af5a9-2eb7-4fb8-ac60-8668c934496b",
+        "/tea/error01/0",4,
+        [boot],
+        "405c7eab-ac2e-4ae8-b626-8b8923fdd42c",undefined,1324892512,0,created}.
+{disk_t,"win2003.win01",<<"win01">>,"b491bfcb-76d4-4d1b-abdc-5d4a16a4a9d8",
+        "/win2003/win01/0",4,
+        [boot],
+        "c4a0854e-85e0-47c3-996b-1124d7284eb2",undefined,1328179852,0,created}.
+{cust_t,"76710f28-1e36-4d0b-a246-7013c3df124a",<<"centos">>,<<"centos">>,
+        false,0,<<"centos">>,<<"centos">>,<<"centos">>,<<"010-12345678">>,
+        <<"12345678912">>,<<"12345678912@qq.com">>}.
+{cust_t,"8c96355f-0f34-427d-a0d1-0c435df488d7",<<"test">>,<<"test">>,false,0,
+        <<"test">>,<<"test">>,<<"test">>,<<"010-12345678">>,<<"12345678912">>,
+        <<"12345678912@qq.com">>}.
+{cust_t,"b491bfcb-76d4-4d1b-abdc-5d4a16a4a9d8",<<"win2003">>,<<"win2003">>,
+        false,0,<<"win2003">>,<<"win2003">>,<<"win2003">>,<<"010-12345678">>,
+        <<"12345678912">>,<<"12345678912@qq.com">>}.
+{cust_t,"b64af5a9-2eb7-4fb8-ac60-8668c934496b",<<"tea">>,<<"tea">>,false,0,
+        <<"tea">>,<<"tea">>,<<"tea">>,<<"010-12345678">>,<<"12345678912">>,
+        <<"12345678912@qq.com">>}.
+{cust_t,"bab04bbc-3598-41cb-bcc5-cf645e1b3428",<<"monkey">>,<<"monkey">>,
+        false,0,<<"monkey">>,<<"monkey">>,<<"monkey">>,<<"010-12345678">>,
+        <<"12345678912">>,<<"12345678912@qq.com">>}.
+{option_t,disk_format,"raw"}.
+{option_t,edog_load_diff,100}.
+{option_t,edog_load_flag,avg5}.
+{option_t,edog_load_min,256}.
+{option_t,edog_load_on,false}.
+{option_t,edog_load_timeout,10000}.
+{option_t,edog_start_flag,max_memory}.
+{option_t,ws_ip,"127.0.0.1"}.
+{option_t,ws_port,9500}.

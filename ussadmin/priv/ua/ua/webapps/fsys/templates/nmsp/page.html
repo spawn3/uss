@@ -1,0 +1,44 @@
+<script type="text/javascript">
+$(document).ready(function(){ 
+$("#tb_fsys_nmsp").jqGrid({
+		url:'fsys/nmsp/rsrc',
+		datatype: 'json',
+		mtype: 'GET',
+		colNames:['ID', '名字空间', '容量', '已用', '已用%'],
+		colModel :[ 
+		  {name:'id', index:'id', width:50, align:'center'}, 
+		  {name:'namespace', index:'namespace', width:100, align:'center', editable:true},
+		  {name:'capacity', index:'capacity', width:100, align:'center', editable:true},
+		  {name:'used', index:'used', width:100, align:'center'},
+		  {name:'percent', index:'percent', width:100, align:'center'}
+		],
+		pager: '#div_fsys_nmsp_pager',
+		rowNum:10,
+		rowList:[10,20,30],
+		sortname: 'id',
+		sortorder: 'desc',
+		viewrecords: true,
+		caption: 'Node',
+		shrinkToFit:false,
+		width: 900,
+		height: 500
+})
+	.navGrid("#div_fsys_nmsp_pager")
+	.navButtonAdd('#div_fsys_nmsp_pager',{
+		caption: "",
+		position: "last",
+		title: "forbidden ",
+		buttonicon: "ui-icon-gear",
+		onClickButton: function(){
+			alert("adding Row");	
+			$("#tb_dev_list").setColumns(options);
+	   		return false;
+		},
+	});
+}); 
+</script>
+ 
+<div class="div_dev">
+<table id="tb_fsys_nmsp"></table>
+<div id="div_fsys_nmsp_pager"></div>
+</div>

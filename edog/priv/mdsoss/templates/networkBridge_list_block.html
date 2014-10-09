@@ -1,0 +1,31 @@
+<table class="v">  
+
+<thead> 
+<tr> 
+
+<td></td>
+<td>名称</td>
+<td>IP地址</td>
+<td>子网掩码</td>
+<td>MAC地址</td>
+</tr> 
+</thead> 
+
+<tbody> 
+
+{% for bridge in bridge_set %}
+
+<tr class="{% cycle 'row1' 'row2' %}">
+
+<td><input type="checkbox" name="action_on_who" value = "action_on_who"></td>
+<td>{{ bridge.name }}</td>
+<td>{{ bridge.ip }}</td>
+<td>{{ bridge.mask }}</td>
+<td>{{ bridge.mac }}</td>
+
+</tr> 
+{% endfor %}
+</tbody> 
+</table> 
+
+<p>{{ bridge_set|length }} 个网桥设备</p>

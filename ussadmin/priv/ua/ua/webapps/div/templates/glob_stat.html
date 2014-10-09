@@ -1,0 +1,123 @@
+<style>
+.unit {
+	margin: 10px;
+	float:left;
+
+	border: 1px solid #EEEEEE;
+	padding: 10px;
+	font-size: 12px;
+
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+
+/*
+	box-shadow: #888 0px 2px 2px;
+	-webkit-box-shadow: #888 0px 2px 2px;
+	-moz-box-shadow: #888 0px 2px 2px;
+*/
+}
+
+.stat_unit {
+	width: 320px;
+	height: 160px;
+}
+
+.stat_unit label {
+	font-size: 14px;
+	color: #242424;
+	font-weight: bold;
+}
+
+.stat_unit a {
+	margin-right:5px;
+}
+
+#div_hightlight_list a {
+	cursor:pointer;
+}
+
+#div_dtls {
+	border: 1px solid #EEEEEE;
+	padding: 10px;
+	width: 420px;
+}
+
+#tb_node_dtls {
+	width: 400px;
+	border-collapse:collapse;
+}
+
+.td_title {
+	font-weight: bold;
+	color: #242424;
+}
+</style>
+
+<script>
+$(document).ready(function(){
+	$('.tb_td_cluster_status').click(function(){
+            $('#middle_field_content').load('node/page/2');
+            $('#lb_mid_caption').html("节点 &rsaquo;&rsaquo; 节点");
+            return false;
+	});
+
+        $('.tb_td_srvc_status a').click(function() {
+            var srv_type = $(this).attr("type");
+            $('#middle_field_content').load('node/page/2?type=' + srv_type);
+            $('#lb_mid_caption').html("节点 &rsaquo;&rsaquo; 节点");
+            return false;
+
+        });
+
+//	$('.tb_td_conn_status').click(function(){
+//		$('#middle_field_content').load('fsys/conn/page/0');
+//		$('#lb_mid_caption').html("文件系统 &rsaquo;&rsaquo; 连接");
+//		return false;
+//	});
+
+	$('.tb_td_node_status').click(function(){
+            $('#middle_field_content').load('node/page/1');
+            $('#lb_mid_caption').html("节点 &rsaquo;&rsaquo; 节点");
+            return false;
+	});
+
+	if ($('#td_cluster_status').text() == "运行") {
+            $('#div_tips').text("集群运行中！");
+	} else if ($('#td_cluster_status').text() == "停止") {
+            if (cluster_status_flag < 0) {
+                $('#div_tips').text("集群已停止！");
+            } else if (cluster_status_flag == 1) {
+                $('#div_tips').text("集群已停止！");
+                //$('#btn_syst_start').show();
+                //$('#btn_syst_stop').hide();
+            } else if (cluster_status_flag == 2) {
+                $('#div_tips').text("部署通过！");
+                //$('#btn_syst_start').show();
+                //$('#btn_syst_stop').hide();
+            } else if (cluster_status_flag == 3) {
+                $('#div_tips').text("测试通过！");
+            }
+	}
+});
+</script>
+
+<div id="div_srvc_stat" class="stat_unit unit">
+    <table>
+        <tr>
+            <td><label>集群状态:</label></td>
+            <td class="tb_td_cluster_status" id="td_cluster_status">{{ cluster_status }}</td>
+        </tr>
+        <tr>
+            <td><label>进程状态:</label></td>
+            <td class="tb_td_srvc_status">{{ serv_status }}</td>
+        </tr>
+        <tr>
+            <td><label></label></td>
+            <td class="tb_td_srvc_status"> {{ fs_status }} </td>
+        </tr>
+        <tr>
+            <td><label>节点状态:</label></td>
+            <td class="tb_td_node_status"> {{ node_status }} </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,48 @@
+.div_filter {
+	float: left;
+	
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	
+	box-shadow: 0 3px 3px#C8C8C8;
+	-webkit-box-shadow: 0 3px 3px #C8C8C8;
+	-moz-box-shadow: 0 3px 3px #C8C8C8;
+	
+	border: 1px solid #DBDBDB;
+	background-color: #dddddd;
+	
+	text-shadow: #EEE 1.5px 1.5px;
+	line-height: 22px;
+	
+	margin-top: 5px;
+	width: 1000px; 
+	
+/*	width: 99.5%; */
+	height: 23px;
+}
+.div_filter_block {
+	padding: 2px 6px;
+	float: left;
+/*	vertical-align:middle; */
+}
+
+.div_filter_block .lbl_right {
+	font-size: 12px;
+/*	color: #159900; 
+	color: #376b95;*/
+	color: #494949;
+}
+
+
+
+#div_stat_graph {
+	float:left;
+}
+
+
+#btn_node_add, #btn_rack_mng {
+/*    float: left;
+	height: 25px;
+	margin: 10px;*/
+}
+

@@ -1,0 +1,83 @@
+<script type="text/javascript">
+$(document).ready(function(){
+		$(".vnc").click(function(){
+			var status = $(this).attr("status");
+			if (status != "running")
+			{
+				alert('虚拟机没有运行.');
+				return false;
+			}
+			var pm = $(this).attr("pm");
+			var port = $(this).attr("port");
+			alert(status);
+			alert(pm);
+			alert(port);
+		});
+});
+</script>
+
+<table class="v">
+    <thead>
+        <tr>
+            <td></td>
+            <td>虚拟机名</td>
+            <td>用户</td>
+            <td>VCPU数</td>
+            <td>配置内存(GB)</td>
+            <td>启动内存(GB)</td>
+            <td>状态</td>
+            <td>宿主物理机</td>
+            <td>端口</td>
+            <td>CPU利用率(%)</td>
+            <td>内存利用率(%)</td>
+            <td>系统盘位置</td>
+            <td>VNC</td>
+            <!--
+            <td>VNC set</td>
+            <td>VD set</td>
+            -->
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for vm in vm_set %}
+        <tr class="{% cycle 'row1' 'row2' %}">
+            <td class='td_checkbox'>
+                <input type="checkbox" id="vm_selected" name="vm_selected" value = {{vm.uuid|default:"nothing"}}>
+            </td>
+            <td><a href="vm_detail?vm_uuid={{vm.uuid}}">{{ vm.alias }}</a></td>
+            <td>{{ vm.customer }}</td>
+            <td>{{ vm.cpu_cores }}</td>
+            <td>{{ vm.mem_capacity }}</td>
+            <td>{{ vm.mem_real }}</td>
+            <td>{{ vm.status }}</td>
+            <td>{{ vm.pm.uuid }}</td>
+            <td>{{ vm.port }}</td>
+            <td>{{ vm.cpu_util }}</td>
+            <td>{{ vm.mem_util }}</td>
+            <td>{{ vm.boot_disk }}</td>
+            <td>
+                {% ifequal vm.status 'running'  %}
+                <OBJECT ID="Exe1" CLASSID="CLSID:83831D65-B4CC-4A7D-B362-D9AF6495C5A9" style='width:20px;height:20px' standby='vnc'>
+                    <param id='exe1_param' name="Path0" value="path={C:\Program Files\RealVNC\VNC4\vncviewer.exe} ip={{vm.pm.uuid}}:{{vm.port}}">
+                </OBJECT>
+                {% endifequal %}
+            </td>
+            <!--
+            <td><a href="vm_detail?vm_uuid={{vm.uuid}}">VNC_set</a></th>
+            <td><a href="vm_detail?vm_uuid={{vm.uuid}}">VD_set</a></th>
+            -->
+        </tr>
+        {% endfor %}
+        <tr>
+            <td>
+                <p>{{ vm_set|length }} 个虚拟机</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div>
+    <br class="clear" />
+</div>
+<!-- END Content -->

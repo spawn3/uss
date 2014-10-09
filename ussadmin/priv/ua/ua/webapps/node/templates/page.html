@@ -1,0 +1,54 @@
+<link type="text/css" href="../static/css/node.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    $(function() {
+        $("#tabs_page_node").tabs({
+            ajaxOptions: {
+                error: function(xhr, status, index, anchor) {
+                    $(anchor.hash).html("Couldn't load this tab. We'll try to fix this as soon as possible.");
+                }
+            },
+            cache: true,
+            selected: {{index}}
+        });
+    });
+
+    $('#a_tab_rrd').click(function(){
+        $('#interval_tip').removeClass();
+        $('#interval_tip').addClass('tab_rrd');
+    });
+
+    $('#a_tab_node_ctrl').click(function(){
+        $('#interval_tip').removeClass();
+        $('#interval_tip').addClass('field_mng');
+        //因为这个标签的链接是node/field_ctrl页面，
+        //也有其他的地方调用这个页面，所以这里设置class为‘field_ctrl’
+    });
+
+    $('#a_tab_srvc').click(function(){
+        $('#interval_tip').removeClass();
+        $('#interval_tip').addClass('tb_srvc');
+    });
+
+</script>
+
+<style>
+    #tabs_page_node {
+        height: 99.2%;
+        border: none;
+        padding: 0px;
+    }
+
+    #tabs_page_node > div {
+        padding: 2px;
+    }
+</style>
+
+<label id="interval_tip" class="tab_rrd"> </label>
+<div id="tabs_page_node">
+    <ul>
+        <li><a id="a_tab_rrd"  href="/node/tab_rrd">状态图</a></li>
+        <li><a id="a_tab_node_ctrl" href="/node/tab_ctrl_mng">管理</a></li>
+        <li><a id="a_tab_srvc" href="/node/tab_srvc?type={{type}}">进程</a></li>
+    </ul>
+</div>

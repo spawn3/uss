@@ -1,0 +1,145 @@
+<style>
+input.text, select.text { 
+	margin-bottom:12px; 
+	width:95%; 
+	padding: .4em; 
+}
+
+.ui-dialog .ui-state-error { 
+	padding: .3em; 
+}
+
+.validateTips {
+	border: 1px solid transparent; 
+	padding: 0.3em; 
+}
+
+#rack {
+	width: 50%;
+}
+</style>
+	
+<script>
+$(function() {
+	var hostname = $("#hostname"),
+		ip = $("#ip"),
+		user = $("#user"),
+		passwd = $("#passwd"),
+		rack = $("#rack"),
+		allFields = $([]).add(hostname).add(ip).add(user).add(passwd).add(rack),
+		tips = $(".validateTips"),
+		dialog_node_add = $('#dialog_node_add')
+
+	function updateTips(t) {
+		tips.text(t).addClass("ui-state-highlight").css('color', 'red');
+	}
+
+	function checkLength(o, n, min, max) {
+		if (o.val().length > max || o.val().length < min) {
+			o.addClass("ui-state-error");
+			updateTips("Length of " + n + " must be between " + min + " and " + max + ".");
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	function checkRegexp( o, regexp, n ) {
+		if (!(regexp.test(o.val()))) {
+			o.addClass("ui-state-error");
+			updateTips(n);
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	dialog_node_add.dialog({
+		autoOpen: true,
+		height: 400,
+		width: 400,
+		modal: true,
+		buttons: {
+			"确定": function() {
+				var bValid = true;
+				allFields.removeClass("ui-state-error");
+				bValid = bValid && checkLength( hostname, "Hostname", 3, 16 );
+				bValid = bValid && checkRegexp( hostname, /^[a-z]([0-9a-z_])+$/i, "Hostname包含英文字母，数字和下划线, 并且以字母开头.");
+
+				bValid = bValid && checkRegexp( ip, /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/i, "无效的IP地址.");
+				
+				
+				bValid = bValid && checkLength( user, "user", 3, 16 );
+				bValid = bValid && checkRegexp( user, /^[a-z]([0-9a-z_])+$/i, "Username包含英文字母，数字和下划线, 并且以字母开头.");
+				
+				
+				bValid = bValid && checkLength( passwd, "Password", 3, 16 );
+				//bValid = bValid && checkRegexp( passwd, /^[a-z]([0-9a-z_])+$/i, "Password包含英文字母，数字和下划线, 并且以字母开头.");
+				
+				bValid = bValid && checkLength( rack, "Rack", 1, 100 );
+				
+				if (bValid) {
+					$.post('node/node_add', {'hostname':hostname.val(),
+												  'ip':ip.val(),
+												  'user':user.val(),
+												  'passwd':passwd.val(),
+												  'rack':rack.val()}, 
+							function(resp){
+								if(resp.substring(0,4)=='SUCC'){
+									dialog_node_add.dialog("close");
+									
+									$('#node_mng_filter div input[value="exited"]').attr({checked:"checked"});
+									
+									$('#tb_node_mng').jqGrid('setGridParam',{url:'node/rsrc/exited'});
+									$('#tb_node_mng').trigger("reloadGrid")
+								}
+								else{
+									//alert(resp);
+									updateTips(resp);
+								}
+							}
+					);
+					
+					$(this).submit();
+					return false;
+				}
+			},
+			"取消": function() {
+				$(this).dialog("close");
+			}
+		},
+		close: function() {
+			allFields.val("").removeClass("ui-state-error").addClass("validateTips");
+		}
+	});
+
+});
+</script>
+
+
+
+<div id="dialog_node_add" title="添加节点">
+
+	<p class="validateTips">所有项目均需填写.</p>
+	
+	<form id="fm_add_dev">
+		<label for="name">主机名:</label>
+		<input type="text" name="hostname" id="hostname" class="text ui-widget-content ui-corner-all" />
+		
+		<label for="name">IP地址:</label>
+		<input type="text" name="ip" id="ip" class="text ui-widget-content ui-corner-all" />
+		
+		<label for="name">用户名:</label>
+		<input type="text" name="user" id="user" class="text ui-widget-content ui-corner-all" />
+		
+		<label for="name">密码:</label>
+		<input type="password" name="passwd" id="passwd" class="text ui-widget-content ui-corner-all" />
+
+		<label for="rack">所属机架:</label><br />
+		<select name="rack" id="rack">
+            {% for r in racks %}
+            <option value="{{ r.id }}">{{ r.name }}</option>
+            {% endfor %}
+        </select>
+	</form>
+</div>

@@ -1,0 +1,97 @@
+{% extends "world_base.html" %}
+{% block title %}yfs list{% endblock %}
+{% block content %}
+<a href="home">Home</a> 
+&rsaquo; 
+<a href="user_userManagement">user management</a> 
+<br />
+<br />
+<script type ="text/javascript" language ="javascript" >
+	function delUser()
+	{		var flag = 0;
+			var user=document.user_list.user_selected;
+			
+			if(user.length == undefined)
+			{
+				if(user.checked)
+					ShowIframe('delete User','user_deleteUser?user='+user.value,340,120);
+			}
+			for(var i=0;i<user.length;i++)
+			{
+				
+				if(user[i].checked==true)
+				{
+					user=user[i].value;
+					flag++;
+					break;	
+				}
+			}
+			
+			if(flag == 0)
+			{
+				document.getElementById("error").innerHTML="请选择要删除的用户！！";
+				return false;
+			}
+			else
+				ShowIframe('delete User','user_deleteUser?user='+user,340,120);
+	}
+				
+	function changeUserGroup()
+	{
+		var flag_u=false;
+		var user=document.user_list.user_selected;
+	
+		if(user.length == undefined)
+		{
+			if(user.checked)
+				ShowIframe('change User Group','user_getUserGroup?user='+user.value,400,240);
+		}
+	
+		for(var i=0;i<user.length;i++)
+			{
+				if(user[i].checked==true)
+				{
+					flag_u=true;
+					user=user[i].value;
+					break;	
+				}	
+			}
+			
+		if(flag_u==false)
+				document.getElementById("error").innerHTML="请选择修改的用户！！";
+		else
+			ShowIframe('change User Group ','user_getUserGroup?user='+user,400,240);
+	}	
+		
+
+</script>
+
+<a href = "user_groupManagement" > Group List</a><br />
+   <div align="center">
+   <form name="user_list">
+         <table class="v">
+          <thead>
+        	<div style="color:#FF0000; text-align:center" id="error"></div>
+         	<tr><td width="5"></td><td>user name</td><td>last login</td><td>joined date</td><td>group</td></tr>
+          </thead>
+          <tbody>
+         	{%for user in user_list %}
+         	<tr class="{% cycle 'row1' 'row2' %}">
+            <td><input type="radio" id="user_selected" name="user_selected" value={{user.username}}></td>
+            <td>{{ user.username }}</td> <td>{{ user.last_login|date:"Y M d H:i" }}</td> 
+            <td>{{ user.date_joined|date:"Y M d H:i"}}</td> 
+            <td>{% for g in user.groups.all %}{{ g.name }}{% if forloop.last %}{% else %},{% endif %}{% endfor %}</td>
+            </tr>
+            {% endfor %}
+            <tr align="left">
+            <td colspan="4">
+            <input type="button" value="add user" onClick="ShowIframe('addUser','user_addUser',400,240);">
+            <input type="button" value="delete user"  onClick="delUser()">
+            <input type="button" value="change user group"  onClick="changeUserGroup()">
+            </td>
+            </tr>
+            </tbody>
+         </table>
+    </form>
+    </div>
+{% endblock %}

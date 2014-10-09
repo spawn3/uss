@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+#coding:utf-8
+
+import os
+import sys
+import commands
+import hashlib
+import time
+
+realpath = os.path.dirname(os.path.realpath( __file__))
+ua_python_path = os.path.join(realpath, '../priv/ua')
+sys.path.insert(0, ua_python_path)
+os.chdir(ua_python_path)
+print '************************************************'
+print '*** ua_python_path: %s' % ua_python_path
+print '************************************************'
+
+from signal import SIGTERM
+from ua.common.ua_conf import ua_main_pid_file
+
+######
+pid =None
+try:
+    with open(ua_main_pid_file, "r") as f:
+        pid = int(f.read().strip())
+except IOError:
+    pid = None
+if not pid:
+    print "can't find uss_ua's pid，was uss_ua stopped? "
+    sys.exit(1)
+
+try:
+    while 1:
+        os.kill(pid, SIGTERM)
+        time.sleep(0.1)
+except OSError, err:
+    err = str(err)
+    if err.find("No such process") > 0:
+        if os.path.exists(ua_main_pid_file):
+            os.remove(ua_main_pid_file)
+    else:
+        print "stop uss_ua failed，%s"%(err)
+        sys.exit(1)
